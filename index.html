@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Aktien-Chancen</title>
+    <style>
+        /* Grundlayout: Schwarzer Hintergrund, weiße Schrift */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Grid-System für die rechteckigen Kästen */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Design der einzelnen Aktien-Kästen */
+        .card {
+            background-color: #1a1a1a; /* Leichtes Grau für Kontrast */
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.02);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        /* Container für das Firmenlogo ganz oben */
+        .logo-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            background-color: #ffffff; /* Weißer Hintergrund, damit Logos gut sichtbar sind */
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .stock-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #eeeeee;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Zeilen für die Kennzahlen */
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: #bbbbbb;
+        }
+
+        .metric-value {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        /* Farben für Performance */
+        .positive { color: #00ff00; } /* Grün */
+        .negative { color: #ff3333; } /* Rot */
+
+        /* KGV visuell abtrennen */
+        .kgv-row {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+            grid-column: 1 / -1;
+            padding: 50px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AKTIEN DASHBOARD (Nach KGV sortiert)</h1>
+    
+    <div class="dashboard" id="dashboard">
+        <div class="loading">Lade aktuelle Aktiendaten und sortiere nach KGV...</div>
+    </div>
+
+    <script>
+        // Funktion, um die Performance grün oder rot einzufärben
+        function formatierePerformance(wert) {
+            if (wert === undefined || wert === null || isNaN(wert)) return '<span class="metric-value">N/A</span>';
+            if (wert > 0) return `<span class="metric-value positive">+${wert.toFixed(2).replace('.', ',')}%</span>`;
+            if (wert < 0) return `<span class="metric-value negative">${wert.toFixed(2).replace('.', ',')}%</span>`;
+            return `<span class="metric-value">0,00%</span>`;
+        }
+
+        const dashboard = document.getElementById('dashboard');
+
+        // Holt die Daten aus der von GitHub Actions generierten daten.json
+        fetch('daten.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('daten.json wurde noch nicht generiert.');
+                }
+                return response.json();
+            })
+            .then(aktienDaten => {
+                dashboard.innerHTML = ''; // Lade-Text entfernen
+                
+                if (!aktienDaten || aktienDaten.length === 0) {
+                    dashboard.innerHTML = '<div class="loading">Keine Daten vorhanden.</div>';
+                    return;
+                }
+
+                // SORTIERUNG: Niedrigstes KGV nach oben. Aktien ohne KGV (N/A oder <= 0) nach unten schieben.
+                aktienDaten.sort((a, b) => {
+                    const kgvA = (a.kgv && a.kgv > 0) ? a.kgv : Infinity;
+                    const kgvB = (b.kgv && b.kgv > 0) ? b.kgv : Infinity;
+                    return kgvA - kgvB;
+                });
+
+                // Baue die HTML-Karten auf der Website auf
+                aktienDaten.forEach(aktie => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    const kgvAnzeige = (aktie.kgv && aktie.kgv > 0) ? aktie.kgv.toFixed(1).replace('.', ',') : 'N/A';
+                    
+                    card.innerHTML = `
+                        <div class="logo-container">
+                            <img src="${aktie.logoUrl}" alt="${aktie.name} Logo" class="logo" onerror="this.src='https://placehold.co/100x50/1a1a1a/ffffff?text=${encodeURIComponent(aktie.name)}'">
+                        </div>
+                        <div class="stock-name" title="${aktie.name}">${aktie.name}</div>
+                        
+                        <div class="metric">
+                            <span>Kurs:</span>
+                            <span class="metric-value">${aktie.kurs}</span>
+                        </div>
+                        <div class="metric">
+                            <span>1-Monat:</span>
+                            ${formatierePerformance(aktie.perfMonat)}
+                        </div>
+                        <div class="metric">
+                            <span>1-Jahr:</span>
+                            ${formatierePerformance(aktie.perfJahr)}
+                        </div>
+                        <div class="metric kgv-row">
+                            <span>KGV:</span>
+                            <span class="metric-value" style="color: ${kgvAnzeige === 'N/A' ? '#888' : '#00ffff'};">${kgvAnzeige}</span>
+                        </div>
+                    `;
+                    
+                    dashboard.appendChild(card);
+                });
+            })
+            .catch(error => {
+                dashboard.innerHTML = `
+                    <div class="loading" style="color: #ff3333;">
+                        <p>Fehler beim Laden der Daten.</p>
+                        <p style="font-size: 0.85em; color: #aaa; max-width: 600px; margin: 10px auto; line-height: 1.5;">
+                            Hinweis: Wenn das Repository ganz neu angelegt wurde, existiert die Datei 'daten.json' noch nicht. 
+                            Du musst zuerst einmal unter dem Reiter <strong>Actions</strong> das Skript manuell starten (siehe Anleitung)!
+                        </p>
+                    </div>
+                `;
+                console.error("Fehler:", error);
+            });
+    </script>
+</body>
+</html>
