@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meine Aktien Watchlist</title>
+    <title>Mein Aktien Dashboard</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        
+        * { box-sizing: border-box; }
         body {
             background-color: #0d0d11;
             color: #f1f1f6;
@@ -18,134 +15,40 @@
             width: 100%;
             overflow-x: hidden;
         }
-        
-        h1 {
-            text-align: center;
-            margin: 15px 0 25px 0;
-            font-weight: 300;
-            letter-spacing: 2px;
-            color: #ffffff;
-            font-size: 1.5em;
-            text-transform: uppercase;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 600px) {
-            .dashboard {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .card {
-            background: linear-gradient(145deg, #16161f, #12121a);
-            border: 1px solid #232330;
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            width: 100%;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #232330;
-            padding-bottom: 10px;
-            gap: 10px;
-        }
-
-        .logo-container {
-            width: 42px;
-            height: 42px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .logo {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .stock-identity {
-            text-align: right;
-            overflow: hidden;
-            flex-grow: 1;
-        }
-
-        .stock-name {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #ffffff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .tags {
-            font-size: 0.7em;
-            color: #8a8a9e;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9em;
-            color: #a0a0b0;
-        }
-
-        .metric-value {
-            font-weight: 600;
-            color: #ffffff;
-            text-align: right;
-        }
-
+        h1 { text-align: center; margin: 15px 0 30px 0; font-weight: 300; letter-spacing: 2px; color: #ffffff; font-size: 1.6em; text-transform: uppercase; }
+        h2 { max-width: 900px; margin: 30px auto 15px auto; font-weight: 400; letter-spacing: 1px; color: #00e5ff; font-size: 1.3em; text-transform: uppercase; border-left: 4px solid #00e5ff; padding-left: 10px; }
+        .dashboard { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; max-width: 900px; margin: 0 auto; }
+        @media (min-width: 600px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
+        .card { background: linear-gradient(145deg, #16161f, #12121a); border: 1px solid #232330; border-radius: 14px; padding: 16px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); width: 100%; }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #232330; padding-bottom: 10px; gap: 10px; }
+        .logo-container { width: 42px; height: 42px; background-color: #ffffff; border-radius: 8px; padding: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .logo { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .stock-identity { text-align: right; overflow: hidden; flex-grow: 1; }
+        .stock-name { font-size: 1.1em; font-weight: 600; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tags { font-size: 0.7em; color: #8a8a9e; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-body { display: flex; flex-direction: column; gap: 8px; }
+        .metric { display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; color: #a0a0b0; }
+        .metric-value { font-weight: 600; color: #ffffff; text-align: right; }
         .positive { color: #39ff14; text-shadow: 0 0 8px rgba(57, 255, 20, 0.2); }
         .negative { color: #ff3131; text-shadow: 0 0 8px rgba(255, 49, 49, 0.2); }
         .kgv-warning { color: #ff3131 !important; font-weight: 700; }
         .kgv-good { color: #00e5ff; }
         .kurs-highlight { font-size: 1.05em; color: #ffffff; font-weight: 700; }
-
-        .loading {
-            text-align: center;
-            color: #8a8a9e;
-            padding: 40px;
-        }
+        .loading { text-align: center; color: #8a8a9e; padding: 40px; grid-column: 1 / -1; }
     </style>
 </head>
 <body>
 
-    <h1>Meine Watchlist</h1>
+    <h1>Premium Investment Dashboard</h1>
     
-    <div class="dashboard" id="dashboard">
-        <div class="loading">Lade Watchlist Daten...</div>
+    <h2>Mein Depot</h2>
+    <div class="dashboard" id="depot-dashboard">
+        <div class="loading">Lade Depot-Aktien...</div>
+    </div>
+
+    <h2>Meine Watchlist</h2>
+    <div class="dashboard" id="watchlist-dashboard">
+        <div class="loading">Lade Watchlist-Aktien...</div>
     </div>
 
     <script>
@@ -156,15 +59,46 @@
             return `<span class="metric-value">0,0%</span>`;
         }
 
-        const dashboard = document.getElementById('dashboard');
+        function erstelleKarte(item) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            let kgvClass = "metric-value kgv-good";
+            let kgvText = "N/A";
+            if (item.kgv && item.kgv > 0) {
+                kgvText = item.kgv.toFixed(1).replace('.', ',');
+                if (item.kgv > 35) kgvClass = "metric-value kgv-warning";
+            }
+            const divText = (item.yield && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
+            const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
+            const domain = item.logoUrl.replace('https://logo.clearbit.com/', '');
+            const stabileLogoUrl = `https://logos.hunter.io/${domain}`;
+            
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="logo-container"><img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(item.name[0])}'"></div>
+                    <div class="stock-identity"><div class="stock-name">${item.name}</div><div class="tags" title="${stichworte}">${stichworte}</div></div>
+                </div>
+                <div class="card-body">
+                    <div class="metric"><span>Kurs (EUR):</span><span class="metric-value kurs-highlight">${item.kurs}</span></div>
+                    <div class="metric"><span>Performance 1M:</span>${fmtPerf(item.perfMonat)}</div>
+                    <div class="metric"><span>Performance 1J:</span>${fmtPerf(item.perfJahr)}</div>
+                    <div class="metric"><span>Performance 5J:</span>${fmtPerf(item.perf5J)}</div>
+                    <div class="metric"><span>Div.-Rendite:</span><span class="metric-value" style="color: #e0e0e0;">${divText}</span></div>
+                    <div class="metric" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #232330;"><span>KGV:</span><span class="${kgvClass}">${kgvText}</span></div>
+                </div>
+            `;
+            return card;
+        }
 
-        // Cache-Buster hinzugefügt (?v=...), damit das Smartphone garantiert die frischen Daten lädt
+        const depotDashboard = document.getElementById('depot-dashboard');
+        const watchlistDashboard = document.getElementById('watchlist-dashboard');
+
         fetch('daten.json?v=' + Date.now())
             .then(res => res.json())
             .then(data => {
-                dashboard.innerHTML = '';
+                depotDashboard.innerHTML = '';
+                watchlistDashboard.innerHTML = '';
                 
-                // Sortierung: Niedrigstes KGV zuerst
                 data.sort((a, b) => {
                     const kA = (a.kgv && a.kgv > 0) ? a.kgv : Infinity;
                     const kB = (b.kgv && b.kgv > 0) ? b.kgv : Infinity;
@@ -172,67 +106,15 @@
                 });
 
                 data.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    let kgvClass = "metric-value kgv-good";
-                    let kgvText = "N/A";
-                    if (item.kgv && item.kgv > 0) {
-                        kgvText = item.kgv.toFixed(1).replace('.', ',');
-                        if (item.kgv > 35) {
-                            kgvClass = "metric-value kgv-warning";
-                        }
+                    const karte = erstelleKarte(item);
+                    if (item.watchlist === true) {
+                        watchlistDashboard.appendChild(karte);
+                    } else {
+                        depotDashboard.appendChild(karte);
                     }
-
-                    const divText = (item.yield && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
-                    const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
-                    
-                    const domain = item.logoUrl.replace('https://logo.clearbit.com/', '');
-                    const stabileLogoUrl = `https://logos.hunter.io/${domain}`;
-                    
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <div class="logo-container">
-                                <img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(item.name[0])}'">
-                            </div>
-                            <div class="stock-identity">
-                                <div class="stock-name">${item.name}</div>
-                                <div class="tags" title="${stichworte}">${stichworte}</div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="metric">
-                                <span>Kurs (EUR):</span>
-                                <span class="metric-value kurs-highlight">${item.kurs}</span>
-                            </div>
-                            <div class="metric">
-                                <span>Performance 1M:</span>
-                                ${fmtPerf(item.perfMonat)}
-                            </div>
-                            <div class="metric">
-                                <span>Performance 1J:</span>
-                                ${fmtPerf(item.perfJahr)}
-                            </div>
-                            <div class="metric">
-                                <span>Performance 5J:</span>
-                                ${fmtPerf(item.perf5J)}
-                            </div>
-                            <div class="metric">
-                                <span>Div.-Rendite:</span>
-                                <span class="metric-value" style="color: #e0e0e0;">${divText}</span>
-                            </div>
-                            <div class="metric" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #232330;">
-                                <span>KGV:</span>
-                                <span class="${kgvClass}">${kgvText}</span>
-                            </div>
-                        </div>
-                    `;
-                    dashboard.appendChild(card);
                 });
             })
-            .catch(err => {
-                dashboard.innerHTML = '<div class="loading" style="color: #ff3131;">Fehler beim Laden. Bitte starte das Action-Skript einmal manuell.</div>';
-            });
+            .catch(err => { depotDashboard.innerHTML = '<div class="loading" style="color: #ff3131;">Fehler beim Laden.</div>'; });
     </script>
 </body>
 </html>
