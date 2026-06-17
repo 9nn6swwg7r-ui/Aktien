@@ -73,12 +73,22 @@
             
             const divText = (item.yield && !isNaN(item.yield) && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
             const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
-            const domain = item.logoUrl ? item.logoUrl.replace('https://logo.clearbit.com/', '') : 'example.com';
-            const stabileLogoUrl = `https://logos.hunter.io/${domain}`;
+            
+            // ABGESICHERT: Verhindert den Absturz bei fehlerhaften Logo-URLs auf iPhones
+            let stabileLogoUrl = '';
+            const ersterBuchstabe = item.name ? item.name[0] : 'A';
+            const platzhalterUrl = `https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(ersterBuchstabe)}`;
+            
+            if (item.logoUrl && typeof item.logoUrl === 'string' && item.logoUrl.includes('clearbit.com/')) {
+                const domain = item.logoUrl.split('clearbit.com/')[1];
+                stabileLogoUrl = domain ? `https://logos.hunter.io/${domain}` : platzhalterUrl;
+            } else {
+                stabileLogoUrl = platzhalterUrl;
+            }
             
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="logo-container"><img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(item.name ? item.name[0] : 'A')}'"></div>
+                    <div class="logo-container"><img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='${platzhalterUrl}'"></div>
                     <div class="stock-identity"><div class="stock-name">${item.name || 'Unbekannt'}</div><div class="tags" title="${stichworte}">${stichworte}</div></div>
                 </div>
                 <div class="card-body">
@@ -102,11 +112,9 @@
                 return res.json();
             })
             .then(data => {
-                // Leeren der Lade-Meldungen
                 depotDashboard.innerHTML = '';
                 watchlistDashboard.innerHTML = '';
                 
-                // Extrem robuste Sortierung nach KGV (fehlerhafte KGVs wandern nach hinten)
                 data.sort((a, b) => {
                     let valA = (a && a.kgv && !isNaN(a.kgv) && a.kgv > 0) ? a.kgv : 999999;
                     let valB = (b && b.kgv && !isNaN(b.kgv) && b.kgv > 0) ? b.kgv : 999999;
@@ -117,7 +125,7 @@
                 let watchlistZaehler = 0;
 
                 data.forEach(item => {
-                    if (!item) return; // Überspringe leere Einträge falls vorhanden
+                    if (!item) return;
                     
                     const karte = erstelleKarte(item);
                     if (item.watchlist === true) {
@@ -129,7 +137,6 @@
                     }
                 });
 
-                // Falls eine Sektion komplett leer blieb, eine kurze Info anzeigen
                 if (depotZaehler === 0) depotDashboard.innerHTML = '<div class="loading">Keine Depot-Aktien gefunden.</div>';
                 if (watchlistZaehler === 0) watchlistDashboard.innerHTML = '<div class="loading">Keine Watchlist-Aktien gefunden.</div>';
             })
