@@ -56,7 +56,6 @@ meine_aktien = [
     {"symbol": "IBN", "name": "ICICI Bank", "logoUrl": "https://logo.clearbit.com/icicibank.com", "tags": ["Banken", "Indien", "Finanzdienstleistung"]}
 ]
 
-# Aktuelle Wechselkurse in Euro laden (Alternative Datenstruktur-Verbindung)
 print("Lade Wechselkurse für EUR-Umrechnung...")
 fx_rates = {"USD": 1.0, "EUR": 1.0, "CHF": 1.0, "GBP": 1.0, "DKK": 1.0, "JPY": 1.0}
 for curr in ["USD", "CHF", "GBP", "DKK", "JPY"]:
@@ -65,7 +64,7 @@ for curr in ["USD", "CHF", "GBP", "DKK", "JPY"]:
         t = yf.Ticker(pair)
         px = t.history(period="1d")['Close'].iloc[-1]
         if curr == "GBP":
-            fx_rates["GBP"] = 1.0 / px # Britische Pence Korrektur erfolgt im Loop
+            fx_rates["GBP"] = 1.0 / px
         else:
             fx_rates[curr] = px
     except:
@@ -83,7 +82,7 @@ for aktie in meine_aktien:
         if not hist_5y.empty and not hist_1m.empty:
             raw_kurs = hist_5y['Close'].iloc[-1]
             
-            # Währungs-Erkennung & automatische Umrechnung in Euro
+            # Währungs-Erkennung
             sym = aktie["symbol"]
             rate = 1.0
             if ".DE" in sym or ".PA" in sym or ".MC" in sym or ".VI" in sym:
@@ -91,20 +90,18 @@ for aktie in meine_aktien:
             elif ".SW" in sym:
                 rate = fx_rates["CHF"]
             elif ".L" in sym:
-                rate = fx_rates["GBP"] * 100 # GBp sind Pence
+                rate = fx_rates["GBP"] * 100
             elif ".CO" in sym:
                 rate = fx_rates["DKK"]
             elif ".T" in sym:
                 rate = fx_rates["JPY"]
             else:
-                rate = fx_rates["USD"] # Standard US-Märkte
+                rate = fx_rates["USD"]
                 
             kurs_eur = raw_kurs / rate
             
-            # Performance Berechnungen (Sichere Variante für GitHub)
+            # Sichere Performance-Berechnung
             kurs_1m = hist_1m['Close'].iloc[0] if len(hist_1m) > 0 else raw_kurs
-            
-            # Falls weniger als 1 oder 5 Jahre Historie existieren, Failsafe aktivieren
             idx_1y = -252 if len(hist_5y) >= 252 else 0
             idx_5y = 0
             
@@ -114,17 +111,17 @@ for aktie in meine_aktien:
             perf_m = ((raw_kurs - kurs_1m) / kurs_1m) * 100
             perf_j = ((raw_kurs - kurs_1y) / kurs_1y) * 100
             perf_5j = ((raw_kurs - kurs_5y) / kurs_5y) * 100
-
-            # Robuste Selektion für 1 Jahr / 5 Jahre
-            idx_1y = -252 if len(hist_5y) >= 252 else 0
-            idx_5y = 0
             
-            perf_m = ((raw_kurs - kurs_1m) / kurs_1m) * 100
-            perf_j = ((raw_kurs - hist_5y['Close'].iloc[idx_1y]) / hist_5y['Close'].iloc[idx_1y]) * 100
-            perf_5j = ((raw_kurs - hist_5y['Close'].iloc[idx_5y]) / hist_5y['Close'].iloc[idx_5y]) * 100
+            # --- KORREKTUR DER DIVIDENDENRENDITE ---
+            raw_yield = info.get("dividendYield", 0) or 0
             
-            # Dividendenrendite & KGV über Fallback-Struktur ziehen
-            div_yield = (info.get("dividendYield", 0) or 0) * 100
+            # Wenn yfinance z.B. 0.035 liefert, ist es eine Dezimalzahl -> * 100
+            # Wenn es über 1.0 geliefert wird (z.B. 3.5), lassen wir es so.
+            if 0 < raw_yield < 1.0:
+                div_yield = raw_yield * 100
+            else:
+                div_yield = raw_yield
+                
             kgv = info.get("trailingPE") or info.get("forwardPE") or 0
             
             aktien_daten.append({
@@ -138,7 +135,7 @@ for aktie in meine_aktien:
                 "yield": div_yield,
                 "kgv": kgv
             })
-            print(f"Erfolg: {aktie['name']} -> {kurs_eur:.2f} € | KGV: {kgv}")
+            print(f"Erfolg: {aktie['name']} -> {kurs_eur:.2f} € | Div-Rendite: {div_yield:.2f}%")
     except Exception as e:
         print(f"Fehler bei {aktie['name']}: {e}", file=sys.stderr)
 
