@@ -2,7 +2,13 @@ name: Automatische Aktualisierung Aktiendaten
 
 on:
   schedule:
-    - cron: '30 18 * * *'
+    # Führt das Skript 3-mal am Tag aus (Zeiten sind in UTC angegeben)
+    # 07:30 UTC = 09:30 Uhr dt. Zeit (Europa Open)
+    # 13:30 UTC = 15:30 Uhr dt. Zeit (USA Open)
+    # 20:15 UTC = 22:15 Uhr dt. Zeit (USA Close)
+    - cron: '30 7 * * *'
+    - cron: '30 13 * * *'
+    - cron: '15 20 * * *'
   workflow_dispatch:
 
 permissions:
@@ -26,7 +32,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Daten von Yahoo Finance abrufen
+    - name: Daten abrufen und konvertieren
       run: python hole_daten.py
 
     - name: Änderungen in GitHub speichern
@@ -34,4 +40,4 @@ jobs:
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add daten.json
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Daten-Update: $(date +'%Y-%m-%d %H:%M')" && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Daten-Update: 3x täglicher Turnus" && git push)
