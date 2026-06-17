@@ -2,31 +2,38 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Meine Aktien Watchlist</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             background-color: #0d0d11;
             color: #f1f1f6;
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             margin: 0;
-            padding: 30px 15px;
+            padding: 15px 10px;
+            width: 100%;
+            overflow-x: hidden;
         }
         
         h1 {
             text-align: center;
-            margin-bottom: 35px;
+            margin: 15px 0 25px 0;
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #ffffff;
-            font-size: 1.8em;
+            font-size: 1.5em;
             text-transform: uppercase;
         }
 
         .dashboard {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
+            width: 100%;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -40,34 +47,32 @@
         .card {
             background: linear-gradient(145deg, #16161f, #12121a);
             border: 1px solid #232330;
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
         }
 
         .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             border-bottom: 1px solid #232330;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
+            gap: 10px;
         }
 
         .logo-container {
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             background-color: #ffffff;
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            overflow: hidden;
+            flex-shrink: 0;
         }
 
         .logo {
@@ -78,11 +83,12 @@
 
         .stock-identity {
             text-align: right;
-            max-width: 70%;
+            overflow: hidden;
+            flex-grow: 1;
         }
 
         .stock-name {
-            font-size: 1.15em;
+            font-size: 1.1em;
             font-weight: 600;
             color: #ffffff;
             white-space: nowrap;
@@ -91,7 +97,7 @@
         }
 
         .tags {
-            font-size: 0.72em;
+            font-size: 0.7em;
             color: #8a8a9e;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -104,42 +110,42 @@
         .card-body {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .metric {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.95em;
+            font-size: 0.9em;
             color: #a0a0b0;
         }
 
         .metric-value {
             font-weight: 600;
             color: #ffffff;
+            text-align: right;
         }
 
         .positive { color: #39ff14; text-shadow: 0 0 8px rgba(57, 255, 20, 0.2); }
         .negative { color: #ff3131; text-shadow: 0 0 8px rgba(255, 49, 49, 0.2); }
         .kgv-warning { color: #ff3131 !important; font-weight: 700; }
         .kgv-good { color: #00e5ff; }
-        .kurs-highlight { font-size: 1.1em; color: #ffffff; font-weight: 700; }
+        .kurs-highlight { font-size: 1.05em; color: #ffffff; font-weight: 700; }
 
         .loading {
             text-align: center;
             color: #8a8a9e;
-            grid-column: 1 / -1;
             padding: 40px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Meine Aktien Watchlist</h1>
+    <h1>Meine Watchlist</h1>
     
     <div class="dashboard" id="dashboard">
-        <div class="loading">Lade Watchlist und berechne KGVs...</div>
+        <div class="loading">Lade Watchlist Daten...</div>
     </div>
 
     <script>
@@ -152,11 +158,81 @@
 
         const dashboard = document.getElementById('dashboard');
 
-        fetch('daten.json')
+        // Cache-Buster hinzugefügt (?v=...), damit das Smartphone garantiert die frischen Daten lädt
+        fetch('daten.json?v=' + Date.now())
             .then(res => res.json())
             .then(data => {
                 dashboard.innerHTML = '';
                 
                 // Sortierung: Niedrigstes KGV zuerst
                 data.sort((a, b) => {
-                    const k
+                    const kA = (a.kgv && a.kgv > 0) ? a.kgv : Infinity;
+                    const kB = (b.kgv && b.kgv > 0) ? b.kgv : Infinity;
+                    return kA - kB;
+                });
+
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    let kgvClass = "metric-value kgv-good";
+                    let kgvText = "N/A";
+                    if (item.kgv && item.kgv > 0) {
+                        kgvText = item.kgv.toFixed(1).replace('.', ',');
+                        if (item.kgv > 35) {
+                            kgvClass = "metric-value kgv-warning";
+                        }
+                    }
+
+                    const divText = (item.yield && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
+                    const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
+                    
+                    const domain = item.logoUrl.replace('https://logo.clearbit.com/', '');
+                    const stabileLogoUrl = `https://logos.hunter.io/${domain}`;
+                    
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <div class="logo-container">
+                                <img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(item.name[0])}'">
+                            </div>
+                            <div class="stock-identity">
+                                <div class="stock-name">${item.name}</div>
+                                <div class="tags" title="${stichworte}">${stichworte}</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="metric">
+                                <span>Kurs (EUR):</span>
+                                <span class="metric-value kurs-highlight">${item.kurs}</span>
+                            </div>
+                            <div class="metric">
+                                <span>Performance 1M:</span>
+                                ${fmtPerf(item.perfMonat)}
+                            </div>
+                            <div class="metric">
+                                <span>Performance 1J:</span>
+                                ${fmtPerf(item.perfJahr)}
+                            </div>
+                            <div class="metric">
+                                <span>Performance 5J:</span>
+                                ${fmtPerf(item.perf5J)}
+                            </div>
+                            <div class="metric">
+                                <span>Div.-Rendite:</span>
+                                <span class="metric-value" style="color: #e0e0e0;">${divText}</span>
+                            </div>
+                            <div class="metric" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #232330;">
+                                <span>KGV:</span>
+                                <span class="${kgvClass}">${kgvText}</span>
+                            </div>
+                        </div>
+                    `;
+                    dashboard.appendChild(card);
+                });
+            })
+            .catch(err => {
+                dashboard.innerHTML = '<div class="loading" style="color: #ff3131;">Fehler beim Laden. Bitte starte das Action-Skript einmal manuell.</div>';
+            });
+    </script>
+</body>
+</html>
