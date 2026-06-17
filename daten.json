@@ -1,0 +1,402 @@
+[
+    {
+        "name": "Microsoft",
+        "logoUrl": "https://logo.clearbit.com/microsoft.com",
+        "kurs": "383.30 $",
+        "perfMonat": -9.303685977572405,
+        "perfJahr": -19.176918622990595,
+        "kgv": 22.842669
+    },
+    {
+        "name": "TSMC",
+        "logoUrl": "https://logo.clearbit.com/tsmc.com",
+        "kurs": "436.93 $",
+        "perfMonat": 10.609473278988691,
+        "perfJahr": 106.52982528720909,
+        "kgv": 37.580635
+    },
+    {
+        "name": "SAP",
+        "logoUrl": "https://logo.clearbit.com/sap.com",
+        "kurs": "141.18 €",
+        "perfMonat": -4.517792443524885,
+        "perfJahr": -43.926523669697836,
+        "kgv": 22.625
+    },
+    {
+        "name": "Oracle",
+        "logoUrl": "https://logo.clearbit.com/oracle.com",
+        "kurs": "186.85 $",
+        "perfMonat": 0.12593141288405668,
+        "perfJahr": -9.347869765546655,
+        "kgv": 31.992294
+    },
+    {
+        "name": "Broadcom",
+        "logoUrl": "https://logo.clearbit.com/broadcom.com",
+        "kurs": "394.55 $",
+        "perfMonat": -6.219243316957817,
+        "perfJahr": 59.49867987617077,
+        "kgv": 65.43035
+    },
+    {
+        "name": "ASML",
+        "logoUrl": "https://logo.clearbit.com/asml.com",
+        "kurs": "1901.57 $",
+        "perfMonat": 29.148522291704094,
+        "perfJahr": 152.21379575370426,
+        "kgv": 63.512688
+    },
+    {
+        "name": "Alphabet",
+        "logoUrl": "https://logo.clearbit.com/google.com",
+        "kurs": "365.40 $",
+        "perfMonat": -7.889544606169349,
+        "perfJahr": 108.26793139168834,
+        "kgv": 27.89351
+    },
+    {
+        "name": "Qualcomm",
+        "logoUrl": "https://logo.clearbit.com/qualcomm.com",
+        "kurs": "216.23 $",
+        "perfMonat": 6.574660966981131,
+        "perfJahr": 42.941517826926855,
+        "kgv": 23.275564
+    },
+    {
+        "name": "ServiceNow",
+        "logoUrl": "https://logo.clearbit.com/servicenow.com",
+        "kurs": "99.30 $",
+        "perfMonat": -3.9838541884137366,
+        "perfJahr": -50.59264068725062,
+        "kgv": 59.101192
+    },
+    {
+        "name": "Intuit",
+        "logoUrl": "https://logo.clearbit.com/intuit.com",
+        "kurs": "276.55 $",
+        "perfMonat": -31.404408849855347,
+        "perfJahr": -63.55076440510615,
+        "kgv": 16.883394
+    },
+    {
+        "name": "JPMorgan Chase",
+        "logoUrl": "https://logo.clearbit.com/jpmorganchase.com",
+        "kurs": "335.76 $",
+        "perfMonat": 11.646657339455453,
+        "perfJahr": 26.9979164622568,
+        "kgv": 16.079943
+    },
+    {
+        "name": "HSBC",
+        "logoUrl": "https://logo.clearbit.com/hsbc.com",
+        "kurs": "1437.00 GBp",
+        "perfMonat": 7.431222056543488,
+        "perfJahr": 66.51216685979142,
+        "kgv": 15.966667
+    },
+    {
+        "name": "Sanofi",
+        "logoUrl": "https://logo.clearbit.com/sanofi.com",
+        "kurs": "74.88 €",
+        "perfMonat": 0.7263935191399905,
+        "perfJahr": -6.816105792852523,
+        "kgv": 18.90909
+    },
+    {
+        "name": "BlackRock",
+        "logoUrl": "https://logo.clearbit.com/blackrock.com",
+        "kurs": "1068.05 $",
+        "perfMonat": -1.087717148321633,
+        "perfJahr": 12.510475364552972,
+        "kgv": 26.85567
+    },
+    {
+        "name": "Allianz",
+        "logoUrl": "https://logo.clearbit.com/allianz.com",
+        "kurs": "400.20 €",
+        "perfMonat": 4.929213060147395,
+        "perfJahr": 23.558475470487824,
+        "kgv": 12.926357
+    },
+    {
+        "name": "Munich Re",
+        "logoUrl": "https://logo.clearbit.com/munichre.com",
+        "kurs": "464.60 €",
+        "perfMonat": -3.968578374100605,
+        "perfJahr": -12.164304536204384,
+        "kgv": 8.896975
+    },
+    {
+        "name": "Siemens",
+        "logoUrl": "https://logo.clearbit.com/siemens.com",
+        "kurs": "273.10 €",
+        "perfMonat": 4.836854550293905,
+        "perfJahr": 30.32991935337059,
+        "kgv": 28.241985
+    },
+    {
+        "name": "Schneider Electric",
+        "logoUrl": "https://logo.clearbit.com/se.com",
+        "kurs": "282.75 €",
+        "perfMonat": 8.354085753279513,
+        "perfJahr": 29.41620490586225,
+        "kgv": 35.43233
+    },
+    {
+        "name": "Honeywell",
+        "logoUrl": "https://logo.clearbit.com/honeywell.com",
+        "kurs": "232.00 $",
+        "perfMonat": 6.799247140337944,
+        "perfJahr": 13.407264147403952,
+        "kgv": 37.001595
+    },
+    {
+        "name": "Caterpillar",
+        "logoUrl": "https://logo.clearbit.com/caterpillar.com",
+        "kurs": "964.61 $",
+        "perfMonat": 11.651133945514633,
+        "perfJahr": 172.60387283417958,
+        "kgv": 48.134228
+    },
+    {
+        "name": "John Deere",
+        "logoUrl": "https://logo.clearbit.com/deere.com",
+        "kurs": "593.65 $",
+        "perfMonat": 5.165730957882941,
+        "perfJahr": 14.969877972870199,
+        "kgv": 33.577488
+    },
+    {
+        "name": "ABB",
+        "logoUrl": "https://logo.clearbit.com/abb.com",
+        "kurs": "85.38 CHF",
+        "perfMonat": 5.329385424298257,
+        "perfJahr": 81.6806404954032,
+        "kgv": 40.464455
+    },
+    {
+        "name": "Keyence",
+        "logoUrl": "https://logo.clearbit.com/keyence.com",
+        "kurs": "75600.00 ¥",
+        "perfMonat": -1.6009371339320577,
+        "perfJahr": 33.923242556723245,
+        "kgv": 41.206768
+    },
+    {
+        "name": "Vinci",
+        "logoUrl": "https://logo.clearbit.com/vinci.com",
+        "kurs": "130.30 €",
+        "perfMonat": 4.658636989363705,
+        "perfJahr": 8.910080520604852,
+        "kgv": 15.04619
+    },
+    {
+        "name": "Parker-Hannifin",
+        "logoUrl": "https://logo.clearbit.com/parker.com",
+        "kurs": "954.31 $",
+        "perfMonat": 11.16922820741018,
+        "perfJahr": 47.59106344019549,
+        "kgv": 35.18842
+    },
+    {
+        "name": "Rio Tinto",
+        "logoUrl": "https://logo.clearbit.com/riotinto.com",
+        "kurs": "103.90 $",
+        "perfMonat": 0.5516303926483737,
+        "perfJahr": 91.88764079773878,
+        "kgv": 17.088816
+    },
+    {
+        "name": "Linde",
+        "logoUrl": "https://logo.clearbit.com/linde.com",
+        "kurs": "515.19 $",
+        "perfMonat": 1.166494437736665,
+        "perfJahr": 13.283787538904562,
+        "kgv": 34.16379
+    },
+    {
+        "name": "Air Liquide",
+        "logoUrl": "https://logo.clearbit.com/airliquide.com",
+        "kurs": "166.90 €",
+        "perfMonat": -4.3553043573155446,
+        "perfJahr": -6.6355666934719855,
+        "kgv": 30.235506
+    },
+    {
+        "name": "LVMH",
+        "logoUrl": "https://logo.clearbit.com/lvmh.com",
+        "kurs": "511.00 €",
+        "perfMonat": 12.0,
+        "perfJahr": 13.699816206964524,
+        "kgv": 23.386726
+    },
+    {
+        "name": "TotalEnergies",
+        "logoUrl": "https://logo.clearbit.com/totalenergies.com",
+        "kurs": "82.95 $",
+        "perfMonat": -11.21695742556155,
+        "perfJahr": 37.462579977149886,
+        "kgv": 12.307121
+    },
+    {
+        "name": "NextEra Energy",
+        "logoUrl": "https://logo.clearbit.com/nexteraenergy.com",
+        "kurs": "85.71 $",
+        "perfMonat": -3.034838104709467,
+        "perfJahr": 22.727327846124215,
+        "kgv": 21.753807
+    },
+    {
+        "name": "Ørsted",
+        "logoUrl": "https://logo.clearbit.com/orsted.com",
+        "kurs": "149.25 DKK",
+        "perfMonat": -9.92757830489308,
+        "perfJahr": -45.96307262719211,
+        "kgv": 15.477468
+    },
+    {
+        "name": "Veolia",
+        "logoUrl": "https://logo.clearbit.com/veolia.com",
+        "kurs": "35.91 €",
+        "perfMonat": 4.999997211478669,
+        "perfJahr": 25.307571973119597,
+        "kgv": 21.12353
+    },
+    {
+        "name": "Iberdrola",
+        "logoUrl": "https://logo.clearbit.com/iberdrola.com",
+        "kurs": "20.70 €",
+        "perfMonat": 6.590895407710522,
+        "perfJahr": 32.50224494467761,
+        "kgv": 25.875
+    },
+    {
+        "name": "Eli Lilly",
+        "logoUrl": "https://logo.clearbit.com/lilly.com",
+        "kurs": "1114.88 $",
+        "perfMonat": 12.832158050344104,
+        "perfJahr": 41.90004580265581,
+        "kgv": 39.576973
+    },
+    {
+        "name": "Novartis",
+        "logoUrl": "https://logo.clearbit.com/novartis.com",
+        "kurs": "121.00 CHF",
+        "perfMonat": 3.242323507428049,
+        "perfJahr": 30.46117216638494,
+        "kgv": 21.841156
+    },
+    {
+        "name": "AbbVie",
+        "logoUrl": "https://logo.clearbit.com/abbvie.com",
+        "kurs": "221.37 $",
+        "perfMonat": 5.711279903502606,
+        "perfJahr": 23.237976555594773,
+        "kgv": 107.98537
+    },
+    {
+        "name": "Johnson & Johnson",
+        "logoUrl": "https://logo.clearbit.com/jnj.com",
+        "kurs": "232.65 $",
+        "perfMonat": 2.2138656006946302,
+        "perfJahr": 56.4923229522758,
+        "kgv": 26.958284
+    },
+    {
+        "name": "Amazon",
+        "logoUrl": "https://logo.clearbit.com/amazon.com",
+        "kurs": "239.43 $",
+        "perfMonat": -9.601296565061231,
+        "perfJahr": 11.456095574198399,
+        "kgv": 30.81467
+    },
+    {
+        "name": "Procter & Gamble",
+        "logoUrl": "https://logo.clearbit.com/pg.com",
+        "kurs": "151.29 $",
+        "perfMonat": 6.250434675633121,
+        "perfJahr": -1.81548846862345,
+        "kgv": 22.08613
+    },
+    {
+        "name": "Nestlé",
+        "logoUrl": "https://logo.clearbit.com/nestle.com",
+        "kurs": "79.09 CHF",
+        "perfMonat": 1.0863988974042407,
+        "perfJahr": -0.556372915568091,
+        "kgv": 22.532763
+    },
+    {
+        "name": "Mondelez",
+        "logoUrl": "https://logo.clearbit.com/mondelezinternational.com",
+        "kurs": "60.60 $",
+        "perfMonat": -1.6872175954336512,
+        "perfJahr": -5.624634045724323,
+        "kgv": 30.0
+    },
+    {
+        "name": "Coca-Cola",
+        "logoUrl": "https://logo.clearbit.com/coca-colacompany.com",
+        "kurs": "80.11 $",
+        "perfMonat": -0.7053958231912707,
+        "perfJahr": 18.326317265117225,
+        "kgv": 25.191824
+    },
+    {
+        "name": "McDonald's",
+        "logoUrl": "https://logo.clearbit.com/mcdonalds.com",
+        "kurs": "283.44 $",
+        "perfMonat": 1.0239377829746157,
+        "perfJahr": -0.6817079419884186,
+        "kgv": 23.386139
+    },
+    {
+        "name": "Walmart",
+        "logoUrl": "https://logo.clearbit.com/walmart.com",
+        "kurs": "118.06 $",
+        "perfMonat": -11.463174180672581,
+        "perfJahr": 26.30455568664576,
+        "kgv": 41.568665
+    },
+    {
+        "name": "Fuchs SE",
+        "logoUrl": "https://logo.clearbit.com/fuchs.com",
+        "kurs": "39.42 €",
+        "perfMonat": 7.881765684888475,
+        "perfJahr": -13.455740908813393,
+        "kgv": 16.918455
+    },
+    {
+        "name": "Prologis",
+        "logoUrl": "https://logo.clearbit.com/prologis.com",
+        "kurs": "142.51 $",
+        "perfMonat": 0.8673185280673507,
+        "perfJahr": 40.00074350991544,
+        "kgv": 35.896725
+    },
+    {
+        "name": "Krones",
+        "logoUrl": "https://logo.clearbit.com/krones.com",
+        "kurs": "114.80 €",
+        "perfMonat": 0.09489915385024746,
+        "perfJahr": -15.193377639014729,
+        "kgv": 12.451193
+    },
+    {
+        "name": "Mayr-Melnhof Karton",
+        "logoUrl": "https://logo.clearbit.com/mm-karton.com",
+        "kurs": "80.80 €",
+        "perfMonat": 2.929940193322054,
+        "perfJahr": 9.945226802521553,
+        "kgv": 20.932644
+    },
+    {
+        "name": "ICICI Bank",
+        "logoUrl": "https://logo.clearbit.com/icicibank.com",
+        "kurs": "28.02 $",
+        "perfMonat": 8.352667426262464,
+        "perfJahr": -14.105952450975865,
+        "kgv": 17.847134
+    }
+]
