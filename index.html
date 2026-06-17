@@ -62,24 +62,27 @@
         function erstelleKarte(item) {
             const card = document.createElement('div');
             card.className = 'card';
+            
             let kgvClass = "metric-value kgv-good";
             let kgvText = "N/A";
-            if (item.kgv && item.kgv > 0) {
+            
+            if (item.kgv && !isNaN(item.kgv) && item.kgv > 0) {
                 kgvText = item.kgv.toFixed(1).replace('.', ',');
                 if (item.kgv > 35) kgvClass = "metric-value kgv-warning";
             }
-            const divText = (item.yield && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
+            
+            const divText = (item.yield && !isNaN(item.yield) && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
             const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
-            const domain = item.logoUrl.replace('https://logo.clearbit.com/', '');
+            const domain = item.logoUrl ? item.logoUrl.replace('https://logo.clearbit.com/', '') : 'example.com';
             const stabileLogoUrl = `https://logos.hunter.io/${domain}`;
             
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="logo-container"><img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(item.name[0])}'"></div>
-                    <div class="stock-identity"><div class="stock-name">${item.name}</div><div class="tags" title="${stichworte}">${stichworte}</div></div>
+                    <div class="logo-container"><img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(item.name ? item.name[0] : 'A')}'"></div>
+                    <div class="stock-identity"><div class="stock-name">${item.name || 'Unbekannt'}</div><div class="tags" title="${stichworte}">${stichworte}</div></div>
                 </div>
                 <div class="card-body">
-                    <div class="metric"><span>Kurs (EUR):</span><span class="metric-value kurs-highlight">${item.kurs}</span></div>
+                    <div class="metric"><span>Kurs (EUR):</span><span class="metric-value kurs-highlight">${item.kurs || 'N/A'}</span></div>
                     <div class="metric"><span>Performance 1M:</span>${fmtPerf(item.perfMonat)}</div>
                     <div class="metric"><span>Performance 1J:</span>${fmtPerf(item.perfJahr)}</div>
                     <div class="metric"><span>Performance 5J:</span>${fmtPerf(item.perf5J)}</div>
@@ -94,27 +97,47 @@
         const watchlistDashboard = document.getElementById('watchlist-dashboard');
 
         fetch('daten.json?v=' + Date.now())
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error("Fehler beim Laden der JSON-Datei");
+                return res.json();
+            })
             .then(data => {
+                // Leeren der Lade-Meldungen
                 depotDashboard.innerHTML = '';
                 watchlistDashboard.innerHTML = '';
                 
+                // Extrem robuste Sortierung nach KGV (fehlerhafte KGVs wandern nach hinten)
                 data.sort((a, b) => {
-                    const kA = (a.kgv && a.kgv > 0) ? a.kgv : Infinity;
-                    const kB = (b.kgv && b.kgv > 0) ? b.kgv : Infinity;
-                    return kA - kB;
+                    let valA = (a && a.kgv && !isNaN(a.kgv) && a.kgv > 0) ? a.kgv : 999999;
+                    let valB = (b && b.kgv && !isNaN(b.kgv) && b.kgv > 0) ? b.kgv : 999999;
+                    return valA - valB;
                 });
 
+                let depotZaehler = 0;
+                let watchlistZaehler = 0;
+
                 data.forEach(item => {
+                    if (!item) return; // Überspringe leere Einträge falls vorhanden
+                    
                     const karte = erstelleKarte(item);
                     if (item.watchlist === true) {
                         watchlistDashboard.appendChild(karte);
+                        watchlistZaehler++;
                     } else {
                         depotDashboard.appendChild(karte);
+                        depotZaehler++;
                     }
                 });
+
+                // Falls eine Sektion komplett leer blieb, eine kurze Info anzeigen
+                if (depotZaehler === 0) depotDashboard.innerHTML = '<div class="loading">Keine Depot-Aktien gefunden.</div>';
+                if (watchlistZaehler === 0) watchlistDashboard.innerHTML = '<div class="loading">Keine Watchlist-Aktien gefunden.</div>';
             })
-            .catch(err => { depotDashboard.innerHTML = '<div class="loading" style="color: #ff3131;">Fehler beim Laden.</div>'; });
+            .catch(err => { 
+                console.error(err);
+                depotDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Laden der Daten: ${err.message}</div>`; 
+                watchlistDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Laden der Daten.</div>`; 
+            });
     </script>
 </body>
 </html>
