@@ -1,1 +1,752 @@
-[]
+[
+    {
+        "name": "Microsoft",
+        "logoUrl": "https://logo.clearbit.com/microsoft.com",
+        "tags": [
+            "Software",
+            "Cloud",
+            "KI"
+        ],
+        "kurs": "329.73 €",
+        "perfMonat": -10.374374529057704,
+        "perfJahr": -20.131046502686406,
+        "perf5J": 51.279088439582,
+        "yield": 92.0,
+        "kgv": 22.573301
+    },
+    {
+        "name": "TSMC",
+        "logoUrl": "https://logo.clearbit.com/tsmc.com",
+        "tags": [
+            "Halbleiter",
+            "Chips",
+            "Tech"
+        ],
+        "kurs": "378.96 €",
+        "perfMonat": 10.205700988174064,
+        "perfJahr": 105.77590233462956,
+        "perf5J": 296.4673678921159,
+        "yield": 0,
+        "kgv": 37.428204
+    },
+    {
+        "name": "SAP",
+        "logoUrl": "https://logo.clearbit.com/sap.com",
+        "tags": [
+            "ERP-Software",
+            "Cloud",
+            "B2B"
+        ],
+        "kurs": "141.18 €",
+        "perfMonat": -4.517792443524885,
+        "perfJahr": -42.04798036374892,
+        "perf5J": 28.445671345286595,
+        "yield": 175.0,
+        "kgv": 22.625
+    },
+    {
+        "name": "Oracle",
+        "logoUrl": "https://logo.clearbit.com/oracle.com",
+        "tags": [
+            "Datenbanken",
+            "Cloud",
+            "Infrastruktur"
+        ],
+        "kurs": "160.47 €",
+        "perfMonat": -1.213760989357606,
+        "perfJahr": -10.560802004062552,
+        "perf5J": 154.30643321138538,
+        "yield": 0,
+        "kgv": 31.565924
+    },
+    {
+        "name": "Broadcom",
+        "logoUrl": "https://logo.clearbit.com/broadcom.com",
+        "tags": [
+            "Chips",
+            "Netzwerk",
+            "Software"
+        ],
+        "kurs": "341.96 €",
+        "perfMonat": -6.6268939290902065,
+        "perfJahr": 58.80535370291905,
+        "perf5J": 821.5149502517347,
+        "yield": 69.0,
+        "kgv": 65.145935
+    },
+    {
+        "name": "ASML",
+        "logoUrl": "https://logo.clearbit.com/asml.com",
+        "tags": [
+            "Lithographie",
+            "Tech",
+            "Halbleiter"
+        ],
+        "kurs": "1648.87 €",
+        "perfMonat": 28.64560477984291,
+        "perfJahr": 151.2316495210821,
+        "perf5J": 183.7263285215174,
+        "yield": 49.0,
+        "kgv": 63.265366
+    },
+    {
+        "name": "Alphabet",
+        "logoUrl": "https://logo.clearbit.com/google.com",
+        "tags": [
+            "Suche",
+            "Werbung",
+            "KI"
+        ],
+        "kurs": "315.80 €",
+        "perfMonat": -8.551248595486818,
+        "perfJahr": 106.77175620863612,
+        "perf5J": 200.62945911126903,
+        "yield": 24.0,
+        "kgv": 27.69558
+    },
+    {
+        "name": "Qualcomm",
+        "logoUrl": "https://logo.clearbit.com/qualcomm.com",
+        "tags": [
+            "Mobilfunk",
+            "Prozessoren",
+            "5G"
+        ],
+        "kurs": "187.16 €",
+        "perfMonat": 5.968425105891413,
+        "perfJahr": 42.12842824775075,
+        "perf5J": 76.95352135591058,
+        "yield": 172.0,
+        "kgv": 23.143166
+    },
+    {
+        "name": "ServiceNow",
+        "logoUrl": "https://logo.clearbit.com/servicenow.com",
+        "tags": [
+            "Workflow",
+            "Cloud",
+            "SaaS"
+        ],
+        "kurs": "83.95 €",
+        "perfMonat": -6.749469180919343,
+        "perfJahr": -52.01575273263083,
+        "perf5J": -9.087768098630923,
+        "yield": 0,
+        "kgv": 57.404583
+    },
+    {
+        "name": "Intuit",
+        "logoUrl": "https://logo.clearbit.com/intuit.com",
+        "tags": [
+            "Finanzsoftware",
+            "Steuern",
+            "KMU"
+        ],
+        "kurs": "235.92 €",
+        "perfMonat": -32.77607239015326,
+        "perfJahr": -64.27962006198227,
+        "perf5J": -40.980126012271064,
+        "yield": 171.0,
+        "kgv": 16.545788
+    },
+    {
+        "name": "JPMorgan Chase",
+        "logoUrl": "https://logo.clearbit.com/jpmorganchase.com",
+        "tags": [
+            "Großbank",
+            "Finanzen",
+            "Investment"
+        ],
+        "kurs": "289.44 €",
+        "perfMonat": 10.564289513199336,
+        "perfJahr": 25.76672457477938,
+        "perf5J": 148.60454063072504,
+        "yield": 0,
+        "kgv": 15.916707
+    },
+    {
+        "name": "HSBC",
+        "logoUrl": "https://logo.clearbit.com/hsbc.com",
+        "tags": [
+            "Banken",
+            "Asien-Fokus",
+            "Vermögen"
+        ],
+        "kurs": "16.60 €",
+        "perfMonat": 7.431222056543488,
+        "perfJahr": 64.36107149157563,
+        "perf5J": 228.03428616013957,
+        "yield": 395.0,
+        "kgv": 15.966667
+    },
+    {
+        "name": "Sanofi",
+        "logoUrl": "https://logo.clearbit.com/sanofi.com",
+        "tags": [
+            "Pharma",
+            "Impfstoffe",
+            "Gesundheit"
+        ],
+        "kurs": "74.88 €",
+        "perfMonat": 0.7263935191399905,
+        "perfJahr": -4.819393715580729,
+        "perf5J": 4.373563751946502,
+        "yield": 545.0,
+        "kgv": 18.90909
+    },
+    {
+        "name": "BlackRock",
+        "logoUrl": "https://logo.clearbit.com/blackrock.com",
+        "tags": [
+            "iShares",
+            "Asset Management",
+            "Finanzen"
+        ],
+        "kurs": "918.03 €",
+        "perfMonat": -2.3333305447787973,
+        "perfJahr": 11.093625557820834,
+        "perf5J": 36.93089416558617,
+        "yield": 0,
+        "kgv": 26.517475
+    },
+    {
+        "name": "Allianz",
+        "logoUrl": "https://logo.clearbit.com/allianz.com",
+        "tags": [
+            "Versicherung",
+            "Vorsorge",
+            "Finanzen"
+        ],
+        "kurs": "400.20 €",
+        "perfMonat": 4.929213060147395,
+        "perfJahr": 25.559725000469157,
+        "perf5J": 129.4298157983779,
+        "yield": 0,
+        "kgv": 12.926357
+    },
+    {
+        "name": "Munich Re",
+        "logoUrl": "https://logo.clearbit.com/munichre.com",
+        "tags": [
+            "Rückversicherung",
+            "Risiko",
+            "Finanzen"
+        ],
+        "kurs": "464.60 €",
+        "perfMonat": -3.968578374100605,
+        "perfJahr": -12.13258940836148,
+        "perf5J": 135.12069075755932,
+        "yield": 512.0,
+        "kgv": 8.896975
+    },
+    {
+        "name": "Siemens",
+        "logoUrl": "https://logo.clearbit.com/siemens.com",
+        "tags": [
+            "Industrie",
+            "Digitalisierung",
+            "Infrastruktur"
+        ],
+        "kurs": "273.10 €",
+        "perfMonat": 4.836854550293905,
+        "perfJahr": 34.15393789901465,
+        "perf5J": 126.15980321010547,
+        "yield": 0,
+        "kgv": 28.241985
+    },
+    {
+        "name": "Schneider Electric",
+        "logoUrl": "https://logo.clearbit.com/se.com",
+        "tags": [
+            "Energiemanagement",
+            "Automatisierung",
+            "Tech"
+        ],
+        "kurs": "282.75 €",
+        "perfMonat": 8.354085753279513,
+        "perfJahr": 34.918742097408135,
+        "perf5J": 133.45266352457722,
+        "yield": 0,
+        "kgv": 35.43233
+    },
+    {
+        "name": "Honeywell",
+        "logoUrl": "https://logo.clearbit.com/honeywell.com",
+        "tags": [
+            "Mischkonzern",
+            "Luftfahrt",
+            "Industrie"
+        ],
+        "kurs": "199.09 €",
+        "perfMonat": 5.2847264245803975,
+        "perfJahr": 11.799035105836497,
+        "perf5J": 24.459907335581605,
+        "yield": 206.99999999999997,
+        "kgv": 36.476875
+    },
+    {
+        "name": "Caterpillar",
+        "logoUrl": "https://logo.clearbit.com/caterpillar.com",
+        "tags": [
+            "Baumaschinen",
+            "Bergbau",
+            "Schwerindustrie"
+        ],
+        "kurs": "835.58 €",
+        "perfMonat": 11.104230129416854,
+        "perfJahr": 171.26859319170296,
+        "perf5J": 401.19503743245974,
+        "yield": 69.0,
+        "kgv": 47.898453
+    },
+    {
+        "name": "John Deere",
+        "logoUrl": "https://logo.clearbit.com/deere.com",
+        "tags": [
+            "Agrartechnik",
+            "Forstwirtschaft",
+            "Maschinen"
+        ],
+        "kurs": "511.87 €",
+        "perfMonat": 4.168369626378208,
+        "perfJahr": 13.879536950813495,
+        "perf5J": 91.23025481401879,
+        "yield": 111.00000000000001,
+        "kgv": 33.25905
+    },
+    {
+        "name": "ABB",
+        "logoUrl": "https://logo.clearbit.com/abb.com",
+        "tags": [
+            "Robotik",
+            "Automation",
+            "Stromnetz"
+        ],
+        "kurs": "92.83 €",
+        "perfMonat": 5.329385424298257,
+        "perfJahr": 81.94769851568827,
+        "perf5J": 223.65674056939778,
+        "yield": 112.00000000000001,
+        "kgv": 40.464455
+    },
+    {
+        "name": "Keyence",
+        "logoUrl": "https://logo.clearbit.com/keyence.com",
+        "tags": [
+            "Sensoren",
+            "Mikroskope",
+            "Automation"
+        ],
+        "kurs": "409.45 €",
+        "perfMonat": -1.6009371339320577,
+        "perfJahr": 31.02636233945317,
+        "perf5J": 37.25318878781243,
+        "yield": 0,
+        "kgv": 41.206768
+    },
+    {
+        "name": "Vinci",
+        "logoUrl": "https://logo.clearbit.com/vinci.com",
+        "tags": [
+            "Konzessionen",
+            "Bau",
+            "Infrastruktur"
+        ],
+        "kurs": "130.30 €",
+        "perfMonat": 4.658636989363705,
+        "perfJahr": 11.926608751317762,
+        "perf5J": 63.588390956235486,
+        "yield": 0,
+        "kgv": 15.04619
+    },
+    {
+        "name": "Parker-Hannifin",
+        "logoUrl": "https://logo.clearbit.com/parker.com",
+        "tags": [
+            "Antriebstechnik",
+            "Luftfahrt",
+            "Maschinenbau"
+        ],
+        "kurs": "820.00 €",
+        "perfMonat": 9.73404916784558,
+        "perfJahr": 45.68568365037431,
+        "perf5J": 252.21072445087898,
+        "yield": 0,
+        "kgv": 34.734142
+    },
+    {
+        "name": "Rio Tinto",
+        "logoUrl": "https://logo.clearbit.com/riotinto.com",
+        "tags": [
+            "Bergbau",
+            "Eisenerz",
+            "Rohstoffe"
+        ],
+        "kurs": "89.63 €",
+        "perfMonat": -0.3580787186929392,
+        "perfJahr": 90.15159798564476,
+        "perf5J": 83.52255156584411,
+        "yield": 0,
+        "kgv": 16.93421
+    },
+    {
+        "name": "Linde",
+        "logoUrl": "https://logo.clearbit.com/linde.com",
+        "tags": [
+            "Gase",
+            "Industrie",
+            "Wasserstoff"
+        ],
+        "kurs": "446.67 €",
+        "perfMonat": 0.7600125893714735,
+        "perfJahr": 12.828619020863602,
+        "perf5J": 91.16304775041216,
+        "yield": 124.0,
+        "kgv": 34.026524
+    },
+    {
+        "name": "Air Liquide",
+        "logoUrl": "https://logo.clearbit.com/airliquide.com",
+        "tags": [
+            "Industriegase",
+            "Medizin",
+            "Tech"
+        ],
+        "kurs": "166.90 €",
+        "perfMonat": -4.3553043573155446,
+        "perfJahr": -2.5502044778611355,
+        "perf5J": 51.023940865988514,
+        "yield": 0,
+        "kgv": 30.235506
+    },
+    {
+        "name": "LVMH",
+        "logoUrl": "https://logo.clearbit.com/lvmh.com",
+        "tags": [
+            "Luxusgüter",
+            "Mode",
+            "Champagner"
+        ],
+        "kurs": "511.00 €",
+        "perfMonat": 12.0,
+        "perfJahr": 16.45511058662275,
+        "perf5J": -18.086259748643474,
+        "yield": 250.0,
+        "kgv": 23.386726
+    },
+    {
+        "name": "TotalEnergies",
+        "logoUrl": "https://logo.clearbit.com/totalenergies.com",
+        "tags": [
+            "Öl & Gas",
+            "Solar",
+            "Energie"
+        ],
+        "kurs": "71.57 €",
+        "perfMonat": -11.998286468860957,
+        "perfJahr": 36.25284140871415,
+        "perf5J": 127.62537202290586,
+        "yield": 501.0,
+        "kgv": 12.198813
+    },
+    {
+        "name": "NextEra Energy",
+        "logoUrl": "https://logo.clearbit.com/nexteraenergy.com",
+        "tags": [
+            "Grüne Energie",
+            "Versorger",
+            "Windkraft"
+        ],
+        "kurs": "74.45 €",
+        "perfMonat": -3.249791058720117,
+        "perfJahr": 22.45526516770735,
+        "perf5J": 30.777439774912956,
+        "yield": 289.0,
+        "kgv": 21.705582
+    },
+    {
+        "name": "Ørsted",
+        "logoUrl": "https://logo.clearbit.com/orsted.com",
+        "tags": [
+            "Offshore-Wind",
+            "Energie",
+            "Nachhaltig"
+        ],
+        "kurs": "19.97 €",
+        "perfMonat": -9.92757830489308,
+        "perfJahr": -46.11913357400722,
+        "perf5J": -82.93413731555779,
+        "yield": 0,
+        "kgv": 15.477468
+    },
+    {
+        "name": "Veolia",
+        "logoUrl": "https://logo.clearbit.com/veolia.com",
+        "tags": [
+            "Wasser",
+            "Recycling",
+            "Versorger"
+        ],
+        "kurs": "35.91 €",
+        "perfMonat": 4.999997211478669,
+        "perfJahr": 26.96305118927832,
+        "perf5J": 79.79859543195462,
+        "yield": 418.0,
+        "kgv": 21.12353
+    },
+    {
+        "name": "Iberdrola",
+        "logoUrl": "https://logo.clearbit.com/iberdrola.com",
+        "tags": [
+            "Stromversorger",
+            "Erneuerbare",
+            "Netze"
+        ],
+        "kurs": "20.70 €",
+        "perfMonat": 6.590895407710522,
+        "perfJahr": 29.318058382551055,
+        "perf5J": 137.22501197298902,
+        "yield": 330.0,
+        "kgv": 25.875
+    },
+    {
+        "name": "Eli Lilly",
+        "logoUrl": "https://logo.clearbit.com/lilly.com",
+        "tags": [
+            "Pharma",
+            "Adipositas",
+            "Biotech"
+        ],
+        "kurs": "966.74 €",
+        "perfMonat": 12.394116277562846,
+        "perfJahr": 41.34917740872211,
+        "perf5J": 423.92172761710043,
+        "yield": 0,
+        "kgv": 39.423325
+    },
+    {
+        "name": "Novartis",
+        "logoUrl": "https://logo.clearbit.com/novartis.com",
+        "tags": [
+            "Generika",
+            "Pharma",
+            "Forschung"
+        ],
+        "kurs": "131.55 €",
+        "perfMonat": 3.242323507428049,
+        "perfJahr": 28.326201093559757,
+        "perf5J": 79.55220948892921,
+        "yield": 309.0,
+        "kgv": 21.841156
+    },
+    {
+        "name": "AbbVie",
+        "logoUrl": "https://logo.clearbit.com/abbvie.com",
+        "tags": [
+            "Biopharmaka",
+            "Immunologie",
+            "Pharma"
+        ],
+        "kurs": "191.66 €",
+        "perfMonat": 5.138242833994491,
+        "perfJahr": 22.569931206016257,
+        "perf5J": 131.13819984327074,
+        "yield": 311.0,
+        "kgv": 107.4
+    },
+    {
+        "name": "Johnson & Johnson",
+        "logoUrl": "https://logo.clearbit.com/jnj.com",
+        "tags": [
+            "Medizintechnik",
+            "Pharma",
+            "Gesundheit"
+        ],
+        "kurs": "202.31 €",
+        "perfMonat": 2.104471534414349,
+        "perfJahr": 56.324837538738315,
+        "perf5J": 61.90255996338156,
+        "yield": 0,
+        "kgv": 26.929432
+    },
+    {
+        "name": "Amazon",
+        "logoUrl": "https://logo.clearbit.com/amazon.com",
+        "tags": [
+            "E-Commerce",
+            "AWS-Cloud",
+            "Logistik"
+        ],
+        "kurs": "206.69 €",
+        "perfMonat": -10.352633250266278,
+        "perfJahr": 10.52974320173451,
+        "perf5J": 36.09840240233517,
+        "yield": 0,
+        "kgv": 30.550823
+    },
+    {
+        "name": "Procter & Gamble",
+        "logoUrl": "https://logo.clearbit.com/pg.com",
+        "tags": [
+            "Konsumgüter",
+            "Hygiene",
+            "Marken"
+        ],
+        "kurs": "130.72 €",
+        "perfMonat": 5.460351098961804,
+        "perfJahr": -2.545593435076133,
+        "perf5J": 27.284589947748618,
+        "yield": 0,
+        "kgv": 21.921898
+    },
+    {
+        "name": "Nestlé",
+        "logoUrl": "https://logo.clearbit.com/nestle.com",
+        "tags": [
+            "Lebensmittel",
+            "Kaffee",
+            "Tiernahrung"
+        ],
+        "kurs": "85.99 €",
+        "perfMonat": 1.0863988974042407,
+        "perfJahr": -2.2914718745287286,
+        "perf5J": -19.955641775057902,
+        "yield": 390.0,
+        "kgv": 22.532763
+    },
+    {
+        "name": "Mondelez",
+        "logoUrl": "https://logo.clearbit.com/mondelezinternational.com",
+        "tags": [
+            "Snacks",
+            "Schokolade",
+            "Kekse"
+        ],
+        "kurs": "52.33 €",
+        "perfMonat": -2.4659319805556885,
+        "perfJahr": -6.372161002771747,
+        "perf5J": 8.261169396157122,
+        "yield": 322.0,
+        "kgv": 29.762377
+    },
+    {
+        "name": "Coca-Cola",
+        "logoUrl": "https://logo.clearbit.com/coca-colacompany.com",
+        "tags": [
+            "Erfrischungsgetränke",
+            "Marken",
+            "Global"
+        ],
+        "kurs": "69.23 €",
+        "perfMonat": -1.424295483628394,
+        "perfJahr": 17.469626712716234,
+        "perf5J": 67.80310088213626,
+        "yield": 264.0,
+        "kgv": 25.009434
+    },
+    {
+        "name": "McDonald's",
+        "logoUrl": "https://logo.clearbit.com/mcdonalds.com",
+        "tags": [
+            "Fast-Food",
+            "Franchise",
+            "Immobilien"
+        ],
+        "kurs": "247.12 €",
+        "perfMonat": 1.180763844511822,
+        "perfJahr": -0.5275296657909437,
+        "perf5J": 36.152772105058666,
+        "yield": 0,
+        "kgv": 23.419968
+    },
+    {
+        "name": "Walmart",
+        "logoUrl": "https://logo.clearbit.com/walmart.com",
+        "tags": [
+            "Einzelhandel",
+            "Supermärkte",
+            "USA"
+        ],
+        "kurs": "102.47 €",
+        "perfMonat": -11.721912166407089,
+        "perfJahr": 25.935446154820635,
+        "perf5J": 173.31034265906766,
+        "yield": 82.0,
+        "kgv": 41.447186
+    },
+    {
+        "name": "Fuchs SE",
+        "logoUrl": "https://logo.clearbit.com/fuchs.com",
+        "tags": [
+            "Schmierstoffe",
+            "Chemie",
+            "Spezialöle"
+        ],
+        "kurs": "39.42 €",
+        "perfMonat": 7.881765684888475,
+        "perfJahr": -11.651174133789652,
+        "perf5J": 8.607170918795253,
+        "yield": 0,
+        "kgv": 16.918455
+    },
+    {
+        "name": "Prologis",
+        "logoUrl": "https://logo.clearbit.com/prologis.com",
+        "tags": [
+            "Logistik-Immobilien",
+            "REIT",
+            "Lager"
+        ],
+        "kurs": "123.03 €",
+        "perfMonat": 0.035672520430428976,
+        "perfJahr": 38.846433959573,
+        "perf5J": 33.14048570492818,
+        "yield": 0,
+        "kgv": 35.600758
+    },
+    {
+        "name": "Krones",
+        "logoUrl": "https://logo.clearbit.com/krones.com",
+        "tags": [
+            "Verpackungsmaschinen",
+            "Abfüllung",
+            "Industrie"
+        ],
+        "kurs": "114.80 €",
+        "perfMonat": 0.09489915385024746,
+        "perfJahr": -12.547107360203558,
+        "perf5J": 64.4578674060298,
+        "yield": 246.0,
+        "kgv": 12.451193
+    },
+    {
+        "name": "Mayr-Melnhof Karton",
+        "logoUrl": "https://logo.clearbit.com/mm-karton.com",
+        "tags": [
+            "Karton",
+            "Verpackung",
+            "Recycling"
+        ],
+        "kurs": "80.80 €",
+        "perfMonat": 2.929940193322054,
+        "perfJahr": 13.404520946327455,
+        "perf5J": -49.959582554027264,
+        "yield": 247.00000000000003,
+        "kgv": 20.932644
+    },
+    {
+        "name": "ICICI Bank",
+        "logoUrl": "https://logo.clearbit.com/icicibank.com",
+        "tags": [
+            "Banken",
+            "Indien",
+            "Finanzdienstleistung"
+        ],
+        "kurs": "24.26 €",
+        "perfMonat": 7.7726225113747605,
+        "perfJahr": -14.565769515782689,
+        "perf5J": 68.25337332197512,
+        "yield": 89.0,
+        "kgv": 17.751593
+    }
+]
