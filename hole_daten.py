@@ -101,9 +101,20 @@ for aktie in meine_aktien:
                 
             kurs_eur = raw_kurs / rate
             
-            # Performance Berechnungen
-            kurs_1m = hist_1m['Close'].iloc[0]
-            kurs_1y = hist_5y['Close'].loc[hist_5y.index >= hist_1m.index[-1] - json.loads(json.dumps(hist_5y.index[0])) if len(hist_5y)>252 else hist_5y['Close'].iloc[0]] 
+            # Performance Berechnungen (Sichere Variante für GitHub)
+            kurs_1m = hist_1m['Close'].iloc[0] if len(hist_1m) > 0 else raw_kurs
+            
+            # Falls weniger als 1 oder 5 Jahre Historie existieren, Failsafe aktivieren
+            idx_1y = -252 if len(hist_5y) >= 252 else 0
+            idx_5y = 0
+            
+            kurs_1y = hist_5y['Close'].iloc[idx_1y]
+            kurs_5y = hist_5y['Close'].iloc[idx_5y]
+            
+            perf_m = ((raw_kurs - kurs_1m) / kurs_1m) * 100
+            perf_j = ((raw_kurs - kurs_1y) / kurs_1y) * 100
+            perf_5j = ((raw_kurs - kurs_5y) / kurs_5y) * 100
+
             # Robuste Selektion für 1 Jahr / 5 Jahre
             idx_1y = -252 if len(hist_5y) >= 252 else 0
             idx_5y = 0
