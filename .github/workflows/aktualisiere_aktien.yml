@@ -2,8 +2,8 @@ name: Automatische Aktualisierung Aktiendaten
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Startet exakt jede Stunde (Minute 0)
-  workflow_dispatch:     # Ermöglicht es dir, den Start weiterhin manuell zu erzwingen
+    - cron: "0 * * * *"  # Startet jede volle Stunde
+  workflow_dispatch:     # Erlaubt manuellen Start
 
 jobs:
   update-data:
