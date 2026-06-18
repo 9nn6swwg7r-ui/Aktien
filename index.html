@@ -74,22 +74,33 @@
             const divText = (item.yield && !isNaN(item.yield) && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
             const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
             
-            // ABGESICHERT: Verhindert den Absturz bei fehlerhaften Logo-URLs auf iPhones
-            let stabileLogoUrl = '';
-            const ersterBuchstabe = item.name ? item.name[0] : 'A';
+            // NEUE, ABSOLUT SICHERE LOGO-GENERIERUNG FÜR IPHONES
+            const aktienName = item.name || 'Aktie';
+            const ersterBuchstabe = aktienName.charAt(0).toUpperCase();
             const platzhalterUrl = `https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(ersterBuchstabe)}`;
             
-            if (item.logoUrl && typeof item.logoUrl === 'string' && item.logoUrl.includes('clearbit.com/')) {
-                const domain = item.logoUrl.split('clearbit.com/')[1];
-                stabileLogoUrl = domain ? `https://logos.hunter.io/${domain}` : platzhalterUrl;
-            } else {
-                stabileLogoUrl = platzhalterUrl;
+            let stabileLogoUrl = platzhalterUrl;
+            if (item.logoUrl && typeof item.logoUrl === 'string') {
+                // Falls ein klarer Domainname im Feld vorhanden ist, nutzen wir hunter.io, ansonsten die URL direkt
+                if (item.logoUrl.includes('logo.clearbit.com/')) {
+                    const teile = item.logoUrl.split('logo.clearbit.com/');
+                    if (teile.length > 1 && teile[1]) {
+                        stabileLogoUrl = `https://logos.hunter.io/${teile[1]}`;
+                    }
+                } else if (item.logoUrl.startsWith('http')) {
+                    stabileLogoUrl = item.logoUrl;
+                }
             }
             
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="logo-container"><img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.src='${platzhalterUrl}'"></div>
-                    <div class="stock-identity"><div class="stock-name">${item.name || 'Unbekannt'}</div><div class="tags" title="${stichworte}">${stichworte}</div></div>
+                    <div class="logo-container">
+                        <img src="${stabileLogoUrl}" alt="" class="logo" onerror="this.onerror=null; this.src='${platzhalterUrl}';">
+                    </div>
+                    <div class="stock-identity">
+                        <div class="stock-name">${aktienName}</div>
+                        <div class="tags" title="${stichworte}">${stichworte}</div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="metric"><span>Kurs (EUR):</span><span class="metric-value kurs-highlight">${item.kurs || 'N/A'}</span></div>
@@ -108,13 +119,14 @@
 
         fetch('daten.json?v=' + Date.now())
             .then(res => {
-                if (!res.ok) throw new Error("Fehler beim Laden der JSON-Datei");
+                if (!res.ok) throw new Error("JSON-Datei konnte nicht geladen werden");
                 return res.json();
             })
             .then(data => {
                 depotDashboard.innerHTML = '';
                 watchlistDashboard.innerHTML = '';
                 
+                // Zuverlässige KGV-Sortierung
                 data.sort((a, b) => {
                     let valA = (a && a.kgv && !isNaN(a.kgv) && a.kgv > 0) ? a.kgv : 999999;
                     let valB = (b && b.kgv && !isNaN(b.kgv) && b.kgv > 0) ? b.kgv : 999999;
@@ -137,13 +149,13 @@
                     }
                 });
 
-                if (depotZaehler === 0) depotDashboard.innerHTML = '<div class="loading">Keine Depot-Aktien gefunden.</div>';
-                if (watchlistZaehler === 0) watchlistDashboard.innerHTML = '<div class="loading">Keine Watchlist-Aktien gefunden.</div>';
+                if (depotZaehler === 0) depotDashboard.innerHTML = '<div class="loading">Keine Depot-Aktien vorhanden.</div>';
+                if (watchlistZaehler === 0) watchlistDashboard.innerHTML = '<div class="loading">Keine Watchlist-Aktien vorhanden.</div>';
             })
             .catch(err => { 
                 console.error(err);
-                depotDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Laden der Daten: ${err.message}</div>`; 
-                watchlistDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Laden der Daten.</div>`; 
+                depotDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Anzeigen: Cache blockiert Daten. Bitte Seite neu laden.</div>`; 
+                watchlistDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Anzeigen.</div>`; 
             });
     </script>
 </body>
