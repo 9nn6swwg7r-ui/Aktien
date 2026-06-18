@@ -54,8 +54,10 @@
     <script>
         function fmtPerf(val) {
             if (val === undefined || val === null || isNaN(val)) return '<span class="metric-value">N/A</span>';
-            if (val > 0) return `<span class="metric-value positive">+${val.toFixed(1).replace('.', ',')}%</span>`;
-            if (val < 0) return `<span class="metric-value negative">${val.toFixed(1).replace('.', ',')}%</span>`;
+            const num = parseFloat(val);
+            if (isNaN(num)) return '<span class="metric-value">N/A</span>';
+            if (num > 0) return `<span class="metric-value positive">+${num.toFixed(1).replace('.', ',')}%</span>`;
+            if (num < 0) return `<span class="metric-value negative">${num.toFixed(1).replace('.', ',')}%</span>`;
             return `<span class="metric-value">0,0%</span>`;
         }
 
@@ -66,22 +68,30 @@
             let kgvClass = "metric-value kgv-good";
             let kgvText = "N/A";
             
-            if (item.kgv && !isNaN(item.kgv) && item.kgv > 0) {
-                kgvText = item.kgv.toFixed(1).replace('.', ',');
-                if (item.kgv > 35) kgvClass = "metric-value kgv-warning";
+            if (item && item.kgv) {
+                const nKgv = parseFloat(item.kgv);
+                if (!isNaN(nKgv) && nKgv > 0) {
+                    kgvText = nKgv.toFixed(1).replace('.', ',');
+                    if (nKgv > 35) kgvClass = "metric-value kgv-warning";
+                }
             }
             
-            const divText = (item.yield && !isNaN(item.yield) && item.yield > 0) ? `${item.yield.toFixed(2).replace('.', ',')}%` : '0,00%';
-            const stichworte = item.tags ? item.tags.join(' • ') : 'Global Business';
+            let divText = '0,00%';
+            if (item && item.yield) {
+                const nYield = parseFloat(item.yield);
+                if (!isNaN(nYield) && nYield > 0) {
+                    divText = `${nYield.toFixed(2).replace('.', ',')}%`;
+                }
+            }
+
+            const aktienName = item.name || 'Unbekannte Aktie';
+            const stichworte = (item.tags && Array.isArray(item.tags)) ? item.tags.join(' • ') : 'Global Business';
             
-            // NEUE, ABSOLUT SICHERE LOGO-GENERIERUNG FÜR IPHONES
-            const aktienName = item.name || 'Aktie';
             const ersterBuchstabe = aktienName.charAt(0).toUpperCase();
             const platzhalterUrl = `https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(ersterBuchstabe)}`;
             
             let stabileLogoUrl = platzhalterUrl;
             if (item.logoUrl && typeof item.logoUrl === 'string') {
-                // Falls ein klarer Domainname im Feld vorhanden ist, nutzen wir hunter.io, ansonsten die URL direkt
                 if (item.logoUrl.includes('logo.clearbit.com/')) {
                     const teile = item.logoUrl.split('logo.clearbit.com/');
                     if (teile.length > 1 && teile[1]) {
@@ -123,13 +133,15 @@
                 return res.json();
             })
             .then(data => {
+                if (!data || !Array.isArray(data)) throw new Error("Ungültiges Datenformat");
+
                 depotDashboard.innerHTML = '';
                 watchlistDashboard.innerHTML = '';
                 
-                // Zuverlässige KGV-Sortierung
+                // Absolut krisensichere Sortierung
                 data.sort((a, b) => {
-                    let valA = (a && a.kgv && !isNaN(a.kgv) && a.kgv > 0) ? a.kgv : 999999;
-                    let valB = (b && b.kgv && !isNaN(b.kgv) && b.kgv > 0) ? b.kgv : 999999;
+                    let valA = (a && a.kgv && !isNaN(parseFloat(a.kgv)) && parseFloat(a.kgv) > 0) ? parseFloat(a.kgv) : 999999;
+                    let valB = (b && b.kgv && !isNaN(parseFloat(b.kgv)) && parseFloat(b.kgv) > 0) ? parseFloat(b.kgv) : 999999;
                     return valA - valB;
                 });
 
@@ -137,15 +149,19 @@
                 let watchlistZaehler = 0;
 
                 data.forEach(item => {
-                    if (!item) return;
+                    if (!item || typeof item !== 'object') return;
                     
-                    const karte = erstelleKarte(item);
-                    if (item.watchlist === true) {
-                        watchlistDashboard.appendChild(karte);
-                        watchlistZaehler++;
-                    } else {
-                        depotDashboard.appendChild(karte);
-                        depotZaehler++;
+                    try {
+                        const karte = erstelleKarte(item);
+                        if (item.watchlist === true) {
+                            watchlistDashboard.appendChild(karte);
+                            watchlistZaehler++;
+                        } else {
+                            depotDashboard.appendChild(karte);
+                            depotZaehler++;
+                        }
+                    } catch (e) {
+                        console.error("Fehler bei einzelner Karte:", e);
                     }
                 });
 
@@ -154,8 +170,8 @@
             })
             .catch(err => { 
                 console.error(err);
-                depotDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Anzeigen: Cache blockiert Daten. Bitte Seite neu laden.</div>`; 
-                watchlistDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Anzeigen.</div>`; 
+                depotDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Laden. Bitte Browser-Cache leeren.</div>`; 
+                watchlistDashboard.innerHTML = `<div class="loading" style="color: #ff3131;">Fehler beim Laden.</div>`; 
             });
     </script>
 </body>
