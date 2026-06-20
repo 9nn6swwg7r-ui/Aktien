@@ -6,7 +6,7 @@ import math
 def isNaN(num):
     return isinstance(num, float) and math.isnan(num)
 
-# Vollständige Liste deiner Aktien
+# Vollständige Liste deiner Aktien (Inklusive ALLER Werte aus den Screenshots)
 meine_aktien = [
     # --- DEPOT AKTIEN ---
     {"symbol": "MSFT", "name": "Microsoft", "logoUrl": "https://logo.clearbit.com/microsoft.com", "tags": ["Software", "Cloud", "KI"], "watchlist": False},
@@ -61,40 +61,56 @@ meine_aktien = [
     {"symbol": "MMK.VI", "name": "Mayr-Melnhof Karton", "logoUrl": "https://logo.clearbit.com/mm-karton.com", "tags": ["Karton", "Verpackung", "Recycling"], "watchlist": False},
     {"symbol": "IBN", "name": "ICICI Bank", "logoUrl": "https://logo.clearbit.com/icicibank.com", "tags": ["Banken", "Indien", "Finanzdienstleistung"], "watchlist": False},
 
-    # --- WATCHLIST AKTIEN ---
-    {"symbol": "1398.HK", "name": "Industrial & Commercial Bank of China", "logoUrl": "https://logo.clearbit.com/icbc.com.cn", "tags": ["Banken", "China", "Staatskonzern"], "watchlist": True},
-    {"symbol": "TPE.WA", "name": "Tauron Polska Energia", "logoUrl": "https://logo.clearbit.com/tauron.pl", "tags": ["Energie", "Versorger", "Polen"], "watchlist": True},
-    {"symbol": "DNP.WA", "name": "Dino Polska", "logoUrl": "https://logo.clearbit.com/grupadino.pl", "tags": ["Supermärkte", "Einzelhandel", "Polen"], "watchlist": True},
-    {"symbol": "LHA.DE", "name": "Deutsche Lufthansa", "logoUrl": "https://logo.clearbit.com/lufthansagroup.com", "tags": ["Airlines", "Luftfahrt", "Logistik"], "watchlist": True},
-    {"symbol": "FIH-U.TO", "name": "Fairfax India", "logoUrl": "https://logo.clearbit.com/fairfaxindia.ca", "tags": ["Beteiligungen", "Indien", "Investment"], "watchlist": True},
-    {"symbol": "EOAN.DE", "name": "E.ON", "logoUrl": "https://logo.clearbit.com/eon.com", "tags": ["Energienetze", "Infrastruktur", "Versorger"], "watchlist": True},
-    {"symbol": "CMCSA", "name": "Comcast A", "logoUrl": "https://logo.clearbit.com/comcastcorporation.com", "tags": ["Medien", "Kabelnetz", "Streaming"], "watchlist": True},
-    {"symbol": "KHC", "name": "Kraft Heinz", "logoUrl": "https://logo.clearbit.com/kraftheinzcompany.com", "tags": ["Lebensmittel", "Ketchup", "Marken"], "watchlist": True},
-    {"symbol": "VNA.DE", "name": "Vonovia", "logoUrl": "https://logo.clearbit.com/vonovia.de", "tags": ["Immobilien", "Wohnungen", "Vermieter"], "watchlist": True},
-    {"symbol": "PKO.WA", "name": "Powszechna Kasa Oszczednosci Bank", "logoUrl": "https://logo.clearbit.com/pkobp.pl", "tags": ["Banken", "Polen", "Finanzen"], "watchlist": True},
-    {"symbol": "DNB.OL", "name": "DNB Bank", "logoUrl": "https://logo.clearbit.com/dnb.no", "tags": ["Banken", "Norwegen", "Finanzservice"], "watchlist": True},
+    # --- WATCHLIST AKTIEN (Aus deinen Screenshots ergänzt) ---
+    {"symbol": "DDOG", "name": "Datadog A", "logoUrl": "https://logo.clearbit.com/datadoghq.com", "tags": ["Cloud", "Monitoring", "Software"], "watchlist": True},
+    {"symbol": "FANUY", "name": "Fanuc", "logoUrl": "https://logo.clearbit.com/fanuc.co.jp", "tags": ["CNC-Systeme", "Roboter", "Automation"], "watchlist": True},
     {"symbol": "6506.T", "name": "Yaskawa Electric", "logoUrl": "https://logo.clearbit.com/yaskawa-global.com", "tags": ["Robotik", "Motoren", "Automation"], "watchlist": True},
-    {"symbol": "6954.T", "name": "Fanuc", "logoUrl": "https://logo.clearbit.com/fanuc.co.jp", "tags": ["CNC-Systeme", "Roboter", "Fabrikautomation"], "watchlist": True},
-    {"symbol": "YAR.OL", "name": "Yara Intl.", "logoUrl": "https://logo.clearbit.com/yara.com", "tags": ["Düngemittel", "Agrar-Chemie", "Ernte"], "watchlist": True},
-    {"symbol": "VZ", "name": "Verizon", "logoUrl": "https://logo.clearbit.com/verizon.com", "tags": ["Telekom", "Mobilfunk", "5G"], "watchlist": True},
-    {"symbol": "DHL.DE", "name": "DHL", "logoUrl": "https://logo.clearbit.com/dhl.com", "tags": ["Logistik", "Pakete", "Post"], "watchlist": True},
-    {"symbol": "EVD.DE", "name": "CTS Eventim", "logoUrl": "https://logo.clearbit.com/eventim.de", "tags": ["Ticketing", "Konzerte", "Live-Events"], "watchlist": True},
-    {"symbol": "VER.VI", "name": "Verbund AG", "logoUrl": "https://logo.clearbit.com/verbund.com", "tags": ["Wasserkraft", "Strom", "Österreich"], "watchlist": True},
     {"symbol": "CGNX", "name": "Cognex", "logoUrl": "https://logo.clearbit.com/cognex.com", "tags": ["Bildverarbeitung", "Sensoren", "Tech"], "watchlist": True},
-    {"symbol": "EUK3.DE", "name": "EUROKAI Vz.", "logoUrl": "https://logo.clearbit.com/eurokai.de", "tags": ["Hafenterminals", "Logistik", "Schifffahrt"], "watchlist": True},
-    {"symbol": "BMW3.DE", "name": "BMW Vz.", "logoUrl": "https://logo.clearbit.com/bmwgroup.com", "tags": ["Automobile", "Premium", "Motorrad"], "watchlist": True},
-    {"symbol": "PDD", "name": "Pinduoduo ADR", "logoUrl": "https://logo.clearbit.com/pddholdings.com", "tags": ["E-Commerce", "Temu", "China"], "watchlist": True},
-    {"symbol": "BEI.DE", "name": "Beiersdorf", "logoUrl": "https://logo.clearbit.com/beiersdorf.de", "tags": ["Nivea", "Hautpflege", "Konsumgüter"], "watchlist": True},
-    {"symbol": "SIX2.DE", "name": "Sixt St.", "logoUrl": "https://logo.clearbit.com/sixt.de", "tags": ["Autovermietung", "Mobilität", "Leasing"], "watchlist": True},
-    {"symbol": "ABBN.SW", "name": "ABB (Watchlist)", "logoUrl": "https://logo.clearbit.com/abb.com", "tags": ["Elektrotechnik", "Automation", "Tech"], "watchlist": True},
-    {"symbol": "STR.VI", "name": "Strabag", "logoUrl": "https://logo.clearbit.com/strabag.com", "tags": ["Baukonzern", "Infrastruktur", "Tiefbau"], "watchlist": True},
-    {"symbol": "FRM.DE", "name": "FRoSTA", "logoUrl": "https://logo.clearbit.com/frosta-ag.de", "tags": ["Tiefkühlkost", "Ernährung", "Lebensmittel"], "watchlist": True},
-    {"symbol": "6367.T", "name": "Daikin Industries", "logoUrl": "https://logo.clearbit.com/daikin.com", "tags": ["Klimaanlagen", "Wärmepumpen", "Heizung"], "watchlist": True},
-    {"symbol": "ADSK", "name": "Autodesk", "logoUrl": "https://logo.clearbit.com/autodesk.com", "tags": ["CAD-Software", "3D-Design", "Architektur"], "watchlist": True},
-    {"symbol": "ADBE", "name": "Adobe", "logoUrl": "https://logo.clearbit.com/adobe.com", "tags": ["Photoshop", "Kreativ-Cloud", "Software"], "watchlist": True},
-    {"symbol": "SIKA.SW", "name": "Sika", "logoUrl": "https://logo.clearbit.com/sika.com", "tags": ["Spezialchemie", "Baustoffe", "Klebstoffe"], "watchlist": True},
+    {"symbol": "MPWR", "name": "Monolithic Power Systems", "logoUrl": "https://logo.clearbit.com/monolithicpower.com", "tags": ["Halbleiter", "Power Management", "Chips"], "watchlist": True},
+    {"symbol": "KEYS", "name": "Keysight Technologies", "logoUrl": "https://logo.clearbit.com/keysight.com", "tags": ["Messtechnik", "Elektronik", "Software"], "watchlist": True},
+    {"symbol": "SFTBY", "name": "SoftBank Group", "logoUrl": "https://logo.clearbit.com/softbank.jp", "tags": ["Beteiligungen", "Tech", "Telekom"], "watchlist": True},
+    {"symbol": "POWL", "name": "Powell Industries", "logoUrl": "https://logo.clearbit.com/powellind.com", "tags": ["Elektrotechnik", "Stromverteilung", "Infrastruktur"], "watchlist": True},
     {"symbol": "TER", "name": "Teradyne", "logoUrl": "https://logo.clearbit.com/teradyne.com", "tags": ["Testsysteme", "Halbleiter", "Automatisierung"], "watchlist": True},
-    {"symbol": "ROK", "name": "Rockwell Automation", "logoUrl": "https://logo.clearbit.com/rockwellautomation.com", "tags": ["Fabrikautomation", "Industriesoftware", "Tech"], "watchlist": True}
+    {"symbol": "DHL.DE", "name": "DHL", "logoUrl": "https://logo.clearbit.com/dhl.com", "tags": ["Logistik", "Pakete", "Post"], "watchlist": True},
+    {"symbol": "LHA.DE", "name": "Deutsche Lufthansa", "logoUrl": "https://logo.clearbit.com/lufthansagroup.com", "tags": ["Airlines", "Luftfahrt", "Logistik"], "watchlist": True},
+    {"symbol": "6367.T", "name": "Daikin Industries", "logoUrl": "https://logo.clearbit.com/daikin.com", "tags": ["Klimaanlagen", "Wärmepumpen", "Heizung"], "watchlist": True},
+    {"symbol": "ERIC", "name": "Telefonaktiebolaget LM Ericsson B", "logoUrl": "https://logo.clearbit.com/ericsson.com", "tags": ["Telekom", "5G-Netze", "Infrastruktur"], "watchlist": True},
+    {"symbol": "CRWD", "name": "CrowdStrike Holdings A", "logoUrl": "https://logo.clearbit.com/crowdstrike.com", "tags": ["Cybersecurity", "Cloud-Sicherheit", "SaaS"], "watchlist": True},
+    {"symbol": "ROK", "name": "Rockwell Automation", "logoUrl": "https://logo.clearbit.com/rockwellautomation.com", "tags": ["Fabrikautomation", "Industriesoftware", "Tech"], "watchlist": True},
+    {"symbol": "PKO.WA", "name": "Powszechna Kasa Oszczednosci Bank", "logoUrl": "https://logo.clearbit.com/pkobp.pl", "tags": ["Banken", "Polen", "Finanzen"], "watchlist": True},
+    {"symbol": "EUK3.DE", "name": "EUROKAI Vz", "logoUrl": "https://logo.clearbit.com/eurokai.de", "tags": ["Hafenterminals", "Logistik", "Schifffahrt"], "watchlist": True},
+    {"symbol": "FRM.DE", "name": "FRoSTA", "logoUrl": "https://logo.clearbit.com/frosta-ag.de", "tags": ["Tiefkühlkost", "Ernährung", "Lebensmittel"], "watchlist": True},
+    {"symbol": "VZ", "name": "Verizon Communications", "logoUrl": "https://logo.clearbit.com/verizon.com", "tags": ["Telekom", "Mobilfunk", "5G"], "watchlist": True},
+    {"symbol": "TPE.WA", "name": "Tauron Polska Energia", "logoUrl": "https://logo.clearbit.com/tauron.pl", "tags": ["Energie", "Versorger", "Polen"], "watchlist": True},
+    {"symbol": "1398.HK", "name": "Industr and Commerc Bank of China", "logoUrl": "https://logo.clearbit.com/icbc.com.cn", "tags": ["Banken", "China", "Staatskonzern"], "watchlist": True},
+    {"symbol": "YAR.OL", "name": "Yara Intl.", "logoUrl": "https://logo.clearbit.com/yara.com", "tags": ["Düngemittel", "Agrar-Chemie", "Ernte"], "watchlist": True},
+    {"symbol": "EOAN.DE", "name": "E.ON", "logoUrl": "https://logo.clearbit.com/eon.com", "tags": ["Energienetze", "Infrastruktur", "Versorger"], "watchlist": True},
+    {"symbol": "STR.VI", "name": "Strabag", "logoUrl": "https://logo.clearbit.com/strabag.com", "tags": ["Baukonzern", "Infrastruktur", "Tiefbau"], "watchlist": True},
+    {"symbol": "NET", "name": "Cloudflare A", "logoUrl": "https://logo.clearbit.com/cloudflare.com", "tags": ["CDN", "Web-Sicherheit", "Netzwerk"], "watchlist": True},
+    {"symbol": "SREN.SW", "name": "Swiss RE", "logoUrl": "https://logo.clearbit.com/swissre.com", "tags": ["Rückversicherung", "Finanzen", "Risiko"], "watchlist": True},
+    {"symbol": "AOS", "name": "A. O. Smith", "logoUrl": "https://logo.clearbit.com/aosmith.com", "tags": ["Wassererhitzer", "Heizung", "Industrie"], "watchlist": True},
+    {"symbol": "FIH-U.TO", "name": "Fairfax India", "logoUrl": "https://logo.clearbit.com/fairfaxindia.ca", "tags": ["Beteiligungen", "Indien", "Investment"], "watchlist": True},
+    {"symbol": "SIX2.DE", "name": "Sixt SE St.", "logoUrl": "https://logo.clearbit.com/sixt.de", "tags": ["Autovermietung", "Mobilität", "Leasing"], "watchlist": True},
+    {"symbol": "CHD", "name": "Church & Dwight", "logoUrl": "https://logo.clearbit.com/churchdwight.com", "tags": ["Konsumgüter", "Haushalt", "Marken"], "watchlist": True},
+    {"symbol": "KGX.DE", "name": "KION Grp", "logoUrl": "https://logo.clearbit.com/kiongroup.com", "tags": ["Gabelstapler", "Intralogistik", "Lagertechnik"], "watchlist": True},
+    {"symbol": "MAY.V", "name": "Mayfair Gold", "logoUrl": "https://logo.clearbit.com/mayfairgold.com", "tags": ["Bergbau", "Gold", "Exploration"], "watchlist": True},
+    {"symbol": "DNB.OL", "name": "DNB Bank", "logoUrl": "https://logo.clearbit.com/dnb.no", "tags": ["Banken", "Norwegen", "Finanzservice"], "watchlist": True},
+    {"symbol": "VNA.DE", "name": "Vonovia", "logoUrl": "https://logo.clearbit.com/vonovia.de", "tags": ["Immobilien", "Wohnungen", "Vermieter"], "watchlist": True},
+    {"symbol": "SIKA.SW", "name": "Sika", "logoUrl": "https://logo.clearbit.com/sika.com", "tags": ["Spezialchemie", "Baustoffe", "Klebstoffe"], "watchlist": True},
+    {"symbol": "PDD", "name": "Pinduoduo ADR A", "logoUrl": "https://logo.clearbit.com/pddholdings.com", "tags": ["E-Commerce", "Temu", "China"], "watchlist": True},
+    {"symbol": "T", "name": "AT&T", "logoUrl": "https://logo.clearbit.com/att.com", "tags": ["Telekom", "Netzwerk", "USA"], "watchlist": True},
+    {"symbol": "VER.VI", "name": "Verbund AG", "logoUrl": "https://logo.clearbit.com/verbund.com", "tags": ["Wasserkraft", "Strom", "Österreich"], "watchlist": True},
+    {"symbol": "DTE.DE", "name": "Deutsche Telekom", "logoUrl": "https://logo.clearbit.com/telekom.com", "tags": ["Telekom", "Mobilfunk", "Breitband"], "watchlist": True},
+    {"symbol": "HNR1.DE", "name": "Hannover Rück", "logoUrl": "https://logo.clearbit.com/hannover-rueck.de", "tags": ["Rückversicherung", "Finanzen", "Risikomanagement"], "watchlist": True},
+    {"symbol": "BMW3.DE", "name": "BMW Vz", "logoUrl": "https://logo.clearbit.com/bmwgroup.com", "tags": ["Automobile", "Premium", "Motorrad"], "watchlist": True},
+    {"symbol": "EVD.DE", "name": "CTS Eventim & Co", "logoUrl": "https://logo.clearbit.com/eventim.de", "tags": ["Ticketing", "Konzerte", "Live-Events"], "watchlist": True},
+    {"symbol": "ADBE", "name": "Adobe", "logoUrl": "https://logo.clearbit.com/adobe.com", "tags": ["Photoshop", "Kreativ-Cloud", "Software"], "watchlist": True},
+    {"symbol": "DSY.PA", "name": "Dassault Systèmes", "logoUrl": "https://logo.clearbit.com/3ds.com", "tags": ["3D-Software", "PLM", "Simulation"], "watchlist": True},
+    {"symbol": "DNP.WA", "name": "Dino Polska", "logoUrl": "https://logo.clearbit.com/grupadino.pl", "tags": ["Supermärkte", "Einzelhandel", "Polen"], "watchlist": True},
+    {"symbol": "ERF.FY", "name": "Lem Holding", "logoUrl": "https://logo.clearbit.com/lem.com", "tags": ["Sensorik", "Elektronik", "Spezialkomponenten"], "watchlist": True},
+    {"symbol": "ADSK", "name": "Autodesk", "logoUrl": "https://logo.clearbit.com/autodesk.com", "tags": ["CAD-Software", "3D-Design", "Architektur"], "watchlist": True},
+    {"symbol": "CMCSA", "name": "Comcast A", "logoUrl": "https://logo.clearbit.com/comcastcorporation.com", "tags": ["Medien", "Kabelnetz", "Streaming"], "watchlist": True},
+    {"symbol": "BEI.DE", "name": "Beiersdorf", "logoUrl": "https://logo.clearbit.com/beiersdorf.de", "tags": ["Nivea", "Hautpflege", "Konsumgüter"], "watchlist": True}
 ]
 
 print("Lade Wechselkurse...")
@@ -116,7 +132,6 @@ for aktie in meine_aktien:
         hist_5y = ticker.history(period="5y")
         hist_1m = ticker.history(period="1mo")
         
-        # Sicherstellen, dass überhaupt Kursdaten da sind
         if hist_5y.empty or hist_1m.empty:
             print(f"Keine Kursdaten für {aktie['name']}, überspringe.")
             continue
@@ -132,7 +147,7 @@ for aktie in meine_aktien:
         elif ".T" in sym: rate = fx_rates["JPY"]
         elif ".HK" in sym: rate = fx_rates["HKD"]
         elif ".WA" in sym: rate = fx_rates["PLN"]
-        elif ".TO" in sym: rate = fx_rates["CAD"]
+        elif ".TO" in sym or ".V" in sym: rate = fx_rates["CAD"]
         elif ".OL" in sym: rate = fx_rates["NOK"]
         else: rate = fx_rates["USD"]
             
@@ -147,7 +162,6 @@ for aktie in meine_aktien:
         perf_j = ((raw_kurs - kurs_1y) / kurs_1y) * 100
         perf_5j = ((raw_kurs - kurs_5y) / kurs_5y) * 100
         
-        # Absicherung gegen ungültige Werte
         perf_m = 0.0 if isNaN(perf_m) else float(perf_m)
         perf_j = 0.0 if isNaN(perf_j) else float(perf_j)
         perf_5j = 0.0 if isNaN(perf_5j) else float(perf_5j)
