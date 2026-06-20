@@ -11,7 +11,7 @@
         "kurs": "330.80 €",
         "perfMonat": -8.911475567423075,
         "perfJahr": -20.366800659296004,
-        "perf5J": 50.52858297699042,
+        "perf5J": 50.52857386400511,
         "yield": 96.0,
         "kgv": 22.569899
     },
@@ -43,7 +43,7 @@
         "kurs": "134.14 €",
         "perfMonat": -14.407862209786536,
         "perfJahr": -45.42242402938386,
-        "perf5J": 23.384502842924675,
+        "perf5J": 23.3845115016315,
         "yield": 1.86,
         "kgv": 21.496796
     },
@@ -58,8 +58,8 @@
         "watchlist": false,
         "kurs": "160.68 €",
         "perfMonat": 1.5595649000101999,
-        "perfJahr": -11.728105149542065,
-        "perf5J": 152.82876835134692,
+        "perfJahr": -11.728098698004276,
+        "perf5J": 152.8288742039325,
         "yield": 1.09,
         "kgv": 31.664946
     },
@@ -75,7 +75,7 @@
         "kurs": "358.66 €",
         "perfMonat": 0.06811462142895641,
         "perfJahr": 65.04139222758397,
-        "perf5J": 870.9841493382125,
+        "perf5J": 870.9840619057296,
         "yield": 63.0,
         "kgv": 68.44426
     },
@@ -91,7 +91,7 @@
         "kurs": "1682.49 €",
         "perfMonat": 32.220586744500466,
         "perfJahr": 155.3439876217131,
-        "perf5J": 196.76642929453402,
+        "perf5J": 196.76651286362392,
         "yield": 46.0,
         "kgv": 64.10897
     },
@@ -107,7 +107,7 @@
         "kurs": "320.89 €",
         "perfMonat": -5.007010490529536,
         "perfJahr": 112.94707430585336,
-        "perf5J": 204.80731682720125,
+        "perf5J": 204.8072975671427,
         "yield": 24.0,
         "kgv": 28.093893
     },
@@ -122,8 +122,8 @@
         "watchlist": false,
         "kurs": "197.15 €",
         "perfMonat": 16.01918460721671,
-        "perfJahr": 50.280372144683625,
-        "perf5J": 88.0284688116403,
+        "perfJahr": 50.280341663296305,
+        "perf5J": 88.02848074101139,
         "yield": 1.63,
         "kgv": 24.339075
     },
@@ -154,8 +154,8 @@
         "watchlist": false,
         "kurs": "232.80 €",
         "perfMonat": -33.2015697110721,
-        "perfJahr": -64.33998333295156,
-        "perf5J": -42.24125217047786,
+        "perfJahr": -64.33998042603933,
+        "perf5J": -42.24123310514068,
         "yield": 1.8,
         "kgv": 16.290422
     },
@@ -171,7 +171,7 @@
         "kurs": "283.56 €",
         "perfMonat": 9.983086843095483,
         "perfJahr": 21.019445562701677,
-        "perf5J": 145.31133770966903,
+        "perf5J": 145.31136594403984,
         "yield": 1.84,
         "kgv": 15.575671
     },
@@ -186,8 +186,8 @@
         "watchlist": false,
         "kurs": "16.51 €",
         "perfMonat": 7.898697836978176,
-        "perfJahr": 65.21669916598276,
-        "perf5J": 236.64660833551255,
+        "perfJahr": 65.21671080365955,
+        "perf5J": 236.64658417663023,
         "yield": 3.88,
         "kgv": 15.560869
     },
@@ -203,7 +203,7 @@
         "kurs": "74.14 €",
         "perfMonat": -1.4095712787373027,
         "perfJahr": -4.832053563760083,
-        "perf5J": 4.126952083406331,
+        "perf5J": 4.126940925986844,
         "yield": 5.56,
         "kgv": 18.722221
     },
@@ -221,7 +221,7 @@
         "perfJahr": 9.450813062230312,
         "perf5J": 37.542146814174124,
         "yield": 2.18,
-        "kgv": 26.404072
+        "kgv": 26.457294
     },
     {
         "name": "Allianz",
@@ -267,7 +267,7 @@
         "kurs": "274.50 €",
         "perfMonat": 6.892528445640324,
         "perfJahr": 34.26042338200193,
-        "perf5J": 128.81799668099003,
+        "perf5J": 128.81798212881012,
         "yield": 1.95,
         "kgv": 28.41615
     },
@@ -298,7 +298,7 @@
         "watchlist": false,
         "kurs": "199.67 €",
         "perfMonat": 5.461662879900995,
-        "perfJahr": 11.905319342955483,
+        "perfJahr": 11.905327686817763,
         "perf5J": 24.790471409914407,
         "yield": 2.08,
         "kgv": 36.641598
@@ -331,7 +331,7 @@
         "kurs": "513.76 €",
         "perfMonat": 5.585317702273077,
         "perfJahr": 13.711492647469342,
-        "perf5J": 86.23912013706769,
+        "perf5J": 86.2390842093536,
         "yield": 1.1,
         "kgv": 33.328053
     },
@@ -347,7 +347,7 @@
         "kurs": "94.14 €",
         "perfMonat": 9.31224666230747,
         "perfJahr": 85.34064205879878,
-        "perf5J": 228.99846694751375,
+        "perf5J": 228.99841954191714,
         "yield": 1.08,
         "kgv": 40.892017
     },
@@ -379,7 +379,7 @@
         "kurs": "129.65 €",
         "perfMonat": 5.449367315610964,
         "perfJahr": 9.467619752284143,
-        "perf5J": 66.61573787060112,
+        "perf5J": 66.61570519831488,
         "yield": 3.86,
         "kgv": 14.98844
     },
@@ -394,8 +394,8 @@
         "watchlist": false,
         "kurs": "831.16 €",
         "perfMonat": 11.812660957709872,
-        "perfJahr": 47.41216148425693,
-        "perf5J": 252.9637916863186,
+        "perfJahr": 47.412147570938856,
+        "perf5J": 252.96359226838962,
         "yield": 84.0,
         "kgv": 35.215
     },
@@ -410,8 +410,8 @@
         "watchlist": false,
         "kurs": "87.26 €",
         "perfMonat": -0.8323388358414628,
-        "perfJahr": 85.0599127821859,
-        "perf5J": 80.41005003479901,
+        "perfJahr": 85.05989972837105,
+        "perf5J": 80.41006244086986,
         "yield": 4.02,
         "kgv": 16.460527
     },
@@ -427,7 +427,7 @@
         "kurs": "446.54 €",
         "perfMonat": 1.5214363591367273,
         "perfJahr": 13.1554478774991,
-        "perf5J": 90.08037860832174,
+        "perf5J": 90.08031402081036,
         "yield": 1.25,
         "kgv": 34.007305
     },
@@ -461,7 +461,7 @@
         "perfJahr": 15.056301154295863,
         "perf5J": -19.12252962785463,
         "yield": 2.6,
-        "kgv": 22.84897
+        "kgv": 22.828074
     },
     {
         "name": "TotalEnergies",
@@ -474,8 +474,8 @@
         "watchlist": false,
         "kurs": "70.13 €",
         "perfMonat": -13.423036615590785,
-        "perfJahr": 35.243999594606215,
-        "perf5J": 124.80458304367667,
+        "perfJahr": 35.243990919436264,
+        "perf5J": 124.80463098195335,
         "yield": 5.24,
         "kgv": 11.933235
     },
@@ -538,7 +538,7 @@
         "watchlist": false,
         "kurs": "20.83 €",
         "perfMonat": 6.465582583384441,
-        "perfJahr": 32.51865085523762,
+        "perfJahr": 32.51863477491444,
         "perf5J": 138.16450373921697,
         "yield": 3.26,
         "kgv": 26.0375
@@ -554,10 +554,10 @@
         "watchlist": false,
         "kurs": "957.84 €",
         "perfMonat": 7.554260793732526,
-        "perfJahr": 40.929806284811164,
-        "perf5J": 417.1968824748655,
+        "perfJahr": 40.929795250174884,
+        "perf5J": 417.19680816711985,
         "yield": 63.0,
-        "kgv": 38.997868
+        "kgv": 39.067207
     },
     {
         "name": "Novartis",
@@ -586,8 +586,8 @@
         "watchlist": false,
         "kurs": "188.76 €",
         "perfMonat": 1.2771384059147797,
-        "perfJahr": 20.51476720922803,
-        "perf5J": 127.61165278748248,
+        "perfJahr": 20.514777445994294,
+        "perf5J": 127.61167104497963,
         "yield": 3.2,
         "kgv": 106.12255
     },
@@ -602,7 +602,7 @@
         "watchlist": false,
         "kurs": "199.13 €",
         "perfMonat": -0.1289176389702923,
-        "perfJahr": 55.308552406920555,
+        "perfJahr": 55.30853629179533,
         "perf5J": 60.44844580835845,
         "yield": 2.35,
         "kgv": 26.464657
@@ -635,7 +635,7 @@
         "kurs": "131.12 €",
         "perfMonat": 6.426045035348447,
         "perfJahr": -2.097230197031318,
-        "perf5J": 28.34813556478991,
+        "perf5J": 28.348118849687303,
         "yield": 2.83,
         "kgv": 21.98538
     },
@@ -666,7 +666,7 @@
         "watchlist": false,
         "kurs": "52.42 €",
         "perfMonat": -1.9089606235365015,
-        "perfJahr": -6.37217212728601,
+        "perfJahr": -6.372161002771747,
         "perf5J": 9.17688409843621,
         "yield": 3.33,
         "kgv": 29.762377
@@ -699,7 +699,7 @@
         "kurs": "242.92 €",
         "perfMonat": -0.10698885140716927,
         "perfJahr": -1.470810749323262,
-        "perf5J": 34.18749726245213,
+        "perf5J": 34.18746767765084,
         "yield": 2.67,
         "kgv": 22.987623
     },
@@ -714,8 +714,8 @@
         "watchlist": false,
         "kurs": "102.17 €",
         "perfMonat": -12.682561125266362,
-        "perfJahr": 24.260935864470536,
-        "perf5J": 174.71280300829773,
+        "perfJahr": 24.260945917705996,
+        "perf5J": 174.7129012791065,
         "yield": 84.0,
         "kgv": 41.260563
     },
@@ -746,8 +746,8 @@
         "watchlist": false,
         "kurs": "122.54 €",
         "perfMonat": -0.6178133354971241,
-        "perfJahr": 38.078551792861234,
-        "perf5J": 32.41314080985626,
+        "perfJahr": 38.07854144280858,
+        "perf5J": 32.413159846149114,
         "yield": 3.05,
         "kgv": 35.311558
     },
@@ -795,185 +795,41 @@
         "kurs": "24.36 €",
         "perfMonat": 10.653467461614326,
         "perfJahr": -13.879727982214149,
-        "perf5J": 67.7943980665498,
+        "perf5J": 67.794359626098,
         "yield": 89.0,
         "kgv": 17.683544
     },
     {
-        "name": "Industrial & Commercial Bank of China",
-        "logoUrl": "https://logo.clearbit.com/icbc.com.cn",
+        "name": "Datadog A",
+        "logoUrl": "https://logo.clearbit.com/datadoghq.com",
         "tags": [
-            "Banken",
-            "China",
-            "Staatskonzern"
+            "Cloud",
+            "Monitoring",
+            "Software"
         ],
         "watchlist": true,
-        "kurs": "0.76 €",
-        "perfMonat": 0.0,
-        "perfJahr": 20.491715209091062,
-        "perf5J": 104.80353005633222,
-        "yield": 5.11,
-        "kgv": 5.854701
-    },
-    {
-        "name": "Tauron Polska Energia",
-        "logoUrl": "https://logo.clearbit.com/tauron.pl",
-        "tags": [
-            "Energie",
-            "Versorger",
-            "Polen"
-        ],
-        "watchlist": true,
-        "kurs": "2.20 €",
-        "perfMonat": 2.9198229036728205,
-        "perfJahr": 29.093875365288156,
-        "perf5J": 180.17564311916087,
-        "yield": 2.13,
-        "kgv": 5.1823206
-    },
-    {
-        "name": "Dino Polska",
-        "logoUrl": "https://logo.clearbit.com/grupadino.pl",
-        "tags": [
-            "Supermärkte",
-            "Einzelhandel",
-            "Polen"
-        ],
-        "watchlist": true,
-        "kurs": "6.87 €",
-        "perfMonat": -9.535603704201044,
-        "perfJahr": -43.26213725562235,
-        "perf5J": 8.142112577051025,
+        "kurs": "194.43 €",
+        "perfMonat": 3.6486201841551145,
+        "perfJahr": 71.48570556238273,
+        "perf5J": 117.87982738112588,
         "yield": 0.0,
-        "kgv": 18.377357
+        "kgv": 586.8421
     },
     {
-        "name": "Deutsche Lufthansa",
-        "logoUrl": "https://logo.clearbit.com/lufthansagroup.com",
+        "name": "Fanuc",
+        "logoUrl": "https://logo.clearbit.com/fanuc.co.jp",
         "tags": [
-            "Airlines",
-            "Luftfahrt",
-            "Logistik"
+            "CNC-Systeme",
+            "Roboter",
+            "Automation"
         ],
         "watchlist": true,
-        "kurs": "9.06 €",
-        "perfMonat": 18.174707164792185,
-        "perfJahr": 38.99198817200606,
-        "perf5J": 41.608635834164474,
-        "yield": 3.64,
-        "kgv": 6.972308
-    },
-    {
-        "name": "Fairfax India",
-        "logoUrl": "https://logo.clearbit.com/fairfaxindia.ca",
-        "tags": [
-            "Beteiligungen",
-            "Indien",
-            "Investment"
-        ],
-        "watchlist": true,
-        "kurs": "0.09 €",
-        "perfMonat": -1.956261574550393,
-        "perfJahr": -4.804462130337979,
-        "perf5J": 33.12500516884021,
-        "yield": 0.0,
-        "kgv": 9.161291
-    },
-    {
-        "name": "E.ON",
-        "logoUrl": "https://logo.clearbit.com/eon.com",
-        "tags": [
-            "Energienetze",
-            "Infrastruktur",
-            "Versorger"
-        ],
-        "watchlist": true,
-        "kurs": "18.02 €",
-        "perfMonat": -1.9314448228817092,
-        "perfJahr": 17.912459744116628,
-        "perf5J": 120.73208388028047,
-        "yield": 3.16,
-        "kgv": 13.759542
-    },
-    {
-        "name": "Comcast A",
-        "logoUrl": "https://logo.clearbit.com/comcastcorporation.com",
-        "tags": [
-            "Medien",
-            "Kabelnetz",
-            "Streaming"
-        ],
-        "watchlist": true,
-        "kurs": "19.56 €",
-        "perfMonat": -9.556447599978526,
-        "perfJahr": -27.081604899414135,
-        "perf5J": -51.27554394249213,
-        "yield": 5.88,
-        "kgv": 4.3980393
-    },
-    {
-        "name": "Kraft Heinz",
-        "logoUrl": "https://logo.clearbit.com/kraftheinzcompany.com",
-        "tags": [
-            "Lebensmittel",
-            "Ketchup",
-            "Marken"
-        ],
-        "watchlist": true,
-        "kurs": "19.90 €",
-        "perfMonat": -0.19934685501933158,
-        "perfJahr": -5.175378264124601,
-        "perf5J": -28.400037869861013,
-        "yield": 7.01,
-        "kgv": 10.918817
-    },
-    {
-        "name": "Vonovia",
-        "logoUrl": "https://logo.clearbit.com/vonovia.de",
-        "tags": [
-            "Immobilien",
-            "Wohnungen",
-            "Vermieter"
-        ],
-        "watchlist": true,
-        "kurs": "20.60 €",
-        "perfMonat": -0.3931490306799932,
-        "perfJahr": -27.759482613313786,
-        "perf5J": -39.197290489612236,
-        "yield": 6.07,
-        "kgv": 4.4301076
-    },
-    {
-        "name": "Powszechna Kasa Oszczednosci Bank",
-        "logoUrl": "https://logo.clearbit.com/pkobp.pl",
-        "tags": [
-            "Banken",
-            "Polen",
-            "Finanzen"
-        ],
-        "watchlist": true,
-        "kurs": "24.74 €",
-        "perfMonat": 8.715409707325573,
-        "perfJahr": 60.419652414747496,
-        "perf5J": 223.43567105484593,
-        "yield": 5.83,
-        "kgv": 12.256111
-    },
-    {
-        "name": "DNB Bank",
-        "logoUrl": "https://logo.clearbit.com/dnb.no",
-        "tags": [
-            "Banken",
-            "Norwegen",
-            "Finanzservice"
-        ],
-        "watchlist": true,
-        "kurs": "26.54 €",
-        "perfMonat": 2.608695652173913,
-        "perfJahr": 11.135663421699423,
-        "perf5J": 127.66384058142532,
-        "yield": 6.1,
-        "kgv": 10.581062
+        "kurs": "20.72 €",
+        "perfMonat": -1.3289023913541977,
+        "perfJahr": 80.54711629464188,
+        "perf5J": 0.6567573306752434,
+        "yield": 1.43,
+        "kgv": 42.42857
     },
     {
         "name": "Yaskawa Electric",
@@ -992,102 +848,6 @@
         "kgv": 52.63236
     },
     {
-        "name": "Fanuc",
-        "logoUrl": "https://logo.clearbit.com/fanuc.co.jp",
-        "tags": [
-            "CNC-Systeme",
-            "Roboter",
-            "Fabrikautomation"
-        ],
-        "watchlist": true,
-        "kurs": "40.40 €",
-        "perfMonat": -2.4667188723570868,
-        "perfJahr": 102.90985384705895,
-        "perf5J": 61.19917230181282,
-        "yield": 1.43,
-        "kgv": 41.842102
-    },
-    {
-        "name": "Yara Intl.",
-        "logoUrl": "https://logo.clearbit.com/yara.com",
-        "tags": [
-            "Düngemittel",
-            "Agrar-Chemie",
-            "Ernte"
-        ],
-        "watchlist": true,
-        "kurs": "40.28 €",
-        "perfMonat": -16.098194773075257,
-        "perfJahr": 17.66216467018466,
-        "perf5J": 39.138994698386185,
-        "yield": 4.91,
-        "kgv": 8.45994
-    },
-    {
-        "name": "Verizon",
-        "logoUrl": "https://logo.clearbit.com/verizon.com",
-        "tags": [
-            "Telekom",
-            "Mobilfunk",
-            "5G"
-        ],
-        "watchlist": true,
-        "kurs": "39.56 €",
-        "perfMonat": -4.964396026929812,
-        "perfJahr": 16.216302838670376,
-        "perf5J": 9.738399706293297,
-        "yield": 6.24,
-        "kgv": 11.065854
-    },
-    {
-        "name": "DHL",
-        "logoUrl": "https://logo.clearbit.com/dhl.com",
-        "tags": [
-            "Logistik",
-            "Pakete",
-            "Post"
-        ],
-        "watchlist": true,
-        "kurs": "51.30 €",
-        "perfMonat": 8.986614764523688,
-        "perfJahr": 34.11193390931978,
-        "perf5J": 12.682027567909254,
-        "yield": 3.7,
-        "kgv": 16.601942
-    },
-    {
-        "name": "CTS Eventim",
-        "logoUrl": "https://logo.clearbit.com/eventim.de",
-        "tags": [
-            "Ticketing",
-            "Konzerte",
-            "Live-Events"
-        ],
-        "watchlist": true,
-        "kurs": "52.10 €",
-        "perfMonat": -4.823029900701732,
-        "perfJahr": -48.01374525555125,
-        "perf5J": -3.111564310623526,
-        "yield": 2.76,
-        "kgv": 16.970684
-    },
-    {
-        "name": "Verbund AG",
-        "logoUrl": "https://logo.clearbit.com/verbund.com",
-        "tags": [
-            "Wasserkraft",
-            "Strom",
-            "Österreich"
-        ],
-        "watchlist": true,
-        "kurs": "55.60 €",
-        "perfMonat": -10.105093216154383,
-        "perfJahr": -12.863778866641319,
-        "perf5J": -9.43940021956674,
-        "yield": 3.6,
-        "kgv": 14.147582
-    },
-    {
         "name": "Cognex",
         "logoUrl": "https://logo.clearbit.com/cognex.com",
         "tags": [
@@ -1099,169 +859,73 @@
         "kurs": "57.63 €",
         "perfMonat": 9.132363436838617,
         "perfJahr": 122.07317422486672,
-        "perf5J": -14.002657781982867,
+        "perf5J": -14.002640709811361,
         "yield": 51.0,
         "kgv": 77.7647
     },
     {
-        "name": "BMW Vz.",
-        "logoUrl": "https://logo.clearbit.com/bmwgroup.com",
+        "name": "Monolithic Power Systems",
+        "logoUrl": "https://logo.clearbit.com/monolithicpower.com",
         "tags": [
-            "Automobile",
-            "Premium",
-            "Motorrad"
+            "Halbleiter",
+            "Power Management",
+            "Chips"
         ],
         "watchlist": true,
-        "kurs": "59.95 €",
-        "perfMonat": -18.93170623806972,
-        "perfJahr": -6.523554313712848,
-        "perf5J": 9.228877231253426,
-        "yield": 7.37,
-        "kgv": 5.3574624
+        "kurs": "1363.39 €",
+        "perfMonat": 6.511090229893229,
+        "perfJahr": 127.27801775453436,
+        "perf5J": 357.9844217087854,
+        "yield": 51.0,
+        "kgv": 112.33476
     },
     {
-        "name": "Pinduoduo ADR",
-        "logoUrl": "https://logo.clearbit.com/pddholdings.com",
+        "name": "Keysight Technologies",
+        "logoUrl": "https://logo.clearbit.com/keysight.com",
         "tags": [
-            "E-Commerce",
-            "Temu",
-            "China"
-        ],
-        "watchlist": true,
-        "kurs": "69.37 €",
-        "perfMonat": -18.26587163366866,
-        "perfJahr": -22.19071143413814,
-        "perf5J": -34.128168270662975,
-        "yield": 0.0,
-        "kgv": 8.33089
-    },
-    {
-        "name": "Beiersdorf",
-        "logoUrl": "https://logo.clearbit.com/beiersdorf.de",
-        "tags": [
-            "Nivea",
-            "Hautpflege",
-            "Konsumgüter"
-        ],
-        "watchlist": true,
-        "kurs": "71.60 €",
-        "perfMonat": 1.4451638093010295,
-        "perfJahr": -32.32682877548456,
-        "perf5J": -27.033754902899883,
-        "yield": 1.4,
-        "kgv": 16.84706
-    },
-    {
-        "name": "Sixt St.",
-        "logoUrl": "https://logo.clearbit.com/sixt.de",
-        "tags": [
-            "Autovermietung",
-            "Mobilität",
-            "Leasing"
-        ],
-        "watchlist": true,
-        "kurs": "73.15 €",
-        "perfMonat": 7.885802542067164,
-        "perfJahr": 2.5277237878354955,
-        "perf5J": -23.601214008573344,
-        "yield": 4.37,
-        "kgv": 11.465517
-    },
-    {
-        "name": "ABB (Watchlist)",
-        "logoUrl": "https://logo.clearbit.com/abb.com",
-        "tags": [
-            "Elektrotechnik",
-            "Automation",
-            "Tech"
-        ],
-        "watchlist": true,
-        "kurs": "94.14 €",
-        "perfMonat": 9.31224666230747,
-        "perfJahr": 85.34064205879878,
-        "perf5J": 228.99841954191714,
-        "yield": 1.08,
-        "kgv": 40.892017
-    },
-    {
-        "name": "Strabag",
-        "logoUrl": "https://logo.clearbit.com/strabag.com",
-        "tags": [
-            "Baukonzern",
-            "Infrastruktur",
-            "Tiefbau"
-        ],
-        "watchlist": true,
-        "kurs": "86.70 €",
-        "perfMonat": 4.0266977588833015,
-        "perfJahr": 21.884138474559236,
-        "perf5J": 274.4370297838599,
-        "yield": 3.34,
-        "kgv": 10.919395
-    },
-    {
-        "name": "Daikin Industries",
-        "logoUrl": "https://logo.clearbit.com/daikin.com",
-        "tags": [
-            "Klimaanlagen",
-            "Wärmepumpen",
-            "Heizung"
-        ],
-        "watchlist": true,
-        "kurs": "129.14 €",
-        "perfMonat": 0.67425200168563,
-        "perfJahr": 49.215151321260194,
-        "perf5J": 24.56133293889237,
-        "yield": 1.51,
-        "kgv": 25.445211
-    },
-    {
-        "name": "Autodesk",
-        "logoUrl": "https://logo.clearbit.com/autodesk.com",
-        "tags": [
-            "CAD-Software",
-            "3D-Design",
-            "Architektur"
-        ],
-        "watchlist": true,
-        "kurs": "168.99 €",
-        "perfMonat": -20.617625975938157,
-        "perfJahr": -34.34059225542672,
-        "perf5J": -31.565565112337595,
-        "yield": 0.0,
-        "kgv": 28.336258
-    },
-    {
-        "name": "Adobe",
-        "logoUrl": "https://logo.clearbit.com/adobe.com",
-        "tags": [
-            "Photoshop",
-            "Kreativ-Cloud",
+            "Messtechnik",
+            "Elektronik",
             "Software"
         ],
         "watchlist": true,
-        "kurs": "170.16 €",
-        "perfMonat": -23.46366545439313,
-        "perfJahr": -48.37583344332222,
-        "perf5J": -65.60147844184614,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 0.0,
-        "kgv": 11.158377
+        "kgv": 58.46785
     },
     {
-        "name": "Sika",
-        "logoUrl": "https://logo.clearbit.com/sika.com",
+        "name": "SoftBank Group",
+        "logoUrl": "https://logo.clearbit.com/softbank.jp",
         "tags": [
-            "Spezialchemie",
-            "Baustoffe",
-            "Klebstoffe"
+            "Beteiligungen",
+            "Tech",
+            "Telekom"
         ],
         "watchlist": true,
-        "kurs": "176.88 €",
-        "perfMonat": 16.892852783203125,
-        "perfJahr": -21.930200209453385,
-        "perf5J": -40.28564320889991,
-        "yield": 2.26,
-        "kgv": 25.176922
+        "kurs": "20.41 €",
+        "perfMonat": 35.6315152779618,
+        "perfJahr": 214.1227811715702,
+        "perf5J": 169.61948944754351,
+        "yield": 16.0,
+        "kgv": 8.606618
+    },
+    {
+        "name": "Powell Industries",
+        "logoUrl": "https://logo.clearbit.com/powellind.com",
+        "tags": [
+            "Elektrotechnik",
+            "Stromverteilung",
+            "Infrastruktur"
+        ],
+        "watchlist": true,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
+        "yield": 12.0,
+        "kgv": 58.16047
     },
     {
         "name": "Teradyne",
@@ -1280,6 +944,86 @@
         "kgv": 81.24676
     },
     {
+        "name": "DHL",
+        "logoUrl": "https://logo.clearbit.com/dhl.com",
+        "tags": [
+            "Logistik",
+            "Pakete",
+            "Post"
+        ],
+        "watchlist": true,
+        "kurs": "51.30 €",
+        "perfMonat": 8.986614764523688,
+        "perfJahr": 34.11193390931978,
+        "perf5J": 12.682027567909254,
+        "yield": 3.7,
+        "kgv": 16.601942
+    },
+    {
+        "name": "Deutsche Lufthansa",
+        "logoUrl": "https://logo.clearbit.com/lufthansagroup.com",
+        "tags": [
+            "Airlines",
+            "Luftfahrt",
+            "Logistik"
+        ],
+        "watchlist": true,
+        "kurs": "9.06 €",
+        "perfMonat": 18.174707164792185,
+        "perfJahr": 38.99198817200606,
+        "perf5J": 41.60862528471895,
+        "yield": 3.64,
+        "kgv": 6.972308
+    },
+    {
+        "name": "Daikin Industries",
+        "logoUrl": "https://logo.clearbit.com/daikin.com",
+        "tags": [
+            "Klimaanlagen",
+            "Wärmepumpen",
+            "Heizung"
+        ],
+        "watchlist": true,
+        "kurs": "129.14 €",
+        "perfMonat": 0.67425200168563,
+        "perfJahr": 49.215151321260194,
+        "perf5J": 24.561345623599003,
+        "yield": 1.51,
+        "kgv": 25.445211
+    },
+    {
+        "name": "Telefonaktiebolaget LM Ericsson B",
+        "logoUrl": "https://logo.clearbit.com/ericsson.com",
+        "tags": [
+            "Telekom",
+            "5G-Netze",
+            "Infrastruktur"
+        ],
+        "watchlist": true,
+        "kurs": "9.92 €",
+        "perfMonat": -10.954613832411958,
+        "perfJahr": 41.175559609869374,
+        "perf5J": 7.933126080322149,
+        "yield": 2.75,
+        "kgv": 14.225
+    },
+    {
+        "name": "CrowdStrike Holdings A",
+        "logoUrl": "https://logo.clearbit.com/crowdstrike.com",
+        "tags": [
+            "Cybersecurity",
+            "Cloud-Sicherheit",
+            "SaaS"
+        ],
+        "watchlist": true,
+        "kurs": "597.13 €",
+        "perfMonat": 11.01996821596836,
+        "perfJahr": 41.161674536661636,
+        "perf5J": 188.14372536849515,
+        "yield": 0.0,
+        "kgv": 109.58058
+    },
+    {
         "name": "Rockwell Automation",
         "logoUrl": "https://logo.clearbit.com/rockwellautomation.com",
         "tags": [
@@ -1291,8 +1035,488 @@
         "kurs": "413.10 €",
         "perfMonat": 0.0,
         "perfJahr": 49.31396550472198,
-        "perf5J": 83.81317280590773,
+        "perf5J": 83.81319456884356,
         "yield": 1.17,
         "kgv": 49.250523
+    },
+    {
+        "name": "Powszechna Kasa Oszczednosci Bank",
+        "logoUrl": "https://logo.clearbit.com/pkobp.pl",
+        "tags": [
+            "Banken",
+            "Polen",
+            "Finanzen"
+        ],
+        "watchlist": true,
+        "kurs": "24.74 €",
+        "perfMonat": 8.715409707325573,
+        "perfJahr": 60.419652414747496,
+        "perf5J": 223.43563315041442,
+        "yield": 5.83,
+        "kgv": 12.256111
+    },
+    {
+        "name": "Verizon Communications",
+        "logoUrl": "https://logo.clearbit.com/verizon.com",
+        "tags": [
+            "Telekom",
+            "Mobilfunk",
+            "5G"
+        ],
+        "watchlist": true,
+        "kurs": "39.56 €",
+        "perfMonat": -4.964396026929812,
+        "perfJahr": 16.216302838670376,
+        "perf5J": 9.738409831609495,
+        "yield": 6.24,
+        "kgv": 11.065854
+    },
+    {
+        "name": "Tauron Polska Energia",
+        "logoUrl": "https://logo.clearbit.com/tauron.pl",
+        "tags": [
+            "Energie",
+            "Versorger",
+            "Polen"
+        ],
+        "watchlist": true,
+        "kurs": "2.20 €",
+        "perfMonat": 2.9198229036728205,
+        "perfJahr": 29.093875365288156,
+        "perf5J": 180.17564311916087,
+        "yield": 2.13,
+        "kgv": 5.1823206
+    },
+    {
+        "name": "Industr and Commerc Bank of China",
+        "logoUrl": "https://logo.clearbit.com/icbc.com.cn",
+        "tags": [
+            "Banken",
+            "China",
+            "Staatskonzern"
+        ],
+        "watchlist": true,
+        "kurs": "6.85 €",
+        "perfMonat": 0.0,
+        "perfJahr": 20.491715209091062,
+        "perf5J": 104.80351545728965,
+        "yield": 5.11,
+        "kgv": 5.854701
+    },
+    {
+        "name": "Yara Intl.",
+        "logoUrl": "https://logo.clearbit.com/yara.com",
+        "tags": [
+            "Düngemittel",
+            "Agrar-Chemie",
+            "Ernte"
+        ],
+        "watchlist": true,
+        "kurs": "40.28 €",
+        "perfMonat": -16.098194773075257,
+        "perfJahr": 17.66216467018466,
+        "perf5J": 39.138994698386185,
+        "yield": 4.91,
+        "kgv": 8.45994
+    },
+    {
+        "name": "E.ON",
+        "logoUrl": "https://logo.clearbit.com/eon.com",
+        "tags": [
+            "Energienetze",
+            "Infrastruktur",
+            "Versorger"
+        ],
+        "watchlist": true,
+        "kurs": "18.02 €",
+        "perfMonat": -1.9314448228817092,
+        "perfJahr": 17.912459744116628,
+        "perf5J": 120.73208388028047,
+        "yield": 3.16,
+        "kgv": 13.759542
+    },
+    {
+        "name": "Strabag",
+        "logoUrl": "https://logo.clearbit.com/strabag.com",
+        "tags": [
+            "Baukonzern",
+            "Infrastruktur",
+            "Tiefbau"
+        ],
+        "watchlist": true,
+        "kurs": "86.70 €",
+        "perfMonat": 4.0266977588833015,
+        "perfJahr": 21.884138474559236,
+        "perf5J": 274.4370297838599,
+        "yield": 3.34,
+        "kgv": 10.919395
+    },
+    {
+        "name": "Cloudflare A",
+        "logoUrl": "https://logo.clearbit.com/cloudflare.com",
+        "tags": [
+            "CDN",
+            "Web-Sicherheit",
+            "Netzwerk"
+        ],
+        "watchlist": true,
+        "kurs": "195.36 €",
+        "perfMonat": 8.382915972143133,
+        "perfJahr": 23.517092115478924,
+        "perf5J": 121.6660006922913,
+        "yield": 0.0,
+        "kgv": 142.3706
+    },
+    {
+        "name": "Swiss RE",
+        "logoUrl": "https://logo.clearbit.com/swissre.com",
+        "tags": [
+            "Rückversicherung",
+            "Finanzen",
+            "Risiko"
+        ],
+        "watchlist": true,
+        "kurs": "133.37 €",
+        "perfMonat": -1.4376960592957533,
+        "perfJahr": -3.1821643307445866,
+        "perf5J": 99.47556880490907,
+        "yield": 5.07,
+        "kgv": 9.927594
+    },
+    {
+        "name": "A. O. Smith",
+        "logoUrl": "https://logo.clearbit.com/aosmith.com",
+        "tags": [
+            "Wassererhitzer",
+            "Heizung",
+            "Industrie"
+        ],
+        "watchlist": true,
+        "kurs": "50.76 €",
+        "perfMonat": 4.057194685987012,
+        "perfJahr": -5.7622857086403165,
+        "perf5J": -5.636220597462384,
+        "yield": 2.44,
+        "kgv": 15.525333
+    },
+    {
+        "name": "Fairfax India",
+        "logoUrl": "https://logo.clearbit.com/fairfaxindia.ca",
+        "tags": [
+            "Beteiligungen",
+            "Indien",
+            "Investment"
+        ],
+        "watchlist": true,
+        "kurs": "0.09 €",
+        "perfMonat": -1.956261574550393,
+        "perfJahr": -4.804462130337979,
+        "perf5J": 33.12500516884021,
+        "yield": 0.0,
+        "kgv": 9.161291
+    },
+    {
+        "name": "Sixt SE St.",
+        "logoUrl": "https://logo.clearbit.com/sixt.de",
+        "tags": [
+            "Autovermietung",
+            "Mobilität",
+            "Leasing"
+        ],
+        "watchlist": true,
+        "kurs": "73.15 €",
+        "perfMonat": 7.885802542067164,
+        "perfJahr": 2.5277237878354955,
+        "perf5J": -23.601214008573344,
+        "yield": 4.37,
+        "kgv": 11.465517
+    },
+    {
+        "name": "Church & Dwight",
+        "logoUrl": "https://logo.clearbit.com/churchdwight.com",
+        "tags": [
+            "Konsumgüter",
+            "Haushalt",
+            "Marken"
+        ],
+        "watchlist": true,
+        "kurs": "83.38 €",
+        "perfMonat": -0.1253292392501632,
+        "perfJahr": 1.0352179987950978,
+        "perf5J": 20.917318599157408,
+        "yield": 1.29,
+        "kgv": 31.457237
+    },
+    {
+        "name": "KION Grp",
+        "logoUrl": "https://logo.clearbit.com/kiongroup.com",
+        "tags": [
+            "Gabelstapler",
+            "Intralogistik",
+            "Lagertechnik"
+        ],
+        "watchlist": true,
+        "kurs": "41.85 €",
+        "perfMonat": -3.7410238083497425,
+        "perfJahr": 1.4099487021633461,
+        "perf5J": -47.97127977059936,
+        "yield": 1.48,
+        "kgv": 14.946428
+    },
+    {
+        "name": "DNB Bank",
+        "logoUrl": "https://logo.clearbit.com/dnb.no",
+        "tags": [
+            "Banken",
+            "Norwegen",
+            "Finanzservice"
+        ],
+        "watchlist": true,
+        "kurs": "26.54 €",
+        "perfMonat": 2.608695652173913,
+        "perfJahr": 11.135663421699423,
+        "perf5J": 127.66384058142532,
+        "yield": 6.1,
+        "kgv": 10.581062
+    },
+    {
+        "name": "Vonovia",
+        "logoUrl": "https://logo.clearbit.com/vonovia.de",
+        "tags": [
+            "Immobilien",
+            "Wohnungen",
+            "Vermieter"
+        ],
+        "watchlist": true,
+        "kurs": "20.60 €",
+        "perfMonat": -0.3931490306799932,
+        "perfJahr": -27.759482613313786,
+        "perf5J": -39.197297335640165,
+        "yield": 6.07,
+        "kgv": 4.4301076
+    },
+    {
+        "name": "Sika",
+        "logoUrl": "https://logo.clearbit.com/sika.com",
+        "tags": [
+            "Spezialchemie",
+            "Baustoffe",
+            "Klebstoffe"
+        ],
+        "watchlist": true,
+        "kurs": "176.88 €",
+        "perfMonat": 16.892852783203125,
+        "perfJahr": -21.930200209453385,
+        "perf5J": -40.28564320889991,
+        "yield": 2.26,
+        "kgv": 25.176922
+    },
+    {
+        "name": "Pinduoduo ADR A",
+        "logoUrl": "https://logo.clearbit.com/pddholdings.com",
+        "tags": [
+            "E-Commerce",
+            "Temu",
+            "China"
+        ],
+        "watchlist": true,
+        "kurs": "69.37 €",
+        "perfMonat": -18.26587163366866,
+        "perfJahr": -22.19071143413814,
+        "perf5J": -34.128168270662975,
+        "yield": 0.0,
+        "kgv": 8.33089
+    },
+    {
+        "name": "AT&T",
+        "logoUrl": "https://logo.clearbit.com/att.com",
+        "tags": [
+            "Telekom",
+            "Netzwerk",
+            "USA"
+        ],
+        "watchlist": true,
+        "kurs": "19.19 €",
+        "perfMonat": -11.889509078384089,
+        "perfJahr": -16.953694238110508,
+        "perf5J": 37.67926921377437,
+        "yield": 5.04,
+        "kgv": 7.240132
+    },
+    {
+        "name": "Verbund AG",
+        "logoUrl": "https://logo.clearbit.com/verbund.com",
+        "tags": [
+            "Wasserkraft",
+            "Strom",
+            "Österreich"
+        ],
+        "watchlist": true,
+        "kurs": "55.60 €",
+        "perfMonat": -10.105093216154383,
+        "perfJahr": -12.863778866641319,
+        "perf5J": -9.43940021956674,
+        "yield": 3.6,
+        "kgv": 14.147582
+    },
+    {
+        "name": "Deutsche Telekom",
+        "logoUrl": "https://logo.clearbit.com/telekom.com",
+        "tags": [
+            "Telekom",
+            "Mobilfunk",
+            "Breitband"
+        ],
+        "watchlist": true,
+        "kurs": "26.60 €",
+        "perfMonat": -9.462215312140728,
+        "perfJahr": -11.382647685039066,
+        "perf5J": 75.85220359021395,
+        "yield": 3.76,
+        "kgv": 14.696134
+    },
+    {
+        "name": "Hannover Rück",
+        "logoUrl": "https://logo.clearbit.com/hannover-rueck.de",
+        "tags": [
+            "Rückversicherung",
+            "Finanzen",
+            "Risikomanagement"
+        ],
+        "watchlist": true,
+        "kurs": "234.20 €",
+        "perfMonat": -5.488299409211469,
+        "perfJahr": -7.861725813594296,
+        "perf5J": 94.29693413133933,
+        "yield": 5.34,
+        "kgv": 9.832074
+    },
+    {
+        "name": "BMW Vz",
+        "logoUrl": "https://logo.clearbit.com/bmwgroup.com",
+        "tags": [
+            "Automobile",
+            "Premium",
+            "Motorrad"
+        ],
+        "watchlist": true,
+        "kurs": "59.95 €",
+        "perfMonat": -18.93170623806972,
+        "perfJahr": -6.523554313712848,
+        "perf5J": 9.228869639435324,
+        "yield": 7.37,
+        "kgv": 5.3574624
+    },
+    {
+        "name": "CTS Eventim & Co",
+        "logoUrl": "https://logo.clearbit.com/eventim.de",
+        "tags": [
+            "Ticketing",
+            "Konzerte",
+            "Live-Events"
+        ],
+        "watchlist": true,
+        "kurs": "52.10 €",
+        "perfMonat": -4.823029900701732,
+        "perfJahr": -48.01374525555125,
+        "perf5J": -3.111564310623526,
+        "yield": 2.76,
+        "kgv": 16.970684
+    },
+    {
+        "name": "Adobe",
+        "logoUrl": "https://logo.clearbit.com/adobe.com",
+        "tags": [
+            "Photoshop",
+            "Kreativ-Cloud",
+            "Software"
+        ],
+        "watchlist": true,
+        "kurs": "170.16 €",
+        "perfMonat": -23.46366545439313,
+        "perfJahr": -48.37583344332222,
+        "perf5J": -65.60147844184614,
+        "yield": 0.0,
+        "kgv": 11.158377
+    },
+    {
+        "name": "Dassault Systèmes",
+        "logoUrl": "https://logo.clearbit.com/3ds.com",
+        "tags": [
+            "3D-Software",
+            "PLM",
+            "Simulation"
+        ],
+        "watchlist": true,
+        "kurs": "17.23 €",
+        "perfMonat": -13.895912928659046,
+        "perfJahr": -43.2502140646271,
+        "perf5J": -54.92032406530411,
+        "yield": 1.57,
+        "kgv": 18.72826
+    },
+    {
+        "name": "Dino Polska",
+        "logoUrl": "https://logo.clearbit.com/grupadino.pl",
+        "tags": [
+            "Supermärkte",
+            "Einzelhandel",
+            "Polen"
+        ],
+        "watchlist": true,
+        "kurs": "6.87 €",
+        "perfMonat": -9.535603704201044,
+        "perfJahr": -43.26213725562235,
+        "perf5J": 8.142112577051025,
+        "yield": 0.0,
+        "kgv": 18.377357
+    },
+    {
+        "name": "Autodesk",
+        "logoUrl": "https://logo.clearbit.com/autodesk.com",
+        "tags": [
+            "CAD-Software",
+            "3D-Design",
+            "Architektur"
+        ],
+        "watchlist": true,
+        "kurs": "168.99 €",
+        "perfMonat": -20.617625975938157,
+        "perfJahr": -34.34059225542672,
+        "perf5J": -31.565565112337595,
+        "yield": 0.0,
+        "kgv": 28.336258
+    },
+    {
+        "name": "Comcast A",
+        "logoUrl": "https://logo.clearbit.com/comcastcorporation.com",
+        "tags": [
+            "Medien",
+            "Kabelnetz",
+            "Streaming"
+        ],
+        "watchlist": true,
+        "kurs": "19.56 €",
+        "perfMonat": -9.556447599978526,
+        "perfJahr": -27.081604899414135,
+        "perf5J": -51.275552017718795,
+        "yield": 5.88,
+        "kgv": 4.3980393
+    },
+    {
+        "name": "Beiersdorf",
+        "logoUrl": "https://logo.clearbit.com/beiersdorf.de",
+        "tags": [
+            "Nivea",
+            "Hautpflege",
+            "Konsumgüter"
+        ],
+        "watchlist": true,
+        "kurs": "71.60 €",
+        "perfMonat": 1.4451638093010295,
+        "perfJahr": -32.32682877548456,
+        "perf5J": -27.033754902899883,
+        "yield": 1.4,
+        "kgv": 16.84706
     }
 ]
