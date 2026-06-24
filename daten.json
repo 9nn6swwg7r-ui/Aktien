@@ -8,12 +8,12 @@
             "KI"
         ],
         "watchlist": false,
-        "kurs": "326.48 €",
-        "perfMonat": -10.854987331350275,
-        "perfJahr": -23.724801759404894,
-        "perf5J": 44.9041714058211,
+        "kurs": "321.71 €",
+        "perfMonat": -12.15537520673985,
+        "perfJahr": -24.837458099434865,
+        "perf5J": 43.69023777164213,
         "yield": 97.0,
-        "kgv": 22.088741
+        "kgv": 21.766525
     },
     {
         "name": "TSMC",
@@ -24,12 +24,12 @@
             "Tech"
         ],
         "watchlist": false,
-        "kurs": "384.57 €",
-        "perfMonat": 6.199808818461742,
-        "perfJahr": 100.68673562809252,
-        "perf5J": 304.23147494288634,
+        "kurs": "388.06 €",
+        "perfMonat": 7.164908357867803,
+        "perfJahr": 102.51049292365093,
+        "perf5J": 310.3902177060566,
         "yield": 87.0,
-        "kgv": 37.627907
+        "kgv": 37.969852
     },
     {
         "name": "SAP",
@@ -40,10 +40,10 @@
             "B2B"
         ],
         "watchlist": false,
-        "kurs": "134.86 €",
-        "perfMonat": -12.700670416765073,
-        "perfJahr": -45.50015052200489,
-        "perf5J": 23.41954064119145,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.86,
         "kgv": 21.61218
     },
@@ -56,12 +56,12 @@
             "Infrastruktur"
         ],
         "watchlist": false,
-        "kurs": "137.20 €",
-        "perfMonat": -19.268619816983048,
-        "perfJahr": -26.87150114857045,
-        "perf5J": 114.51307068272232,
+        "kurs": "138.67 €",
+        "perfMonat": -18.403604697298057,
+        "perfJahr": -26.087943574781335,
+        "perf5J": 114.8219636034639,
         "yield": 1.21,
-        "kgv": 26.734135
+        "kgv": 27.020584
     },
     {
         "name": "Broadcom",
@@ -72,12 +72,12 @@
             "Software"
         ],
         "watchlist": false,
-        "kurs": "334.88 €",
-        "perfMonat": -9.712547784305345,
-        "perfJahr": 45.28087267333128,
-        "perf5J": 788.9677855690924,
+        "kurs": "336.34 €",
+        "perfMonat": -9.320944451602871,
+        "perfJahr": 45.9110157096229,
+        "perf5J": 808.0065241118077,
         "yield": 68.0,
-        "kgv": 63.297836
+        "kgv": 63.57238
     },
     {
         "name": "ASML",
@@ -88,12 +88,12 @@
             "Halbleiter"
         ],
         "watchlist": false,
-        "kurs": "1528.87 €",
-        "perfMonat": 6.417160137296656,
-        "perfJahr": 115.2023918069178,
-        "perf5J": 161.5823636134986,
+        "kurs": "1551.77 €",
+        "perfMonat": 8.010881410723888,
+        "perfJahr": 118.42529899099048,
+        "perf5J": 168.90070731482274,
         "yield": 49.0,
-        "kgv": 58.476765
+        "kgv": 59.352524
     },
     {
         "name": "Alphabet",
@@ -104,12 +104,12 @@
             "KI"
         ],
         "watchlist": false,
-        "kurs": "307.11 €",
-        "perfMonat": -10.234936785116982,
-        "perfJahr": 109.7890607100213,
-        "perf5J": 187.31715273880386,
+        "kurs": "303.96 €",
+        "perfMonat": -11.156075677729143,
+        "perfJahr": 107.6362759166549,
+        "perf5J": 184.349076104371,
         "yield": 25.0,
-        "kgv": 26.5907
+        "kgv": 26.317837
     },
     {
         "name": "Qualcomm",
@@ -120,12 +120,12 @@
             "5G"
         ],
         "watchlist": false,
-        "kurs": "171.99 €",
-        "perfMonat": -21.187355285658064,
-        "perfJahr": 28.12152290261486,
-        "perf5J": 57.80902658939818,
+        "kurs": "173.78 €",
+        "perfMonat": -20.36849169386302,
+        "perfJahr": 29.452718825267283,
+        "perf5J": 59.761427174168006,
         "yield": 1.8,
-        "kgv": 20.986036
+        "kgv": 21.20408
     },
     {
         "name": "ServiceNow",
@@ -136,12 +136,12 @@
             "SaaS"
         ],
         "watchlist": false,
-        "kurs": "82.40 €",
-        "perfMonat": -6.320050968510116,
-        "perfJahr": -53.024630740289844,
-        "perf5J": -15.223611032032208,
+        "kurs": "82.57 €",
+        "perfMonat": -6.124895145454043,
+        "perfJahr": -52.92677077189726,
+        "perf5J": -13.943373175368839,
         "yield": 0.0,
-        "kgv": 55.717266
+        "kgv": 55.833336
     },
     {
         "name": "Intuit",
@@ -152,12 +152,12 @@
             "KMU"
         ],
         "watchlist": false,
-        "kurs": "235.33 €",
-        "perfMonat": -12.163633576093552,
-        "perfJahr": -64.49347687586888,
-        "perf5J": -42.73543703124561,
+        "kurs": "230.85 €",
+        "perfMonat": -13.837693414610595,
+        "perfJahr": -65.17019025538895,
+        "perf5J": -44.22782529748804,
         "yield": 1.86,
-        "kgv": 16.310555
+        "kgv": 15.999695
     },
     {
         "name": "JPMorgan Chase",
@@ -168,12 +168,12 @@
             "Investment"
         ],
         "watchlist": false,
-        "kurs": "292.31 €",
-        "perfMonat": 8.254550476079805,
-        "perfJahr": 20.357652507763117,
-        "perf5J": 147.05466178806225,
+        "kurs": "293.54 €",
+        "perfMonat": 8.707707773038514,
+        "perfJahr": 20.86144707117708,
+        "perf5J": 145.60869945393515,
         "yield": 1.8,
-        "kgv": 15.903257
+        "kgv": 15.969829
     },
     {
         "name": "HSBC",
@@ -184,9 +184,9 @@
             "Vermögen"
         ],
         "watchlist": false,
-        "kurs": "16.56 €",
+        "kurs": "16.57 €",
         "perfMonat": 3.1313148927895025,
-        "perfJahr": 60.68121294254368,
+        "perfJahr": 60.681201918105955,
         "perf5J": 237.67301490513978,
         "yield": 3.85,
         "kgv": 15.707692
@@ -200,10 +200,10 @@
             "Gesundheit"
         ],
         "watchlist": false,
-        "kurs": "73.55 €",
-        "perfMonat": -5.047761527147535,
-        "perfJahr": -5.531963347717308,
-        "perf5J": 4.029431071159297,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 5.61,
         "kgv": 18.573233
     },
@@ -216,12 +216,12 @@
             "Finanzen"
         ],
         "watchlist": false,
-        "kurs": "865.04 €",
-        "perfMonat": -8.279427701127647,
-        "perfJahr": -0.17116100723577515,
-        "perf5J": 27.807807946074618,
+        "kurs": "864.98 €",
+        "perfMonat": -8.285027817710338,
+        "perfJahr": -0.17726237398392536,
+        "perf5J": 26.82180142388703,
         "yield": 2.26,
-        "kgv": 24.75214
+        "kgv": 24.75063
     },
     {
         "name": "Allianz",
@@ -232,10 +232,10 @@
             "Finanzen"
         ],
         "watchlist": false,
-        "kurs": "404.50 €",
-        "perfMonat": 3.4526854219948846,
-        "perfJahr": 24.33558703491843,
-        "perf5J": 140.3137231581143,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 4.22,
         "kgv": 13.065246
     },
@@ -248,10 +248,10 @@
             "Finanzen"
         ],
         "watchlist": false,
-        "kurs": "479.50 €",
-        "perfMonat": 1.160337552742616,
-        "perfJahr": -8.321732728363097,
-        "perf5J": 146.44634922786003,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 5.05,
         "kgv": 9.17879
     },
@@ -264,10 +264,10 @@
             "Infrastruktur"
         ],
         "watchlist": false,
-        "kurs": "271.40 €",
-        "perfMonat": -1.9331548702856822,
-        "perfJahr": 29.006214923780927,
-        "perf5J": 128.34164044356882,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.97,
         "kgv": 28.095238
     },
@@ -280,10 +280,10 @@
             "Tech"
         ],
         "watchlist": false,
-        "kurs": "280.50 €",
-        "perfMonat": 1.1539893068514553,
-        "perfJahr": 26.16888376299491,
-        "perf5J": 124.12848497498881,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.5,
         "kgv": 35.19448
     },
@@ -296,12 +296,12 @@
             "Industrie"
         ],
         "watchlist": false,
-        "kurs": "199.70 €",
-        "perfMonat": -2.0995190175794787,
-        "perfJahr": 9.504865681843626,
-        "perf5J": 22.656513360555557,
+        "kurs": "200.20 €",
+        "perfMonat": -1.8556892064152237,
+        "perfJahr": 9.77760532570498,
+        "perf5J": 22.371745571616042,
         "yield": 2.14,
-        "kgv": 36.18102
+        "kgv": 36.271133
     },
     {
         "name": "Caterpillar",
@@ -312,12 +312,12 @@
             "Schwerindustrie"
         ],
         "watchlist": false,
-        "kurs": "863.09 €",
-        "perfMonat": 7.913711450122913,
-        "perfJahr": 165.68575740660341,
-        "perf5J": 388.8498920045313,
+        "kurs": "875.41 €",
+        "perfMonat": 9.454628316349341,
+        "perfJahr": 169.4795484280881,
+        "perf5J": 402.77578549126315,
         "yield": 66.0,
-        "kgv": 48.82719
+        "kgv": 49.524403
     },
     {
         "name": "John Deere",
@@ -328,12 +328,12 @@
             "Maschinen"
         ],
         "watchlist": false,
-        "kurs": "532.81 €",
-        "perfMonat": 14.389933351805064,
-        "perfJahr": 19.27496226267583,
-        "perf5J": 84.35147203458229,
+        "kurs": "528.84 €",
+        "perfMonat": 13.53757286510183,
+        "perfJahr": 18.386201670665923,
+        "perf5J": 83.30715929055292,
         "yield": 1.09,
-        "kgv": 34.311794
+        "kgv": 34.05612
     },
     {
         "name": "ABB",
@@ -344,10 +344,10 @@
             "Stromnetz"
         ],
         "watchlist": false,
-        "kurs": "93.86 €",
-        "perfMonat": 1.9547853248970366,
-        "perfJahr": 86.97862135524815,
-        "perf5J": 220.99354510502914,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.09,
         "kgv": 40.269768
     },
@@ -360,12 +360,12 @@
             "Automation"
         ],
         "watchlist": false,
-        "kurs": "nan €",
-        "perfMonat": 0.0,
-        "perfJahr": 0.0,
-        "perf5J": 0.0,
-        "yield": 73.0,
-        "kgv": 41.734184
+        "kurs": "417.83 €",
+        "perfMonat": -2.6756276946487447,
+        "perfJahr": 30.444192750415272,
+        "perf5J": 42.17601373133162,
+        "yield": 72.0,
+        "kgv": 41.840893
     },
     {
         "name": "Vinci",
@@ -376,10 +376,10 @@
             "Infrastruktur"
         ],
         "watchlist": false,
-        "kurs": "129.15 €",
-        "perfMonat": 2.7855092145658347,
-        "perfJahr": 7.258538605525732,
-        "perf5J": 66.16757670721562,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.87,
         "kgv": 14.930635
     },
@@ -392,12 +392,12 @@
             "Maschinenbau"
         ],
         "watchlist": false,
-        "kurs": "844.70 €",
-        "perfMonat": 10.544562419788656,
-        "perfJahr": 43.33940008621463,
-        "perf5J": 242.43001243482826,
+        "kurs": "846.05 €",
+        "perfMonat": 10.720826978068324,
+        "perfJahr": 43.567956385024914,
+        "perf5J": 239.71376365615868,
         "yield": 84.0,
-        "kgv": 35.40812
+        "kgv": 35.464577
     },
     {
         "name": "Rio Tinto",
@@ -408,12 +408,12 @@
             "Rohstoffe"
         ],
         "watchlist": false,
-        "kurs": "82.44 €",
-        "perfMonat": -12.42753002816612,
-        "perfJahr": 72.41307724208306,
-        "perf5J": 63.38536087681801,
+        "kurs": "82.77 €",
+        "perfMonat": -12.072193161939495,
+        "perfJahr": 73.1126660807146,
+        "perf5J": 63.6624307496858,
         "yield": 4.21,
-        "kgv": 15.377668
+        "kgv": 15.440065
     },
     {
         "name": "Linde",
@@ -424,12 +424,12 @@
             "Wasserstoff"
         ],
         "watchlist": false,
-        "kurs": "454.60 €",
-        "perfMonat": 0.5967299640266557,
-        "perfJahr": 12.997964307094808,
-        "perf5J": 93.81237915876807,
+        "kurs": "454.00 €",
+        "perfMonat": 0.4642673023035496,
+        "perfJahr": 12.849172083662069,
+        "perf5J": 93.57076356918746,
         "yield": 1.25,
-        "kgv": 34.29017
+        "kgv": 34.245018
     },
     {
         "name": "Air Liquide",
@@ -440,10 +440,10 @@
             "Tech"
         ],
         "watchlist": false,
-        "kurs": "169.76 €",
-        "perfMonat": -7.819292391899651,
-        "perfJahr": -1.1859138787122592,
-        "perf5J": 47.85855835729001,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.02,
         "kgv": 30.69801
     },
@@ -456,10 +456,10 @@
             "Champagner"
         ],
         "watchlist": false,
-        "kurs": "493.00 €",
-        "perfMonat": 3.1596581494801956,
-        "perfJahr": 13.667035996384241,
-        "perf5J": -19.316430693573203,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.69,
         "kgv": 22.552607
     },
@@ -472,12 +472,12 @@
             "Energie"
         ],
         "watchlist": false,
-        "kurs": "69.06 €",
-        "perfMonat": -12.876280861701295,
-        "perfJahr": 35.46797623918495,
-        "perf5J": 115.05234660361985,
+        "kurs": "69.27 €",
+        "perfMonat": -12.605506839975824,
+        "perfJahr": 35.889000606648736,
+        "perf5J": 118.03252818801346,
         "yield": 5.25,
-        "kgv": 11.638902
+        "kgv": 11.675075
     },
     {
         "name": "NextEra Energy",
@@ -488,12 +488,12 @@
             "Windkraft"
         ],
         "watchlist": false,
-        "kurs": "76.40 €",
-        "perfMonat": -0.25591573325420963,
-        "perfJahr": 25.07441031658867,
-        "perf5J": 35.81537567763739,
+        "kurs": "77.13 €",
+        "perfMonat": 0.6979703331700705,
+        "perfJahr": 26.270538770163572,
+        "perf5J": 35.29491318563965,
         "yield": 2.88,
-        "kgv": 22.027918
+        "kgv": 22.238579
     },
     {
         "name": "Ørsted",
@@ -504,10 +504,10 @@
             "Nachhaltig"
         ],
         "watchlist": false,
-        "kurs": "19.71 €",
-        "perfMonat": -13.097343332296276,
-        "perfJahr": -46.377868035643466,
-        "perf5J": -82.65978635157686,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 0.0,
         "kgv": 15.27525
     },
@@ -520,10 +520,10 @@
             "Versorger"
         ],
         "watchlist": false,
-        "kurs": "35.63 €",
-        "perfMonat": 0.8491345075358891,
-        "perfJahr": 22.933086612288093,
-        "perf5J": 80.57824068963238,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 4.17,
         "kgv": 20.958824
     },
@@ -536,10 +536,10 @@
             "Netze"
         ],
         "watchlist": false,
-        "kurs": "21.15 €",
-        "perfMonat": 7.197162236390975,
-        "perfJahr": 35.00874738366844,
-        "perf5J": 150.48461732207338,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.21,
         "kgv": 26.4375
     },
@@ -552,12 +552,12 @@
             "Biotech"
         ],
         "watchlist": false,
-        "kurs": "970.81 €",
-        "perfMonat": 3.5759858295069566,
-        "perfJahr": 42.73803615873517,
-        "perf5J": 396.240812132887,
+        "kurs": "983.52 €",
+        "perfMonat": 4.932661496041778,
+        "perfJahr": 44.607681926721746,
+        "perf5J": 408.7460199474751,
         "yield": 63.0,
-        "kgv": 39.21224
+        "kgv": 39.73186
     },
     {
         "name": "Novartis",
@@ -568,10 +568,10 @@
             "Forschung"
         ],
         "watchlist": false,
-        "kurs": "134.80 €",
-        "perfMonat": 4.981419938253696,
-        "perfJahr": 35.02305479921343,
-        "perf5J": 86.35180333406095,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.0,
         "kgv": 22.046099
     },
@@ -584,12 +584,12 @@
             "Pharma"
         ],
         "watchlist": false,
-        "kurs": "205.29 €",
-        "perfMonat": 9.42661977147328,
-        "perfJahr": 29.780410166069903,
-        "perf5J": 145.1692462774417,
+        "kurs": "206.77 €",
+        "perfMonat": 10.214904641157835,
+        "perfJahr": 30.715319184817076,
+        "perf5J": 150.7821551779191,
         "yield": 2.95,
-        "kgv": 114.318634
+        "kgv": 115.14216
     },
     {
         "name": "Johnson & Johnson",
@@ -600,12 +600,12 @@
             "Gesundheit"
         ],
         "watchlist": false,
-        "kurs": "210.55 €",
-        "perfMonat": 3.909983615594645,
-        "perfJahr": 61.08558503471969,
-        "perf5J": 68.51199678690992,
+        "kurs": "212.15 €",
+        "perfMonat": 4.700672373145485,
+        "perfJahr": 62.31134368329807,
+        "perf5J": 68.92571543959983,
         "yield": 2.24,
-        "kgv": 27.714947
+        "kgv": 27.92584
     },
     {
         "name": "Amazon",
@@ -616,12 +616,12 @@
             "Logistik"
         ],
         "watchlist": false,
-        "kurs": "210.46 €",
-        "perfMonat": -9.881643014173552,
-        "perfJahr": 12.363111410242112,
-        "perf5J": 38.631173660816785,
+        "kurs": "206.23 €",
+        "perfMonat": -11.692865646392516,
+        "perfJahr": 10.104807805741427,
+        "perf5J": 37.746736379570464,
         "yield": 0.0,
-        "kgv": 32.30743
+        "kgv": 31.658108
     },
     {
         "name": "Procter & Gamble",
@@ -632,12 +632,12 @@
             "Marken"
         ],
         "watchlist": false,
-        "kurs": "133.88 €",
-        "perfMonat": 6.3794031119773695,
-        "perfJahr": -2.4352436648394735,
-        "perf5J": 29.847839047131668,
+        "kurs": "133.84 €",
+        "perfMonat": 6.351417281645149,
+        "perfJahr": -2.4609105762652335,
+        "perf5J": 27.985600084569384,
         "yield": 2.82,
-        "kgv": 22.266472
+        "kgv": 22.260614
     },
     {
         "name": "Nestlé",
@@ -648,10 +648,10 @@
             "Tiernahrung"
         ],
         "watchlist": false,
-        "kurs": "89.86 €",
-        "perfMonat": 4.42177155162264,
-        "perfJahr": 5.806474860079487,
-        "perf5J": -16.50031633564657,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.86,
         "kgv": 23.615385
     },
@@ -664,12 +664,12 @@
             "Kekse"
         ],
         "watchlist": false,
-        "kurs": "54.61 €",
-        "perfMonat": 1.2900017622106905,
-        "perfJahr": -6.3339475668461365,
-        "perf5J": 12.663392936016754,
+        "kurs": "54.35 €",
+        "perfMonat": 0.8164598077988132,
+        "perfJahr": -6.771846715425172,
+        "perf5J": 11.195990429520771,
         "yield": 3.28,
-        "kgv": 30.70792
+        "kgv": 30.564358
     },
     {
         "name": "Coca-Cola",
@@ -680,12 +680,12 @@
             "Global"
         ],
         "watchlist": false,
-        "kurs": "71.07 €",
-        "perfMonat": 0.9896261843767956,
-        "perfJahr": 18.24735839948509,
-        "perf5J": 72.09948695897396,
+        "kurs": "70.95 €",
+        "perfMonat": 0.8207549987827341,
+        "perfJahr": 18.049642651975013,
+        "perf5J": 72.03311397125427,
         "yield": 2.64,
-        "kgv": 25.388365
+        "kgv": 25.345911
     },
     {
         "name": "McDonald's",
@@ -696,12 +696,12 @@
             "Immobilien"
         ],
         "watchlist": false,
-        "kurs": "240.75 €",
-        "perfMonat": -1.4019795914864628,
-        "perfJahr": -3.8920434346037416,
-        "perf5J": 31.478753054808855,
+        "kurs": "241.10 €",
+        "perfMonat": -1.2613723530522334,
+        "perfJahr": -3.7549871903888183,
+        "perf5J": 32.18177324621468,
         "yield": 2.74,
-        "kgv": 22.528006
+        "kgv": 22.560131
     },
     {
         "name": "Walmart",
@@ -712,12 +712,12 @@
             "USA"
         ],
         "watchlist": false,
-        "kurs": "104.93 €",
-        "perfMonat": 0.531329387736744,
-        "perfJahr": 22.649591570533293,
-        "perf5J": 178.4074245866909,
+        "kurs": "104.76 €",
+        "perfMonat": 0.3626552300603164,
+        "perfJahr": 22.443806800019342,
+        "perf5J": 174.6900405636039,
         "yield": 83.0,
-        "kgv": 41.971832
+        "kgv": 41.90141
     },
     {
         "name": "Fuchs SE",
@@ -728,10 +728,10 @@
             "Spezialöle"
         ],
         "watchlist": false,
-        "kurs": "39.60 €",
-        "perfMonat": 5.207224007053744,
-        "perfJahr": -13.939474530909335,
-        "perf5J": 10.041845129030873,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.12,
         "kgv": 16.363636
     },
@@ -744,12 +744,12 @@
             "Lager"
         ],
         "watchlist": false,
-        "kurs": "123.22 €",
-        "perfMonat": -4.045239184295589,
-        "perfJahr": 33.649128913083906,
-        "perf5J": 33.32109176835655,
+        "kurs": "124.01 €",
+        "perfMonat": -3.435154306695914,
+        "perfJahr": 34.49887635407693,
+        "perf5J": 33.36593305495482,
         "yield": 2.95,
-        "kgv": 35.170853
+        "kgv": 35.39447
     },
     {
         "name": "Krones",
@@ -760,10 +760,10 @@
             "Industrie"
         ],
         "watchlist": false,
-        "kurs": "113.60 €",
-        "perfMonat": -2.6077250422867966,
-        "perfJahr": -15.715509527402094,
-        "perf5J": 61.58013392142575,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.45,
         "kgv": 12.321041
     },
@@ -776,10 +776,10 @@
             "Recycling"
         ],
         "watchlist": false,
-        "kurs": "76.90 €",
-        "perfMonat": -6.105005991263738,
-        "perfJahr": 2.8649383439248632,
-        "perf5J": -52.68890806471993,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.58,
         "kgv": 19.922281
     },
@@ -792,12 +792,12 @@
             "Finanzdienstleistung"
         ],
         "watchlist": false,
-        "kurs": "25.52 €",
-        "perfMonat": 10.503244819654112,
-        "perfJahr": -11.201804889820966,
-        "perf5J": 73.9691206713463,
+        "kurs": "25.53 €",
+        "perfMonat": 10.560428921484862,
+        "perfJahr": -11.155852890494119,
+        "perf5J": 71.66794740967374,
         "yield": 88.0,
-        "kgv": 18.229559
+        "kgv": 18.238993
     },
     {
         "name": "Datadog A",
@@ -808,12 +808,12 @@
             "Software"
         ],
         "watchlist": true,
-        "kurs": "195.83 €",
-        "perfMonat": -0.5320756606718124,
-        "perfJahr": 70.03745593547993,
-        "perf5J": 109.00037731240033,
+        "kurs": "196.00 €",
+        "perfMonat": -0.447127219892904,
+        "perfJahr": 70.18267276645003,
+        "perf5J": 109.92834152525744,
         "yield": 0.0,
-        "kgv": 556.15
+        "kgv": 556.625
     },
     {
         "name": "Fanuc",
@@ -824,12 +824,12 @@
             "Automation"
         ],
         "watchlist": true,
-        "kurs": "20.08 €",
-        "perfMonat": -14.28034970781226,
-        "perfJahr": 76.54798243999197,
-        "perf5J": -2.7230687525892163,
+        "kurs": "20.03 €",
+        "perfMonat": -14.505826838838864,
+        "perfJahr": 76.0835902914774,
+        "perf5J": -4.0591856725576605,
         "yield": 1.48,
-        "kgv": 41.472725
+        "kgv": 41.363636
     },
     {
         "name": "Yaskawa Electric",
@@ -840,12 +840,12 @@
             "Automation"
         ],
         "watchlist": true,
-        "kurs": "nan €",
-        "perfMonat": 0.0,
-        "perfJahr": 0.0,
-        "perf5J": 0.0,
-        "yield": 1.01,
-        "kgv": 52.007942
+        "kurs": "38.50 €",
+        "perfMonat": -5.480550728512231,
+        "perfJahr": 119.68840199736202,
+        "perf5J": 41.94733991259325,
+        "yield": 1.02,
+        "kgv": 52.084564
     },
     {
         "name": "Cognex",
@@ -856,12 +856,12 @@
             "Tech"
         ],
         "watchlist": true,
-        "kurs": "55.55 €",
-        "perfMonat": -7.654036611713738,
-        "perfJahr": 106.88591366549073,
-        "perf5J": -20.558076944134672,
+        "kurs": "56.02 €",
+        "perfMonat": -6.863752840227106,
+        "perfJahr": 108.65641422794154,
+        "perf5J": -20.160520824549536,
         "yield": 52.0,
-        "kgv": 74.23529
+        "kgv": 74.87058
     },
     {
         "name": "Monolithic Power Systems",
@@ -871,12 +871,12 @@
             "Chips"
         ],
         "watchlist": true,
-        "kurs": "1242.04 €",
-        "perfMonat": -15.156522009769855,
-        "perfJahr": 98.39394530011268,
-        "perf5J": 307.2146181462026,
+        "kurs": "1263.19 €",
+        "perfMonat": -13.712133157044946,
+        "perfJahr": 101.77145267049012,
+        "perf5J": 306.97807670642703,
         "yield": 56.00000000000001,
-        "kgv": 101.14194
+        "kgv": 102.8638
     },
     {
         "name": "Keysight Technologies",
@@ -886,12 +886,12 @@
             "Elektronik"
         ],
         "watchlist": true,
-        "kurs": "308.88 €",
-        "perfMonat": -1.367569114501229,
-        "perfJahr": 113.00006622979701,
-        "perf5J": 129.8408172297772,
+        "kurs": "309.25 €",
+        "perfMonat": -1.248103267355747,
+        "perfJahr": 113.25805676217806,
+        "perf5J": 129.12860097253377,
         "yield": 0.0,
-        "kgv": 56.50161
+        "kgv": 56.570045
     },
     {
         "name": "SoftBank Group",
@@ -901,12 +901,12 @@
             "Tech"
         ],
         "watchlist": true,
-        "kurs": "17.61 €",
-        "perfMonat": -19.09384888536225,
-        "perfJahr": 143.23503035752145,
-        "perf5J": 124.05757338769301,
+        "kurs": "17.70 €",
+        "perfMonat": -18.648862585171955,
+        "perfJahr": 144.57283044743187,
+        "perf5J": 123.85571908500414,
         "yield": 18.0,
-        "kgv": 7.4074073
+        "kgv": 7.4481483
     },
     {
         "name": "Powell Industries",
@@ -916,12 +916,12 @@
             "Infrastruktur"
         ],
         "watchlist": true,
-        "kurs": "257.23 €",
-        "perfMonat": 0.08219688097120256,
-        "perfJahr": 366.3936293733671,
-        "perf5J": 2840.817696865924,
+        "kurs": "259.24 €",
+        "perfMonat": 0.8630986070952507,
+        "perfJahr": 370.03274267999234,
+        "perf5J": 2936.436096123989,
         "yield": 12.0,
-        "kgv": 56.96101
+        "kgv": 57.405457
     },
     {
         "name": "Teradyne",
@@ -931,12 +931,12 @@
             "Halbleiter"
         ],
         "watchlist": true,
-        "kurs": "369.67 €",
-        "perfMonat": 7.913599668740696,
-        "perfJahr": 365.7705714971873,
-        "perf5J": 227.8487492282036,
+        "kurs": "376.06 €",
+        "perfMonat": 9.780540711799702,
+        "perfJahr": 373.82855676731475,
+        "perf5J": 236.24955194417944,
         "yield": 12.0,
-        "kgv": 78.05483
+        "kgv": 79.405205
     },
     {
         "name": "DHL",
@@ -946,10 +946,10 @@
             "Pakete"
         ],
         "watchlist": true,
-        "kurs": "51.18 €",
-        "perfMonat": 1.8304855041119568,
-        "perfJahr": 38.30554566216989,
-        "perf5J": 10.374823556163314,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.72,
         "kgv": 16.563107
     },
@@ -961,10 +961,10 @@
             "Luftfahrt"
         ],
         "watchlist": true,
-        "kurs": "9.60 €",
-        "perfMonat": 17.47430815140642,
-        "perfJahr": 41.336167077854,
-        "perf5J": 55.940517753259876,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.59,
         "kgv": 7.384616
     },
@@ -976,12 +976,12 @@
             "Wärmepumpen"
         ],
         "watchlist": true,
-        "kurs": "nan €",
-        "perfMonat": 0.0,
-        "perfJahr": 0.0,
-        "perf5J": 0.0,
-        "yield": 1.52,
-        "kgv": 25.039707
+        "kurs": "127.88 €",
+        "perfMonat": -4.004903964037597,
+        "perfJahr": 45.15927548299705,
+        "perf5J": 21.029665092570955,
+        "yield": 1.53,
+        "kgv": 25.0
     },
     {
         "name": "Telefonaktiebolaget LM Ericsson B",
@@ -991,12 +991,12 @@
             "5G-Netze"
         ],
         "watchlist": true,
-        "kurs": "9.77 €",
-        "perfMonat": -19.132652688850623,
-        "perfJahr": 36.81871279556712,
-        "perf5J": 6.150175850176708,
+        "kurs": "9.82 €",
+        "perfMonat": -18.658894823557397,
+        "perfJahr": 37.62025932159319,
+        "perf5J": 6.433636575142346,
         "yield": 2.75,
-        "kgv": 14.044304
+        "kgv": 14.126582
     },
     {
         "name": "CrowdStrike Holdings A",
@@ -1006,12 +1006,12 @@
             "Cloud"
         ],
         "watchlist": true,
-        "kurs": "590.92 €",
-        "perfMonat": -0.04168986178361171,
-        "perfJahr": 38.29783113816519,
-        "perf5J": 164.59204872130803,
+        "kurs": "592.46 €",
+        "perfMonat": 0.2189013126353364,
+        "perfJahr": 38.658373390090574,
+        "perf5J": 165.76370436440283,
         "yield": 0.0,
-        "kgv": 107.39581
+        "kgv": 107.6758
     },
     {
         "name": "Rockwell Automation",
@@ -1021,12 +1021,12 @@
             "Tech"
         ],
         "watchlist": true,
-        "kurs": "405.11 €",
-        "perfMonat": 0.8536093875630868,
-        "perfJahr": 43.183001185178604,
-        "perf5J": 75.29330885683012,
+        "kurs": "405.26 €",
+        "perfMonat": 0.8919586747973755,
+        "perfJahr": 43.237446098681076,
+        "perf5J": 75.28015315949555,
         "yield": 1.21,
-        "kgv": 47.787643
+        "kgv": 47.805813
     },
     {
         "name": "Powszechna Kasa Oszczednosci Bank",
@@ -1036,10 +1036,10 @@
             "Polen"
         ],
         "watchlist": true,
-        "kurs": "24.08 €",
-        "perfMonat": -1.543153643341006,
-        "perfJahr": 57.181404480544174,
-        "perf5J": 211.53426971892452,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 5.88,
         "kgv": 12.032596
     },
@@ -1051,12 +1051,12 @@
             "Mobilfunk"
         ],
         "watchlist": true,
-        "kurs": "40.08 €",
-        "perfMonat": -6.114662920097554,
-        "perfJahr": 13.987282517272254,
-        "perf5J": 10.152359463073397,
+        "kurs": "40.21 €",
+        "perfMonat": -5.795011911783181,
+        "perfJahr": 14.375374533820606,
+        "perf5J": 10.507810881423124,
         "yield": 6.06,
-        "kgv": 11.10366
+        "kgv": 11.141463
     },
     {
         "name": "Tauron Polska Energia",
@@ -1066,10 +1066,10 @@
             "Polen"
         ],
         "watchlist": true,
-        "kurs": "2.04 €",
-        "perfMonat": -7.0716361278304305,
-        "perfJahr": 12.478674840192351,
-        "perf5J": 151.5086499991226,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.16,
         "kgv": 4.8331494
     },
@@ -1081,11 +1081,11 @@
             "China"
         ],
         "watchlist": true,
-        "kurs": "nan €",
-        "perfMonat": 0.0,
-        "perfJahr": 0.0,
-        "perf5J": 0.0,
-        "yield": 5.03,
+        "kurs": "0.76 €",
+        "perfMonat": -0.14749599664272892,
+        "perfJahr": 19.471787590137854,
+        "perf5J": 103.62126899091315,
+        "yield": 5.17,
         "kgv": 5.786325
     },
     {
@@ -1096,10 +1096,10 @@
             "Chemie"
         ],
         "watchlist": true,
-        "kurs": "39.39 €",
-        "perfMonat": -15.061635278977798,
-        "perfJahr": 19.175870055828558,
-        "perf5J": 35.80171825633257,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 5.08,
         "kgv": 8.258427
     },
@@ -1111,10 +1111,10 @@
             "Versorger"
         ],
         "watchlist": true,
-        "kurs": "17.61 €",
-        "perfMonat": -4.448059227444632,
-        "perfJahr": 16.487729592221246,
-        "perf5J": 116.40494172801141,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.2,
         "kgv": 13.446566
     },
@@ -1126,10 +1126,10 @@
             "Infrastruktur"
         ],
         "watchlist": true,
-        "kurs": "89.90 €",
-        "perfMonat": 1.3824504557677888,
-        "perfJahr": 20.630611032084392,
-        "perf5J": 292.80342107848844,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.19,
         "kgv": 11.322418
     },
@@ -1141,12 +1141,12 @@
             "Web-Sicherheit"
         ],
         "watchlist": true,
-        "kurs": "196.59 €",
-        "perfMonat": 2.656989158992673,
-        "perfJahr": 19.787596469304486,
-        "perf5J": 113.56030216692461,
+        "kurs": "196.73 €",
+        "perfMonat": 2.7305335224467426,
+        "perfJahr": 19.87341334942342,
+        "perf5J": 113.16291828862866,
         "yield": 0.0,
-        "kgv": 141.9004
+        "kgv": 142.00206
     },
     {
         "name": "Swiss RE",
@@ -1156,10 +1156,10 @@
             "Finanzen"
         ],
         "watchlist": true,
-        "kurs": "137.30 €",
-        "perfMonat": 5.762005449585725,
-        "perfJahr": -1.6477001872336754,
-        "perf5J": 104.87357962276474,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 5.0,
         "kgv": 10.075577
     },
@@ -1171,12 +1171,12 @@
             "Industrie"
         ],
         "watchlist": true,
-        "kurs": "52.93 €",
-        "perfMonat": 3.0773154681947257,
-        "perfJahr": -5.466204308148805,
-        "perf5J": -2.7355106907636424,
+        "kurs": "52.98 €",
+        "perfMonat": 3.1716070907718725,
+        "perfJahr": -5.379728006901789,
+        "perf5J": -4.754675379874615,
         "yield": 2.47,
-        "kgv": 16.033333
+        "kgv": 16.048
     },
     {
         "name": "Fairfax India",
@@ -1187,11 +1187,11 @@
         ],
         "watchlist": true,
         "kurs": "0.10 €",
-        "perfMonat": 1.0650254060118687,
-        "perfJahr": -0.6063875783022368,
-        "perf5J": 39.013109602470756,
+        "perfMonat": 0.784749935263476,
+        "perfJahr": -0.882027854440905,
+        "perf5J": 38.627595775333155,
         "yield": 0.0,
-        "kgv": 9.693549
+        "kgv": 9.666666
     },
     {
         "name": "Sixt SE St.",
@@ -1201,10 +1201,10 @@
             "Mobilität"
         ],
         "watchlist": true,
-        "kurs": "66.85 €",
-        "perfMonat": -4.833400183313398,
-        "perfJahr": -9.929423069727433,
-        "perf5J": -30.99421297772939,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 4.54,
         "kgv": 10.478056
     },
@@ -1216,12 +1216,12 @@
             "Marken"
         ],
         "watchlist": true,
-        "kurs": "87.05 €",
-        "perfMonat": 2.296473841680787,
-        "perfJahr": 4.338029937683157,
-        "perf5J": 26.19684987622949,
+        "kurs": "86.86 €",
+        "perfMonat": 2.0688942152504235,
+        "perfJahr": 4.105908448212783,
+        "perf5J": 24.34645126019669,
         "yield": 1.27,
-        "kgv": 32.529606
+        "kgv": 32.457237
     },
     {
         "name": "KION Grp",
@@ -1231,10 +1231,10 @@
             "Lagertechnik"
         ],
         "watchlist": true,
-        "kurs": "39.42 €",
-        "perfMonat": -13.07531565530177,
-        "perfJahr": -12.581207640818844,
-        "perf5J": -53.09522810943065,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.52,
         "kgv": 14.078571
     },
@@ -1246,10 +1246,10 @@
             "Norwegen"
         ],
         "watchlist": true,
-        "kurs": "26.20 €",
-        "perfMonat": 0.47944996454944344,
-        "perfJahr": 15.319101442062866,
-        "perf5J": 118.56529321825961,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 6.09,
         "kgv": 10.531227
     },
@@ -1261,10 +1261,10 @@
             "Wohnungen"
         ],
         "watchlist": true,
-        "kurs": "20.79 €",
-        "perfMonat": -3.5714219364030146,
-        "perfJahr": -25.237104110572794,
-        "perf5J": -40.16835716565287,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 6.17,
         "kgv": 5.236776
     },
@@ -1276,10 +1276,10 @@
             "Baustoffe"
         ],
         "watchlist": true,
-        "kurs": "178.61 €",
-        "perfMonat": 10.127000854532952,
-        "perfJahr": -19.881849901201484,
-        "perf5J": -41.309936719209325,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.3,
         "kgv": 25.307219
     },
@@ -1291,12 +1291,12 @@
             "Temu"
         ],
         "watchlist": true,
-        "kurs": "67.47 €",
-        "perfMonat": -20.68501447642885,
-        "perfJahr": -28.471445589375694,
-        "perf5J": -39.98590604972989,
+        "kurs": "66.67 €",
+        "perfMonat": -21.626657344658057,
+        "perfJahr": -29.320646439516334,
+        "perf5J": -40.642634193188826,
         "yield": 0.0,
-        "kgv": 8.043022
+        "kgv": 7.947534
     },
     {
         "name": "AT&T",
@@ -1306,12 +1306,12 @@
             "USA"
         ],
         "watchlist": true,
-        "kurs": "19.72 €",
-        "perfMonat": -10.451637583031031,
-        "perfJahr": -17.3166678175223,
-        "perf5J": 40.831643174690406,
+        "kurs": "19.69 €",
+        "perfMonat": -10.591525060136368,
+        "perfJahr": -17.44583693664917,
+        "perf5J": 40.12488190580362,
         "yield": 4.87,
-        "kgv": 7.370066
+        "kgv": 7.358553
     },
     {
         "name": "Verbund AG",
@@ -1321,10 +1321,10 @@
             "Strom"
         ],
         "watchlist": true,
-        "kurs": "54.75 €",
-        "perfMonat": -7.9831932773109235,
-        "perfJahr": -11.761260098122396,
-        "perf5J": -13.743001046631441,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.64,
         "kgv": 13.931297
     },
@@ -1336,10 +1336,10 @@
             "Mobilfunk"
         ],
         "watchlist": true,
-        "kurs": "26.44 €",
-        "perfMonat": -10.220713585412494,
-        "perfJahr": -11.199320608428796,
-        "perf5J": 74.20761950781502,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 3.81,
         "kgv": 14.607736
     },
@@ -1351,10 +1351,10 @@
             "Finanzen"
         ],
         "watchlist": true,
-        "kurs": "238.00 €",
-        "perfMonat": -2.538901320935015,
-        "perfJahr": -5.37441266113049,
-        "perf5J": 101.98133142508911,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 5.3,
         "kgv": 9.9958
     },
@@ -1366,10 +1366,10 @@
             "Premium"
         ],
         "watchlist": true,
-        "kurs": "60.80 €",
-        "perfMonat": -19.47019968601252,
-        "perfJahr": -5.960495555555293,
-        "perf5J": 11.209737954721383,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 7.22,
         "kgv": 5.433423
     },
@@ -1381,10 +1381,10 @@
             "Konzerte"
         ],
         "watchlist": true,
-        "kurs": "50.35 €",
-        "perfMonat": -9.787255274191669,
-        "perfJahr": -49.85747753626239,
-        "perf5J": -4.253680034158041,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 2.86,
         "kgv": 16.400652
     },
@@ -1396,12 +1396,12 @@
             "Software"
         ],
         "watchlist": true,
-        "kurs": "174.17 €",
-        "perfMonat": -17.730466304497,
-        "perfJahr": -48.2528618510874,
-        "perf5J": -65.78528641748781,
+        "kurs": "173.04 €",
+        "perfMonat": -18.262712447812614,
+        "perfJahr": -48.58764209682598,
+        "perf5J": -66.0887388415197,
         "yield": 0.0,
-        "kgv": 11.3251295
+        "kgv": 11.251862
     },
     {
         "name": "Dassault Systèmes",
@@ -1411,10 +1411,10 @@
             "Simulation"
         ],
         "watchlist": true,
-        "kurs": "17.39 €",
-        "perfMonat": -14.653449609141308,
-        "perfJahr": -42.648673867803645,
-        "perf5J": -56.06411671814078,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.55,
         "kgv": 18.902172
     },
@@ -1426,10 +1426,10 @@
             "Einzelhandel"
         ],
         "watchlist": true,
-        "kurs": "6.76 €",
-        "perfMonat": -8.973958377907456,
-        "perfJahr": -43.117646610035614,
-        "perf5J": 5.875914718125541,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 0.0,
         "kgv": 18.245283
     },
@@ -1441,12 +1441,12 @@
             "3D-Design"
         ],
         "watchlist": true,
-        "kurs": "170.28 €",
-        "perfMonat": -18.805357786680677,
-        "perfJahr": -36.411456286095344,
-        "perf5J": -32.593393352514944,
+        "kurs": "169.55 €",
+        "perfMonat": -19.14955964208746,
+        "perfJahr": -36.68102203738516,
+        "perf5J": -33.29292542608772,
         "yield": 0.0,
-        "kgv": 28.237955
+        "kgv": 28.118248
     },
     {
         "name": "Comcast A",
@@ -1456,12 +1456,12 @@
             "Streaming"
         ],
         "watchlist": true,
-        "kurs": "19.88 €",
-        "perfMonat": -10.198809435240507,
-        "perfJahr": -28.558721453836984,
-        "perf5J": -49.87116246568446,
+        "kurs": "19.93 €",
+        "perfMonat": -9.98012034573747,
+        "perfJahr": -28.384739170601218,
+        "perf5J": -50.06971381622424,
         "yield": 5.79,
-        "kgv": 4.4284315
+        "kgv": 4.4392157
     },
     {
         "name": "Beiersdorf",
@@ -1471,10 +1471,10 @@
             "Konsumgüter"
         ],
         "watchlist": true,
-        "kurs": "73.96 €",
-        "perfMonat": 1.7051675508175161,
-        "perfJahr": -29.23854067120459,
-        "perf5J": -24.072615518030286,
+        "kurs": "nan €",
+        "perfMonat": 0.0,
+        "perfJahr": 0.0,
+        "perf5J": 0.0,
         "yield": 1.4,
         "kgv": 17.402353
     }
