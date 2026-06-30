@@ -195,15 +195,24 @@ for aktie in meine_aktien:
         except Exception:
             pass
 
+        # NEU & ROBUST: Auslesen der tatsächlichen Ausschüttungsmonate über die History
         if div_yield > 0:
             try:
-                cal = ticker.calendar
-                if cal and 'Dividend Date' in cal:
-                    div_date = cal['Dividend Date']
-                    if isinstance(div_date, datetime):
-                        auszahlungsmonate = monate_de[div_date.month]
-                    else:
-                        auszahlungsmonate = monate_de[div_date[0].month]
+                # Wir holen uns die Dividenden-Historie
+                dividenden = ticker.dividends
+                if not dividenden.empty:
+                    # Filter auf die Ausschüttungen der letzten 365 Tage
+                    letztes_jahr = dividenden[dividenden.index >= (datetime.now() - datetime.timedelta(days=365))]
+                    if letztes_jahr.empty:
+                        # Fallback, falls im letzten Jahr nichts kam: Nimm einfach die letzten bekannten Ausschüttungen
+                        letztes_jahr = dividenden.tail(4)
+                    
+                    # Extrahiere die Monatsnamen, sortiere sie chronologisch und lösche Duplikate
+                    monate_zahlen = sorted(list(set(letztes_jahr.index.month)))
+                    monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
+                    
+                    if monate_namen:
+                        auszahlungsmonate = ", ".join(monate_namen)
             except Exception:
                 auszahlungsmonate = "-"
         
@@ -221,7 +230,7 @@ for aktie in meine_aktien:
             "exDate": ex_date_str,
             "monate": auszahlungsmonate
         })
-        print(f"Erfolg: {aktie['name']}")
+        print(f"Erfolg: {aktie['name']} | Monate: {auszahlungsmonate}")
     except Exception as e:
         print(f"Überspringe {aktie['name']} wegen Fehler: {e}")
 
