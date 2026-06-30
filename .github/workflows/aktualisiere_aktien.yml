@@ -30,6 +30,4 @@ jobs:
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
         git add daten.json
-        # Prüft, ob es Änderungen gibt. Falls ja, wird committed und gepusht. 
-        # Das "|| true" am Ende sichert ab, dass die Action nicht fehlschlägt, falls nichts zu tun war.
         git diff --quiet && git diff --staged --quiet || (git commit -m "Stündliches Aktiendaten-Update" && git push) || true
