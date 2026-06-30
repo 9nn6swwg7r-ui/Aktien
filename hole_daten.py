@@ -136,7 +136,9 @@ aktien_daten = []
 for aktie in meine_aktien:
     try:
         ticker = yf.Ticker(aktie["symbol"])
-        hist_5y = ticker.history(period="5y")
+        
+        # WICHTIG: actions=True lädt die Dividenden direkt in die Kurshistorie mit rein!
+        hist_5y = ticker.history(period="5y", actions=True)
         hist_1m = ticker.history(period="1mo")
         
         if hist_5y.empty or hist_1m.empty:
@@ -178,7 +180,7 @@ for aktie in meine_aktien:
         ex_date_str = "-"
         auszahlungsmonate = "-"
 
-        # 1. Info blockunabhängig auswerten
+        # Ticker Info auslesen (falls möglich)
         try:
             info = ticker.info
             if info:
@@ -193,33 +195,54 @@ for aktie in meine_aktien:
         except Exception:
             pass
 
-        # 2. Absolut unabhängig von info/yield immer die Dividenden-Historie prüfen
+        # === NEUE BOMBENFESTE DIVIDENDEN-ERMITTLUNG ===
         try:
-            dividenden = ticker.dividends
-            if not dividenden.empty:
-                # Zeitzonen vollständig entfernen (tz-naive machen), um Crashs beim Vergleichen zu verhindern
-                dividenden_naive = dividenden.copy()
-                if dividenden_naive.index.tz is not None:
-                    dividenden_naive.index = dividenden_naive.index.tz_localize(None)
+            jetzt_naive = datetime.now().replace(tzinfo=None)
+            vor_einem_jahr = jetzt_naive - timedelta(days=365)
+            
+            # Methode 1: Direkt aus der Kurshistorie (Spalte "Dividends")
+            if "Dividends" in hist_5y.columns:
+                hist_naive = hist_5y.copy()
+                if hist_naive.index.tz is not None:
+                    hist_naive.index = hist_naive.index.tz_localize(None)
                 
-                jetzt_naive = datetime.now().replace(tzinfo=None)
-                vor_einem_jahr = jetzt_naive - timedelta(days=365)
+                # Filter auf das letzte Jahr und nur Zeilen, wo die Dividende > 0 ist
+                div_historie = hist_naive[(hist_naive.index >= vor_einem_jahr) & (hist_naive["Dividends"] > 0)]
                 
-                # Filter auf das letzte Jahr
-                letztes_jahr = dividenden_naive[dividenden_naive.index >= vor_einem_jahr]
-                if letztes_jahr.empty:
-                    letztes_jahr = dividenden_naive.tail(4)  # Fallback: Die letzten 4 bekannten Ausschüttungen
+                # Fallback, falls im letzten Jahr nix war, nimm die letzten 4 Ausschüttungen überhaupt
+                if div_historie.empty:
+                    all_divs = hist_naive[hist_naive["Dividends"] > 0]
+                    div_historie = all_divs.tail(4)
                 
-                monate_zahlen = sorted(list(set(letztes_jahr.index.month)))
-                monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
-                
-                if monate_namen:
-                    auszahlungsmonate = ", ".join(monate_namen)
-                    # Falls div_yield vorher 0 war (weil info blockiert war), passen wir es hier an, damit es logisch bleibt
-                    if div_yield == 0.0:
-                        div_yield = 0.01  # Dummy-Wert, damit das Dashboard weiß, dass es Ausschüttungen gibt
+                if not div_historie.empty:
+                    monate_zahlen = sorted(list(set(div_historie.index.month)))
+                    monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
+                    if monate_namen:
+                        auszahlungsmonate = ", ".join(monate_namen)
+
+            # Methode 2: Falls Methode 1 fehlschlug, nutze klassische .dividends als Backup
+            if auszahlungsmonate == "-":
+                dividenden = ticker.dividends
+                if not dividenden.empty:
+                    dividenden_naive = dividenden.copy()
+                    if dividenden_naive.index.tz is not None:
+                        dividenden_naive.index = dividenden_naive.index.tz_localize(None)
+                    
+                    letztes_jahr = dividenden_naive[dividenden_naive.index >= vor_einem_jahr]
+                    if letztes_jahr.empty:
+                        letztes_jahr = dividenden_naive.tail(4)
+                    
+                    monate_zahlen = sorted(list(set(letztes_jahr.index.month)))
+                    monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
+                    if monate_namen:
+                        auszahlungsmonate = ", ".join(monate_namen)
+
+            # Falls wir Monate gefunden haben, aber div_yield auf 0.0 steht (wegen Info-Blockade)
+            if auszahlungsmonate != "-" and div_yield == 0.0:
+                div_yield = 0.01  # Aktivierungs-Flag für das Frontend
+
         except Exception as div_e:
-            print(f"Fehler bei Dividenden für {aktie['name']}: {div_e}")
+            print(f"Fehler bei Dividenden-Ermittlung für {aktie['name']}: {div_e}")
 
         aktien_daten.append({
             "name": str(aktie["name"]),
