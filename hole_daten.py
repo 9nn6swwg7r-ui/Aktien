@@ -7,7 +7,7 @@ from datetime import datetime
 def isNaN(num):
     return isinstance(num, float) and math.isnan(num)
 
-# Komplett bereinigte und lückenlose Liste ALLER Aktien aus deinen Screenshots
+# Komplett bereinigte Liste aller Aktien
 meine_aktien = [
     # --- DEPOT AKTIEN ---
     {"symbol": "MSFT", "name": "Microsoft", "logoUrl": "https://logo.clearbit.com/microsoft.com", "tags": ["Software", "Cloud", "KI"], "watchlist": False},
@@ -45,15 +45,4 @@ meine_aktien = [
     {"symbol": "VIE.PA", "name": "Veolia", "logoUrl": "https://logo.clearbit.com/veolia.com", "tags": ["Wasser", "Recycling", "Versorger"], "watchlist": False},
     {"symbol": "IBE.MC", "name": "Iberdrola", "logoUrl": "https://logo.clearbit.com/iberdrola.com", "tags": ["Stromversorger", "Erneuerbare", "Netze"], "watchlist": False},
     {"symbol": "LLY", "name": "Eli Lilly", "logoUrl": "https://logo.clearbit.com/lilly.com", "tags": ["Pharma", "Adipositas", "Biotech"], "watchlist": False},
-    {"symbol": "ROG.SW", "name": "Roche", "logoUrl": "https://logo.clearbit.com/roche.com", "tags": ["Pharma", "Diagnostik", "Krebsmedizin"], "watchlist": False},
-    {"symbol": "NOVN.SW", "name": "Novartis", "logoUrl": "https://logo.clearbit.com/novartis.com", "tags": ["Generika", "Pharma", "Forschung"], "watchlist": False},
-    {"symbol": "ABBV", "name": "AbbVie", "logoUrl": "https://logo.clearbit.com/abbvie.com", "tags": ["Biopharmaka", "Immunologie", "Pharma"], "watchlist": False},
-    {"symbol": "JNJ", "name": "Johnson & Johnson", "logoUrl": "https://logo.clearbit.com/jnj.com", "tags": ["Medizintechnik", "Pharma", "Gesundheit"], "watchlist": False},
-    {"symbol": "AMZN", "name": "Amazon", "logoUrl": "https://logo.clearbit.com/amazon.com", "tags": ["E-Commerce", "AWS-Cloud", "Logistik"], "watchlist": False},
-    {"symbol": "PG", "name": "Procter & Gamble", "logoUrl": "https://logo.clearbit.com/pg.com", "tags": ["Konsumgüter", "Hygiene", "Marken"], "watchlist": False},
-    {"symbol": "NESN.SW", "name": "Nestlé", "logoUrl": "https://logo.clearbit.com/nestle.com", "tags": ["Lebensmittel", "Kaffee", "Tiernahrung"], "watchlist": False},
-    {"symbol": "MDLZ", "name": "Mondelez", "logoUrl": "https://logo.clearbit.com/mondelezinternational.com", "tags": ["Snacks", "Schokolade", "Kekse"], "watchlist": False},
-    {"symbol": "KO", "name": "Coca-Cola", "logoUrl": "https://logo.clearbit.com/coca-colacompany.com", "tags": ["Erfrischungsgetränke", "Marken", "Global"], "watchlist": False},
-    {"symbol": "MCD", "name": "McDonald's", "logoUrl": "https://logo.clearbit.com/mcdonalds.com", "tags": ["Fast-Food", "Franchise", "Immobilien"], "watchlist": False},
-    {"symbol": "WMT", "name": "Walmart", "logoUrl": "https://logo.clearbit.com/walmart.com", "tags": ["Einzelhandel", "Supermärkte", "USA"], "watchlist": False},
-    {"symbol": "FPE3.DE", "name": "Fuchs SE", "logoUrl": "
+    {"symbol": "ROG.SW", "name": "Roche", "logoUrl": "
