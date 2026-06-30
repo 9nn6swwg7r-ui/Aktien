@@ -35,6 +35,7 @@
         .kgv-good { color: #00e5ff; }
         .kurs-highlight { font-size: 1.05em; color: #ffffff; font-weight: 700; }
         .loading { text-align: center; color: #8a8a9e; padding: 40px; grid-column: 1 / -1; }
+        .sub-metric { color: #73738c; font-size: 0.85em; } /* Stil für die neuen Dividenden-Details */
     </style>
 </head>
 <body>
@@ -87,6 +88,10 @@
             const aktienName = item.name || 'Unbekannte Aktie';
             const stichworte = (item.tags && Array.isArray(item.tags)) ? item.tags.join(' • ') : 'Global Business';
             
+            // Neue Variablen für Ex-Date und Monate abfangen
+            const exDateText = item.exDate || '-';
+            const monateText = item.monate || '-';
+            
             const ersterBuchstabe = aktienName.charAt(0).toUpperCase();
             const platzhalterUrl = `https://placehold.co/50x50/16161f/ffffff?text=${encodeURIComponent(ersterBuchstabe)}`;
             
@@ -118,6 +123,10 @@
                     <div class="metric"><span>Performance 1J:</span>${fmtPerf(item.perfJahr)}</div>
                     <div class="metric"><span>Performance 5J:</span>${fmtPerf(item.perf5J)}</div>
                     <div class="metric"><span>Div.-Rendite:</span><span class="metric-value" style="color: #e0e0e0;">${divText}</span></div>
+                    
+                    <div class="metric sub-metric"><span>↳ Ex-Dividenden-Tag:</span><span class="metric-value sub-metric">${exDateText}</span></div>
+                    <div class="metric sub-metric"><span>↳ Ausschüttung in:</span><span class="metric-value sub-metric">${monateText}</span></div>
+                    
                     <div class="metric" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #232330;"><span>KGV:</span><span class="${kgvClass}">${kgvText}</span></div>
                 </div>
             `;
