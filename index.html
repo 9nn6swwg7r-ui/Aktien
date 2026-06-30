@@ -35,7 +35,7 @@
         .kgv-good { color: #00e5ff; }
         .kurs-highlight { font-size: 1.05em; color: #ffffff; font-weight: 700; }
         .loading { text-align: center; color: #8a8a9e; padding: 40px; grid-column: 1 / -1; }
-        .sub-metric { color: #73738c; font-size: 0.85em; } /* Stil für die neuen Dividenden-Details */
+        .sub-metric { color: #73738c; font-size: 0.85em; }
     </style>
 </head>
 <body>
@@ -88,7 +88,6 @@
             const aktienName = item.name || 'Unbekannte Aktie';
             const stichworte = (item.tags && Array.isArray(item.tags)) ? item.tags.join(' • ') : 'Global Business';
             
-            // Neue Variablen für Ex-Date und Monate abfangen
             const exDateText = item.exDate || '-';
             const monateText = item.monate || '-';
             
@@ -147,7 +146,6 @@
                 depotDashboard.innerHTML = '';
                 watchlistDashboard.innerHTML = '';
                 
-                // Absolut krisensichere Sortierung
                 data.sort((a, b) => {
                     let valA = (a && a.kgv && !isNaN(parseFloat(a.kgv)) && parseFloat(a.kgv) > 0) ? parseFloat(a.kgv) : 999999;
                     let valB = (b && b.kgv && !isNaN(parseFloat(b.kgv)) && parseFloat(b.kgv) > 0) ? parseFloat(b.kgv) : 999999;
