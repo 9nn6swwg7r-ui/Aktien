@@ -112,7 +112,6 @@
         /* --- DESKTOP TABLE STYLES --- */
         .stock-table-header, .stock-summary {
             display: grid;
-            /* Spalten-Verhältnis angepasst für die neue KCV-Spalte */
             grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
             padding: 1rem 1.5rem;
             align-items: center;
@@ -249,7 +248,7 @@
 
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
         }
 
@@ -302,9 +301,7 @@
         }
 
         /* --- MOBILGERÄTE CONTAINER --- */
-        .mobile-row-layout {
-            display: none;
-        }
+        .mobile-row-layout { display: none; }
 
         /* --- RESPONSIVE BREAKPOINTS --- */
         @media (max-width: 1100px) {
@@ -317,10 +314,7 @@
         @media (max-width: 768px) {
             body { padding: 1rem; }
             .stock-table-header { display: none; }
-
-            .stock-summary {
-                display: none !important;
-            }
+            .stock-summary { display: none !important; }
 
             .mobile-row-layout {
                 display: flex !important;
@@ -415,8 +409,9 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
+    // Fehlersichere Berechnung
     function berechneKgvAbweichung(aktie) {
-        if (aktie.kgv && aktie.kgv > 0 && aktie.kgv5J && aktie.kgv5J > 0) {
+        if (aktie && aktie.kgv && aktie.kgv > 0 && aktie.kgv5J && aktie.kgv5J > 0) {
             return ((aktie.kgv - aktie.kgv5J) / aktie.kgv5J) * 100;
         }
         return null;
@@ -425,11 +420,16 @@
     async function datenLaden() {
         try {
             const antwort = await fetch('daten.json');
+            if (!antwort.ok) throw new Error("HTTP Fehler " + antwort.status);
             alleAktien = await antwort.json();
             renderAktien();
         } catch (fehler) {
             console.error("Fehler beim Abrufen der JSON-Daten:", fehler);
-            document.getElementById('stock-list').innerHTML = `<p style="padding: 2rem; color: var(--danger);">Fehler beim Laden der Portfolio-Daten.</p>`;
+            document.getElementById('stock-list').innerHTML = `
+                <div style="padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px; text-align: center;">
+                    <p style="color: var(--danger); font-weight: 600; margin-bottom: 0.5rem;">Fehler beim Laden der Portfolio-Daten.</p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Bitte überprüfe, ob die Datei 'daten.json' im selben Ordner liegt und ein gültiges JSON-Format hat.</p>
+                </div>`;
         }
     }
 
@@ -445,6 +445,9 @@
         const container = document.getElementById('stock-list');
         container.innerHTML = '';
 
+        // Sicherheitscheck, falls JSON leer oder fehlerhaft geladen wurde
+        if (!Array.isArray(liste)) return;
+
         const tabListe = liste.filter(aktie => {
             if (aktuellerTab === 'portfolio') return !aktie.watchlist;
             if (aktuellerTab === 'watchlist') return aktie.watchlist;
@@ -457,18 +460,26 @@
         }
 
         tabListe.forEach(aktie => {
-            const tagsHTML = aktie.tags.map(t => `<span class="tag">${t}</span>`).join('');
-            const monatClass = aktie.perfMonat >= 0 ? 'positive' : 'negative';
-            const jahrClass = aktie.perfJahr >= 0 ? 'positive' : 'negative';
+            // Ausfallsichere Variablenzuweisungen (Verhindert Absturz bei fehlenden Feldern)
+            const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
+            const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
+            
+            const perfMonat = typeof aktie.perfMonat === 'number' ? aktie.perfMonat : 0;
+            const perfJahr = typeof aktie.perfJahr === 'number' ? aktie.perfJahr : 0;
+            const perf5J = typeof aktie.perf5J === 'number' ? aktie.perf5J : 0;
+            const yieldVal = typeof aktie.yield === 'number' ? aktie.yield : 0;
+
+            const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
+            const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
             
             let dividendDisplay = "-";
-            if (aktie.yield > 0) {
-                dividendDisplay = aktie.yield === 0.01 ? "Ja" : `${aktie.yield.toFixed(2)} %`;
+            if (yieldVal > 0) {
+                dividendDisplay = yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`;
             }
 
-            // KGV Logik
-            const hatKGV = aktie.kgv && aktie.kgv > 0;
-            const hatKGV5J = aktie.kgv5J && aktie.kgv5J > 0;
+            // KGV
+            const hatKGV = typeof aktie.kgv === 'number' && aktie.kgv > 0;
+            const hatKGV5J = typeof aktie.kgv5J === 'number' && aktie.kgv5J > 0;
             let discountBadgeHTML = "";
             let diffHTML = "";
             
@@ -477,7 +488,6 @@
                 const diffKlasse = abweichung <= 0 ? 'positive' : 'negative';
                 const vorzeichen = abweichung > 0 ? '+' : '';
                 diffHTML = `<span class="kgv-diff-text ${diffKlasse}">(${vorzeichen}${abweichung.toFixed(1)}%)</span>`;
-                
                 if (abweichung < 0) {
                     discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
                 }
@@ -485,28 +495,29 @@
             const kgvDisplay = hatKGV ? aktie.kgv.toFixed(1) : '-';
             const kgv5JDisplay = hatKGV5J ? aktie.kgv5J.toFixed(1) : '-';
 
-            // KCV Logik (Erwartet keys "kcv" und "kcv5J" in deiner daten.json)
-            const hatKCV = aktie.kcv && aktie.kcv > 0;
-            const hatKCV5J = aktie.kcv5J && aktie.kcv5J > 0;
+            // KCV (Neu abgesichert)
+            const hatKCV = typeof aktie.kcv === 'number' && aktie.kcv > 0;
+            const hatKCV5J = typeof aktie.kcv5J === 'number' && aktie.kcv5J > 0;
             const kcvDisplay = hatKCV ? aktie.kcv.toFixed(1) : '-';
             const kcv5JDisplay = hatKCV5J ? aktie.kcv5J.toFixed(1) : '-';
 
             const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=60";
+            const logoUrl = aktie.logoUrl || fallbackSrc;
 
             const item = document.createElement('div');
             item.className = 'stock-item';
             item.innerHTML = `
                 <div class="stock-summary" onclick="toggleDetails(this.parentNode)">
                     <div class="stock-profile">
-                        <img src="${aktie.logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
+                        <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
                         <div class="stock-info">
-                            <div class="name">${aktie.name}</div>
+                            <div class="name">${aktie.name || 'Unbekannt'}</div>
                             <div class="tags-container">${tagsHTML}</div>
                         </div>
                     </div>
-                    <div class="stock-value">${aktie.kurs}</div>
-                    <div class="stock-value perf ${monatClass}">${aktie.perfMonat >= 0 ? '+' : ''}${aktie.perfMonat.toFixed(2)}%</div>
-                    <div class="stock-value perf ${jahrClass}">${aktie.perfJahr >= 0 ? '+' : ''}${aktie.perfJahr.toFixed(2)}%</div>
+                    <div class="stock-value">${aktie.kurs || '-'}</div>
+                    <div class="stock-value perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
+                    <div class="stock-value perf ${jahrClass}">${perfJahr >= 0 ? '+' : ''}${perfJahr.toFixed(2)}%</div>
                     <div class="stock-value hide-tablet">${dividendDisplay}</div>
                     <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${diffHTML}${discountBadgeHTML}</div>
                     <div class="stock-value hide-tablet" style="color: var(--text-muted); font-size: 0.95rem;">${kcvDisplay} <span style="font-size: 0.8rem; color: #64748b;">(${kcv5JDisplay})</span></div>
@@ -514,15 +525,15 @@
 
                 <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
                     <div class="mobile-left">
-                        <img src="${aktie.logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
+                        <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
                         <div class="stock-info">
-                            <div class="name">${aktie.name}</div>
+                            <div class="name">${aktie.name || 'Unbekannt'}</div>
                             <div class="tags-container">${tagsHTML}</div>
                         </div>
                     </div>
                     <div class="mobile-right">
-                        <div class="mob-kurs">${aktie.kurs}</div>
-                        <div class="mob-perf perf ${monatClass}">${aktie.perfMonat >= 0 ? '+' : ''}${aktie.perfMonat.toFixed(2)}%</div>
+                        <div class="mob-kurs">${aktie.kurs || '-'}</div>
+                        <div class="mob-perf perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
                     </div>
                 </div>
 
@@ -559,18 +570,9 @@
                             </div>
                             <div class="detail-card">
                                 <label>5J Perf.</label>
-                                <span class="perf ${aktie.perf5J >= 0 ? 'positive' : 'negative'}">
-                                    ${aktie.perf5J >= 0 ? '+' : ''}${aktie.perf5J.toFixed(1)}%
+                                <span class="perf ${perf5J >= 0 ? 'positive' : 'negative'}">
+                                    ${perf5J >= 0 ? '+' : ''}${perf5J.toFixed(1)}%
                                 </span>
-                            </div>
-                        </div>
-                        
-                        <div class="perf-explanation">
-                            <div class="info-text">
-                                💡 <strong>Performance-Werte:</strong> Zeigen die reine Kursveränderung (ohne Dividenden) im jeweiligen Zeitraum an.
-                            </div>
-                            <div class="info-text">
-                                📊 <strong>KCV / KGV:</strong> Das Kurs-Cashflow-Verhältnis (KCV) ist weniger anfällig für bilanzielle Verzerrungen als das KGV. Niedrigere Werte im Vergleich zum 5J-Schnitt deuten auf eine günstige Bewertung hin.
                             </div>
                         </div>
                     </div>
@@ -590,16 +592,20 @@
         const suchBegriff = document.getElementById('search').value.toLowerCase();
         const sortWert = document.getElementById('sortPerformance').value;
 
+        if (!Array.isArray(alleAktien)) return;
+
         let ergebnis = alleAktien.filter(aktie => {
-            return aktie.name.toLowerCase().includes(suchBegriff) || aktie.tags.some(t => t.toLowerCase().includes(suchBegriff));
+            const name = aktie.name ? aktie.name.toLowerCase() : '';
+            const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
+            return name.includes(suchBegriff) || tags.some(t => t.toLowerCase().includes(suchBegriff));
         });
 
         if (sortWert === 'perfMonat') {
-            ergebnis.sort((a, b) => b.perfMonat - a.perfMonat);
+            ergebnis.sort((a, b) => (b.perfMonat || 0) - (a.perfMonat || 0));
         } else if (sortWert === 'perfJahr') {
-            ergebnis.sort((a, b) => b.perfJahr - a.perfJahr);
+            ergebnis.sort((a, b) => (b.perfJahr || 0) - (a.perfJahr || 0));
         } else if (sortWert === 'yield') {
-            ergebnis.sort((a, b) => b.yield - a.yield);
+            ergebnis.sort((a, b) => (b.yield || 0) - (a.yield || 0));
         } else if (sortWert === 'kgvAsc') {
             ergebnis.sort((a, b) => {
                 const valA = a.kgv && a.kgv > 0 ? a.kgv : Infinity;
