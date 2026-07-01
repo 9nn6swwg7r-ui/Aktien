@@ -17,6 +17,7 @@
             --success: #10b981;
             --danger: #ef4444;
             --border: #334155;
+            --badge-discount: #22c55e;
         }
 
         * {
@@ -193,6 +194,19 @@
         .perf.positive { color: var(--success); }
         .perf.negative { color: var(--danger); }
 
+        .discount-badge {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: var(--badge-discount);
+            font-size: 0.75rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .stock-details {
             max-height: 0;
             overflow: hidden;
@@ -277,7 +291,8 @@
                 <option value="perfMonat">Beste Monats-Performance</option>
                 <option value="perfJahr">Beste Jahres-Performance</option>
                 <option value="yield">Höchste Dividendenrendite</option>
-                <option value="kgv">Niedrigstes KGV</option>
+                <option value="kgvAsc">Niedrigstes KGV (Value-Fokus)</option>
+                <option value="kgvDesc">Höchstes KGV (Wachstum)</option>
             </select>
         </div>
     </div>
@@ -342,8 +357,16 @@
                 dividendDisplay = aktie.yield === 0.01 ? "Ja" : `${aktie.yield.toFixed(2)} %`;
             }
 
-            const kgvDisplay = (aktie.kgv && aktie.kgv > 0) ? aktie.kgv.toFixed(1) : '-';
-            const kgv5JDisplay = (aktie.kgv5J && aktie.kgv5J > 0) ? aktie.kgv5J.toFixed(1) : '-';
+            const hatKGV = aktie.kgv && aktie.kgv > 0;
+            const hatKGV5J = aktie.kgv5J && aktie.kgv5J > 0;
+            
+            let discountBadgeHTML = "";
+            if (hatKGV && hatKGV5J && aktie.kgv < aktie.kgv5J) {
+                discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
+            }
+
+            const kgvDisplay = hatKGV ? aktie.kgv.toFixed(1) : '-';
+            const kgv5JDisplay = hatKGV5J ? aktie.kgv5J.toFixed(1) : '-';
 
             const item = document.createElement('div');
             item.className = 'stock-item';
@@ -360,7 +383,7 @@
                     <div class="stock-value perf ${monatClass}">${aktie.perfMonat >= 0 ? '+' : ''}${aktie.perfMonat.toFixed(2)}%</div>
                     <div class="stock-value perf ${jahrClass} hide-mobile">${aktie.perfJahr >= 0 ? '+' : ''}${aktie.perfJahr.toFixed(2)}%</div>
                     <div class="stock-value hide-tablet">${dividendDisplay}</div>
-                    <div class="stock-value hide-tablet">${kgvDisplay}</div>
+                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay} ${discountBadgeHTML}</div>
                 </div>
                 <div class="stock-details">
                     <div class="details-grid">
@@ -407,10 +430,27 @@
             return aktie.name.toLowerCase().includes(suchBegriff) || aktie.tags.some(t => t.toLowerCase().includes(suchBegriff));
         });
 
-        if (sortWert === 'perfMonat') ergebnis.sort((a, b) => b.perfMonat - a.perfMonat);
-        else if (sortWert === 'perfJahr') ergebnis.sort((a, b) => b.perfJahr - a.perfJahr);
-        else if (sortWert === 'yield') ergebnis.sort((a, b) => b.yield - a.yield);
-        else if (sortWert === 'kgv') ergebnis.sort((a, b) => (a.kgv === 0 ? 1 : b.kgv === 0 ? -1 : a.kgv - b.kgv));
+        if (sortWert === 'perfMonat') {
+            ergebnis.sort((a, b) => b.perfMonat - a.perfMonat);
+        } else if (sortWert === 'perfJahr') {
+            ergebnis.sort((a, b) => b.perfJahr - a.perfJahr);
+        } else if (sortWert === 'yield') {
+            ergebnis.sort((a, b) => b.yield - a.yield);
+        } else if (sortWert === 'kgvAsc') {
+            // Sortiert nach niedrigstem KGV, schiebt 0 oder ungültige KGVs nach hinten
+            ergebnis.sort((a, b) => {
+                const valA = a.kgv && a.kgv > 0 ? a.kgv : Infinity;
+                const valB = b.kgv && b.kgv > 0 ? b.kgv : Infinity;
+                return valA - valB;
+            });
+        } else if (sortWert === 'kgvDesc') {
+            // Sortiert nach höchstem KGV, schiebt 0 nach ganz hinten
+            ergebnis.sort((a, b) => {
+                const valA = a.kgv && a.kgv > 0 ? a.kgv : -Infinity;
+                const valB = b.kgv && b.kgv > 0 ? b.kgv : -Infinity;
+                return valB - valA;
+            });
+        }
 
         renderAktien(ergebnis);
     }
