@@ -3,70 +3,627 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Validator & Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Aktien Portfolio & Watchlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; padding: 2rem; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .error-box { 
-            background: rgba(239, 68, 68, 0.1); 
-            border: 2px dashed #ef4444; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            margin-bottom: 2rem;
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #111827;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: #334155;
+            --badge-discount: #22c55e;
         }
-        .error-title { color: #ef4444; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .error-details { font-family: monospace; background: #000; padding: 1rem; border-radius: 4px; color: #f43f5e; margin-top: 0.5rem; white-space: pre-wrap; }
-        .success-box { background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; padding: 1rem; border-radius: 8px; color: #10b981; font-weight: 600; margin-bottom: 1rem;}
-        .info-text { color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .controls {
+            background-color: var(--bg-secondary);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .search-box input, .controls select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus, .controls select:focus {
+            border-color: var(--accent);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            background-color: var(--bg-primary);
+            padding: 0.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.6rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--bg-secondary);
+            color: var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- STABILES GRID-LAYOUT (7 SPALTEN) --- */
+        .stock-table-header, .stock-summary {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
+            padding: 1rem 1.5rem;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stock-table-header {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stock-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .stock-item {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .stock-item:hover {
+            border-color: #475569;
+        }
+
+        .stock-summary {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+        }
+
+        .stock-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 0;
+        }
+
+        .stock-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            object-fit: contain;
+            padding: 4px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .stock-info {
+            min-width: 0;
+        }
+
+        .stock-info .name {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tags-container {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .stock-value {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .perf.positive { color: var(--success); }
+        .perf.negative { color: var(--danger); }
+
+        .discount-badge {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: var(--badge-discount);
+            font-size: 0.75rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .kgv-diff-text, .kcv-diff-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.4rem;
+        }
+
+        .stock-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(4, 0, 0.2, 1);
+            background-color: rgba(30, 41, 59, 0.3);
+            border-top: 0 solid var(--border);
+        }
+
+        .stock-item.open .stock-details {
+            max-height: 800px;
+            border-top: 1px solid var(--border);
+        }
+
+        .details-container {
+            padding: 1.5rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .detail-card {
+            background-color: rgba(15, 23, 42, 0.6);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .detail-card label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
+        }
+
+        .detail-card span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .detail-card.highlight {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* --- MOBILGERÄTE --- */
+        .mobile-row-layout { display: none; }
+
+        @media (max-width: 1200px) {
+            .stock-table-header, .stock-summary {
+                grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr;
+            }
+            .hide-tablet { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .stock-table-header { display: none; }
+            .stock-summary { display: none !important; }
+
+            .mobile-row-layout {
+                display: flex !important;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 1rem;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            .mobile-left {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                min-width: 0;
+                flex: 1;
+            }
+
+            .mobile-right {
+                text-align: right;
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .mobile-right .mob-kurs {
+                font-weight: 700;
+                font-size: 1.1rem;
+                color: var(--text-main);
+            }
+
+            .mobile-right .mob-perf {
+                font-size: 0.85rem;
+                font-weight: 600;
+            }
+
+            .details-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <h1>Dashboard Diagnose-Modus</h1>
-    <div id="diagnose-output">Prüfe Daten...</div>
+    <header>
+        <h1>Umfassendes Aktien-Dashboard</h1>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('portfolio')">Depot Portfolio</button>
+            <button class="tab-btn" onclick="switchTab('watchlist')">Watchlist</button>
+        </div>
+    </header>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Aktie oder Tag suchen..." oninput="filterAktien()">
+        </div>
+        <div>
+            <select id="sortPerformance" onchange="filterAktien()">
+                <option value="default">Sortierung: Standard</option>
+                <option value="perfMonat">Beste Monats-Performance</option>
+                <option value="perfJahr">Beste Jahres-Performance</option>
+                <option value="yield">Höchste Dividendenrendite</option>
+                <option value="kgvAsc">Niedrigstes KGV (Value-Fokus)</option>
+                <option value="kgvDesc">Höchstes KGV (Wachstum)</option>
+                <option value="kgvDiffAsc">Höchste KGV-Unterbewertung (Abweichung)</option>
+                <option value="kcvAsc">Niedrigstes KCV (Value-Fokus)</option>
+                <option value="kcvDesc">Höchstes KCV (Wachstum)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="stock-table-header">
+        <span>Unternehmen / Sektor</span>
+        <span>Kurs (EUR)</span>
+        <span>1 Monat</span>
+        <span>1 Jahr</span>
+        <span class="hide-tablet">Dividende</span>
+        <span class="hide-tablet">KGV (% vs. 5J Ø)</span>
+        <span class="hide-tablet">KCV (% vs. 5J Ø)</span>
+    </div>
+
+    <div id="stock-list" class="stock-list"></div>
 </div>
 
 <script>
-    async function analysiereJSON() {
-        const output = document.getElementById('diagnose-output');
+    let alleAktien = [];
+    let aktuellerTab = 'portfolio';
+
+    function getJSONValue(obj, baseKey, is5Year = false) {
+        if (!obj || typeof obj !== 'object') return null;
+        const keys = Object.keys(obj);
+        
+        const targetKey = keys.find(k => {
+            const lowKey = k.toLowerCase();
+            const matchesBase = lowKey.includes(baseKey.toLowerCase());
+            
+            if (is5Year) {
+                return matchesBase && (lowKey.includes('5') || lowKey.includes('y') || lowKey.includes('j'));
+            } else {
+                return matchesBase && !lowKey.includes('5') && !lowKey.includes('y') && !lowKey.includes('j');
+            }
+        });
+
+        return targetKey ? obj[targetKey] : null;
+    }
+
+    function parseToNumber(val) {
+        if (typeof val === 'number') return val;
+        if (typeof val === 'string') {
+            let sauber = val.replace(',', '.').replace(/[^0-9.-]/g, '');
+            let num = parseFloat(sauber);
+            return isNaN(num) ? null : num;
+        }
+        return null;
+    }
+
+    function berechneAbweichung(aktuell, schnitt) {
+        if (aktuell !== null && schnitt !== null && aktuell > 0 && schnitt > 0) {
+            return ((aktuell - schnitt) / schnitt) * 100;
+        }
+        return null;
+    }
+
+    async function datenLaden() {
         try {
             const cacheBuster = "?v=" + new Date().getTime();
             const antwort = await fetch('daten.json' + cacheBuster);
-            
-            if (!antwort.ok) {
-                throw new Error(`Die Datei 'daten.json' wurde im Ordner nicht gefunden (HTTP ${antwort.status}).`);
-            }
-            
-            const roherText = await antwort.text();
-            
-            try {
-                const validierteDaten = JSON.parse(roherText);
-                output.innerHTML = `
-                    <div class="success-box">✓ Deine daten.json ist syntaktisch absolut fehlerfrei!</div>
-                    <p class="info-text">Da die Datei in Ordnung ist, liegt das Problem woanders. Lade bitte die Seite einmal komplett neu (STRG + F5), damit das alte Dashboard wieder greift.</p>
-                `;
-            } catch (jsonFehler) {
-                // Hier fangen wir den exakten Syntaxfehler ab
-                output.innerHTML = `
-                    <div class="error-box">
-                        <div class="error-title">❌ Syntax-Fehler in deiner 'daten.json' gefunden!</div>
-                        <p>JavaScript kann die Datei nicht lesen. Meistens fehlt ein Komma oder es ist eines zu viel am Ende eines Blocks.</p>
-                        <div class="error-details">${jsonFehler.message}</div>
-                        <p class="info-text" style="margin-top: 1rem; color: #f8fafc;"><strong>Was bedeutet das?</strong> Schau in deiner daten.json nach dem genannten Begriff oder der Stelle. Wenn du den Fehler nicht findest, kopiere mir einfach den Inhalt deiner 'daten.json' hier in den Chat, dann korrigiere ich sie dir sofort!</p>
-                    </div>
-                `;
-            }
-        } catch (netzwerkFehler) {
-            output.innerHTML = `
-                <div class="error-box">
-                    <div class="error-title">❌ Datei-Ladefehler</div>
-                    <div class="error-details">${netzwerkFehler.message}</div>
-                </div>
-            `;
+            if (!antwort.ok) throw new Error("Die Datei 'daten.json' wurde nicht gefunden.");
+            alleAktien = await antwort.json();
+            renderAktien();
+        } catch (fehler) {
+            console.error("Fehler beim Laden:", fehler);
+            document.getElementById('stock-list').innerHTML = `
+                <div style="padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px; text-align: center;">
+                    <p style="color: var(--danger); font-weight: 600;">Fehler beim Laden der Portfolio-Daten.</p>
+                </div>`;
         }
     }
-    window.onload = analysiereJSON;
+
+    function switchTab(tab) {
+        aktuellerTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if(event && event.target) event.target.classList.add('active');
+        renderAktien();
+    }
+
+    function renderAktien(gefilterteListe = null) {
+        const liste = gefilterteListe || alleAktien;
+        const container = document.getElementById('stock-list');
+        container.innerHTML = '';
+
+        if (!Array.isArray(liste)) return;
+
+        const tabListe = liste.filter(aktie => {
+            if (aktuellerTab === 'portfolio') return !aktie.watchlist;
+            if (aktuellerTab === 'watchlist') return aktie.watchlist;
+            return true;
+        });
+
+        if (tabListe.length === 0) {
+            container.innerHTML = `<p style="padding: 2rem; color: var(--text-muted); text-align: center;">Keine passenden Werte gefunden.</p>`;
+            return;
+        }
+
+        tabListe.forEach(aktie => {
+            const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
+            const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
+            
+            const perfMonat = parseToNumber(getJSONValue(aktie, 'perfMonat')) || 0;
+            const perfJahr = parseToNumber(getJSONValue(aktie, 'perfJahr')) || 0;
+            const perf5J = parseToNumber(getJSONValue(aktie, 'perf5J')) || 0;
+            const yieldVal = parseToNumber(getJSONValue(aktie, 'yield')) || 0;
+
+            const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
+            const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
+            
+            let dividendDisplay = "-";
+            if (yieldVal > 0) {
+                dividendDisplay = yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`;
+            }
+
+            // KGV
+            const kgvNum = parseToNumber(getJSONValue(aktie, 'kgv', false));
+            const kgv5JNum = parseToNumber(getJSONValue(aktie, 'kgv', true));
+            let discountBadgeHTML = "";
+            let kgvDiffHTML = "";
+            
+            const kgvAbw = berechneAbweichung(kgvNum, kgv5JNum);
+            if (kgvAbw !== null) {
+                const diffKlasse = kgvAbw <= 0 ? 'positive' : 'negative';
+                const vorzeichen = kgvAbw > 0 ? '+' : '';
+                kgvDiffHTML = `<span class="kgv-diff-text ${diffKlasse}">(${vorzeichen}${kgvAbw.toFixed(1)}%)</span>`;
+                if (kgvAbw < 0) {
+                    discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
+                }
+            }
+            const kgvDisplay = kgvNum !== null ? kgvNum.toFixed(1) : '-';
+            const kgv5JDisplay = kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-';
+
+            // KCV
+            const kcvNum = parseToNumber(getJSONValue(aktie, 'kcv', false));
+            const kcv5JNum = parseToNumber(getJSONValue(aktie, 'kcv', true));
+            let kcvDiffHTML = "";
+
+            const kcvAbw = berechneAbweichung(kcvNum, kcv5JNum);
+            if (kcvAbw !== null) {
+                const diffKlasse = kcvAbw <= 0 ? 'positive' : 'negative';
+                const vorzeichen = kcvAbw > 0 ? '+' : '';
+                kcvDiffHTML = `<span class="kcv-diff-text ${diffKlasse}">(${vorzeichen}${kcvAbw.toFixed(1)}%)</span>`;
+            }
+            const kcvDisplay = kcvNum !== null ? kcvNum.toFixed(1) : '-';
+            const kcv5JDisplay = kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-';
+
+            const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=60";
+            const logoUrl = aktie.logoUrl || fallbackSrc;
+
+            const item = document.createElement('div');
+            item.className = 'stock-item';
+            item.innerHTML = `
+                <div class="stock-summary" onclick="toggleDetails(this.parentNode)">
+                    <div class="stock-profile">
+                        <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
+                        <div class="stock-info">
+                            <div class="name">${aktie.name || 'Unbekannt'}</div>
+                            <div class="tags-container">${tagsHTML}</div>
+                        </div>
+                    </div>
+                    <div class="stock-value">${aktie.kurs || '-'}</div>
+                    <div class="stock-value perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
+                    <div class="stock-value perf ${jahrClass}">${perfJahr >= 0 ? '+' : ''}${perfJahr.toFixed(2)}%</div>
+                    <div class="stock-value hide-tablet">${dividendDisplay}</div>
+                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${kgvDiffHTML}${discountBadgeHTML}</div>
+                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kcvDisplay}${kcvDiffHTML}</div>
+                </div>
+
+                <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
+                    <div class="mobile-left">
+                        <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
+                        <div class="stock-info">
+                            <div class="name">${aktie.name || 'Unbekannt'}</div>
+                            <div class="tags-container">${tagsHTML}</div>
+                        </div>
+                    </div>
+                    <div class="mobile-right">
+                        <div class="mob-kurs">${aktie.kurs || '-'}</div>
+                        <div class="mob-perf perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
+                    </div>
+                </div>
+
+                <div class="stock-details">
+                    <div class="details-container">
+                        <div class="details-grid">
+                            <div class="detail-card highlight">
+                                <label>Dividenden-Monate</label>
+                                <span>${aktie.monate || '-'}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Intervall</label>
+                                <span>${aktie.frequenz || '-'}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Ex-Datum</label>
+                                <span>${aktie.exDate || '-'}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Aktuelles KGV</label>
+                                <span>${kgvDisplay} ${kgvDiffHTML}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>5Y Ø KGV</label>
+                                <span style="color: var(--accent);">${kgv5JDisplay}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Aktuelles KCV</label>
+                                <span>${kcvDisplay} ${kcvDiffHTML}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>5Y Ø KCV</label>
+                                <span style="color: var(--accent);">${kcv5JDisplay}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>5J Perf.</label>
+                                <span class="perf ${perf5J >= 0 ? 'positive' : 'negative'}">
+                                    ${perf5J >= 0 ? '+' : ''}${perf5J.toFixed(1)}%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    function toggleDetails(element) {
+        const isOpen = element.classList.contains('open');
+        document.querySelectorAll('.stock-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) element.classList.add('open');
+    }
+
+    function filterAktien() {
+        const suchBegriff = document.getElementById('search').value.toLowerCase();
+        const sortWert = document.getElementById('sortPerformance').value;
+
+        if (!Array.isArray(alleAktien)) return;
+
+        let ergebnis = alleAktien.filter(aktie => {
+            const name = aktie.name ? aktie.name.toLowerCase() : '';
+            const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
+            return name.includes(suchBegriff) || tags.some(t => t.toLowerCase().includes(suchBegriff));
+        });
+
+        if (sortWert === 'perfMonat') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'perfMonat')) || 0) - (parseToNumber(getJSONValue(a, 'perfMonat')) || 0));
+        } else if (sortWert === 'perfJahr') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'perfJahr')) || 0) - (parseToNumber(getJSONValue(a, 'perfJahr')) || 0));
+        } else if (sortWert === 'yield') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'yield')) || 0) - (parseToNumber(getJSONValue(a, 'yield')) || 0));
+        } else if (sortWert === 'kgvAsc') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(a, 'kgv', false)) || Infinity) - (parseToNumber(getJSONValue(b, 'kgv', false)) || Infinity));
+        } else if (sortWert === 'kgvDesc') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'kgv', false)) || -Infinity) - (parseToNumber(getJSONValue(a, 'kgv', false)) || -Infinity));
+        } else if (sortWert === 'kcvAsc') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(a, 'kcv', false)) || Infinity) - (parseToNumber(getJSONValue(b, 'kcv', false)) || Infinity));
+        } else if (sortWert === 'kcvDesc') {
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'kcv', false)) || -Infinity) - (parseToNumber(getJSONValue(a, 'kcv', false)) || -Infinity));
+        }
+
+        renderAktien(ergebnis);
+    }
+
+    window.onload = datenLaden;
 </script>
 </body>
 </html>
