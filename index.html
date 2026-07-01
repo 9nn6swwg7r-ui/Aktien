@@ -109,7 +109,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
         }
 
-        /* --- STABILES GRID-LAYOUT (7 SPALTEN) --- */
+        /* --- DESKTOP 7-SPALTEN GRID --- */
         .stock-table-header, .stock-summary {
             display: grid;
             grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
@@ -417,7 +417,8 @@
 
     async function datenLaden() {
         try {
-            const cacheBuster = "?v=" + new Date().getTime();
+            // Extrem aggressiver Cache-Buster, damit die Live-Preview sich zwingend aktualisiert
+            const cacheBuster = "?v=" + Math.random();
             const antwort = await fetch('daten.json' + cacheBuster);
             if (!antwort.ok) throw new Error("Die Datei 'daten.json' wurde nicht gefunden.");
             alleAktien = await antwort.json();
@@ -434,8 +435,13 @@
     function switchTab(tab) {
         aktuellerTab = tab;
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        if(event && event.target) event.target.classList.add('active');
-        renderAktien();
+        if(window.event && window.event.target) {
+            window.event.target.classList.add('active');
+        } else if (document.querySelector(`[onclick="switchTab('${tab}')"]`)) {
+            document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+        }
+        // Lädt die Daten bei Tab-Wechsel direkt neu
+        datenLaden();
     }
 
     function renderAktien(gefilterteListe = null) {
@@ -623,7 +629,8 @@
         renderAktien(ergebnis);
     }
 
-    window.onload = datenLaden;
+    // Beim allerersten Start laden
+    datenLaden();
 </script>
 </body>
 </html>
