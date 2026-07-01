@@ -385,6 +385,27 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
+    // Hilfsfunktion: Sucht flexibel nach Keys in der JSON (egal ob groß, klein, 5J oder 5Y)
+    function getJSONValue(obj, baseKey, is5Year = false) {
+        if (!obj || typeof obj !== 'object') return null;
+        const keys = Object.keys(obj);
+        
+        const targetKey = keys.find(k => {
+            const lowKey = k.toLowerCase();
+            const matchesBase = lowKey.includes(baseKey.toLowerCase());
+            
+            if (is5Year) {
+                // Sucht nach '5', 'y' oder 'j' im Schlüsselnamen für den 5-Jahres-Schnitt
+                return matchesBase && (lowKey.includes('5') || lowKey.includes('y') || lowKey.includes('j'));
+            } else {
+                // Sucht den aktuellen Wert (darf keine 5, y oder j enthalten)
+                return matchesBase && !lowKey.includes('5') && !lowKey.includes('y') && !lowKey.includes('j');
+            }
+        });
+
+        return targetKey ? obj[targetKey] : null;
+    }
+
     function parseToNumber(val) {
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
@@ -447,10 +468,10 @@
             const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
             const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
             
-            const perfMonat = parseToNumber(aktie.perfMonat) || 0;
-            const perfJahr = parseToNumber(aktie.perfJahr) || 0;
-            const perf5J = parseToNumber(aktie.perf5J) || 0;
-            const yieldVal = parseToNumber(aktie.yield) || 0;
+            const perfMonat = parseToNumber(getJSONValue(aktie, 'perfMonat')) || 0;
+            const perfJahr = parseToNumber(getJSONValue(aktie, 'perfJahr')) || 0;
+            const perf5J = parseToNumber(getJSONValue(aktie, 'perf5J')) || 0;
+            const yieldVal = parseToNumber(getJSONValue(aktie, 'yield')) || 0;
 
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
@@ -460,9 +481,9 @@
                 dividendDisplay = yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`;
             }
 
-            // KGV Logik
-            const kgvNum = parseToNumber(aktie.kgv);
-            const kgv5JNum = parseToNumber(aktie.kgv5J);
+            // KGV Logik (Fehlertolerant via getJSONValue)
+            const kgvNum = parseToNumber(getJSONValue(aktie, 'kgv', false));
+            const kgv5JNum = parseToNumber(getJSONValue(aktie, 'kgv', true));
             let discountBadgeHTML = "";
             let kgvDiffHTML = "";
             
@@ -478,9 +499,9 @@
             const kgvDisplay = kgvNum !== null ? kgvNum.toFixed(1) : '-';
             const kgv5JDisplay = kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-';
 
-            // KCV Logik
-            const kcvNum = parseToNumber(aktie.kcv);
-            const kcv5JNum = parseToNumber(aktie.kcv5J);
+            // KCV Logik (Fehlertolerant via getJSONValue)
+            const kcvNum = parseToNumber(getJSONValue(aktie, 'kcv', false));
+            const kcv5JNum = parseToNumber(getJSONValue(aktie, 'kcv', true));
             let kcvDiffHTML = "";
 
             const kcvAbw = berechneAbweichung(kcvNum, kcv5JNum);
@@ -498,6 +519,7 @@
             const item = document.createElement('div');
             item.className = 'stock-item';
             item.innerHTML = `
+                <!-- DESKTOP -->
                 <div class="stock-summary" onclick="toggleDetails(this.parentNode)">
                     <div class="stock-profile">
                         <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
@@ -514,6 +536,7 @@
                     <div class="stock-value hide-tablet" style="white-space: nowrap;">${kcvDisplay}${kcvDiffHTML}</div>
                 </div>
 
+                <!-- MOBIL -->
                 <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
                     <div class="mobile-left">
                         <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
@@ -528,6 +551,7 @@
                     </div>
                 </div>
 
+                <!-- DETAILS -->
                 <div class="stock-details">
                     <div class="details-container">
                         <div class="details-grid">
@@ -592,41 +616,41 @@
         });
 
         if (sortWert === 'perfMonat') {
-            ergebnis.sort((a, b) => (parseToNumber(b.perfMonat) || 0) - (parseToNumber(a.perfMonat) || 0));
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'perfMonat')) || 0) - (parseToNumber(getJSONValue(a, 'perfMonat')) || 0));
         } else if (sortWert === 'perfJahr') {
-            ergebnis.sort((a, b) => (parseToNumber(b.perfJahr) || 0) - (parseToNumber(a.perfJahr) || 0));
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'perfJahr')) || 0) - (parseToNumber(getJSONValue(a, 'perfJahr')) || 0));
         } else if (sortWert === 'yield') {
-            ergebnis.sort((a, b) => (parseToNumber(b.yield) || 0) - (parseToNumber(a.yield) || 0));
+            ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'yield')) || 0) - (parseToNumber(getJSONValue(a, 'yield')) || 0));
         } else if (sortWert === 'kgvAsc') {
             ergebnis.sort((a, b) => {
-                const valA = parseToNumber(a.kgv) || Infinity;
-                const valB = parseToNumber(b.kgv) || Infinity;
+                const valA = parseToNumber(getJSONValue(a, 'kgv', false)) || Infinity;
+                const valB = parseToNumber(getJSONValue(b, 'kgv', false)) || Infinity;
                 return valA - valB;
             });
         } else if (sortWert === 'kgvDesc') {
             ergebnis.sort((a, b) => {
-                const valA = parseToNumber(a.kgv) || -Infinity;
-                const valB = parseToNumber(b.kgv) || -Infinity;
+                const valA = parseToNumber(getJSONValue(a, 'kgv', false)) || -Infinity;
+                const valB = parseToNumber(getJSONValue(b, 'kgv', false)) || -Infinity;
                 return valB - valA;
             });
         } else if (sortWert === 'kgvDiffAsc') {
             ergebnis.sort((a, b) => {
-                const abwA = berechneAbweichung(parseToNumber(a.kgv), parseToNumber(a.kgv5J));
-                const abwB = berechneAbweichung(parseToNumber(b.kgv), parseToNumber(b.kgv5J));
+                const abwA = berechneAbweichung(parseToNumber(getJSONValue(a, 'kgv', false)), parseToNumber(getJSONValue(a, 'kgv', true)));
+                const abwB = berechneAbweichung(parseToNumber(getJSONValue(b, 'kgv', false)), parseToNumber(getJSONValue(b, 'kgv', true)));
                 const valA = abwA !== null ? abwA : Infinity;
                 const valB = abwB !== null ? abwB : Infinity;
                 return valA - valB;
             });
         } else if (sortWert === 'kcvAsc') {
             ergebnis.sort((a, b) => {
-                const valA = parseToNumber(a.kcv) || Infinity;
-                const valB = parseToNumber(b.kcv) || Infinity;
+                const valA = parseToNumber(getJSONValue(a, 'kcv', false)) || Infinity;
+                const valB = parseToNumber(getJSONValue(b, 'kcv', false)) || Infinity;
                 return valA - valB;
             });
         } else if (sortWert === 'kcvDesc') {
             ergebnis.sort((a, b) => {
-                const valA = parseToNumber(a.kcv) || -Infinity;
-                const valB = parseToNumber(b.kcv) || -Infinity;
+                const valA = parseToNumber(getJSONValue(a, 'kcv', false)) || -Infinity;
+                const valB = parseToNumber(getJSONValue(b, 'kcv', false)) || -Infinity;
                 return valB - valA;
             });
         }
