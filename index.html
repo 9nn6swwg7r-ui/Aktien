@@ -423,12 +423,9 @@
 
     async function datenLaden() {
         try {
-            // Cache-Buster verhindert, dass der Browser veraltete Daten aus dem Speicher lädt
             const cacheBuster = "?v=" + new Date().getTime();
             const antwort = await fetch('daten.json' + cacheBuster);
-            
             if (!antwort.ok) throw new Error("Die Datei 'daten.json' wurde nicht gefunden.");
-            
             alleAktien = await antwort.json();
             renderAktien();
         } catch (fehler) {
@@ -437,7 +434,6 @@
                 <div style="padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px; text-align: center;">
                     <p style="color: var(--danger); font-weight: 600; margin-bottom: 0.5rem;">Fehler beim Laden der daten.json!</p>
                     <p style="color: var(--text-muted); font-size: 0.85rem;">Details: ${fehler.message}</p>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Hinweis: Prüfe bitte, ob in der 'daten.json' ein Komma am Ende einer Zeile zu viel oder zu wenig steht.</p>
                 </div>`;
         }
     }
