@@ -112,7 +112,7 @@
         /* --- DESKTOP TABLE STYLES --- */
         .stock-table-header, .stock-summary {
             display: grid;
-            grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
+            grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1.6fr 1.6fr;
             padding: 1rem 1.5rem;
             align-items: center;
             gap: 1rem;
@@ -223,7 +223,7 @@
             vertical-align: middle;
         }
 
-        .kgv-diff-text {
+        .kgv-diff-text, .kcv-diff-text {
             font-size: 0.8rem;
             font-weight: 600;
             margin-left: 0.4rem;
@@ -304,7 +304,7 @@
         .mobile-row-layout { display: none; }
 
         /* --- RESPONSIVE BREAKPOINTS --- */
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .stock-table-header, .stock-summary {
                 grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr;
             }
@@ -399,7 +399,7 @@
         <span>1 Jahr</span>
         <span class="hide-tablet">Dividende</span>
         <span class="hide-tablet">KGV (% vs. 5J Ø)</span>
-        <span class="hide-tablet">KCV (5J Ø)</span>
+        <span class="hide-tablet">KCV (% vs. 5J Ø)</span>
     </div>
 
     <div id="stock-list" class="stock-list"></div>
@@ -409,10 +409,10 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    // Fehlersichere Berechnung
-    function berechneKgvAbweichung(aktie) {
-        if (aktie && aktie.kgv && aktie.kgv > 0 && aktie.kgv5J && aktie.kgv5J > 0) {
-            return ((aktie.kgv - aktie.kgv5J) / aktie.kgv5J) * 100;
+    // Generische Abweichungsberechnung
+    function berechneAbweichung(aktuell, schnitt) {
+        if (typeof aktuell === 'number' && aktuell > 0 && typeof schnitt === 'number' && schnitt > 0) {
+            return ((aktuell - schnitt) / schnitt) * 100;
         }
         return null;
     }
@@ -428,7 +428,7 @@
             document.getElementById('stock-list').innerHTML = `
                 <div style="padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px; text-align: center;">
                     <p style="color: var(--danger); font-weight: 600; margin-bottom: 0.5rem;">Fehler beim Laden der Portfolio-Daten.</p>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">Bitte überprüfe, ob die Datei 'daten.json' im selben Ordner liegt und ein gültiges JSON-Format hat.</p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Bitte überprüfe, ob die Datei 'daten.json' im selben Ordner liegt und gültig ist.</p>
                 </div>`;
         }
     }
@@ -445,7 +445,6 @@
         const container = document.getElementById('stock-list');
         container.innerHTML = '';
 
-        // Sicherheitscheck, falls JSON leer oder fehlerhaft geladen wurde
         if (!Array.isArray(liste)) return;
 
         const tabListe = liste.filter(aktie => {
@@ -460,7 +459,6 @@
         }
 
         tabListe.forEach(aktie => {
-            // Ausfallsichere Variablenzuweisungen (Verhindert Absturz bei fehlenden Feldern)
             const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
             const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
             
@@ -477,27 +475,35 @@
                 dividendDisplay = yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`;
             }
 
-            // KGV
+            // KGV Logik & Prozent-Abweichung
             const hatKGV = typeof aktie.kgv === 'number' && aktie.kgv > 0;
             const hatKGV5J = typeof aktie.kgv5J === 'number' && aktie.kgv5J > 0;
             let discountBadgeHTML = "";
-            let diffHTML = "";
+            let kgvDiffHTML = "";
             
-            const abweichung = berechneKgvAbweichung(aktie);
-            if (abweichung !== null) {
-                const diffKlasse = abweichung <= 0 ? 'positive' : 'negative';
-                const vorzeichen = abweichung > 0 ? '+' : '';
-                diffHTML = `<span class="kgv-diff-text ${diffKlasse}">(${vorzeichen}${abweichung.toFixed(1)}%)</span>`;
-                if (abweichung < 0) {
+            const kgvAbw = berechneAbweichung(aktie.kgv, aktie.kgv5J);
+            if (kgvAbw !== null) {
+                const diffKlasse = kgvAbw <= 0 ? 'positive' : 'negative';
+                const vorzeichen = kgvAbw > 0 ? '+' : '';
+                kgvDiffHTML = `<span class="kgv-diff-text ${diffKlasse}">CNV ${vorzeichen}${kgvAbw.toFixed(1)}%</span>`;
+                if (kgvAbw < 0) {
                     discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
                 }
             }
             const kgvDisplay = hatKGV ? aktie.kgv.toFixed(1) : '-';
             const kgv5JDisplay = hatKGV5J ? aktie.kgv5J.toFixed(1) : '-';
 
-            // KCV (Neu abgesichert)
+            // KCV Logik & Prozent-Abweichung
             const hatKCV = typeof aktie.kcv === 'number' && aktie.kcv > 0;
             const hatKCV5J = typeof aktie.kcv5J === 'number' && aktie.kcv5J > 0;
+            let kcvDiffHTML = "";
+
+            const kcvAbw = berechneAbweichung(aktie.kcv, aktie.kcv5J);
+            if (kcvAbw !== null) {
+                const diffKlasse = kcvAbw <= 0 ? 'positive' : 'negative';
+                const vorzeichen = kcvAbw > 0 ? '+' : '';
+                kcvDiffHTML = `<span class="kcv-diff-text ${diffKlasse}">(${vorzeichen}${kcvAbw.toFixed(1)}%)</span>`;
+            }
             const kcvDisplay = hatKCV ? aktie.kcv.toFixed(1) : '-';
             const kcv5JDisplay = hatKCV5J ? aktie.kcv5J.toFixed(1) : '-';
 
@@ -519,8 +525,8 @@
                     <div class="stock-value perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
                     <div class="stock-value perf ${jahrClass}">${perfJahr >= 0 ? '+' : ''}${perfJahr.toFixed(2)}%</div>
                     <div class="stock-value hide-tablet">${dividendDisplay}</div>
-                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${diffHTML}${discountBadgeHTML}</div>
-                    <div class="stock-value hide-tablet" style="color: var(--text-muted); font-size: 0.95rem;">${kcvDisplay} <span style="font-size: 0.8rem; color: #64748b;">(${kcv5JDisplay})</span></div>
+                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${kgvDiffHTML}${discountBadgeHTML}</div>
+                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kcvDisplay}${kcvDiffHTML}</div>
                 </div>
 
                 <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
@@ -554,7 +560,7 @@
                             </div>
                             <div class="detail-card">
                                 <label>Aktuelles KGV</label>
-                                <span style="color: var(--text-main);">${kgvDisplay} ${diffHTML}</span>
+                                <span style="color: var(--text-main);">${kgvDisplay} ${kgvDiffHTML}</span>
                             </div>
                             <div class="detail-card">
                                 <label>5Y Ø KGV</label>
@@ -562,7 +568,7 @@
                             </div>
                             <div class="detail-card">
                                 <label>Aktuelles KCV</label>
-                                <span style="color: var(--text-main);">${kcvDisplay}</span>
+                                <span style="color: var(--text-main);">${kcvDisplay} ${kcvDiffHTML}</span>
                             </div>
                             <div class="detail-card">
                                 <label>5Y Ø KCV</label>
@@ -620,8 +626,8 @@
             });
         } else if (sortWert === 'kgvDiffAsc') {
             ergebnis.sort((a, b) => {
-                const abwA = berechneKgvAbweichung(a);
-                const abwB = berechneKgvAbweichung(b);
+                const abwA = berechneAbweichung(a.kgv, a.kgv5J);
+                const abwB = berechneAbweichung(b.kgv, b.kgv5J);
                 const valA = abwA !== null ? abwA : Infinity;
                 const valB = abwB !== null ? abwB : Infinity;
                 return valA - valB;
