@@ -385,7 +385,7 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    // Hilfsfunktion: Sucht flexibel nach Keys in der JSON (egal ob groß, klein, 5J oder 5Y)
+    // Intelligente Key-Suche zur Fehlereindämmung
     function getJSONValue(obj, baseKey, is5Year = false) {
         if (!obj || typeof obj !== 'object') return null;
         const keys = Object.keys(obj);
@@ -395,13 +395,16 @@
             const matchesBase = lowKey.includes(baseKey.toLowerCase());
             
             if (is5Year) {
-                // Sucht nach '5', 'y' oder 'j' im Schlüsselnamen für den 5-Jahres-Schnitt
                 return matchesBase && (lowKey.includes('5') || lowKey.includes('y') || lowKey.includes('j'));
             } else {
-                // Sucht den aktuellen Wert (darf keine 5, y oder j enthalten)
                 return matchesBase && !lowKey.includes('5') && !lowKey.includes('y') && !lowKey.includes('j');
             }
         });
+
+        // Diagnose-Log in die Browser-Konsole schreiben
+        if (baseKey.toLowerCase() === 'kcv' && obj.name === 'Microsoft') {
+            console.log(`[Diagnose Microsoft] Gesucht nach: KCV (5J: ${is5Year}). Gefundener Key in JSON: "${targetKey || 'NICHTS GEFUNDEN'}", Wert:`, targetKey ? obj[targetKey] : 'undefined');
+        }
 
         return targetKey ? obj[targetKey] : null;
     }
@@ -425,9 +428,11 @@
 
     async function datenLaden() {
         try {
+            console.log("Lade daten.json...");
             const antwort = await fetch('daten.json');
             if (!antwort.ok) throw new Error("HTTP Fehler " + antwort.status);
             alleAktien = await antwort.json();
+            console.log("JSON erfolgreich geladen. Anzahl Einträge:", alleAktien.length);
             renderAktien();
         } catch (fehler) {
             console.error("Fehler beim Abrufen der JSON-Daten:", fehler);
@@ -481,7 +486,7 @@
                 dividendDisplay = yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`;
             }
 
-            // KGV Logik (Fehlertolerant via getJSONValue)
+            // KGV Logik
             const kgvNum = parseToNumber(getJSONValue(aktie, 'kgv', false));
             const kgv5JNum = parseToNumber(getJSONValue(aktie, 'kgv', true));
             let discountBadgeHTML = "";
@@ -499,7 +504,7 @@
             const kgvDisplay = kgvNum !== null ? kgvNum.toFixed(1) : '-';
             const kgv5JDisplay = kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-';
 
-            // KCV Logik (Fehlertolerant via getJSONValue)
+            // KCV Logik
             const kcvNum = parseToNumber(getJSONValue(aktie, 'kcv', false));
             const kcv5JNum = parseToNumber(getJSONValue(aktie, 'kcv', true));
             let kcvDiffHTML = "";
@@ -519,7 +524,6 @@
             const item = document.createElement('div');
             item.className = 'stock-item';
             item.innerHTML = `
-                <!-- DESKTOP -->
                 <div class="stock-summary" onclick="toggleDetails(this.parentNode)">
                     <div class="stock-profile">
                         <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
@@ -536,7 +540,6 @@
                     <div class="stock-value hide-tablet" style="white-space: nowrap;">${kcvDisplay}${kcvDiffHTML}</div>
                 </div>
 
-                <!-- MOBIL -->
                 <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
                     <div class="mobile-left">
                         <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
@@ -551,7 +554,6 @@
                     </div>
                 </div>
 
-                <!-- DETAILS -->
                 <div class="stock-details">
                     <div class="details-container">
                         <div class="details-grid">
