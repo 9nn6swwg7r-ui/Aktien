@@ -32,7 +32,11 @@ meine_aktien = [
     {"symbol": "MUV2.DE", "name": "Munich Re", "logoUrl": "https://logo.clearbit.com/munichre.com", "tags": ["Rückversicherung", "Risiko", "Finanzen"], "watchlist": False},
     {"symbol": "SIE.DE", "name": "Siemens", "logoUrl": "https://logo.clearbit.com/siemens.com", "tags": ["Industrie", "Digitalisierung", "Infrastruktur"], "watchlist": False},
     {"symbol": "SU.PA", "name": "Schneider Electric", "logoUrl": "https://logo.clearbit.com/se.com", "tags": ["Energiemanagement", "Automatisierung", "Tech"], "watchlist": False},
-    {"symbol": "HON", "name": "Honeywell", "logoUrl": "https://logo.clearbit.com/honeywell.com", "tags": ["Mischkonzern", "Luftfahrt", "Industrie"], "watchlist": False},
+    
+    # NEU: Aufgeteilt nach Spin-off im Juni 2026
+    {"symbol": "HON", "name": "Honeywell Technologies", "logoUrl": "https://logo.clearbit.com/honeywell.com", "tags": ["Automation", "Autonomie", "Industrie"], "watchlist": False},
+    {"symbol": "HONA", "name": "Honeywell Aerospace", "logoUrl": "https://logo.clearbit.com/honeywell.com", "tags": ["Luftfahrt", "Verteidigung", "Avionik"], "watchlist": False},
+    
     {"symbol": "CAT", "name": "Caterpillar", "logoUrl": "https://logo.clearbit.com/caterpillar.com", "tags": ["Baumaschinen", "Bergbau", "Schwerindustrie"], "watchlist": False},
     {"symbol": "DE", "name": "John Deere", "logoUrl": "https://logo.clearbit.com/deere.com", "tags": ["Agrartechnik", "Forstwirtschaft", "Maschinen"], "watchlist": False},
     {"symbol": "ABBN.SW", "name": "ABB", "logoUrl": "https://logo.clearbit.com/abb.com", "tags": ["Robotik", "Automation", "Stromnetz"], "watchlist": False},
@@ -80,14 +84,10 @@ meine_aktien = [
     {"symbol": "LHA.DE", "name": "Deutsche Lufthansa", "logoUrl": "https://logo.clearbit.com/lufthansagroup.com", "tags": ["Airlines", "Luftfahrt"], "watchlist": True},
     {"symbol": "6367.T", "name": "Daikin Industries", "logoUrl": "https://logo.clearbit.com/daikin.com", "tags": ["Klimaanlagen", "Wärmepumpen"], "watchlist": True},
     {"symbol": "ERIC", "name": "Telefonaktiebolaget LM Ericsson B", "logoUrl": "https://logo.clearbit.com/ericsson.com", "tags": ["Telekom", "5G-Netze"], "watchlist": True},
-    {"symbol": "CRWD", "name": "CrowdStrike Holdings A", "logoUrl": "https://logo.clearbit.com/crowdstrike.com", "tags": ["Cybersecurity", "Cloud"], "watchlist": True},
     {"symbol": "ROK", "name": "Rockwell Automation", "logoUrl": "https://logo.clearbit.com/rockwellautomation.com", "tags": ["Fabrikautomation", "Tech"], "watchlist": True},
     {"symbol": "PKO.WA", "name": "Powszechna Kasa Oszczednosci Bank", "logoUrl": "https://logo.clearbit.com/pkobp.pl", "tags": ["Banken", "Polen"], "watchlist": True},
     {"symbol": "EUK3.DE", "name": "EUROKAI Vz", "logoUrl": "https://logo.clearbit.com/eurokai.de", "tags": ["Hafenterminals", "Logistik"], "watchlist": True},
     {"symbol": "FRM.DE", "name": "FRoSTA", "logoUrl": "https://logo.clearbit.com/frosta-ag.de", "tags": ["Tiefkühlkost", "Lebensmittel"], "watchlist": True},
-    {"symbol": "VZ", "name": "Verizon Communications", "logoUrl": "https://logo.clearbit.com/verizon.com", "tags": ["Telekom", "Mobilfunk"], "watchlist": True},
-    {"symbol": "TPE.WA", "name": "Tauron Polska Energia", "logoUrl": "https://logo.clearbit.com/tauron.pl", "tags": ["Energie", "Polen"], "watchlist": True},
-    {"symbol": "1398.HK", "name": "Industr and Commerc Bank of China", "logoUrl": "https://logo.clearbit.com/icbc.com.cn", "tags": ["Banken", "China"], "watchlist": True},
     {"symbol": "YAR.OL", "name": "Yara Intl.", "logoUrl": "https://logo.clearbit.com/yara.com", "tags": ["Düngemittel", "Chemie"], "watchlist": True},
     {"symbol": "EOAN.DE", "name": "E.ON", "logoUrl": "https://logo.clearbit.com/eon.com", "tags": ["Energienetze", "Versorger"], "watchlist": True},
     {"symbol": "STR.VI", "name": "Strabag", "logoUrl": "https://logo.clearbit.com/strabag.com", "tags": ["Baukonzern", "Infrastruktur"], "watchlist": True},
@@ -103,7 +103,6 @@ meine_aktien = [
     {"symbol": "VNA.DE", "name": "Vonovia", "logoUrl": "https://logo.clearbit.com/vonovia.de", "tags": ["Immobilien", "Wohnungen"], "watchlist": True},
     {"symbol": "SIKA.SW", "name": "Sika", "logoUrl": "https://logo.clearbit.com/sika.com", "tags": ["Spezialchemie", "Baustoffe"], "watchlist": True},
     {"symbol": "PDD", "name": "Pinduoduo ADR A", "logoUrl": "https://logo.clearbit.com/pddholdings.com", "tags": ["E-Commerce", "Temu"], "watchlist": True},
-    {"symbol": "SOBA.DE", "name": "AT&T", "logoUrl": "https://logo.clearbit.com/att.com", "tags": ["Telekom", "USA"], "watchlist": True},
     {"symbol": "VER.VI", "name": "Verbund AG", "logoUrl": "https://logo.clearbit.com/verbund.com", "tags": ["Wasserkraft", "Strom"], "watchlist": True},
     {"symbol": "DTE.DE", "name": "Deutsche Telekom", "logoUrl": "https://logo.clearbit.com/telekom.com", "tags": ["Telekom", "Mobilfunk"], "watchlist": True},
     {"symbol": "HNR1.DE", "name": "Hannover Rück", "logoUrl": "https://logo.clearbit.com/hannover-rueck.de", "tags": ["Rückversicherung", "Finanzen"], "watchlist": True},
@@ -114,8 +113,15 @@ meine_aktien = [
     {"symbol": "DNP.WA", "name": "Dino Polska", "logoUrl": "https://logo.clearbit.com/grupadino.pl", "tags": ["Supermärkte", "Einzelhandel"], "watchlist": True},
     {"symbol": "LEHNF", "name": "Lem Holding", "logoUrl": "https://logo.clearbit.com/lem.com", "tags": ["Sensorik", "Elektronik"], "watchlist": True},
     {"symbol": "ADSK", "name": "Autodesk", "logoUrl": "https://logo.clearbit.com/autodesk.com", "tags": ["CAD-Software", "3D-Design"], "watchlist": True},
-    {"symbol": "CMCSA", "name": "Comcast A", "logoUrl": "https://logo.clearbit.com/comcastcorporation.com", "tags": ["Medien", "Streaming"], "watchlist": True},
-    {"symbol": "BEI.DE", "name": "Beiersdorf", "logoUrl": "https://logo.clearbit.com/beiersdorf.de", "tags": ["Nivea", "Konsumgüter"], "watchlist": True}
+    {"symbol": "BEI.DE", "name": "Beiersdorf", "logoUrl": "https://logo.clearbit.com/beiersdorf.de", "tags": ["Nivea", "Konsumgüter"], "watchlist": True},
+    
+    # NEU: Aus Watchlist in den festen Datenbestand transferiert / hinzugefügt
+    {"symbol": "CMCSA", "name": "Comcast", "logoUrl": "https://logo.clearbit.com/comcastcorporation.com", "tags": ["Medien", "Streaming", "Kabelnetz"], "watchlist": False},
+    {"symbol": "TPE.WA", "name": "Tauron Polska Energia", "logoUrl": "https://logo.clearbit.com/tauron.pl", "tags": ["Energie", "Versorger", "Polen"], "watchlist": False},
+    {"symbol": "SOBA.DE", "name": "AT&T", "logoUrl": "https://logo.clearbit.com/att.com", "tags": ["Telekom", "USA", "Dividendenwert"], "watchlist": False},
+    {"symbol": "CRWD", "name": "CrowdStrike", "logoUrl": "https://logo.clearbit.com/crowdstrike.com", "tags": ["Cybersecurity", "Cloud", "SaaS"], "watchlist": True},
+    {"symbol": "1398.HK", "name": "ICBC", "logoUrl": "https://logo.clearbit.com/icbc.com.cn", "tags": ["Banken", "China", "Großbank"], "watchlist": True},
+    {"symbol": "VZ", "name": "Verizon", "logoUrl": "https://logo.clearbit.com/verizon.com", "tags": ["Telekom", "Mobilfunk", "USA"], "watchlist": True}
 ]
 
 monate_de = {1: "Jan", 2: "Feb", 3: "Mrz", 4: "Apr", 5: "Mai", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dez"}
@@ -136,8 +142,6 @@ aktien_daten = []
 for aktie in meine_aktien:
     try:
         ticker = yf.Ticker(aktie["symbol"])
-        
-        # WICHTIG: actions=True lädt die Dividenden direkt in die Kurshistorie mit rein!
         hist_5y = ticker.history(period="5y", actions=True)
         hist_1m = ticker.history(period="1mo")
         
@@ -179,8 +183,8 @@ for aktie in meine_aktien:
         kgv = 0.0
         ex_date_str = "-"
         auszahlungsmonate = "-"
+        frequenz = "-"
 
-        # Ticker Info auslesen (falls möglich)
         try:
             info = ticker.info
             if info:
@@ -195,54 +199,39 @@ for aktie in meine_aktien:
         except Exception:
             pass
 
-        # === NEUE BOMBENFESTE DIVIDENDEN-ERMITTLUNG ===
+        # Dividenden-Ermittlung
         try:
             jetzt_naive = datetime.now().replace(tzinfo=None)
             vor_einem_jahr = jetzt_naive - timedelta(days=365)
+            div_historie = None
             
-            # Methode 1: Direkt aus der Kurshistorie (Spalte "Dividends")
             if "Dividends" in hist_5y.columns:
                 hist_naive = hist_5y.copy()
                 if hist_naive.index.tz is not None:
                     hist_naive.index = hist_naive.index.tz_localize(None)
-                
-                # Filter auf das letzte Jahr und nur Zeilen, wo die Dividende > 0 ist
                 div_historie = hist_naive[(hist_naive.index >= vor_einem_jahr) & (hist_naive["Dividends"] > 0)]
-                
-                # Fallback, falls im letzten Jahr nix war, nimm die letzten 4 Ausschüttungen überhaupt
                 if div_historie.empty:
-                    all_divs = hist_naive[hist_naive["Dividends"] > 0]
-                    div_historie = all_divs.tail(4)
+                    div_historie = hist_naive[hist_naive["Dividends"] > 0].tail(4)
+
+            if div_historie is not None and not div_historie.empty:
+                monate_zahlen = sorted(list(set(div_historie.index.month)))
+                monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
+                if monate_namen:
+                    auszahlungsmonate = ", ".join(monate_namen)
                 
-                if not div_historie.empty:
-                    monate_zahlen = sorted(list(set(div_historie.index.month)))
-                    monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
-                    if monate_namen:
-                        auszahlungsmonate = ", ".join(monate_namen)
+                # Häufigkeit ermitteln
+                anzahl_zahlungen = len(div_historie)
+                if anzahl_zahlungen >= 4: frequenz = "Vierteljährlich (4x)"
+                elif anzahl_zahlungen == 2: frequenz = "Halbjährlich (2x)"
+                elif anzahl_zahlungen == 1: frequenz = "Jährlich (1x)"
+                elif anzahl_zahlungen >= 12: frequenz = "Monatlich (12x)"
+                else: frequenz = f"{anzahl_zahlungen}x pro Jahr"
 
-            # Methode 2: Falls Methode 1 fehlschlug, nutze klassische .dividends als Backup
-            if auszahlungsmonate == "-":
-                dividenden = ticker.dividends
-                if not dividenden.empty:
-                    dividenden_naive = dividenden.copy()
-                    if dividenden_naive.index.tz is not None:
-                        dividenden_naive.index = dividenden_naive.index.tz_localize(None)
-                    
-                    letztes_jahr = dividenden_naive[dividenden_naive.index >= vor_einem_jahr]
-                    if letztes_jahr.empty:
-                        letztes_jahr = dividenden_naive.tail(4)
-                    
-                    monate_zahlen = sorted(list(set(letztes_jahr.index.month)))
-                    monate_namen = [monate_de[m] for m in monate_zahlen if m in monate_de]
-                    if monate_namen:
-                        auszahlungsmonate = ", ".join(monate_namen)
-
-            # Falls wir Monate gefunden haben, aber div_yield auf 0.0 steht (wegen Info-Blockade)
             if auszahlungsmonate != "-" and div_yield == 0.0:
-                div_yield = 0.01  # Aktivierungs-Flag für das Frontend
+                div_yield = 0.01
 
         except Exception as div_e:
-            print(f"Fehler bei Dividenden-Ermittlung für {aktie['name']}: {div_e}")
+            print(f"Fehler bei Dividenden für {aktie['name']}: {div_e}")
 
         aktien_daten.append({
             "name": str(aktie["name"]),
@@ -256,9 +245,10 @@ for aktie in meine_aktien:
             "yield": div_yield,
             "kgv": kgv,
             "exDate": ex_date_str,
-            "monate": auszahlungsmonate
+            "monate": auszahlungsmonate,
+            "frequenz": frequenz  # NEU: Das extra Feld für die Auszahlungshäufigkeit
         })
-        print(f"Erfolg: {aktie['name']} | Monate: {auszahlungsmonate}")
+        print(f"Erfolg: {aktie['name']} | Frequenz: {frequenz}")
     except Exception as e:
         print(f"Überspringe {aktie['name']} wegen Fehler: {e}")
 
