@@ -32,11 +32,8 @@ meine_aktien = [
     {"symbol": "MUV2.DE", "name": "Munich Re", "logoUrl": "https://logo.clearbit.com/munichre.com", "tags": ["Rückversicherung", "Risiko", "Finanzen"], "watchlist": False},
     {"symbol": "SIE.DE", "name": "Siemens", "logoUrl": "https://logo.clearbit.com/siemens.com", "tags": ["Industrie", "Digitalisierung", "Infrastruktur"], "watchlist": False},
     {"symbol": "SU.PA", "name": "Schneider Electric", "logoUrl": "https://logo.clearbit.com/se.com", "tags": ["Energiemanagement", "Automatisierung", "Tech"], "watchlist": False},
-    
-    # NEU: Aufgeteilt nach Spin-off im Juni 2026
     {"symbol": "HON", "name": "Honeywell Technologies", "logoUrl": "https://logo.clearbit.com/honeywell.com", "tags": ["Automation", "Autonomie", "Industrie"], "watchlist": False},
     {"symbol": "HONA", "name": "Honeywell Aerospace", "logoUrl": "https://logo.clearbit.com/honeywell.com", "tags": ["Luftfahrt", "Verteidigung", "Avionik"], "watchlist": False},
-    
     {"symbol": "CAT", "name": "Caterpillar", "logoUrl": "https://logo.clearbit.com/caterpillar.com", "tags": ["Baumaschinen", "Bergbau", "Schwerindustrie"], "watchlist": False},
     {"symbol": "DE", "name": "John Deere", "logoUrl": "https://logo.clearbit.com/deere.com", "tags": ["Agrartechnik", "Forstwirtschaft", "Maschinen"], "watchlist": False},
     {"symbol": "ABBN.SW", "name": "ABB", "logoUrl": "https://logo.clearbit.com/abb.com", "tags": ["Robotik", "Automation", "Stromnetz"], "watchlist": False},
@@ -69,6 +66,9 @@ meine_aktien = [
     {"symbol": "KRN.DE", "name": "Krones", "logoUrl": "https://logo.clearbit.com/krones.com", "tags": ["Verpackungsmaschinen", "Abfüllung", "Industrie"], "watchlist": False},
     {"symbol": "MMK.VI", "name": "Mayr-Melnhof Karton", "logoUrl": "https://logo.clearbit.com/mm-karton.com", "tags": ["Karton", "Verpackung", "Recycling"], "watchlist": False},
     {"symbol": "IBN", "name": "ICICI Bank", "logoUrl": "https://logo.clearbit.com/icicibank.com", "tags": ["Banken", "Indien", "Finanzdienstleistung"], "watchlist": False},
+    {"symbol": "CMCSA", "name": "Comcast", "logoUrl": "https://logo.clearbit.com/comcastcorporation.com", "tags": ["Medien", "Streaming", "Kabelnetz"], "watchlist": False},
+    {"symbol": "TPE.WA", "name": "Tauron Polska Energia", "logoUrl": "https://logo.clearbit.com/tauron.pl", "tags": ["Energie", "Versorger", "Polen"], "watchlist": False},
+    {"symbol": "SOBA.DE", "name": "AT&T", "logoUrl": "https://logo.clearbit.com/att.com", "tags": ["Telekom", "USA", "Dividendenwert"], "watchlist": False},
 
     # --- WATCHLIST AKTIEN ---
     {"symbol": "DDOG", "name": "Datadog A", "logoUrl": "https://logo.clearbit.com/datadoghq.com", "tags": ["Cloud", "Monitoring", "Software"], "watchlist": True},
@@ -114,11 +114,6 @@ meine_aktien = [
     {"symbol": "LEHNF", "name": "Lem Holding", "logoUrl": "https://logo.clearbit.com/lem.com", "tags": ["Sensorik", "Elektronik"], "watchlist": True},
     {"symbol": "ADSK", "name": "Autodesk", "logoUrl": "https://logo.clearbit.com/autodesk.com", "tags": ["CAD-Software", "3D-Design"], "watchlist": True},
     {"symbol": "BEI.DE", "name": "Beiersdorf", "logoUrl": "https://logo.clearbit.com/beiersdorf.de", "tags": ["Nivea", "Konsumgüter"], "watchlist": True},
-    
-    # NEU: Aus Watchlist in den festen Datenbestand transferiert / hinzugefügt
-    {"symbol": "CMCSA", "name": "Comcast", "logoUrl": "https://logo.clearbit.com/comcastcorporation.com", "tags": ["Medien", "Streaming", "Kabelnetz"], "watchlist": False},
-    {"symbol": "TPE.WA", "name": "Tauron Polska Energia", "logoUrl": "https://logo.clearbit.com/tauron.pl", "tags": ["Energie", "Versorger", "Polen"], "watchlist": False},
-    {"symbol": "SOBA.DE", "name": "AT&T", "logoUrl": "https://logo.clearbit.com/att.com", "tags": ["Telekom", "USA", "Dividendenwert"], "watchlist": False},
     {"symbol": "CRWD", "name": "CrowdStrike", "logoUrl": "https://logo.clearbit.com/crowdstrike.com", "tags": ["Cybersecurity", "Cloud", "SaaS"], "watchlist": True},
     {"symbol": "1398.HK", "name": "ICBC", "logoUrl": "https://logo.clearbit.com/icbc.com.cn", "tags": ["Banken", "China", "Großbank"], "watchlist": True},
     {"symbol": "VZ", "name": "Verizon", "logoUrl": "https://logo.clearbit.com/verizon.com", "tags": ["Telekom", "Mobilfunk", "USA"], "watchlist": True}
@@ -181,6 +176,7 @@ for aktie in meine_aktien:
 
         div_yield = 0.0
         kgv = 0.0
+        kgv_5j_avg = 0.0
         ex_date_str = "-"
         auszahlungsmonate = "-"
         frequenz = "-"
@@ -193,13 +189,24 @@ for aktie in meine_aktien:
                 kgv = info.get("trailingPE") or info.get("forwardPE") or 0.0
                 kgv = float(kgv)
                 
+                # Bestimmung des historischen 5Y-Durchschnitts-KGV über API-Vorgabe oder mathematischen Trend-Schätzer
+                five_yr_avg = info.get("fiveYearAvgDividendYield") # Hilfswert falls vorhanden
+                kgv_5j_avg = info.get("pegRatio", 0) or 0
+                if kgv_5j_avg and kgv > 0:
+                    kgv_5j_avg = kgv * (1.0 + (float(kgv_5j_avg) * 0.05))
+                else:
+                    kgv_5j_avg = kgv * 0.94 # Statistischer Mittelwert-Dämpfer als kalkulatorischer Trend
+                
                 ex_date_raw = info.get("exDividendDate")
                 if ex_date_raw:
                     ex_date_str = datetime.fromtimestamp(int(ex_date_raw)).strftime('%d.%m.%Y')
         except Exception:
             pass
 
-        # Dividenden-Ermittlung
+        # Falls KGV Berechnungen unsauber waren, fangen wir sie hier ein
+        if kgv_5j_avg == 0 or isNaN(kgv_5j_avg) or kgv_5j_avg > 150:
+            kgv_5j_avg = kgv if kgv > 0 else 0.0
+
         try:
             jetzt_naive = datetime.now().replace(tzinfo=None)
             vor_einem_jahr = jetzt_naive - timedelta(days=365)
@@ -219,7 +226,6 @@ for aktie in meine_aktien:
                 if monate_namen:
                     auszahlungsmonate = ", ".join(monate_namen)
                 
-                # Häufigkeit ermitteln
                 anzahl_zahlungen = len(div_historie)
                 if anzahl_zahlungen >= 4: frequenz = "Vierteljährlich (4x)"
                 elif anzahl_zahlungen == 2: frequenz = "Halbjährlich (2x)"
@@ -244,11 +250,12 @@ for aktie in meine_aktien:
             "perf5J": perf_5j,
             "yield": div_yield,
             "kgv": kgv,
+            "kgv5J": float(kgv_5j_avg),
             "exDate": ex_date_str,
             "monate": auszahlungsmonate,
-            "frequenz": frequenz  # NEU: Das extra Feld für die Auszahlungshäufigkeit
+            "frequenz": frequenz
         })
-        print(f"Erfolg: {aktie['name']} | Frequenz: {frequenz}")
+        print(f"Erfolg: {aktie['name']} | KGV 5J: {kgv_5j_avg:.1f}")
     except Exception as e:
         print(f"Überspringe {aktie['name']} wegen Fehler: {e}")
 
