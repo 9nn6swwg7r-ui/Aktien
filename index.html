@@ -362,6 +362,8 @@
                 <option value="kgvAsc">Niedrigstes KGV (Value-Fokus)</option>
                 <option value="kgvDesc">Höchstes KGV (Wachstum)</option>
                 <option value="kgvDiffAsc">Höchste KGV-Unterbewertung (Abweichung)</option>
+                <option value="kcvAsc">Niedrigstes KCV (Value-Fokus)</option>
+                <option value="kcvDesc">Höchstes KCV (Wachstum)</option>
             </select>
         </div>
     </div>
@@ -383,9 +385,18 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    // Generische Abweichungsberechnung
+    function parseToNumber(val) {
+        if (typeof val === 'number') return val;
+        if (typeof val === 'string') {
+            let sauber = val.replace(',', '.').replace(/[^0-9.-]/g, '');
+            let num = parseFloat(sauber);
+            return isNaN(num) ? null : num;
+        }
+        return null;
+    }
+
     function berechneAbweichung(aktuell, schnitt) {
-        if (typeof aktuell === 'number' && aktuell > 0 && typeof schnitt === 'number' && schnitt > 0) {
+        if (aktuell !== null && schnitt !== null && aktuell > 0 && schnitt > 0) {
             return ((aktuell - schnitt) / schnitt) * 100;
         }
         return null;
@@ -402,7 +413,7 @@
             document.getElementById('stock-list').innerHTML = `
                 <div style="padding: 2rem; background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px; text-align: center;">
                     <p style="color: var(--danger); font-weight: 600; margin-bottom: 0.5rem;">Fehler beim Laden der Portfolio-Daten.</p>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">Bitte überprüfe, ob die Datei 'daten.json' im selben Ordner liegt und gültig ist.</p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Bitte überprüfe die 'daten.json' im selben Ordner.</p>
                 </div>`;
         }
     }
@@ -436,10 +447,10 @@
             const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
             const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
             
-            const perfMonat = typeof aktie.perfMonat === 'number' ? aktie.perfMonat : 0;
-            const perfJahr = typeof aktie.perfJahr === 'number' ? aktie.perfJahr : 0;
-            const perf5J = typeof aktie.perf5J === 'number' ? aktie.perf5J : 0;
-            const yieldVal = typeof aktie.yield === 'number' ? aktie.yield : 0;
+            const perfMonat = parseToNumber(aktie.perfMonat) || 0;
+            const perfJahr = parseToNumber(aktie.perfJahr) || 0;
+            const perf5J = parseToNumber(aktie.perf5J) || 0;
+            const yieldVal = parseToNumber(aktie.yield) || 0;
 
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
@@ -449,13 +460,13 @@
                 dividendDisplay = yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`;
             }
 
-            // KGV Logik & Prozent-Abweichung
-            const hatKGV = typeof aktie.kgv === 'number' && aktie.kgv > 0;
-            const hatKGV5J = typeof aktie.kgv5J === 'number' && aktie.kgv5J > 0;
+            // KGV Logik
+            const kgvNum = parseToNumber(aktie.kgv);
+            const kgv5JNum = parseToNumber(aktie.kgv5J);
             let discountBadgeHTML = "";
             let kgvDiffHTML = "";
             
-            const kgvAbw = berechneAbweichung(aktie.kgv, aktie.kgv5J);
+            const kgvAbw = berechneAbweichung(kgvNum, kgv5JNum);
             if (kgvAbw !== null) {
                 const diffKlasse = kgvAbw <= 0 ? 'positive' : 'negative';
                 const vorzeichen = kgvAbw > 0 ? '+' : '';
@@ -464,22 +475,22 @@
                     discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
                 }
             }
-            const kgvDisplay = hatKGV ? aktie.kgv.toFixed(1) : '-';
-            const kgv5JDisplay = hatKGV5J ? aktie.kgv5J.toFixed(1) : '-';
+            const kgvDisplay = kgvNum !== null ? kgvNum.toFixed(1) : '-';
+            const kgv5JDisplay = kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-';
 
-            // KCV Logik & Prozent-Abweichung
-            const hatKCV = typeof aktie.kcv === 'number' && aktie.kcv > 0;
-            const hatKCV5J = typeof aktie.kcv5J === 'number' && aktie.kcv5J > 0;
+            // KCV Logik
+            const kcvNum = parseToNumber(aktie.kcv);
+            const kcv5JNum = parseToNumber(aktie.kcv5J);
             let kcvDiffHTML = "";
 
-            const kcvAbw = berechneAbweichung(aktie.kcv, aktie.kcv5J);
+            const kcvAbw = berechneAbweichung(kcvNum, kcv5JNum);
             if (kcvAbw !== null) {
                 const diffKlasse = kcvAbw <= 0 ? 'positive' : 'negative';
                 const vorzeichen = kcvAbw > 0 ? '+' : '';
                 kcvDiffHTML = `<span class="kcv-diff-text ${diffKlasse}">(${vorzeichen}${kcvAbw.toFixed(1)}%)</span>`;
             }
-            const kcvDisplay = hatKCV ? aktie.kcv.toFixed(1) : '-';
-            const kcv5JDisplay = hatKCV5J ? aktie.kcv5J.toFixed(1) : '-';
+            const kcvDisplay = kcvNum !== null ? kcvNum.toFixed(1) : '-';
+            const kcv5JDisplay = kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-';
 
             const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=60";
             const logoUrl = aktie.logoUrl || fallbackSrc;
@@ -487,7 +498,6 @@
             const item = document.createElement('div');
             item.className = 'stock-item';
             item.innerHTML = `
-                <!-- DESKTOP -->
                 <div class="stock-summary" onclick="toggleDetails(this.parentNode)">
                     <div class="stock-profile">
                         <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
@@ -504,7 +514,6 @@
                     <div class="stock-value hide-tablet" style="white-space: nowrap;">${kcvDisplay}${kcvDiffHTML}</div>
                 </div>
 
-                <!-- MOBIL -->
                 <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
                     <div class="mobile-left">
                         <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
@@ -519,7 +528,6 @@
                     </div>
                 </div>
 
-                <!-- DETAILS -->
                 <div class="stock-details">
                     <div class="details-container">
                         <div class="details-grid">
@@ -584,30 +592,42 @@
         });
 
         if (sortWert === 'perfMonat') {
-            ergebnis.sort((a, b) => (b.perfMonat || 0) - (a.perfMonat || 0));
+            ergebnis.sort((a, b) => (parseToNumber(b.perfMonat) || 0) - (parseToNumber(a.perfMonat) || 0));
         } else if (sortWert === 'perfJahr') {
-            ergebnis.sort((a, b) => (b.perfJahr || 0) - (a.perfJahr || 0));
+            ergebnis.sort((a, b) => (parseToNumber(b.perfJahr) || 0) - (parseToNumber(a.perfJahr) || 0));
         } else if (sortWert === 'yield') {
-            ergebnis.sort((a, b) => (b.yield || 0) - (a.yield || 0));
+            ergebnis.sort((a, b) => (parseToNumber(b.yield) || 0) - (parseToNumber(a.yield) || 0));
         } else if (sortWert === 'kgvAsc') {
             ergebnis.sort((a, b) => {
-                const valA = a.kgv && a.kgv > 0 ? a.kgv : Infinity;
-                const valB = b.kgv && b.kgv > 0 ? b.kgv : Infinity;
+                const valA = parseToNumber(a.kgv) || Infinity;
+                const valB = parseToNumber(b.kgv) || Infinity;
                 return valA - valB;
             });
         } else if (sortWert === 'kgvDesc') {
             ergebnis.sort((a, b) => {
-                const valA = a.kgv && a.kgv > 0 ? a.kgv : -Infinity;
-                const valB = b.kgv && b.kgv > 0 ? b.kgv : -Infinity;
+                const valA = parseToNumber(a.kgv) || -Infinity;
+                const valB = parseToNumber(b.kgv) || -Infinity;
                 return valB - valA;
             });
         } else if (sortWert === 'kgvDiffAsc') {
             ergebnis.sort((a, b) => {
-                const abwA = berechneAbweichung(a.kgv, a.kgv5J);
-                const abwB = berechneAbweichung(b.kgv, b.kgv5J);
+                const abwA = berechneAbweichung(parseToNumber(a.kgv), parseToNumber(a.kgv5J));
+                const abwB = berechneAbweichung(parseToNumber(b.kgv), parseToNumber(b.kgv5J));
                 const valA = abwA !== null ? abwA : Infinity;
                 const valB = abwB !== null ? abwB : Infinity;
                 return valA - valB;
+            });
+        } else if (sortWert === 'kcvAsc') {
+            ergebnis.sort((a, b) => {
+                const valA = parseToNumber(a.kcv) || Infinity;
+                const valB = parseToNumber(b.kcv) || Infinity;
+                return valA - valB;
+            });
+        } else if (sortWert === 'kcvDesc') {
+            ergebnis.sort((a, b) => {
+                const valA = parseToNumber(a.kcv) || -Infinity;
+                const valB = parseToNumber(b.kcv) || -Infinity;
+                return valB - valA;
             });
         }
 
