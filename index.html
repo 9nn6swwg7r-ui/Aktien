@@ -112,7 +112,8 @@
         /* --- DESKTOP TABLE STYLES --- */
         .stock-table-header, .stock-summary {
             display: grid;
-            grid-template-columns: 2.8fr 1.2fr 1.2fr 1.2fr 1.2fr 1.8fr;
+            /* Spalten-Verhältnis angepasst für die neue KCV-Spalte */
+            grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
             padding: 1rem 1.5rem;
             align-items: center;
             gap: 1rem;
@@ -238,7 +239,7 @@
         }
 
         .stock-item.open .stock-details {
-            max-height: 700px;
+            max-height: 800px;
             border-top: 1px solid var(--border);
         }
 
@@ -300,22 +301,27 @@
             color: var(--text-main);
         }
 
-        /* --- MOBILGERÄTE CONTAINER (FÜR SMARTPHONES OPTIMIERT) --- */
+        /* --- MOBILGERÄTE CONTAINER --- */
         .mobile-row-layout {
             display: none;
         }
 
         /* --- RESPONSIVE BREAKPOINTS --- */
+        @media (max-width: 1100px) {
+            .stock-table-header, .stock-summary {
+                grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr;
+            }
+            .hide-tablet { display: none; }
+        }
+
         @media (max-width: 768px) {
             body { padding: 1rem; }
             .stock-table-header { display: none; }
 
-            /* Desktop-Grid abschalten */
             .stock-summary {
                 display: none !important;
             }
 
-            /* Mobiles Flexbox-Layout erzwingen */
             .mobile-row-layout {
                 display: flex !important;
                 align-items: center;
@@ -397,8 +403,9 @@
         <span>Kurs (EUR)</span>
         <span>1 Monat</span>
         <span>1 Jahr</span>
-        <span>Dividende</span>
-        <span>KGV (% vs. 5J Ø)</span>
+        <span class="hide-tablet">Dividende</span>
+        <span class="hide-tablet">KGV (% vs. 5J Ø)</span>
+        <span class="hide-tablet">KCV (5J Ø)</span>
     </div>
 
     <div id="stock-list" class="stock-list"></div>
@@ -459,9 +466,9 @@
                 dividendDisplay = aktie.yield === 0.01 ? "Ja" : `${aktie.yield.toFixed(2)} %`;
             }
 
+            // KGV Logik
             const hatKGV = aktie.kgv && aktie.kgv > 0;
             const hatKGV5J = aktie.kgv5J && aktie.kgv5J > 0;
-            
             let discountBadgeHTML = "";
             let diffHTML = "";
             
@@ -475,9 +482,14 @@
                     discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
                 }
             }
-
             const kgvDisplay = hatKGV ? aktie.kgv.toFixed(1) : '-';
             const kgv5JDisplay = hatKGV5J ? aktie.kgv5J.toFixed(1) : '-';
+
+            // KCV Logik (Erwartet keys "kcv" und "kcv5J" in deiner daten.json)
+            const hatKCV = aktie.kcv && aktie.kcv > 0;
+            const hatKCV5J = aktie.kcv5J && aktie.kcv5J > 0;
+            const kcvDisplay = hatKCV ? aktie.kcv.toFixed(1) : '-';
+            const kcv5JDisplay = hatKCV5J ? aktie.kcv5J.toFixed(1) : '-';
 
             const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=60";
 
@@ -495,8 +507,9 @@
                     <div class="stock-value">${aktie.kurs}</div>
                     <div class="stock-value perf ${monatClass}">${aktie.perfMonat >= 0 ? '+' : ''}${aktie.perfMonat.toFixed(2)}%</div>
                     <div class="stock-value perf ${jahrClass}">${aktie.perfJahr >= 0 ? '+' : ''}${aktie.perfJahr.toFixed(2)}%</div>
-                    <div class="stock-value">${dividendDisplay}</div>
-                    <div class="stock-value" style="white-space: nowrap;">${kgvDisplay}${diffHTML}${discountBadgeHTML}</div>
+                    <div class="stock-value hide-tablet">${dividendDisplay}</div>
+                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${diffHTML}${discountBadgeHTML}</div>
+                    <div class="stock-value hide-tablet" style="color: var(--text-muted); font-size: 0.95rem;">${kcvDisplay} <span style="font-size: 0.8rem; color: #64748b;">(${kcv5JDisplay})</span></div>
                 </div>
 
                 <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
@@ -537,6 +550,14 @@
                                 <span style="color: var(--accent);">${kgv5JDisplay}</span>
                             </div>
                             <div class="detail-card">
+                                <label>Aktuelles KCV</label>
+                                <span style="color: var(--text-main);">${kcvDisplay}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>5Y Ø KCV</label>
+                                <span style="color: var(--accent);">${kcv5JDisplay}</span>
+                            </div>
+                            <div class="detail-card">
                                 <label>5J Perf.</label>
                                 <span class="perf ${aktie.perf5J >= 0 ? 'positive' : 'negative'}">
                                     ${aktie.perf5J >= 0 ? '+' : ''}${aktie.perf5J.toFixed(1)}%
@@ -549,7 +570,7 @@
                                 💡 <strong>Performance-Werte:</strong> Zeigen die reine Kursveränderung (ohne Dividenden) im jeweiligen Zeitraum an.
                             </div>
                             <div class="info-text">
-                                📊 <strong>KGV-Abweichung:</strong> Ein <span class="perf positive">negativer Prozentwert</span> zeigt, um wie viel Prozent die Aktie billiger ist als im 5-Jahres-Schnitt (Unterbewertung).
+                                📊 <strong>KCV / KGV:</strong> Das Kurs-Cashflow-Verhältnis (KCV) ist weniger anfällig für bilanzielle Verzerrungen als das KGV. Niedrigere Werte im Vergleich zum 5J-Schnitt deuten auf eine günstige Bewertung hin.
                             </div>
                         </div>
                     </div>
