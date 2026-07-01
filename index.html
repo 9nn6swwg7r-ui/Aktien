@@ -109,7 +109,6 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
         }
 
-        /* Festes, definiertes Tabellen-Grid */
         .stock-table-header, .stock-summary {
             display: grid;
             grid-template-columns: 3fr 1.2fr 1.2fr 1.2fr 1.2fr 1.5fr;
@@ -155,20 +154,20 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            min-width: 0; /* Verhindert das Herausquetschen von Inhalten */
+            min-width: 0;
         }
 
         .stock-logo {
             width: 40px;
             height: 40px;
-            min-width: 40px; /* Erzwingt die volle Breite des Logos */
+            min-width: 40px;
             min-height: 40px;
             border-radius: 8px;
             background-color: #ffffff;
             object-fit: contain;
             padding: 4px;
             border: 1px solid var(--border);
-            flex-shrink: 0; /* Verhindert, dass das Bild schrumpft */
+            flex-shrink: 0;
         }
 
         .stock-info {
@@ -230,14 +229,17 @@
         }
 
         .stock-item.open .stock-details {
-            max-height: 400px;
+            max-height: 500px;
             border-top: 1px solid var(--border);
         }
 
-        .details-grid {
+        .details-container {
             padding: 1.5rem;
+        }
+
+        .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1rem;
         }
 
@@ -266,6 +268,28 @@
 
         .detail-card.highlight {
             border-left: 3px solid var(--accent);
+        }
+
+        /* Stil für die Prozentwert-Erklärung */
+        .perf-explanation {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(51, 65, 85, 0.6);
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .info-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .info-text strong {
+            color: var(--text-main);
         }
 
         @media (max-width: 1024px) {
@@ -382,7 +406,6 @@
             const kgvDisplay = hatKGV ? aktie.kgv.toFixed(1) : '-';
             const kgv5JDisplay = hatKGV5J ? aktie.kgv5J.toFixed(1) : '-';
 
-            // Ein Fallback-Bild von Unsplash falls Clearbit mal streikt
             const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=60";
 
             const item = document.createElement('div');
@@ -403,28 +426,43 @@
                     <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${discountBadgeHTML}</div>
                 </div>
                 <div class="stock-details">
-                    <div class="details-grid">
-                        <div class="detail-card highlight">
-                            <label>Dividenden-Monate</label>
-                            <span>${aktie.monate || '-'}</span>
+                    <div class="details-container">
+                        <div class="details-grid">
+                            <div class="detail-card highlight">
+                                <label>Dividenden-Monate</label>
+                                <span>${aktie.monate || '-'}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Intervall</label>
+                                <span>${aktie.frequenz || '-'}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Ex-Datum</label>
+                                <span>${aktie.exDate || '-'}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>Aktuelles KGV</label>
+                                <span style="color: var(--text-main);">${kgvDisplay}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>5Y Ø KGV</label>
+                                <span style="color: var(--accent);">${kgv5JDisplay}</span>
+                            </div>
+                            <div class="detail-card">
+                                <label>5J Perf.</label>
+                                <span class="perf ${aktie.perf5J >= 0 ? 'positive' : 'negative'}">
+                                    ${aktie.perf5J >= 0 ? '+' : ''}${aktie.perf5J.toFixed(1)}%
+                                </span>
+                            </div>
                         </div>
-                        <div class="detail-card">
-                            <label>Intervall</label>
-                            <span>${aktie.frequenz || '-'}</span>
-                        </div>
-                        <div class="detail-card">
-                            <label>Ex-Datum</label>
-                            <span>${aktie.exDate || '-'}</span>
-                        </div>
-                        <div class="detail-card">
-                            <label>5Y Ø KGV</label>
-                            <span style="color: var(--accent);">${kgv5JDisplay}</span>
-                        </div>
-                        <div class="detail-card">
-                            <label>5J Perf.</label>
-                            <span class="perf ${aktie.perf5J >= 0 ? 'positive' : 'negative'}">
-                                ${aktie.perf5J >= 0 ? '+' : ''}${aktie.perf5J.toFixed(1)}%
-                            </span>
+                        
+                        <div class="perf-explanation">
+                            <div class="info-text">
+                                💡 <strong>Performance-Werte:</strong> Zeigen die reine Kursveränderung (ohne Dividenden) im jeweiligen Zeitraum an.
+                            </div>
+                            <div class="info-text">
+                                📈 <span class="perf positive">Grüne Werte</span> signalisieren Kursgewinne, 📉 <span class="perf negative">rote Werte</span> stehen für Kursverluste.
+                            </div>
                         </div>
                     </div>
                 </div>
