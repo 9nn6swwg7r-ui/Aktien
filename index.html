@@ -230,7 +230,7 @@
             .details-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         }
     </style>
-</head>
+    /head>
 <body>
 
 <div class="container">
@@ -473,5 +473,22 @@
 
     datenLaden();
 </script>
+    <div id="json-spickzettel" style="background: #1e293b; padding: 1.5rem; margin-top: 2rem; border-radius: 8px; border: 1px dashed #38bdf8;">
+    <h3 style="color: #38bdf8; margin-bottom: 0.5rem;">Diagnose: So sehen deine Daten aus</h3>
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">Hier sind die exakten Feldnamen der ersten Aktie aus deiner JSON:</p>
+    <pre id="erster-eintrag" style="background: #000; padding: 1rem; border-radius: 4px; color: #a7f3d0; overflow-x: auto; font-family: monospace;"></pre>
+</div>
+
+<script>
+    // Kleiner Helfer, der uns den ersten Eintrag direkt auf den Bildschirm wirft
+    setTimeout(() => {
+        if(alleAktien && alleAktien.length > 0) {
+            document.getElementById('erster-eintrag').textContent = JSON.stringify(alleAktien[0], null, 2);
+        } else {
+            document.getElementById('erster-eintrag').textContent = "Keine Daten geladen.";
+        }
+    }, 1000);
+</script>
+
 </body>
 </html>
