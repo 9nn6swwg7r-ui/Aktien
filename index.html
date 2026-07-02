@@ -153,7 +153,6 @@
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
             let sauber = val.trim();
-            // Ersetze Komma durch Punkt und filtere alles bis auf Ziffern, Minus und Punkt
             sauber = sauber.replace(',', '.').replace(/[^0-9.-]/g, '');
             let n = parseFloat(sauber);
             return isNaN(n) ? null : n;
@@ -165,7 +164,6 @@
         const btn = document.querySelector('.refresh-btn');
         if (btn) btn.textContent = "⏳ Lädt neu...";
         try {
-            // Timestamp erzwingt immer frische Daten
             const antwort = await fetch('daten.json?nocache=' + new Date().getTime());
             alleAktien = await antwort.json();
             renderAktien();
@@ -195,7 +193,7 @@
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
 
-            // DIVIDENDEN-FIX auf Basis der echten JSON-Keys
+            // DIVIDENDEN-FIX: Keine automatische Multiplikation mehr!
             let dividendDisplay = "-";
             let roheDiv = aktie.dividendYield !== undefined ? aktie.dividendYield : aktie.yield;
             
@@ -207,16 +205,15 @@
                     } else {
                         let num = parseToNumber(divString);
                         if (num !== null) {
-                            if (num > 0 && num < 1) num = num * 100;
                             dividendDisplay = `${num.toFixed(2)} %`;
                         }
                     }
                 }
             }
 
-            // KGV-FIX auf Basis der echten JSON-Keys ('kgv' und 'kgv5Jahre')
-            const kgvNum = parseToNumber(aktie.kgv) || parseToNumber(aktie.kgvAktuell);
-            const kgv5JNum = parseToNumber(aktie.kgv5Jahre);
+            // KGV-LOOKUP
+            const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
+            const kgv5JNum = parseToNumber(aktie.kgv5Jahre) !== null ? parseToNumber(aktie.kgv5Jahre) : parseToNumber(aktie.kgv5j);
             let kgvDiffHTML = "", kgvDiscount = "";
             if (kgvNum !== null && kgv5JNum !== null) {
                 const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
@@ -224,9 +221,12 @@
                 if (abw < 0) kgvDiscount = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV-FIX auf Basis der echten JSON-Keys ('kcv' und 'kcv5Jahre')
-            const kcvNum = parseToNumber(aktie.kcv) || parseToNumber(aktie.kcvAktuell);
-            const kcv5JNum = parseToNumber(aktie.kcv5Jahre);
+            // KCV-LOOKUP (Sucht flexibel nach 'kcv', 'kcvAktuell', 'pcf' oder 'KCV')
+            const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : 
+                           (parseToNumber(aktie.kcvAktuell) !== null ? parseToNumber(aktie.kcvAktuell) : 
+                           (parseToNumber(aktie.pcf) !== null ? parseToNumber(aktie.pcf) : parseToNumber(aktie.KCV)));
+            
+            const kcv5JNum = parseToNumber(aktie.kcv5Jahre) !== null ? parseToNumber(aktie.kcv5Jahre) : parseToNumber(aktie.kcv5j);
             let kcvDiffHTML = "", kcvDiscount = "";
             if (kcvNum !== null && kcv5JNum !== null) {
                 const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
