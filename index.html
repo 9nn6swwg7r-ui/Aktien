@@ -149,18 +149,12 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    // Aggressives Parsing, das Textzeichen wie 'x' oder '%' entfernt und Zahlen sauber isoliert
     function parseToNumber(val) {
         if (val === undefined || val === null) return null;
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
             let sauber = val.trim();
-            // Wenn Komma und Punkt vorkommen (z.B. Tausender-Trenner), bereinigen
-            if (sauber.includes(',') && sauber.includes('.')) {
-                if (sauber.indexOf('.') < sauber.indexOf(',')) {
-                    sauber = sauber.replace(/\./g, '');
-                }
-            }
+            if (sauber === "N/A" || sauber === "NaN" || sauber === "-") return null;
             sauber = sauber.replace(',', '.').replace(/[^0-9.-]/g, '');
             let n = parseFloat(sauber);
             return isNaN(n) ? null : n;
@@ -197,22 +191,32 @@
             const perfJahr = parseToNumber(aktie.perfJahr) || 0;
             const perf5J = parseToNumber(aktie.perf5J) || 0;
             
-            // Radikaler Dividenden-Komma-Fix (z.B. 0.035 -> 3.50% oder 3.5 -> 3.50%)
-            let yieldVal = parseToNumber(aktie.yield || aktie.dividendYield);
-            if (yieldVal !== null) {
-                if (yieldVal > 0 && yieldVal < 1) {
-                    yieldVal = yieldVal * 100;
+            // INTELLIGENTER DIVIDENDEN-FIX:
+            let dividendDisplay = "-";
+            let roheDiv = aktie.yield || aktie.dividendYield;
+            
+            if (roheDiv !== undefined && roheDiv !== null) {
+                let divString = String(roheDiv).trim();
+                if (divString !== "N/A" && divString !== "-") {
+                    if (divString.includes("%")) {
+                        // Wenn bereits "0.75 %" drin steht, übernehmen wir es exakt so!
+                        dividendDisplay = divString;
+                    } else {
+                        // Falls es eine reine Zahl ist, parsen
+                        let num = parseToNumber(divString);
+                        if (num !== null) {
+                            if (num > 0 && num < 1) num = num * 100;
+                            dividendDisplay = `${num.toFixed(2)} %`;
+                        }
+                    }
                 }
-            } else {
-                yieldVal = 0;
             }
-            let dividendDisplay = yieldVal > 0 ? `${yieldVal.toFixed(2)} %` : "-";
 
             const tagClass = perfTag >= 0 ? 'positive' : 'negative';
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
 
-            // KGV aus JSON extrahieren
+            // KGV
             const kgvNum = parseToNumber(aktie.kgvAktuell);
             const kgv5JNum = parseToNumber(aktie.kgv5Jahre);
             let kgvDiffHTML = "", kgvDiscount = "";
@@ -222,7 +226,7 @@
                 if (abw < 0) kgvDiscount = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV aus JSON extrahieren (kcvAktuell & kcv5Jahre)
+            // KCV
             const kcvNum = parseToNumber(aktie.kcvAktuell);
             const kcv5JNum = parseToNumber(aktie.kcv5Jahre);
             let kcvDiffHTML = "", kcvDiscount = "";
