@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktien Portfolio & Watchlist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -53,7 +53,6 @@
         .tab-btn { flex: 1; padding: 0.6rem 1.2rem; background: none; border: none; color: var(--text-muted); font-weight: 500; cursor: pointer; border-radius: 6px; }
         .tab-btn.active { background-color: var(--bg-secondary); color: var(--accent); }
 
-        /* Erweitertes Grid-Layout für alle neuen Spalten */
         .stock-table-header, .stock-summary { display: grid; grid-template-columns: 2.2fr 1fr 0.8fr 0.8fr 0.8fr 1fr 1.3fr 1.3fr; padding: 1rem 1.5rem; align-items: center; gap: 1rem; }
         .stock-table-header { color: var(--text-muted); font-size: 0.82rem; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid var(--border); }
         
@@ -86,7 +85,6 @@
 
         .mobile-row-layout { display: none; }
 
-        /* Responsive Anpassungen */
         @media (max-width: 1250px) {
             .stock-table-header, .stock-summary { grid-template-columns: 2fr 1fr 0.8fr 0.8fr 0.8fr 1fr; }
             .hide-tablet { display: none; }
@@ -151,49 +149,11 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    // Intelligente Wertextraktion für KGV und KCV aus der JSON
-    function extrahiereWert(aktie, typ, ist5Jahre) {
-        if (!aktie) return null;
-        const keys = Object.keys(aktie);
-        let treffer = null;
-        
-        if (typ === 'kgv') {
-            const key = keys.find(k => {
-                const l = k.toLowerCase();
-                if (ist5Jahre) return l.includes('kgv') && (l.includes('5') || l.includes('y') || l.includes('j'));
-                return l === 'kgv' || (l.includes('kgv') && !l.includes('5') && !l.includes('y') && !l.includes('j'));
-            });
-            if (key) treffer = aktie[key];
-        }
-        
-        if (typ === 'kcv') {
-            const key = keys.find(k => {
-                const l = k.toLowerCase();
-                const hatCashflow = l.includes('kcv') || l.includes('cashflow') || l.includes('cash_flow') || l.includes('pcf');
-                if (ist5Jahre) return hatCashflow && (l.includes('5') || l.includes('y') || l.includes('j'));
-                return hatCashflow && !l.includes('5') && !l.includes('y') && !l.includes('j');
-            });
-            if (key) treffer = aktie[key];
-        }
-
-        if (treffer === null) {
-            if (typ === 'kcv' && !ist5Jahre) treffer = aktie.kcv || aktie.KCV || aktie.cashflow;
-            if (typ === 'kcv' && ist5Jahre) treffer = aktie.kcv5 || aktie.kcv5j || aktie.kcv5y;
-        }
-
-        if (typeof treffer === 'number') return treffer;
-        if (typeof treffer === 'string') {
-            let s = treffer.replace(',', '.').replace(/[^0-9.-]/g, '');
-            let n = parseFloat(s);
-            return isNaN(n) ? null : n;
-        }
-        return null;
-    }
-
     function parseToNumber(val) {
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
-            let n = parseFloat(val.replace(',', '.').replace(/[^0-9.-]/g, ''));
+            let sauber = val.replace(',', '.').replace(/[^0-9.-]/g, '');
+            let n = parseFloat(sauber);
             return isNaN(n) ? null : n;
         }
         return null;
@@ -223,21 +183,26 @@
         const tabListe = liste.filter(a => aktuellerTab === 'portfolio' ? !a.watchlist : a.watchlist);
 
         tabListe.forEach(aktie => {
-            // Performance-Werte flexibel auslesen
-            const perfTag = parseToNumber(aktie.perfTag || aktie.PerfTag || aktie.tagesperformance || aktie.change_percent) || 0;
-            const perfMonat = parseToNumber(aktie.perfMonat || aktie.PerfMonat) || 0;
-            const perfJahr = parseToNumber(aktie.perfJahr || aktie.PerfJahr) || 0;
-            const perf5J = parseToNumber(aktie.perf5J || aktie.Perf5J) || 0;
-            const yieldVal = parseToNumber(aktie.yield || aktie.Yield || aktie.dividende) || 0;
+            // Exakte Zuordnung laut deinem JSON-Screenshot
+            const perfTag = parseToNumber(aktie.perfTag) || 0;
+            const perfMonat = parseToNumber(aktie.perfMonat) || 0;
+            const perfJahr = parseToNumber(aktie.perfJahr) || 0;
+            const perf5J = parseToNumber(aktie.perf5J) || 0;
+            
+            // Dividenden-Multiplikation für die Prozentdarstellung (z.B. 0.0075 -> 0.75%)
+            let yieldVal = parseToNumber(aktie.yield || aktie.dividendYield) || 0;
+            if (yieldVal > 0 && yieldVal < 1) {
+                yieldVal = yieldVal * 100;
+            }
+            let dividendDisplay = yieldVal > 0 ? `${yieldVal.toFixed(2)} %` : "-";
 
             const tagClass = perfTag >= 0 ? 'positive' : 'negative';
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
-            let dividendDisplay = yieldVal > 0 ? `${yieldVal.toFixed(2)} %` : "-";
 
-            // KGV & Abweichung
-            const kgvNum = extrahiereWert(aktie, 'kgv', false);
-            const kgv5JNum = extrahiereWert(aktie, 'kgv', true);
+            // KGV aus JSON holen (kgvAktuell & kgv5Jahre)
+            const kgvNum = parseToNumber(aktie.kgvAktuell);
+            const kgv5JNum = parseToNumber(aktie.kgv5Jahre);
             let kgvDiffHTML = "", kgvDiscount = "";
             if (kgvNum && kgv5JNum) {
                 const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
@@ -245,9 +210,9 @@
                 if (abw < 0) kgvDiscount = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV & Abweichung (Dein Wunsch!)
-            const kcvNum = extrahiereWert(aktie, 'kcv', false);
-            const kcv5JNum = extrahiereWert(aktie, 'kcv', true);
+            // KCV aus JSON holen (kcvAktuell & kcv5Jahre) -> JETZT EXAKT ABGESTIMMT!
+            const kcvNum = parseToNumber(aktie.kcvAktuell);
+            const kcv5JNum = parseToNumber(aktie.kcv5Jahre);
             let kcvDiffHTML = "", kcvDiscount = "";
             if (kcvNum && kcv5JNum) {
                 const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
@@ -255,9 +220,9 @@
                 if (abw < 0 && !kgvDiscount) kcvDiscount = `<span class="discount-badge">Cash Günstig 💸</span>`;
             }
 
-            // Ausschüttungs-Daten (Frequenz & Monate)
-            const ausschuettungstage = aktie.monate || aktie.ausschüttungstage || aktie.months || '-';
-            const haeufigkeit = aktie.frequenz || aktie.häufigkeit || aktie.frequency || '-';
+            // Ausschüttung & Frequenz
+            const ausschuettungstage = aktie.monate || "-";
+            const haeufigkeit = aktie.frequenz || "-";
 
             const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100";
             const tagsHTML = (aktie.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
@@ -312,11 +277,11 @@
                             </div>
                             <div class="detail-card">
                                 <label>Aktuelles KGV</label>
-                                <span>${kgvNum ? kgvNum.toFixed(1) : '-'} ${kgvDiffHTML}</span>
+                                <span>${kgvNum !== null ? kgvNum.toFixed(1) : '-'} ${kgvDiffHTML}</span>
                             </div>
                             <div class="detail-card">
                                 <label>5Y Ø KGV</label>
-                                <span>${kgv5JNum ? kgv5JNum.toFixed(1) : '-'}</span>
+                                <span>${kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-'}</span>
                             </div>
                             <div class="detail-card highlight">
                                 <label>Aktuelles KCV</label>
@@ -324,7 +289,7 @@
                             </div>
                             <div class="detail-card">
                                 <label>5Y Ø KCV</label>
-                                <span>${kcv5JNum ? kcv5JNum.toFixed(1) : '-'}</span>
+                                <span>${kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-'}</span>
                             </div>
                             <div class="detail-card">
                                 <label>Ex-Datum</label>
@@ -350,10 +315,10 @@
         const sortWert = document.getElementById('sortPerformance').value;
         let ergebnis = alleAktien.filter(a => (a.name || '').toLowerCase().includes(s) || (a.tags || []).some(t => t.toLowerCase().includes(s)));
         
-        if (sortWert === 'perfTag') ergebnis.sort((a, b) => (parseToNumber(b.perfTag || b.PerfTag) || 0) - (parseToNumber(a.perfTag || a.PerfTag) || 0));
-        if (sortWert === 'perfMonat') ergebnis.sort((a, b) => (parseToNumber(b.perfMonat || b.PerfMonat) || 0) - (parseToNumber(a.perfMonat || a.PerfMonat) || 0));
-        if (sortWert === 'perfJahr') ergebnis.sort((a, b) => (parseToNumber(b.perfJahr || b.PerfJahr) || 0) - (parseToNumber(a.perfJahr || a.PerfJahr) || 0));
-        if (sortWert === 'yield') ergebnis.sort((a, b) => (parseToNumber(b.yield || b.Yield) || 0) - (parseToNumber(a.yield || a.Yield) || 0));
+        if (sortWert === 'perfTag') ergebnis.sort((a, b) => (parseToNumber(b.perfTag) || 0) - (parseToNumber(a.perfTag) || 0));
+        if (sortWert === 'perfMonat') ergebnis.sort((a, b) => (parseToNumber(b.perfMonat) || 0) - (parseToNumber(a.perfMonat) || 0));
+        if (sortWert === 'perfJahr') ergebnis.sort((a, b) => (parseToNumber(b.perfJahr) || 0) - (parseToNumber(a.perfJahr) || 0));
+        if (sortWert === 'yield') ergebnis.sort((a, b) => (parseToNumber(b.yield) || 0) - (parseToNumber(a.yield) || 0));
         
         renderAktien(ergebnis);
     }
