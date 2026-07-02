@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aktien Portfolio & Watchlist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -20,196 +20,47 @@
             --badge-discount: #22c55e;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-primary); color: var(--text-main); padding: 2rem; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; }
 
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            padding: 2rem;
-            min-height: 100vh;
-        }
+        header { margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.05em; background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .controls { background-color: var(--bg-secondary); padding: 1.25rem; border-radius: 12px; margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; border: 1px solid var(--border); }
+        .search-box input, .controls select { width: 100%; padding: 0.75rem 1rem; background-color: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-size: 0.9rem; outline: none; }
 
-        /* DIAGNOSE BOX */
-        #diagnose-container {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
-        .error-details { font-family: monospace; background: #000; padding: 1rem; border-radius: 4px; color: #f43f5e; margin-top: 0.5rem; white-space: pre-wrap; }
+        .tabs { display: flex; gap: 0.5rem; background-color: var(--bg-primary); padding: 0.25rem; border-radius: 8px; border: 1px solid var(--border); }
+        .tab-btn { flex: 1; padding: 0.6rem; background: none; border: none; color: var(--text-muted); font-weight: 500; cursor: pointer; border-radius: 6px; }
+        .tab-btn.active { background-color: var(--bg-secondary); color: var(--accent); }
 
-        /* DASHBOARD (Standardmäßig versteckt, bis Daten da sind) */
-        #main-dashboard {
-            display: none;
-        }
+        .stock-table-header, .stock-summary { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr; padding: 1rem 1.5rem; align-items: center; gap: 1rem; }
+        .stock-table-header { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        
+        .stock-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+        .stock-item { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .stock-summary { padding: 1.25rem 1.5rem; cursor: pointer; }
 
-        header {
-            margin-bottom: 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .stock-profile { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+        .stock-logo { width: 40px; height: 40px; border-radius: 8px; background-color: #ffffff; object-fit: contain; padding: 4px; border: 1px solid var(--border); flex-shrink: 0; }
+        .stock-info .name { font-weight: 600; font-size: 1.05rem; color: var(--text-main); }
+        
+        .tags-container { display: flex; gap: 0.4rem; margin-top: 0.35rem; }
+        .tag { background-color: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-            background: linear-gradient(to right, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .controls {
-            background-color: var(--bg-secondary);
-            padding: 1.25rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            border: 1px solid var(--border);
-        }
-
-        .search-box input, .controls select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background-color: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .search-box input:focus, .controls select:focus {
-            border-color: var(--accent);
-        }
-
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            background-color: var(--bg-primary);
-            padding: 0.25rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 0.6rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background-color: var(--bg-secondary);
-            color: var(--accent);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-        }
-
-        /* GRID SYSTEM */
-        .stock-table-header, .stock-summary {
-            display: grid;
-            grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
-            padding: 1rem 1.5rem;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .stock-table-header {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .stock-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        .stock-item {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .stock-item:hover {
-            border-color: #475569;
-        }
-
-        .stock-summary {
-            padding: 1.25rem 1.5rem;
-            cursor: pointer;
-        }
-
-        .stock-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            min-width: 0;
-        }
-
-        .stock-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            object-fit: contain;
-            padding: 4px;
-            border: 1px solid var(--border);
-            flex-shrink: 0;
-        }
-
-        .stock-info { min-width: 0; }
-        .stock-info .name {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: var(--text-main);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .tags-container { display: flex; gap: 0.4rem; margin-top: 0.35rem; flex-wrap: wrap; }
-        .tag { background-color: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 500; }
         .stock-value { font-weight: 500; font-size: 1rem; }
         .perf.positive { color: var(--success); }
         .perf.negative { color: var(--danger); }
-        .discount-badge { background-color: rgba(34, 197, 94, 0.15); color: var(--badge-discount); font-size: 0.75rem; padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; margin-left: 0.5rem; border: 1px solid rgba(34, 197, 94, 0.3); display: inline-block; vertical-align: middle; }
+        .discount-badge { background-color: rgba(34, 197, 94, 0.15); color: var(--badge-discount); font-size: 0.75rem; padding: 0.15rem 0.4rem; border-radius: 4px; margin-left: 0.5rem; }
         .kgv-diff-text, .kcv-diff-text { font-size: 0.8rem; font-weight: 600; margin-left: 0.4rem; }
 
-        .stock-details { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(4, 0, 0.2, 1); background-color: rgba(30, 41, 59, 0.3); border-top: 0 solid var(--border); }
+        .stock-details { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: rgba(30, 41, 59, 0.3); }
         .stock-item.open .stock-details { max-height: 800px; border-top: 1px solid var(--border); }
         .details-container { padding: 1.5rem; }
         .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
         .detail-card { background-color: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; border: 1px solid rgba(51, 65, 85, 0.5); }
-        .detail-card label { display: block; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
-        .detail-card span { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
-        .detail-card.highlight { border-left: 3px solid var(--accent); }
+        .detail-card label { display: block; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .detail-card span { font-size: 1.1rem; font-weight: 600; }
 
         .mobile-row-layout { display: none; }
 
@@ -217,142 +68,120 @@
             .stock-table-header, .stock-summary { grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr; }
             .hide-tablet { display: none; }
         }
-
         @media (max-width: 768px) {
-            body { padding: 1rem; }
             .stock-table-header { display: none; }
             .stock-summary { display: none !important; }
-            .mobile-row-layout { display: flex !important; align-items: center; justify-content: space-between; padding: 1.25rem 1rem; cursor: pointer; width: 100%; }
-            .mobile-left { display: flex; align-items: center; gap: 1rem; min-width: 0; flex: 1; }
-            .mobile-right { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; gap: 0.25rem; }
-            .mobile-right .mob-kurs { font-weight: 700; font-size: 1.1rem; color: var(--text-main); }
-            .mobile-right .mob-perf { font-size: 0.85rem; font-weight: 600; }
-            .details-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .mobile-row-layout { display: flex !important; align-items: center; justify-content: space-between; padding: 1.25rem 1rem; }
+            .mobile-left { display: flex; align-items: center; gap: 1rem; }
+            .mobile-right { text-align: right; }
         }
     </style>
-    /head>
+</head>
 <body>
 
 <div class="container">
-    <div id="diagnose-container">
-        <h2 style="color: var(--accent); margin-bottom: 0.5rem;">Starte Dashboard...</h2>
-        <p id="diagnose-status" style="color: var(--text-muted);">Lese daten.json ein...</p>
+    <header>
+        <h1>Umfassendes Aktien-Dashboard</h1>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('portfolio')">Depot Portfolio</button>
+            <button class="tab-btn" onclick="switchTab('watchlist')">Watchlist</button>
+        </div>
+    </header>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Aktie oder Tag suchen..." oninput="filterAktien()">
+        </div>
+        <div>
+            <select id="sortPerformance" onchange="filterAktien()">
+                <option value="default">Sortierung: Standard</option>
+                <option value="perfMonat">Beste Monats-Performance</option>
+                <option value="perfJahr">Beste Jahres-Performance</option>
+                <option value="yield">Höchste Dividendenrendite</option>
+            </select>
+        </div>
     </div>
 
-    <div id="main-dashboard">
-        <header>
-            <h1>Umfassendes Aktien-Dashboard</h1>
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('portfolio')">Depot Portfolio</button>
-                <button class="tab-btn" onclick="switchTab('watchlist')">Watchlist</button>
-            </div>
-        </header>
-
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="search" placeholder="Aktie oder Tag suchen..." oninput="filterAktien()">
-            </div>
-            <div>
-                <select id="sortPerformance" onchange="filterAktien()">
-                    <option value="default">Sortierung: Standard</option>
-                    <option value="perfMonat">Beste Monats-Performance</option>
-                    <option value="perfJahr">Beste Jahres-Performance</option>
-                    <option value="yield">Höchste Dividendenrendite</option>
-                    <option value="kgvAsc">Niedrigstes KGV (Value-Fokus)</option>
-                    <option value="kgvDesc">Höchstes KGV (Wachstum)</option>
-                    <option value="kcvAsc">Niedrigstes KCV (Value-Fokus)</option>
-                    <option value="kcvDesc">Höchstes KCV (Wachstum)</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="stock-table-header">
-            <span>Unternehmen / Sektor</span>
-            <span>Kurs (EUR)</span>
-            <span>1 Monat</span>
-            <span>1 Jahr</span>
-            <span class="hide-tablet">Dividende</span>
-            <span class="hide-tablet">KGV (% vs. 5J Ø)</span>
-            <span class="hide-tablet">KCV (% vs. 5J Ø)</span>
-        </div>
-
-        <div id="stock-list" class="stock-list"></div>
+    <div class="stock-table-header">
+        <span>Unternehmen / Sektor</span>
+        <span>Kurs (EUR)</span>
+        <span>1 Monat</span>
+        <span>1 Jahr</span>
+        <span class="hide-tablet">Dividende</span>
+        <span class="hide-tablet">KGV (% vs. 5J Ø)</span>
+        <span class="hide-tablet">KCV (% vs. 5J Ø)</span>
     </div>
+
+    <div id="stock-list" class="stock-list">Lade Daten aus JSON...</div>
 </div>
 
 <script>
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    function getJSONValue(obj, baseKey, is5Year = false) {
-        if (!obj || typeof obj !== 'object') return null;
-        const keys = Object.keys(obj);
-        const targetKey = keys.find(k => {
-            const lowKey = k.toLowerCase();
-            const matchesBase = lowKey.includes(baseKey.toLowerCase());
-            return is5Year ? (matchesBase && (lowKey.includes('5') || lowKey.includes('y') || lowKey.includes('j'))) : (matchesBase && !lowKey.includes('5') && !lowKey.includes('y') && !lowKey.includes('j'));
-        });
-        return targetKey ? obj[targetKey] : null;
+    // Ultradirekte, kompromisslose Namenssuche für KCV und KGV
+    function extrahiereWert(aktie, typ, ist5Jahre) {
+        if (!aktie) return null;
+        
+        // Alle Keys in Kleinbuchstaben umwandeln, um Tippfehler zu ignorieren
+        const keys = Object.keys(aktie);
+        
+        let treffer = null;
+        
+        if (typ === 'kgv') {
+            const suchBegriff = ist5Jahre ? ['kgv5', 'kgv_5', 'kgv5j', 'kgv5y'] : ['kgv'];
+            const key = keys.find(k => {
+                const l = k.toLowerCase();
+                if (ist5Jahre) return l.includes('kgv') && (l.includes('5') || l.includes('y') || l.includes('j'));
+                return l === 'kgv' || (l.includes('kgv') && !l.includes('5') && !l.includes('y') && !l.includes('j'));
+            });
+            if (key) treffer = aktie[key];
+        }
+        
+        if (typ === 'kcv') {
+            // Sucht nach kcv, cashflow, pcf, pricecashflow, etc.
+            const key = keys.find(k => {
+                const l = k.toLowerCase();
+                const hatCashflow = l.includes('kcv') || l.includes('cashflow') || l.includes('cash_flow') || l.includes('pcf');
+                if (ist5Jahre) return hatCashflow && (l.includes('5') || l.includes('y') || l.includes('j'));
+                return hatCashflow && !l.includes('5') && !l.includes('y') && !l.includes('j');
+            });
+            if (key) treffer = aktie[key];
+        }
+
+        // Falls über allgemeine Logik nichts kam, direkt nach Standard-Keys greifen
+        if (treffer === null) {
+            if (typ === 'kcv' && !ist5Jahre) treffer = aktie.kcv || aktie.KCV || aktie.cashflow || aktie.Cashflow;
+            if (typ === 'kcv' && ist5Jahre) treffer = aktie.kcv5 || aktie.kcv5j || aktie.kcv5y || aktie.KCV5;
+        }
+
+        // In Zahl umwandeln
+        if (typeof treffer === 'number') return treffer;
+        if (typeof treffer === 'string') {
+            let s = treffer.replace(',', '.').replace(/[^0-9.-]/g, '');
+            let n = parseFloat(s);
+            return isNaN(n) ? null : n;
+        }
+        return null;
     }
 
     function parseToNumber(val) {
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
-            let sauber = val.replace(',', '.').replace(/[^0-9.-]/g, '');
-            let num = parseFloat(sauber);
-            return isNaN(num) ? null : num;
-        }
-        return null;
-    }
-
-    function berechneAbweichung(aktuell, schnitt) {
-        if (aktuell !== null && schnitt !== null && aktuell > 0 && schnitt > 0) {
-            return ((aktuell - schnitt) / schnitt) * 100;
+            let n = parseFloat(val.replace(',', '.').replace(/[^0-9.-]/g, ''));
+            return isNaN(n) ? null : n;
         }
         return null;
     }
 
     async function datenLaden() {
-        const diagBox = document.getElementById('diagnose-container');
-        const diagStatus = document.getElementById('diagnose-status');
-        const dashboard = document.getElementById('main-dashboard');
-
         try {
-            const cacheBuster = "?v=" + Math.random();
-            const antwort = await fetch('daten.json' + cacheBuster);
-            
-            if (!antwort.ok) throw new Error("Die Datei 'daten.json' wurde nicht gefunden.");
-            
-            const textDaten = await antwort.text();
-            
-            try {
-                alleAktien = JSON.parse(textDaten);
-                
-                // ERFOLG: Diagnose ausblenden, Dashboard einblenden
-                diagBox.style.display = 'none';
-                dashboard.style.display = 'block';
-                
-                renderAktien();
-            } catch (jsonFehler) {
-                diagBox.innerHTML = `
-                    <h2 style="color: var(--danger);">❌ Fehler in 'daten.json'</h2>
-                    <p style="margin-top:0.5rem;">Deine JSON-Datei enthält einen Tippfehler:</p>
-                    <div class="error-details">${jsonFehler.message}</div>
-                `;
-            }
-        } catch (fehler) {
-            diagBox.innerHTML = `
-                <h2 style="color: var(--danger);">❌ Datei nicht ladbar</h2>
-                <div class="error-details">${fehler.message}</div>
-            `;
+            const antwort = await fetch('daten.json?nocache=' + Math.random());
+            alleAktien = await antwort.json();
+            renderAktien();
+        } catch (f) {
+            document.getElementById('stock-list').innerHTML = `<p style="color:var(--danger)">Fehler beim Einlesen der daten.json.</p>`;
         }
-    }
-
-    function switchTab(tab) {
-        aktuellerTab = tab;
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        if(window.event && window.event.target) window.event.target.classList.add('active');
-        renderAktien();
     }
 
     function renderAktien(gefilterteListe = null) {
@@ -362,57 +191,46 @@
 
         if (!Array.isArray(liste)) return;
 
-        const tabListe = liste.filter(aktie => aktuellerTab === 'portfolio' ? !aktie.watchlist : aktie.watchlist);
-
-        if (tabListe.length === 0) {
-            container.innerHTML = `<p style="padding: 2rem; color: var(--text-muted); text-align: center;">Keine passenden Werte gefunden.</p>`;
-            return;
-        }
+        const tabListe = liste.filter(a => aktuellerTab === 'portfolio' ? !a.watchlist : a.watchlist);
 
         tabListe.forEach(aktie => {
-            const tags = Array.isArray(aktie.tags) ? aktie.tags : [];
-            const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
-            
-            const perfMonat = parseToNumber(getJSONValue(aktie, 'perfMonat')) || 0;
-            const perfJahr = parseToNumber(getJSONValue(aktie, 'perfJahr')) || 0;
-            const perf5J = parseToNumber(getJSONValue(aktie, 'perf5J')) || 0;
-            const yieldVal = parseToNumber(getJSONValue(aktie, 'yield')) || 0;
+            const perfMonat = parseToNumber(aktie.perfMonat || aktie.PerfMonat) || 0;
+            const perfJahr = parseToNumber(aktie.perfJahr || aktie.PerfJahr) || 0;
+            const perf5J = parseToNumber(aktie.perf5J || aktie.Perf5J) || 0;
+            const yieldVal = parseToNumber(aktie.yield || aktie.Yield || aktie.dividende) || 0;
 
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
-            
-            let dividendDisplay = yieldVal > 0 ? (yieldVal === 0.01 ? "Ja" : `${yieldVal.toFixed(2)} %`) : "-";
+            let dividendDisplay = yieldVal > 0 ? `${yieldVal.toFixed(2)} %` : "-";
 
-            // KGV
-            const kgvNum = parseToNumber(getJSONValue(aktie, 'kgv', false));
-            const kgv5JNum = parseToNumber(getJSONValue(aktie, 'kgv', true));
-            let discountBadgeHTML = "", kgvDiffHTML = "";
-            const kgvAbw = berechneAbweichung(kgvNum, kgv5JNum);
-            if (kgvAbw !== null) {
-                kgvDiffHTML = `<span class="kgv-diff-text ${kgvAbw <= 0 ? 'positive' : 'negative'}">(${kgvAbw > 0 ? '+' : ''}${kgvAbw.toFixed(1)}%)</span>`;
-                if (kgvAbw < 0) discountBadgeHTML = `<span class="discount-badge">Günstig 🔥</span>`;
+            // KGV Werte holen
+            const kgvNum = extrahiereWert(aktie, 'kgv', false);
+            const kgv5JNum = extrahiereWert(aktie, 'kgv', true);
+            let kgvDiffHTML = "", discountBadge = "";
+            if (kgvNum && kgv5JNum) {
+                const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
+                kgvDiffHTML = `<span class="kgv-diff-text ${abw <= 0 ? 'positive' : 'negative'}">(${abw > 0 ? '+' : ''}${abw.toFixed(1)}%)</span>`;
+                if (abw < 0) discountBadge = `<span class="discount-badge">Günstig 🔥</span>`;
             }
-            const kgvDisplay = kgvNum !== null ? kgvNum.toFixed(1) : '-';
 
-            // KCV
-            const kcvNum = parseToNumber(getJSONValue(aktie, 'kcv', false));
-            const kcv5JNum = parseToNumber(getJSONValue(aktie, 'kcv', true));
+            // KCV Werte holen (Der ultimative Fix!)
+            const kcvNum = extrahiereWert(aktie, 'kcv', false);
+            const kcv5JNum = extrahiereWert(aktie, 'kcv', true);
             let kcvDiffHTML = "";
-            const kcvAbw = berechneAbweichung(kcvNum, kcv5JNum);
-            if (kcvAbw !== null) {
-                kcvDiffHTML = `<span class="kcv-diff-text ${kcvAbw <= 0 ? 'positive' : 'negative'}">(${kcvAbw > 0 ? '+' : ''}${kcvAbw.toFixed(1)}%)</span>`;
+            if (kcvNum && kcv5JNum) {
+                const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
+                kcvDiffHTML = `<span class="kcv-diff-text ${abw <= 0 ? 'positive' : 'negative'}">(${abw > 0 ? '+' : ''}${abw.toFixed(1)}%)</span>`;
             }
-            const kcvDisplay = kcvNum !== null ? kcvNum.toFixed(1) : '-';
 
-            const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=60";
-            const logoUrl = aktie.logoUrl || fallbackSrc;
+            const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100";
+            const tagsHTML = (aktie.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
 
             const item = document.createElement('div');
             item.className = 'stock-item';
             item.innerHTML = `
                 <div class="stock-summary" onclick="toggleDetails(this.parentNode)">
                     <div class="stock-profile">
-                        <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
+                        <img src="${aktie.logoUrl || fallbackSrc}" class="stock-logo" onerror="this.src='${fallbackSrc}';">
                         <div class="stock-info">
                             <div class="name">${aktie.name || 'Unbekannt'}</div>
                             <div class="tags-container">${tagsHTML}</div>
@@ -422,30 +240,16 @@
                     <div class="stock-value perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
                     <div class="stock-value perf ${jahrClass}">${perfJahr >= 0 ? '+' : ''}${perfJahr.toFixed(2)}%</div>
                     <div class="stock-value hide-tablet">${dividendDisplay}</div>
-                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kgvDisplay}${kgvDiffHTML}${discountBadgeHTML}</div>
-                    <div class="stock-value hide-tablet" style="white-space: nowrap;">${kcvDisplay}${kcvDiffHTML}</div>
-                </div>
-                <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
-                    <div class="mobile-left">
-                        <img src="${logoUrl}" class="stock-logo" onerror="this.onerror=null; this.src='${fallbackSrc}';">
-                        <div class="stock-info"><div class="name">${aktie.name || 'Unbekannt'}</div><div class="tags-container">${tagsHTML}</div></div>
-                    </div>
-                    <div class="mobile-right">
-                        <div class="mob-kurs">${aktie.kurs || '-'}</div>
-                        <div class="mob-perf perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
-                    </div>
+                    <div class="stock-value hide-tablet">${kcvNum ? kgvNum?.toFixed(1) || '-' : (kgvNum?.toFixed(1) || '-')}${kgvDiffHTML}${discountBadge}</div>
+                    <div class="stock-value hide-tablet">${kcvNum !== null ? kcvNum.toFixed(1) : '-'}${kcvDiffHTML}</div>
                 </div>
                 <div class="stock-details">
                     <div class="details-container">
                         <div class="details-grid">
-                            <div class="detail-card highlight"><label>Dividenden-Monate</label><span>${aktie.monate || '-'}</span></div>
-                            <div class="detail-card"><label>Intervall</label><span>${aktie.frequenz || '-'}</span></div>
-                            <div class="detail-card"><label>Ex-Datum</label><span>${aktie.exDate || '-'}</span></div>
-                            <div class="detail-card"><label>Aktuelles KGV</label><span>${kgvDisplay} ${kgvDiffHTML}</span></div>
-                            <div class="detail-card"><label>5Y Ø KGV</label><span style="color: var(--accent);">${kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-'}</span></div>
-                            <div class="detail-card"><label>Aktuelles KCV</label><span>${kcvDisplay} ${kcvDiffHTML}</span></div>
-                            <div class="detail-card"><label>5Y Ø KCV</label><span style="color: var(--accent);">${kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-'}</span></div>
-                            <div class="detail-card"><label>5J Perf.</label><span class="perf ${perf5J >= 0 ? 'positive' : 'negative'}">${perf5J >= 0 ? '+' : ''}${perf5J.toFixed(1)}%</span></div>
+                            <div class="detail-card"><label>Aktuelles KGV</label><span>${kgvNum ? kgvNum.toFixed(1) : '-'}</span></div>
+                            <div class="detail-card"><label>5Y Ø KGV</label><span>${kgv5JNum ? kgv5JNum.toFixed(1) : '-'}</span></div>
+                            <div class="detail-card highlight"><label>Aktuelles KCV</label><span style="color:var(--accent);">${kcvNum !== null ? kcvNum.toFixed(1) : '-'}</span></div>
+                            <div class="detail-card"><label>5Y Ø KCV</label><span>${kcv5JNum ? kcv5JNum.toFixed(1) : '-'}</span></div>
                         </div>
                     </div>
                 </div>
@@ -454,41 +258,14 @@
         });
     }
 
-    function toggleDetails(element) {
-        const isOpen = element.classList.contains('open');
-        document.querySelectorAll('.stock-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) element.classList.add('open');
-    }
-
+    function toggleDetails(el) { el.classList.toggle('open'); }
+    function switchTab(t) { aktuellerTab = t; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); if(window.event) window.event.target.classList.add('active'); renderAktien(); }
     function filterAktien() {
-        const suchBegriff = document.getElementById('search').value.toLowerCase();
-        const sortWert = document.getElementById('sortPerformance').value;
-        if (!Array.isArray(alleAktien)) return;
-        let ergebnis = alleAktien.filter(aktie => (aktie.name || '').toLowerCase().includes(suchBegriff) || (aktie.tags || []).some(t => t.toLowerCase().includes(suchBegriff)));
-        if (sortWert === 'perfMonat') ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'perfMonat')) || 0) - (parseToNumber(getJSONValue(a, 'perfMonat')) || 0));
-        if (sortWert === 'perfJahr') ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'perfJahr')) || 0) - (parseToNumber(getJSONValue(a, 'perfJahr')) || 0));
-        if (sortWert === 'yield') ergebnis.sort((a, b) => (parseToNumber(getJSONValue(b, 'yield')) || 0) - (parseToNumber(getJSONValue(a, 'yield')) || 0));
-        renderAktien(ergebnis);
+        const s = document.getElementById('search').value.toLowerCase();
+        renderAktien(alleAktien.filter(a => (a.name || '').toLowerCase().includes(s)));
     }
 
-    datenLaden();
+    window.onload = datenLaden;
 </script>
-    <div id="json-spickzettel" style="background: #1e293b; padding: 1.5rem; margin-top: 2rem; border-radius: 8px; border: 1px dashed #38bdf8;">
-    <h3 style="color: #38bdf8; margin-bottom: 0.5rem;">Diagnose: So sehen deine Daten aus</h3>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">Hier sind die exakten Feldnamen der ersten Aktie aus deiner JSON:</p>
-    <pre id="erster-eintrag" style="background: #000; padding: 1rem; border-radius: 4px; color: #a7f3d0; overflow-x: auto; font-family: monospace;"></pre>
-</div>
-
-<script>
-    // Kleiner Helfer, der uns den ersten Eintrag direkt auf den Bildschirm wirft
-    setTimeout(() => {
-        if(alleAktien && alleAktien.length > 0) {
-            document.getElementById('erster-eintrag').textContent = JSON.stringify(alleAktien[0], null, 2);
-        } else {
-            document.getElementById('erster-eintrag').textContent = "Keine Daten geladen.";
-        }
-    }, 1000);
-</script>
-
 </body>
 </html>
