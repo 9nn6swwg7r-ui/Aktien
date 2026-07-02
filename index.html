@@ -149,10 +149,19 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
+    // Aggressives Parsing, das Textzeichen wie 'x' oder '%' entfernt und Zahlen sauber isoliert
     function parseToNumber(val) {
+        if (val === undefined || val === null) return null;
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
-            let sauber = val.replace(',', '.').replace(/[^0-9.-]/g, '');
+            let sauber = val.trim();
+            // Wenn Komma und Punkt vorkommen (z.B. Tausender-Trenner), bereinigen
+            if (sauber.includes(',') && sauber.includes('.')) {
+                if (sauber.indexOf('.') < sauber.indexOf(',')) {
+                    sauber = sauber.replace(/\./g, '');
+                }
+            }
+            sauber = sauber.replace(',', '.').replace(/[^0-9.-]/g, '');
             let n = parseFloat(sauber);
             return isNaN(n) ? null : n;
         }
@@ -183,16 +192,19 @@
         const tabListe = liste.filter(a => aktuellerTab === 'portfolio' ? !a.watchlist : a.watchlist);
 
         tabListe.forEach(aktie => {
-            // Exakte Zuordnung laut deinem JSON-Screenshot
             const perfTag = parseToNumber(aktie.perfTag) || 0;
             const perfMonat = parseToNumber(aktie.perfMonat) || 0;
             const perfJahr = parseToNumber(aktie.perfJahr) || 0;
             const perf5J = parseToNumber(aktie.perf5J) || 0;
             
-            // Dividenden-Multiplikation für die Prozentdarstellung (z.B. 0.0075 -> 0.75%)
-            let yieldVal = parseToNumber(aktie.yield || aktie.dividendYield) || 0;
-            if (yieldVal > 0 && yieldVal < 1) {
-                yieldVal = yieldVal * 100;
+            // Radikaler Dividenden-Komma-Fix (z.B. 0.035 -> 3.50% oder 3.5 -> 3.50%)
+            let yieldVal = parseToNumber(aktie.yield || aktie.dividendYield);
+            if (yieldVal !== null) {
+                if (yieldVal > 0 && yieldVal < 1) {
+                    yieldVal = yieldVal * 100;
+                }
+            } else {
+                yieldVal = 0;
             }
             let dividendDisplay = yieldVal > 0 ? `${yieldVal.toFixed(2)} %` : "-";
 
@@ -200,7 +212,7 @@
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
 
-            // KGV aus JSON holen (kgvAktuell & kgv5Jahre)
+            // KGV aus JSON extrahieren
             const kgvNum = parseToNumber(aktie.kgvAktuell);
             const kgv5JNum = parseToNumber(aktie.kgv5Jahre);
             let kgvDiffHTML = "", kgvDiscount = "";
@@ -210,7 +222,7 @@
                 if (abw < 0) kgvDiscount = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV aus JSON holen (kcvAktuell & kcv5Jahre) -> JETZT EXAKT ABGESTIMMT!
+            // KCV aus JSON extrahieren (kcvAktuell & kcv5Jahre)
             const kcvNum = parseToNumber(aktie.kcvAktuell);
             const kcv5JNum = parseToNumber(aktie.kcv5Jahre);
             let kcvDiffHTML = "", kcvDiscount = "";
@@ -220,7 +232,6 @@
                 if (abw < 0 && !kgvDiscount) kcvDiscount = `<span class="discount-badge">Cash Günstig 💸</span>`;
             }
 
-            // Ausschüttung & Frequenz
             const ausschuettungstage = aktie.monate || "-";
             const haeufigkeit = aktie.frequenz || "-";
 
