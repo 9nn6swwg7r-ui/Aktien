@@ -24,14 +24,34 @@
         body { background-color: var(--bg-primary); color: var(--text-main); padding: 2rem; min-height: 100vh; }
         .container { max-width: 1400px; margin: 0 auto; }
 
-        header { margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+        header { margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.05em; background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+        /* REFRESH BUTTON */
+        .refresh-btn {
+            background-color: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .refresh-btn:hover { background-color: var(--accent); color: var(--bg-primary); }
+        .refresh-btn:active { transform: scale(0.95); }
 
         .controls { background-color: var(--bg-secondary); padding: 1.25rem; border-radius: 12px; margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; border: 1px solid var(--border); }
         .search-box input, .controls select { width: 100%; padding: 0.75rem 1rem; background-color: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-size: 0.9rem; outline: none; }
 
         .tabs { display: flex; gap: 0.5rem; background-color: var(--bg-primary); padding: 0.25rem; border-radius: 8px; border: 1px solid var(--border); }
-        .tab-btn { flex: 1; padding: 0.6rem; background: none; border: none; color: var(--text-muted); font-weight: 500; cursor: pointer; border-radius: 6px; }
+        .tab-btn { flex: 1; padding: 0.6rem 1.2rem; background: none; border: none; color: var(--text-muted); font-weight: 500; cursor: pointer; border-radius: 6px; }
         .tab-btn.active { background-color: var(--bg-secondary); color: var(--accent); }
 
         .stock-table-header, .stock-summary { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr; padding: 1rem 1.5rem; align-items: center; gap: 1rem; }
@@ -45,7 +65,7 @@
         .stock-logo { width: 40px; height: 40px; border-radius: 8px; background-color: #ffffff; object-fit: contain; padding: 4px; border: 1px solid var(--border); flex-shrink: 0; }
         .stock-info .name { font-weight: 600; font-size: 1.05rem; color: var(--text-main); }
         
-        .tags-container { display: flex; gap: 0.4rem; margin-top: 0.35rem; }
+        .tags-container { display: flex; gap: 0.4rem; margin-top: 0.35rem; flex-wrap: wrap; }
         .tag { background-color: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; }
 
         .stock-value { font-weight: 500; font-size: 1rem; }
@@ -69,6 +89,9 @@
             .hide-tablet { display: none; }
         }
         @media (max-width: 768px) {
+            body { padding: 1rem; }
+            header { flex-direction: column; align-items: flex-start; }
+            .header-actions { width: 100%; justify-content: space-between; }
             .stock-table-header { display: none; }
             .stock-summary { display: none !important; }
             .mobile-row-layout { display: flex !important; align-items: center; justify-content: space-between; padding: 1.25rem 1rem; }
@@ -82,9 +105,12 @@
 <div class="container">
     <header>
         <h1>Umfassendes Aktien-Dashboard</h1>
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('portfolio')">Depot Portfolio</button>
-            <button class="tab-btn" onclick="switchTab('watchlist')">Watchlist</button>
+        <div class="header-actions">
+            <button class="refresh-btn" onclick="datenLaden()">🔄 Daten neu laden</button>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('portfolio')">Depot Portfolio</button>
+                <button class="tab-btn" onclick="switchTab('watchlist')">Watchlist</button>
+            </div>
         </div>
     </header>
 
@@ -119,17 +145,12 @@
     let alleAktien = [];
     let aktuellerTab = 'portfolio';
 
-    // Ultradirekte, kompromisslose Namenssuche für KCV und KGV
     function extrahiereWert(aktie, typ, ist5Jahre) {
         if (!aktie) return null;
-        
-        // Alle Keys in Kleinbuchstaben umwandeln, um Tippfehler zu ignorieren
         const keys = Object.keys(aktie);
-        
         let treffer = null;
         
         if (typ === 'kgv') {
-            const suchBegriff = ist5Jahre ? ['kgv5', 'kgv_5', 'kgv5j', 'kgv5y'] : ['kgv'];
             const key = keys.find(k => {
                 const l = k.toLowerCase();
                 if (ist5Jahre) return l.includes('kgv') && (l.includes('5') || l.includes('y') || l.includes('j'));
@@ -139,7 +160,6 @@
         }
         
         if (typ === 'kcv') {
-            // Sucht nach kcv, cashflow, pcf, pricecashflow, etc.
             const key = keys.find(k => {
                 const l = k.toLowerCase();
                 const hatCashflow = l.includes('kcv') || l.includes('cashflow') || l.includes('cash_flow') || l.includes('pcf');
@@ -149,13 +169,11 @@
             if (key) treffer = aktie[key];
         }
 
-        // Falls über allgemeine Logik nichts kam, direkt nach Standard-Keys greifen
         if (treffer === null) {
             if (typ === 'kcv' && !ist5Jahre) treffer = aktie.kcv || aktie.KCV || aktie.cashflow || aktie.Cashflow;
             if (typ === 'kcv' && ist5Jahre) treffer = aktie.kcv5 || aktie.kcv5j || aktie.kcv5y || aktie.KCV5;
         }
 
-        // In Zahl umwandeln
         if (typeof treffer === 'number') return treffer;
         if (typeof treffer === 'string') {
             let s = treffer.replace(',', '.').replace(/[^0-9.-]/g, '');
@@ -175,12 +193,18 @@
     }
 
     async function datenLaden() {
+        const btn = document.querySelector('.refresh-btn');
+        if (btn) btn.textContent = "⏳ Läde neu...";
+        
         try {
-            const antwort = await fetch('daten.json?nocache=' + Math.random());
+            // Einzigartiger Timestamp zwingt JEDEN Browser (auch Handys), die Datei komplett neu abzufragen
+            const antwort = await fetch('daten.json?nocache=' + new Date().getTime());
             alleAktien = await antwort.json();
             renderAktien();
+            if (btn) btn.textContent = "🔄 Daten neu laden";
         } catch (f) {
             document.getElementById('stock-list').innerHTML = `<p style="color:var(--danger)">Fehler beim Einlesen der daten.json.</p>`;
+            if (btn) btn.textContent = "❌ Fehler";
         }
     }
 
@@ -203,7 +227,7 @@
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
             let dividendDisplay = yieldVal > 0 ? `${yieldVal.toFixed(2)} %` : "-";
 
-            // KGV Werte holen
+            // KGV
             const kgvNum = extrahiereWert(aktie, 'kgv', false);
             const kgv5JNum = extrahiereWert(aktie, 'kgv', true);
             let kgvDiffHTML = "", discountBadge = "";
@@ -213,7 +237,7 @@
                 if (abw < 0) discountBadge = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV Werte holen (Der ultimative Fix!)
+            // KCV (Tippfehler-Fix integriert)
             const kcvNum = extrahiereWert(aktie, 'kcv', false);
             const kcv5JNum = extrahiereWert(aktie, 'kcv', true);
             let kcvDiffHTML = "";
@@ -240,8 +264,18 @@
                     <div class="stock-value perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
                     <div class="stock-value perf ${jahrClass}">${perfJahr >= 0 ? '+' : ''}${perfJahr.toFixed(2)}%</div>
                     <div class="stock-value hide-tablet">${dividendDisplay}</div>
-                    <div class="stock-value hide-tablet">${kcvNum ? kgvNum?.toFixed(1) || '-' : (kgvNum?.toFixed(1) || '-')}${kgvDiffHTML}${discountBadge}</div>
+                    <div class="stock-value hide-tablet">${kgvNum !== null ? kgvNum.toFixed(1) : '-'}${kgvDiffHTML}${discountBadge}</div>
                     <div class="stock-value hide-tablet">${kcvNum !== null ? kcvNum.toFixed(1) : '-'}${kcvDiffHTML}</div>
+                </div>
+                <div class="mobile-row-layout" onclick="toggleDetails(this.parentNode)">
+                    <div class="mobile-left">
+                        <img src="${aktie.logoUrl || fallbackSrc}" class="stock-logo" onerror="this.src='${fallbackSrc}';">
+                        <div class="stock-info"><div class="name">${aktie.name || 'Unbekannt'}</div><div class="tags-container">${tagsHTML}</div></div>
+                    </div>
+                    <div class="mobile-right">
+                        <div class="mob-kurs">${aktie.kurs || '-'}</div>
+                        <div class="mob-perf perf ${monatClass}">${perfMonat >= 0 ? '+' : ''}${perfMonat.toFixed(2)}%</div>
+                    </div>
                 </div>
                 <div class="stock-details">
                     <div class="details-container">
