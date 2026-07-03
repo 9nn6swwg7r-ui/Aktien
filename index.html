@@ -149,7 +149,7 @@
     let aktuellerTab = 'portfolio';
 
     function parseToNumber(val) {
-        if (val === undefined || val === null || val === "N/A" || val === "-") return null;
+        if (val === undefined || val === null || val === "N/A" || val === "-" || val === "None") return null;
         if (typeof val === 'number') return val;
         if (typeof val === 'string') {
             let sauber = val.trim();
@@ -193,27 +193,30 @@
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
 
-            // DIVIDENDEN-FIX: Zielt jetzt direkt auf deinen Key 'dividende'
+            // DIVIDENDEN-FIX: Rechnet kleine Dezimalzahlen (z.B. 0.0326) automatisch in Prozent um
             let dividendDisplay = "-";
             let roheDiv = aktie.dividende !== undefined ? aktie.dividende : (aktie.dividendYield !== undefined ? aktie.dividendYield : aktie.yield);
             
             if (roheDiv !== undefined && roheDiv !== null) {
                 let divString = String(roheDiv).trim();
-                if (divString !== "N/A" && divString !== "-") {
+                if (divString !== "N/A" && divString !== "-" && divString !== "None") {
                     if (divString.includes("%")) {
                         dividendDisplay = divString;
                     } else {
                         let num = parseToNumber(divString);
                         if (num !== null) {
+                            if (num > 0 && num < 1) {
+                                num = num * 100;
+                            }
                             dividendDisplay = `${num.toFixed(2)} %`;
                         }
                     }
                 }
             }
 
-            // KGV-FIX: Direktes Mapping auf deine genauen Keys
-            const kgvNum = parseToNumber(aktie.kgv);
-            const kgv5JNum = parseToNumber(aktie.kgv5J);
+            // KGV-FIX: Direktes Mapping auf 'kgv' und 'kgv5J'
+            const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
+            const kgv5JNum = parseToNumber(aktie.kgv5J) !== null ? parseToNumber(aktie.kgv5J) : parseToNumber(aktie.kgv5Jahre);
             
             let kgvDiffHTML = "", kgvDiscount = "";
             if (kgvNum !== null && kgv5JNum !== null && kgv5JNum !== 0) {
@@ -222,9 +225,9 @@
                 if (abw < 0) kgvDiscount = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV-FIX: Direktes Mapping auf 'kcvAktuell' und 'kcv5J'
-            const kcvNum = parseToNumber(aktie.kcvAktuell) !== null ? parseToNumber(aktie.kcvAktuell) : parseToNumber(aktie.kcv);
-            const kcv5JNum = parseToNumber(aktie.kcv5J);
+            // KCV-FIX: Mappt jetzt präzise auf deine JSON-Schlüssel 'kcv' und 'kcv5J'
+            const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
+            const kcv5JNum = parseToNumber(aktie.kcv5J) !== null ? parseToNumber(aktie.kcv5J) : parseToNumber(aktie.kcv5Jahre);
             
             let kcvDiffHTML = "", kcvDiscount = "";
             if (kcvNum !== null && kcv5JNum !== null && kcv5JNum !== 0) {
@@ -314,7 +317,9 @@
                             <div class="detail-card" style="grid-column: span 2; opacity: 0.9; background: #1e293b; border-left: 3px solid #eab308;">
                                 <label>🔍 Live-Werte Check (Inhalt deiner JSON):</label>
                                 <span style="font-size:0.8rem; font-family:monospace; color:#fef08a; display:block; margin-top:5px;">
-                                    dividende: "${aktie.dividende}" | kcvAktuell: "${aktie.kcvAktuell}" | kcv5J: "${aktie.kcv5J}"
+                                    dividende: "${aktie.dividende !== undefined ? aktie.dividende : 'nicht im JSON'}" | 
+                                    kcv: "${aktie.kcv !== undefined ? aktie.kcv : 'nicht im JSON'}" | 
+                                    kcv5J: "${aktie.kcv5J !== undefined ? aktie.kcv5J : 'nicht im JSON'}"
                                 </span>
                             </div>
                         </div>
