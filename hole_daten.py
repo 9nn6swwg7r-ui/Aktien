@@ -1,6 +1,6 @@
 import json
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import yfinance as yf
 import pandas as pd
 
@@ -33,9 +33,12 @@ def berechne_historische_durchschnitte(ticker, shares_outstanding):
             if net_income_keys:
                 row_key = net_income_keys[0]
                 for datum in financials.columns:
+                    # Zeitzone entfernen, um Berechnungen mit timedelta zu erlauben
+                    datum_naive = datum.replace(tzinfo=None) if hasattr(datum, 'tzinfo') else datum
+                    
+                    hist_kurs_data = ticker.history(start=datum_naive - timedelta(days=5), end=datum_naive + timedelta(days=5))
                     net_income = financials.loc[row_key, datum]
-                    # Historischen Aktienkurs um diesen Bilanzstichtag herum abfragen
-                    hist_kurs_data = ticker.history(start=datum - timedelta(days=5), end=datum + timedelta(days=5))
+                    
                     if not hist_kurs_data.empty and pd.notna(net_income) and net_income != 0:
                         hist_close = hist_kurs_data['Close'].iloc[-1]
                         hist_market_cap = hist_close * shares_outstanding
@@ -47,15 +50,18 @@ def berechne_historische_durchschnitte(ticker, shares_outstanding):
             if ocf_keys:
                 row_key = ocf_keys[0]
                 for datum in cashflow.columns:
+                    # Zeitzone entfernen
+                    datum_naive = datum.replace(tzinfo=None) if hasattr(datum, 'tzinfo') else datum
+                    
+                    hist_kurs_data = ticker.history(start=datum_naive - timedelta(days=5), end=datum_naive + timedelta(days=5))
                     ocf = cashflow.loc[row_key, datum]
-                    hist_kurs_data = ticker.history(start=datum - timedelta(days=5), end=datum + timedelta(days=5))
+                    
                     if not hist_kurs_data.empty and pd.notna(ocf) and ocf != 0:
                         hist_close = hist_kurs_data['Close'].iloc[-1]
                         hist_market_cap = hist_close * shares_outstanding
                         kcv_historie.append(hist_market_cap / ocf)
                         
     except Exception as e:
-        # Falls eine Aktie lückenhafte Daten hat, wird der Fehler abgefangen
         print(f"   -> Historische Kennzahlen für diesen Ticker unvollständig ({e})")
 
     avg_kgv = sum(kgv_historie) / len(kgv_historie) if kgv_historie else "None"
@@ -89,87 +95,21 @@ def daten_generieren():
             if not hist_prices.empty:
                 heute_close = hist_prices['Close'].iloc[-1]
                 
-                # Performance Heute / Letzter Handelstag
+                # Performance Heute
                 if len(hist_prices) > 1:
                     gestern_close = hist_prices['Close'].iloc[-2]
                     perf_tag = ((heute_close - gestern_close) / gestern_close) * 100
                 
-                # Performance 1 Monat (ca. 21 Handelstage)
+                # Performance 1 Monat
                 if len(hist_prices) > 21:
                     monat_close = hist_prices['Close'].iloc[-21]
                     perf_monat = ((heute_close - monat_close) / monat_close) * 100
                     
-                # Performance 1 Jahr (ca. 252 Handelstage)
+                # Performance 1 Jahr
                 if len(hist_prices) > 252:
                     jahr_close = hist_prices['Close'].iloc[-252]
                     perf_jahr = ((heute_close - jahr_close) / jahr_close) * 100
                     
-                # Performance 5 Jahre (Erster Eintrag der 5Y-Historie)
+                # Performance 5 Jahre
                 start_5j_close = hist_prices['Close'].iloc[0]
-                perf_5j = ((heute_close - start_5j_close) / start_5j_close) * 100
-
-            # Dividendenrendite (als Dezimalzahl sichern, z.B. 0.032)
-            dividende = info.get("dividendYield", info.get("trailingAnnualDividendYield", "None"))
-            if dividende is None:
-                dividende = "None"
-            
-            # Aktuelles KGV ermitteln
-            kgv = info.get("trailingPE", info.get("forwardPE", "None"))
-            if kgv is None:
-                kgv = "None"
-                
-            # Aktuelles KCV mathematisch berechnen: Market Cap / Operating Cash Flow
-            market_cap = info.get("marketCap")
-            operating_cashflow = info.get("operatingCashflow")
-            
-            if market_cap and operating_cashflow:
-                kcv = market_cap / operating_cashflow
-            else:
-                kcv = "None"
-                
-            # Historische 5-Jahres-Durchschnitte berechnen
-            shares_outstanding = info.get("sharesOutstanding", 1)
-            kgv_5j, kcv_5j = berechne_historische_durchschnitte(t, shares_outstanding)
-            
-            # Ex-Dividenden-Datum konvertieren
-            ex_date_raw = info.get("exDividendDate")
-            ex_date = datetime.fromtimestamp(ex_date_raw).strftime('%d.%m.%Y') if ex_date_raw else "-"
-            
-            # Datenpaket passgenau für die HTML-Struktur schnüren
-            aktie_daten = {
-                "name": name,
-                "kurs": kurs_formatiert,
-                "perfTag": perf_tag,
-                "perfMonat": perf_monat,
-                "perfJahr": perf_jahr,
-                "perf5J": perf_5j,
-                "dividende": dividende,
-                "kgv": kgv,
-                "kgv5J": kgv_5j,
-                "kcv": kcv,
-                "kcv5J": kcv_5j,
-                "watchlist": aktie["watchlist"],
-                "tags": aktie["tags"],
-                "logoUrl": info.get("logo_url", f"https://logo.clearbit.com/{symbol.lower()}.com"),
-                "monate": "-", 
-                "frequenz": "-",
-                "exDate": ex_date
-            }
-            
-            json_output.append(aktie_daten)
-            print(f"   -> {name} erfolgreich hinzugefügt (KGV: {kgv} | KCV: {kcv:.1f if isinstance(kcv, float) else kcv})")
-            
-        except Exception as e:
-            print(f"💥 Kritischer Fehler bei Ticker {symbol}: {e}")
-        
-        # 1 Sekunde Pause zum Schutz gegen API-Sperren
-        time.sleep(1)
-        
-    # JSON-Datei komplett neu schreiben
-    with open("daten.json", "w", encoding="utf-8") as f:
-        json.dump(json_output, f, indent=4, ensure_ascii=False)
-        
-    print(f"\n=== FERTIG! 'daten.json' wurde erfolgreich mit {len(json_output)} Aktien überschrieben. ===")
-
-if __name__ == "__main__":
-    daten_generieren()
+                perf_5j = ((heute_close - start_5j_close)
