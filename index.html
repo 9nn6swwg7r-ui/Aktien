@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktien Terminal Pro</title>
+    <title>Aktien Terminal Pro - V2</title>
     <style>
         :root {
             --bg-main: #090d16;
@@ -44,11 +44,29 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .header-title-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         h1 {
             font-size: 2rem;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.5px;
+        }
+
+        .version-badge {
+            background: var(--accent);
+            color: var(--bg-main);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
 
         /* Filter-Leiste */
@@ -73,7 +91,7 @@
         .select-input { min-width: 160px; cursor: pointer; }
         .search-input:focus, .select-input:focus { border-color: var(--accent); }
 
-        /* Das Tabellen-Layout */
+        /* Tabellen-Layout */
         .table-grid {
             display: grid;
             grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1.6fr 1.6fr;
@@ -113,7 +131,7 @@
             border-radius: var(--radius);
             border: 1px solid var(--border);
             overflow: hidden;
-            transition: background-color 0.15s, transform 0.1s;
+            transition: background-color 0.15s;
         }
 
         .stock-row:hover {
@@ -229,13 +247,6 @@
 
         .detail-card span { font-size: 1.1rem; font-weight: 700; color: #ffffff; }
 
-        .dev-box {
-            grid-column: 1 / -1;
-            background: #181612 !important;
-            border-left: 4px solid #eab308 !important;
-            padding: 12px 15px;
-        }
-
         @media (max-width: 1024px) {
             .table-grid { grid-template-columns: 2fr 1.2fr 1fr 1fr 1fr; }
             .hide-tablet { display: none !important; }
@@ -246,8 +257,11 @@
 
 <div class="container">
     <header>
-        <h1>Aktien Terminal Pro</h1>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Sortiere per Klick auf die Spaltenüberschriften <b>KGV</b> oder <b>KCV</b>.</p>
+        <div class="header-title-row">
+            <h1>Aktien Terminal Pro</h1>
+            <span class="version-badge">Version 2.0 (NEU)</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 6px;">Klicke direkt auf die Spaltenüberschriften <b>KGV</b> oder <b>KCV</b>, um die Liste blitzschnell zu sortieren.</p>
     </header>
 
     <div class="controls">
@@ -274,13 +288,15 @@
     </div>
 
     <div id="stockList" class="stock-list">
-        </div>
+        <p style="padding: 20px; text-align: center; color: var(--text-muted);">Verbinde mit 'daten.json'...</p>
+    </div>
 </div>
 
 <script>
     let alleAktien = [];
     let aktuelleSortierung = { spalte: null, richtung: 'asc' };
 
+    // Wandelt Strings wie "15,4%" oder "2.100" sauber in JavaScript-Zahlen um
     function parseToNumber(val) {
         if (val === undefined || val === null || val === "N/A" || val === "-" || val === "None") return null;
         if (typeof val === 'number') return val;
@@ -289,31 +305,46 @@
         return isNaN(n) ? null : n;
     }
 
+    // Lädt die JSON-Datei mit eingebautem Cache-Buster gegen Browser-Sturheit
     async function ladeDaten() {
+        const container = document.getElementById('stockList');
         try {
-            // Cache-Busting durch dynamischen Zeitstempel (?t=...)
-            const response = await fetch(`daten.json?t=${new Date().getTime()}`);
+            const response = await fetch(`daten.json?nocache=${new Date().getTime()}`);
+            if (!response.ok) {
+                throw new Error(`Die Datei 'daten.json' wurde nicht gefunden oder der Server antwortet nicht (Status: ${response.status}).`);
+            }
             alleAktien = await response.json();
             
             extrahiereTags();
-            // Zeige beim Start sofort ALLE Aktien ungefiltert an
-            filterUndSortiere();
+            filterUndSortiere(); // Zeigt standardmäßig alle Werte an
         } catch (error) {
-            console.error("Fehler beim Laden:", error);
-            document.getElementById('stockList').innerHTML = `<p style="padding: 20px; color: var(--negative);">Fehler beim Laden der 'daten.json'. Stelle sicher, dass index.html und daten.json im selben Ordner liegen.</p>`;
+            console.error("Fehler im Detail:", error);
+            container.innerHTML = `
+                <div style="padding: 25px; color: #f87171; background: rgba(239,68,68,0.1); border: 1px solid #ef4444; border-radius: 8px; line-height: 1.6;">
+                    <strong style="font-size: 1.1rem;">⚠️ Verbindung zur 'daten.json' fehlgeschlagen</strong><br><br>
+                    <b>Mögliche Ursache:</b> Du hast die <code>index.html</code> wahrscheinlich per Doppelklick direkt von der Festplatte geöffnet.<br>
+                    Moderne Browser blockieren das Nachladen von JSON-Dateien aus Sicherheitsgründen (sogenannte CORS-Sperre).<br><br>
+                    <b>Lösung:</b> Starte das Projekt über einen lokalen Webserver (z.B. die Erweiterung <b>"Live Server"</b> in VS Code) oder ziehe den Ordner in eine Entwicklungsumgebung.
+                </div>`;
         }
     }
 
+    // Erkennt alle Branchen-Tags automatisch aus deiner JSON
     function extrahiereTags() {
-        const tagSet = new Set();
-        alleAktien.forEach(a => { if (a.tags && Array.isArray(a.tags)) a.tags.forEach(t => tagSet.add(t)); });
-        const select = document.getElementById('tagFilter');
-        tagSet.forEach(t => {
-            const opt = document.createElement('option');
-            opt.value = t; opt.textContent = t; select.appendChild(opt);
-        });
+        try {
+            const tagSet = new Set();
+            alleAktien.forEach(a => { if (a.tags && Array.isArray(a.tags)) a.tags.forEach(t => { if(t) tagSet.add(String(t)); }); });
+            const select = document.getElementById('tagFilter');
+            if (select) {
+                tagSet.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t; opt.textContent = t; select.appendChild(opt);
+                });
+            }
+        } catch(e) { console.error("Fehler bei den Tags:", e); }
     }
 
+    // Verarbeitet die Klicks auf die Spaltenüberschriften
     function waehleSortierung(spalte) {
         if (aktuelleSortierung.spalte === spalte) {
             aktuelleSortierung.richtung = aktuelleSortierung.richtung === 'asc' ? 'desc' : 'asc';
@@ -330,143 +361,148 @@
         filterUndSortiere();
     }
 
+    // Filtert nach Suchbegriff, Tag, Watchlist und sortiert anschließend
     function filterUndSortiere() {
-        const sTerm = document.getElementById('searchInput').value.toLowerCase();
-        const selTag = document.getElementById('tagFilter').value;
-        const selWatch = document.getElementById('watchlistFilter').value;
+        const container = document.getElementById('stockList');
+        try {
+            const sTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selTag = document.getElementById('tagFilter').value;
+            const selWatch = document.getElementById('watchlistFilter').value;
 
-        // 1. Filtern
-        let daten = alleAktien.filter(a => {
-            const matchesSearch = (a.name || '').toLowerCase().includes(sTerm) || (a.ticker || '').toLowerCase().includes(sTerm) || (a.tags || []).some(t => t.toLowerCase().includes(sTerm));
-            const matchesTag = !selTag || (a.tags || []).includes(selTag);
-            
-            let matchesWatch = true;
-            if (selWatch === 'watchlist') matchesWatch = (a.watchlist === true || a.watchlist === "true");
-            if (selWatch === 'portfolio') matchesWatch = (a.watchlist === false || a.watchlist === "false" || a.watchlist === undefined);
-
-            return matchesSearch && matchesTag && matchesWatch;
-        });
-
-        // 2. Sortieren
-        if (aktuelleSortierung.spalte) {
-            daten.sort((a, b) => {
-                let valA, valB;
+            // 1. Filtern
+            let daten = alleAktien.filter(a => {
+                const nameStr = String(a.name || '').toLowerCase();
+                const tickerStr = String(a.ticker || '').toLowerCase();
                 
-                if (aktuelleSortierung.spalte === 'kgv') {
-                    valA = parseToNumber(a.kgv) !== null ? parseToNumber(a.kgv) : parseToNumber(a.kgvAktuell);
-                    valB = parseToNumber(b.kgv) !== null ? parseToNumber(b.kgv) : parseToNumber(b.kgvAktuell);
-                } else if (aktuelleSortierung.spalte === 'kcv') {
-                    valA = parseToNumber(a.kcv) !== null ? parseToNumber(a.kcv) : parseToNumber(a.kcvAktuell);
-                    valB = parseToNumber(b.kcv) !== null ? parseToNumber(b.kcv) : parseToNumber(b.kcvAktuell);
-                }
+                const matchesSearch = nameStr.includes(sTerm) || 
+                                      tickerStr.includes(sTerm) || 
+                                      (a.tags || []).some(t => String(t || '').toLowerCase().includes(sTerm));
+                
+                const matchesTag = !selTag || (a.tags || []).map(String).includes(selTag);
+                
+                let matchesWatch = true;
+                if (selWatch === 'watchlist') matchesWatch = (a.watchlist === true || String(a.watchlist) === "true");
+                if (selWatch === 'portfolio') matchesWatch = (a.watchlist === false || String(a.watchlist) === "false" || a.watchlist === undefined || a.watchlist === null);
 
-                if (valA === null) return 1;
-                if (valB === null) return -1;
-
-                return aktuelleSortierung.richtung === 'asc' ? valA - valB : valB - valA;
+                return matchesSearch && matchesTag && matchesWatch;
             });
-        }
 
-        renderAktien(daten);
+            // 2. Sortieren
+            if (aktuelleSortierung.spalte) {
+                daten.sort((a, b) => {
+                    let valA = null, valB = null;
+                    if (aktuelleSortierung.spalte === 'kgv') {
+                        valA = parseToNumber(a.kgv) !== null ? parseToNumber(a.kgv) : parseToNumber(a.kgvAktuell);
+                        valB = parseToNumber(b.kgv) !== null ? parseToNumber(b.kgv) : parseToNumber(b.kgvAktuell);
+                    } else if (aktuelleSortierung.spalte === 'kcv') {
+                        valA = parseToNumber(a.kcv) !== null ? parseToNumber(a.kcv) : parseToNumber(a.kcvAktuell);
+                        valB = parseToNumber(b.kcv) !== null ? parseToNumber(b.kcv) : parseToNumber(b.kcvAktuell);
+                    }
+                    if (valA === null) return 1;
+                    if (valB === null) return -1;
+                    return aktuelleSortierung.richtung === 'asc' ? valA - valB : valB - valA;
+                });
+            }
+
+            renderAktien(daten);
+        } catch (err) {
+            container.innerHTML = `<div style="padding: 20px; color: var(--negative);"><b>Fehler beim Filtern:</b> ${err.message}</div>`;
+        }
     }
 
+    // Schreibt das HTML für die Zeilen auf den Bildschirm
     function renderAktien(daten) {
         const container = document.getElementById('stockList');
         container.innerHTML = '';
 
         if (daten.length === 0) {
-            container.innerHTML = '<p style="padding:20px; text-align:center; color:var(--text-muted);">Keine Datensätze entsprechen den Filtereinstellungen.</p>';
+            container.innerHTML = '<p style="padding:30px; text-align:center; color:var(--text-muted); font-size:0.95rem;">Keine passenden Aktien gefunden.</p>';
             return;
         }
 
         daten.forEach(aktie => {
-            const pTag = parseToNumber(aktie.perfTag) || 0;
-            const pMonat = parseToNumber(aktie.perfMonat) || 0;
-            const pJahr = parseToNumber(aktie.perfJahr) || 0;
-            const p5J = parseToNumber(aktie.perf5J) || 0;
+            try {
+                const pTag = parseToNumber(aktie.perfTag) || 0;
+                const pMonat = parseToNumber(aktie.perfMonat) || 0;
+                const pJahr = parseToNumber(aktie.perfJahr) || 0;
+                const p5J = parseToNumber(aktie.perf5J) || 0;
 
-            const divRaw = parseToNumber(aktie.dividende);
-            let dividendDisplay = "-";
-            if (divRaw !== null) {
-                dividendDisplay = divRaw < 0.2 ? `${(divRaw * 100).toFixed(2)} %` : `${divRaw.toFixed(2)} %`;
-            }
-
-            // KGV Berechnungen
-            const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
-            const kgv5JNum = parseToNumber(aktie.kgv5J) !== null ? parseToNumber(aktie.kgv5J) : parseToNumber(aktie.kgv5Jahre);
-            
-            let kgvHTML = `<span class="val-main">-</span>`;
-            if (kgvNum !== null) {
-                let diffHTML = "";
-                let discountHTML = "";
-                if (kgv5JNum !== null && kgv5JNum !== 0) {
-                    const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
-                    diffHTML = `<span class="val-sub ${abw <= 0 ? 'positive' : 'negative'}">${abw > 0 ? '+' : ''}${abw.toFixed(0)}%</span>`;
-                    if (abw < -10) discountHTML = `<span class="discount-badge">Rabatt 🏷️</span>`;
+                const divRaw = parseToNumber(aktie.dividende);
+                let dividendDisplay = "-";
+                if (divRaw !== null) {
+                    dividendDisplay = divRaw < 0.2 ? `${(divRaw * 100).toFixed(2)} %` : `${divRaw.toFixed(2)} %`;
                 }
-                kgvHTML = `<div class="discount-container"><div><span class="val-main">${kgvNum.toFixed(1)}</span>${diffHTML}</div>${discountHTML}</div>`;
-            }
 
-            // KCV Berechnungen
-            const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
-            const kcv5JNum = parseToNumber(aktie.kcv5J) !== null ? parseToNumber(aktie.kcv5J) : parseToNumber(aktie.kcv5Jahre);
-
-            let kcvHTML = `<span class="val-main">-</span>`;
-            if (kcvNum !== null) {
-                let diffHTML = "";
-                let discountHTML = "";
-                if (kcv5JNum !== null && kcv5JNum !== 0) {
-                    const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
-                    diffHTML = `<span class="val-sub ${abw <= 0 ? 'positive' : 'negative'}">${abw > 0 ? '+' : ''}${abw.toFixed(0)}%</span>`;
-                    if (abw < 0 && !discountHTML) discountHTML = `<span class="discount-badge">Günstig 💸</span>`;
+                // KGV Logik
+                const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
+                const kgv5JNum = parseToNumber(aktie.kgv5J) !== null ? parseToNumber(aktie.kgv5J) : parseToNumber(aktie.kgv5Jahre);
+                let kgvHTML = `<span class="val-main">-</span>`;
+                if (kgvNum !== null) {
+                    let diffHTML = ""; let discountHTML = "";
+                    if (kgv5JNum !== null && kgv5JNum !== 0) {
+                        const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
+                        diffHTML = `<span class="val-sub ${abw <= 0 ? 'positive' : 'negative'}">${abw > 0 ? '+' : ''}${abw.toFixed(0)}%</span>`;
+                        if (abw < -10) discountHTML = `<span class="discount-badge">Rabatt 🏷️</span>`;
+                    }
+                    kgvHTML = `<div class="discount-container"><div><span class="val-main">${kgvNum.toFixed(1)}</span>${diffHTML}</div>${discountHTML}</div>`;
                 }
-                kcvHTML = `<div class="discount-container"><div><span class="val-main">${kcvNum.toFixed(1)}</span>${diffHTML}</div>${discountHTML}</div>`;
-            }
 
-            const tagsHTML = (aktie.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+                // KCV Logik
+                const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
+                const kcv5JNum = parseToNumber(aktie.kcv5J) !== null ? parseToNumber(aktie.kcv5J) : parseToNumber(aktie.kcv5Jahre);
+                let kcvHTML = `<span class="val-main">-</span>`;
+                if (kcvNum !== null) {
+                    let diffHTML = ""; let discountHTML = "";
+                    if (kcv5JNum !== null && kcv5JNum !== 0) {
+                        const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
+                        diffHTML = `<span class="val-sub ${abw <= 0 ? 'positive' : 'negative'}">${abw > 0 ? '+' : ''}${abw.toFixed(0)}%</span>`;
+                        if (abw < 0 && !discountHTML) discountHTML = `<span class="discount-badge">Günstig 💸</span>`;
+                    }
+                    kcvHTML = `<div class="discount-container"><div><span class="val-main">${kcvNum.toFixed(1)}</span>${diffHTML}</div>${discountHTML}</div>`;
+                }
 
-            const row = document.createElement('div');
-            row.className = 'stock-row';
-            row.innerHTML = `
-                <div class="table-grid stock-summary" onclick="toggleDetails(this.parentNode)">
-                    <div class="cell-left stock-profile">
-                        <img class="stock-logo" src="${aktie.logoUrl || 'https://via.placeholder.com/32?text=' + (aktie.ticker || '?')}" onerror="this.src='https://via.placeholder.com/32?text=${aktie.ticker || '?'}';">
-                        <div class="stock-info">
-                            <span class="stock-name">${aktie.name || 'Unbekannt'} <span style="color:var(--text-muted); font-size:0.75rem;">(${aktie.ticker || '-'})</span></span>
-                            <div class="stock-tags">${tagsHTML}</div>
+                const tagsHTML = (aktie.tags || []).map(t => `<span class="tag">${String(t)}</span>`).join('');
+                const fallbackLogo = `https://via.placeholder.com/32?text=${aktie.ticker || '?'}`;
+
+                const row = document.createElement('div');
+                row.className = 'stock-row';
+                row.innerHTML = `
+                    <div class="table-grid stock-summary" onclick="toggleDetails(this.parentNode)">
+                        <div class="cell-left stock-profile">
+                            <img class="stock-logo" src="${aktie.logoUrl || fallbackLogo}" onerror="this.src='${fallbackLogo}';">
+                            <div class="stock-info">
+                                <span class="stock-name">${aktie.name || 'Unbekannt'} <span style="color:var(--text-muted); font-size:0.75rem;">(${aktie.ticker || '-'})</span></span>
+                                <div class="stock-tags">${tagsHTML}</div>
+                            </div>
                         </div>
+                        <div class="cell-right val-main">${aktie.kurs || '-'}</div>
+                        <div class="cell-center"><span class="perf-badge ${pTag >= 0 ? 'positive' : 'negative'}">${pTag >= 0 ? '+' : ''}${pTag.toFixed(2)}%</span></div>
+                        <div class="cell-center"><span class="perf-badge ${pMonat >= 0 ? 'positive' : 'negative'}">${pMonat >= 0 ? '+' : ''}${pMonat.toFixed(2)}%</span></div>
+                        <div class="cell-center"><span class="perf-badge ${pJahr >= 0 ? 'positive' : 'negative'}">${pJahr >= 0 ? '+' : ''}${pJahr.toFixed(2)}%</span></div>
+                        <div class="cell-center hide-tablet val-main" style="font-weight:600;">${dividendDisplay}</div>
+                        <div class="cell-right hide-tablet">${kgvHTML}</div>
+                        <div class="cell-right hide-tablet">${kcvHTML}</div>
                     </div>
-                    <div class="cell-right val-main">${aktie.kurs || '-'}</div>
-                    <div class="cell-center"><span class="perf-badge ${pTag >= 0 ? 'positive' : 'negative'}">${pTag >= 0 ? '+' : ''}${pTag.toFixed(2)}%</span></div>
-                    <div class="cell-center"><span class="perf-badge ${pMonat >= 0 ? 'positive' : 'negative'}">${pMonat >= 0 ? '+' : ''}${pMonat.toFixed(2)}%</span></div>
-                    <div class="cell-center"><span class="perf-badge ${pJahr >= 0 ? 'positive' : 'negative'}">${pJahr >= 0 ? '+' : ''}${pJahr.toFixed(2)}%</span></div>
-                    <div class="cell-center hide-tablet val-main" style="font-weight:600;">${dividendDisplay}</div>
-                    <div class="cell-right hide-tablet">${kgvHTML}</div>
-                    <div class="cell-right hide-tablet">${kcvHTML}</div>
-                </div>
-                
-                <div class="stock-details">
-                    <div class="detail-card"><label>📆 Ausschüttung</label><span>${aktie.monate || '-'}</span></div>
-                    <div class="detail-card"><label>🔄 Frequenz</label><span>${aktie.frequenz || '-'}</span></div>
-                    <div class="detail-card"><label>KGV Aktuell</label><span>${kgvNum !== null ? kgvNum.toFixed(1) : '-'}</span></div>
-                    <div class="detail-card"><label>KGV 5J Ø</label><span style="color:var(--text-muted);">${kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-'}</span></div>
-                    <div class="detail-card"><label>KCV Aktuell</label><span>${kcvNum !== null ? kcvNum.toFixed(1) : '-'}</span></div>
-                    <div class="detail-card"><label>KCV 5J Ø</label><span style="color:var(--text-muted);">${kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-'}</span></div>
-                    <div class="detail-card"><label>Ex-Date</label><span>${aktie.exDate || '-'}</span></div>
-                    <div class="detail-card"><label>5J Performance</label><span class="${p5J >= 0 ? 'positive' : 'negative'}" style="color:${p5J >= 0 ? 'var(--positive)' : 'var(--negative)'}">${p5J >= 0 ? '+' : ''}${p5J.toFixed(1)}%</span></div>
                     
-                    <div class="detail-card dev-box">
-                        <label style="color:#eab308; font-weight:800;">🔍 Rohdaten-Auslesung (Inhalt deiner JSON):</label>
-                        <span style="font-size:0.75rem; font-family:monospace; color:#fef08a; display:block; margin-top:4px; font-weight:normal;">
-                            dividende: "${aktie.dividende}" | kcv: "${aktie.kcv}" | kcv5J: "${aktie.kcv5J}" | watchlist-status: "${aktie.watchlist}"
-                        </span>
+                    <div class="stock-details">
+                        <div class="detail-card"><label>📆 Ausschüttung</label><span>${aktie.monate || '-'}</span></div>
+                        <div class="detail-card"><label>🔄 Frequenz</label><span>${aktie.frequenz || '-'}</span></div>
+                        <div class="detail-card"><label>KGV Aktuell</label><span>${kgvNum !== null ? kgvNum.toFixed(1) : '-'}</span></div>
+                        <div class="detail-card"><label>KGV 5J Ø</label><span style="color:var(--text-muted);">${kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-'}</span></div>
+                        <div class="detail-card"><label>KCV Aktuell</label><span>${kcvNum !== null ? kcvNum.toFixed(1) : '-'}</span></div>
+                        <div class="detail-card"><label>KCV 5J Ø</label><span style="color:var(--text-muted);">${kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-'}</span></div>
+                        <div class="detail-card"><label>Ex-Date</label><span>${aktie.exDate || '-'}</span></div>
+                        <div class="detail-card"><label>5J Performance</label><span class="${p5J >= 0 ? 'positive' : 'negative'}" style="color:${p5J >= 0 ? 'var(--positive)' : 'var(--negative)'}">${p5J >= 0 ? '+' : ''}${p5J.toFixed(1)}%</span></div>
                     </div>
-                </div>
-            `;
-            container.appendChild(row);
+                `;
+                container.appendChild(row);
+            } catch(rowErr) {
+                console.error("Fehler bei Zeile:", rowErr);
+            }
         });
     }
 
+    // Klappt die Details ein- und aus
     function toggleDetails(rowElement) {
         const details = rowElement.querySelector('.stock-details');
         const isVisible = window.getComputedStyle(details).display === 'grid';
@@ -474,7 +510,12 @@
         details.style.display = isVisible ? 'none' : 'grid';
     }
 
-    window.onload = ladeDaten;
+    // Start-Sicherung
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ladeDaten);
+    } else {
+        ladeDaten();
+    }
 </script>
 
 </body>
