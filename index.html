@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktien Terminal Pro - V2</title>
+    <title>Aktien Terminal Pro - V2.1</title>
     <style>
         :root {
             --bg-main: #090d16;
@@ -259,7 +259,7 @@
     <header>
         <div class="header-title-row">
             <h1>Aktien Terminal Pro</h1>
-            <span class="version-badge">Version 2.0 (NEU)</span>
+            <span class="version-badge">Version 2.1 (STABIL)</span>
         </div>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 6px;">Klicke direkt auf die Spaltenüberschriften <b>KGV</b> oder <b>KCV</b>, um die Liste blitzschnell zu sortieren.</p>
     </header>
@@ -288,7 +288,7 @@
     </div>
 
     <div id="stockList" class="stock-list">
-        <p style="padding: 20px; text-align: center; color: var(--text-muted);">Verbinde mit 'daten.json'...</p>
+        <p style="padding: 20px; text-align: center; color: var(--text-muted);">Lese 'daten.json' aus dem Ordner...</p>
     </div>
 </div>
 
@@ -296,7 +296,6 @@
     let alleAktien = [];
     let aktuelleSortierung = { spalte: null, richtung: 'asc' };
 
-    // Wandelt Strings wie "15,4%" oder "2.100" sauber in JavaScript-Zahlen um
     function parseToNumber(val) {
         if (val === undefined || val === null || val === "N/A" || val === "-" || val === "None") return null;
         if (typeof val === 'number') return val;
@@ -305,31 +304,31 @@
         return isNaN(n) ? null : n;
     }
 
-    // Lädt die JSON-Datei mit eingebautem Cache-Buster gegen Browser-Sturheit
+    // JETZT GANZ SAUBER UND FEHLERRESISTENT OHNE '?' PARAMETER
     async function ladeDaten() {
         const container = document.getElementById('stockList');
         try {
-            const response = await fetch(`daten.json?nocache=${new Date().getTime()}`);
+            const response = await fetch('daten.json');
             if (!response.ok) {
-                throw new Error(`Die Datei 'daten.json' wurde nicht gefunden oder der Server antwortet nicht (Status: ${response.status}).`);
+                throw new Error(`Die Datei 'daten.json' konnte im selben Ordner nicht gefunden werden (HTTP-Status: ${response.status}).`);
             }
             alleAktien = await response.json();
             
             extrahiereTags();
-            filterUndSortiere(); // Zeigt standardmäßig alle Werte an
+            filterUndSortiere();
         } catch (error) {
             console.error("Fehler im Detail:", error);
             container.innerHTML = `
                 <div style="padding: 25px; color: #f87171; background: rgba(239,68,68,0.1); border: 1px solid #ef4444; border-radius: 8px; line-height: 1.6;">
-                    <strong style="font-size: 1.1rem;">⚠️ Verbindung zur 'daten.json' fehlgeschlagen</strong><br><br>
-                    <b>Mögliche Ursache:</b> Du hast die <code>index.html</code> wahrscheinlich per Doppelklick direkt von der Festplatte geöffnet.<br>
-                    Moderne Browser blockieren das Nachladen von JSON-Dateien aus Sicherheitsgründen (sogenannte CORS-Sperre).<br><br>
-                    <b>Lösung:</b> Starte das Projekt über einen lokalen Webserver (z.B. die Erweiterung <b>"Live Server"</b> in VS Code) oder ziehe den Ordner in eine Entwicklungsumgebung.
+                    <strong style="font-size: 1.1rem;">⚠️ Browser blockiert lokalen Datenzugriff (CORS)</strong><br><br>
+                    <b>Das Problem:</b> Du hast die <code>index.html</code> per Doppelklick direkt geöffnet. Moderne Browser verbieten HTML-Dateien aus Sicherheitsgründen, einfach so andere Dateien (wie deine <code>daten.json</code>) von der Festplatte nachzuladen.<br><br>
+                    <b>Die 2 einfachsten Lösungen:</b><br>
+                    1. Nutze in VS Code die Erweiterung <b>"Live Server"</b> (unten rechts auf "Go Live" klicken).<br>
+                    2. <i>Alternativ:</i> Wenn du keinen Server willst, antworte mir kurz mit "Daten direkt einbauen", dann schreibe ich dir den Code so um, dass wir deine Aktien fest in die HTML-Datei integrieren. Dann klappt der Doppelklick immer und überall!
                 </div>`;
         }
     }
 
-    // Erkennt alle Branchen-Tags automatisch aus deiner JSON
     function extrahiereTags() {
         try {
             const tagSet = new Set();
@@ -344,7 +343,6 @@
         } catch(e) { console.error("Fehler bei den Tags:", e); }
     }
 
-    // Verarbeitet die Klicks auf die Spaltenüberschriften
     function waehleSortierung(spalte) {
         if (aktuelleSortierung.spalte === spalte) {
             aktuelleSortierung.richtung = aktuelleSortierung.richtung === 'asc' ? 'desc' : 'asc';
@@ -361,7 +359,6 @@
         filterUndSortiere();
     }
 
-    // Filtert nach Suchbegriff, Tag, Watchlist und sortiert anschließend
     function filterUndSortiere() {
         const container = document.getElementById('stockList');
         try {
@@ -369,7 +366,6 @@
             const selTag = document.getElementById('tagFilter').value;
             const selWatch = document.getElementById('watchlistFilter').value;
 
-            // 1. Filtern
             let daten = alleAktien.filter(a => {
                 const nameStr = String(a.name || '').toLowerCase();
                 const tickerStr = String(a.ticker || '').toLowerCase();
@@ -387,7 +383,6 @@
                 return matchesSearch && matchesTag && matchesWatch;
             });
 
-            // 2. Sortieren
             if (aktuelleSortierung.spalte) {
                 daten.sort((a, b) => {
                     let valA = null, valB = null;
@@ -410,7 +405,6 @@
         }
     }
 
-    // Schreibt das HTML für die Zeilen auf den Bildschirm
     function renderAktien(daten) {
         const container = document.getElementById('stockList');
         container.innerHTML = '';
@@ -433,7 +427,6 @@
                     dividendDisplay = divRaw < 0.2 ? `${(divRaw * 100).toFixed(2)} %` : `${divRaw.toFixed(2)} %`;
                 }
 
-                // KGV Logik
                 const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
                 const kgv5JNum = parseToNumber(aktie.kgv5J) !== null ? parseToNumber(aktie.kgv5J) : parseToNumber(aktie.kgv5Jahre);
                 let kgvHTML = `<span class="val-main">-</span>`;
@@ -447,7 +440,6 @@
                     kgvHTML = `<div class="discount-container"><div><span class="val-main">${kgvNum.toFixed(1)}</span>${diffHTML}</div>${discountHTML}</div>`;
                 }
 
-                // KCV Logik
                 const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
                 const kcv5JNum = parseToNumber(aktie.kcv5J) !== null ? parseToNumber(aktie.kcv5J) : parseToNumber(aktie.kcv5Jahre);
                 let kcvHTML = `<span class="val-main">-</span>`;
@@ -502,7 +494,6 @@
         });
     }
 
-    // Klappt die Details ein- und aus
     function toggleDetails(rowElement) {
         const details = rowElement.querySelector('.stock-details');
         const isVisible = window.getComputedStyle(details).display === 'grid';
@@ -510,7 +501,6 @@
         details.style.display = isVisible ? 'none' : 'grid';
     }
 
-    // Start-Sicherung
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', ladeDaten);
     } else {
