@@ -29,10 +29,10 @@ def berechne_historische_durchschnitte(ticker, shares_outstanding):
                 for datum in financials.columns:
                     datum_naive = datum.replace(tzinfo=None) if hasattr(datum, 'tzinfo') else datum
                     try:
-                        hist_kurs_data = ticker.history(start=datum_naive - timedelta(days=7), end=datum_naive + timedelta(days=7))
+                        h_data = ticker.history(start=datum_naive - timedelta(days=7), end=datum_naive + timedelta(days=7))
                         net_income = financials.loc[row_key, datum]
-                        if not hist_kurs_data.empty and pd.notna(net_income) and net_income != 0:
-                            hist_close = hist_kurs_data['Close'].iloc[-1]
+                        if not h_data.empty and pd.notna(net_income) and net_income != 0:
+                            hist_close = h_data['Close'].iloc[-1]
                             hist_market_cap = hist_close * shares_outstanding
                             kgv_historie.append(hist_market_cap / net_income)
                     except:
@@ -45,10 +45,10 @@ def berechne_historische_durchschnitte(ticker, shares_outstanding):
                 for datum in cashflow.columns:
                     datum_naive = datum.replace(tzinfo=None) if hasattr(datum, 'tzinfo') else datum
                     try:
-                        hist_kurs_data = ticker.history(start=datum_naive - timedelta(days=7), end=datum_naive + timedelta(days=7))
+                        h_data = ticker.history(start=datum_naive - timedelta(days=7), end=datum_naive + timedelta(days=7))
                         ocf = cashflow.loc[row_key, datum]
-                        if not hist_kurs_data.empty and pd.notna(ocf) and ocf != 0:
-                            hist_close = hist_kurs_data['Close'].iloc[-1]
+                        if not h_data.empty and pd.notna(ocf) and ocf != 0:
+                            hist_close = h_data['Close'].iloc[-1]
                             hist_market_cap = hist_close * shares_outstanding
                             kcv_historie.append(hist_market_cap / ocf)
                     except:
@@ -65,7 +65,7 @@ def berechne_historische_durchschnitte(ticker, shares_outstanding):
 def daten_generieren():
     json_output = []
     
-    print(f"=== STARTE AKTUALISIERUNG: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')} ===")
+    print(f"=== STARTE REPARIERTE AKTUALISIERUNG: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')} ===")
     
     for aktie in AKTIEN_KONFIGURATION:
         symbol = aktie["ticker"]
@@ -73,98 +73,139 @@ def daten_generieren():
         
         try:
             t = yf.Ticker(symbol)
-            info = {}
+            
+            # 1. Kurs & Historie laden (Der stabilste Endpunkt bei Yahoo)
+            hist_prices = t.history(period="5y")
+            if hist_prices.empty:
+                print(f"   ❌ Keine Kursdaten für {symbol} gefunden. Überspringe.")
+                continue
+                
+            aktueller_kurs = float(hist_prices['Close'].iloc[-1])
+            
+            # Währung bestimmen über Metadaten
+            waehrung = "USD"
             try:
-                info = t.info
-            except Exception as e:
-                print(f"   ⚠️ Warnung: Konnte .info für {symbol} nicht vollständig laden ({e})")
+                if hasattr(t, 'history_metadata') and t.history_metadata:
+                    waehrung = t.history_metadata.get('currency', 'USD')
+                elif hasattr(t, 'fast_info') and t.fast_info:
+                    waehrung = t.fast_info.get('currency', 'USD')
+            except:
+                pass
+                
+            kurs_formatiert = f"{aktueller_kurs:.2f} {waehrung}"
             
-            # Basisdaten sichern
-            name = info.get("longName", info.get("shortName", symbol)) if info else symbol
-            waehrung = info.get("currency", "USD") if info else "USD"
-            aktueller_kurs = info.get("currentPrice", info.get("regularMarketPrice", 0)) if info else 0
-            kurs_formatiert = f"{aktueller_kurs:.2f} {waehrung}" if aktueller_kurs else "-"
-            
-            # Performance-Berechnung absichern
+            # 2. Performance berechnen
             perf_tag, perf_monat, perf_jahr, perf_5j = 0.0, 0.0, 0.0, 0.0
-            try:
-                hist_prices = t.history(period="5y")
-                if not hist_prices.empty:
-                    heute_close = hist_prices['Close'].iloc[-1]
-                    if len(hist_prices) > 1:
-                        perf_tag = ((heute_close - hist_prices['Close'].iloc[-2]) / hist_prices['Close'].iloc[-2]) * 100
-                    if len(hist_prices) > 21:
-                        perf_monat = ((heute_close - hist_prices['Close'].iloc[-21]) / hist_prices['Close'].iloc[-21]) * 100
-                    if len(hist_prices) > 252:
-                        perf_jahr = ((heute_close - hist_prices['Close'].iloc[-252]) / hist_prices['Close'].iloc[-252]) * 100
-                    perf_5j = ((heute_close - hist_prices['Close'].iloc[0]) / hist_prices['Close'].iloc[0]) * 100
-            except Exception as e:
-                print(f"   ⚠️ Kurs-Performance fehlerhaft für {symbol}: {e}")
+            heute_close = hist_prices['Close'].iloc[-1]
+            if len(hist_prices) > 1:
+                perf_tag = ((heute_close - hist_prices['Close'].iloc[-2]) / hist_prices['Close'].iloc[-2]) * 100
+            if len(hist_prices) > 21:
+                perf_monat = ((heute_close - hist_prices['Close'].iloc[-21]) / hist_prices['Close'].iloc[-21]) * 100
+            if len(hist_prices) > 252:
+                perf_jahr = ((heute_close - hist_prices['Close'].iloc[-252]) / hist_prices['Close'].iloc[-252]) * 100
+            perf_5j = ((heute_close - hist_prices['Close'].iloc[0]) / hist_prices['Close'].iloc[0]) * 100
 
-            # Dividende absichern
-            dividende = None
-            if info:
-                dividende = info.get("dividendYield", info.get("trailingAnnualDividendYield"))
+            # 3. Fundamentaldaten & Cashflow laden
+            financials = t.financials
+            cashflow = t.cashflow
             
-            # KGV & KCV absichern
+            # Anteile für die Marktkapitalisierung bestimmen
+            shares_outstanding = 1
+            market_cap = None
+            try:
+                if hasattr(t, 'fast_info') and t.fast_info:
+                    shares_outstanding = t.fast_info.get('shares', 1)
+                    market_cap = t.fast_info.get('marketCap')
+            except:
+                pass
+                
+            if not market_cap or market_cap == 0:
+                market_cap = aktueller_kurs * shares_outstanding
+
+            # 4. Dividendenrendite manuell aus den realen Ausschüttungen berechnen (365 Tage)
+            dividende = None
+            try:
+                divs = t.dividends
+                if not divs.empty:
+                    tz_info = divs.index.tz
+                    now_tz = datetime.now(tz_info) if tz_info else datetime.now()
+                    one_year_ago = now_tz - timedelta(days=365)
+                    divs_filtered = divs[divs.index > one_year_ago] if tz_info else divs[divs.index.replace(tzinfo=None) > one_year_ago]
+                    
+                    if not divs_filtered.empty:
+                        dividende = divs_filtered.sum() / aktueller_kurs
+            except:
+                pass
+
+            # 5. Aktuelles KGV berechnen (Market Cap / Letzter Jahresgewinn)
             kgv = None
-            if info:
-                kgv = info.get("trailingPE", info.get("forwardPE"))
-                
+            try:
+                if financials is not None and not financials.empty:
+                    net_income_keys = [idx for idx in financials.index if 'Net Income' in str(idx)]
+                    if net_income_keys:
+                        letzter_gewinn = financials.loc[net_income_keys[0]].iloc[0]
+                        if letzter_gewinn and letzter_gewinn != 0:
+                            kgv = market_cap / letzter_gewinn
+            except:
+                pass
+
+            # 6. Aktuelles KCV berechnen (Market Cap / Operativer Cashflow)
             kcv = None
-            if info:
-                market_cap = info.get("marketCap")
-                operating_cashflow = info.get("operatingCashflow")
-                if market_cap and operating_cashflow:
-                    kcv = market_cap / operating_cashflow
+            try:
+                if cashflow is not None and not cashflow.empty:
+                    ocf_keys = [idx for idx in cashflow.index if 'Operating Cash Flow' in str(idx) or 'Cash Flow From Operating Activities' in str(idx)]
+                    if ocf_keys:
+                        letzter_ocf = cashflow.loc[ocf_keys[0]].iloc[0]
+                        if letzter_ocf and letzter_ocf != 0:
+                            kcv = market_cap / letzter_ocf
+            except:
+                pass
                 
-            # Historische 5J-Werte absichern
-            shares_outstanding = info.get("sharesOutstanding", 1) if info else 1
+            # 7. Historische 5J-Durchschnitte ermitteln
             kgv_5j, kcv_5j = berechne_historische_durchschnitte(t, shares_outstanding)
             
-            # Ex-Date absichern
-            ex_date = "-"
-            if info and info.get("exDividendDate"):
-                try:
-                    ex_date = datetime.fromtimestamp(info["exDividendDate"], tz=timezone.utc).strftime('%d.%m.%Y')
-                except:
-                    pass
-            
-            # Logo URL via Fallback-Dienst generieren (yfinance liefert oft keine funktionierenden Logos mehr)
-            logo_symbol = symbol.split(".")[0].lower()
-            logo_url = f"https://logo.clearbit.com/{logo_symbol}.com"
-            
-            # Sauberes Datenpaket packen
+            # Name bestimmen
+            name = symbol
+            try:
+                if hasattr(t, 'info') and t.info and t.info.get("longName"):
+                    name = t.info.get("longName")
+            except:
+                pass
+
+            def clean(val):
+                if val is None or pd.isna(val) or val == "None": return None
+                return float(val)
+
+            # Paket schnüren
             aktie_daten = {
-                "name": name,
-                "ticker": symbol,
-                "kurs": kurs_formatiert,
-                "perfTag": float(perf_tag),
-                "perfMonat": float(perf_monat),
-                "perfJahr": float(perf_jahr),
-                "perf5J": float(perf_5j),
-                "dividende": float(dividende) if isinstance(dividende, (int, float)) else None,
-                "kgv": float(kgv) if isinstance(kgv, (int, float)) else None,
-                "kgv5J": float(kgv_5j) if isinstance(kgv_5j, (int, float)) else None,
-                "kcv": float(kcv) if isinstance(kcv, (int, float)) else None,
-                "kcv5J": float(kcv_5j) if isinstance(kcv_5j, (int, float)) else None,
-                "watchlist": aktie["watchlist"],
+                "name": str(name),
+                "ticker": str(symbol),
+                "kurs": str(kurs_formatiert),
+                "perfTag": clean(perf_tag) or 0.0,
+                "perfMonat": clean(perf_monat) or 0.0,
+                "perfJahr": clean(perf_jahr) or 0.0,
+                "perf5J": clean(perf_5j) or 0.0,
+                "dividende": clean(dividende),
+                "kgv": clean(kgv),
+                "kgv5J": clean(kgv_5j),
+                "kcv": clean(kcv),
+                "kcv5J": clean(kcv_5j),
+                "watchlist": bool(aktie["watchlist"]),
                 "tags": aktie["tags"],
-                "logoUrl": logo_url,
+                "logoUrl": f"https://logo.clearbit.com/{symbol.split('.')[0].lower()}.com",
                 "monate": "-", 
                 "frequenz": "-",
-                "exDate": ex_date
+                "exDate": "-"
             }
             
             json_output.append(aktie_daten)
-            print(f"   -> {name} erfolgreich hinzugefügt.")
+            print(f"   -> {name} erfolgreich mit echten Werten erfasst! ({kurs_formatiert})")
             
         except Exception as e:
             print(f"❌ Fehler bei Ticker {symbol}: {e}")
         
         time.sleep(1)
         
-    # Datei schreiben
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
         
