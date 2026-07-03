@@ -470,4 +470,12 @@
     function toggleDetails(rowElement) {
         const details = rowElement.querySelector('.stock-details');
         const isVisible = window.getComputedStyle(details).display === 'grid';
-        document.querySelectorAll('.stock-details').forEach(el => el.style.display =
+        document.querySelectorAll('.stock-details').forEach(el => el.style.display = 'none');
+        details.style.display = isVisible ? 'none' : 'grid';
+    }
+
+    window.onload = ladeDaten;
+</script>
+
+</body>
+</html>
