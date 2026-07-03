@@ -3,31 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktien Dashboard</title>
+    <title>Aktien Dashboard Pro</title>
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-input: #334155;
+            --bg-main: #0b0f19;
+            --bg-card: #151f32;
+            --bg-card-hover: #1c2a45;
+            --bg-input: #1e293b;
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --text-muted: #64748b;
             --accent: #38bdf8;
-            --positive: #4ade80;
-            --negative: #f87171;
-            --border: #334155;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --positive: #10b981;
+            --positive-bg: rgba(16, 185, 129, 0.1);
+            --negative: #ef4444;
+            --negative-bg: rgba(239, 68, 68, 0.1);
+            --border: #22314d;
+            --radius: 12px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding: 20px;
+            padding: 30px 20px;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -36,22 +42,26 @@
         }
 
         header {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
+            padding-bottom: 25px;
         }
 
         h1 {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
         }
 
         /* Filter & Controls */
         .controls {
             display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
@@ -59,53 +69,70 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 10px 15px;
-            border-radius: 6px;
+            padding: 12px 18px;
+            border-radius: var(--radius);
             outline: none;
             font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
-        .search-input { flex: 1; min-width: 200px; }
-        .select-input { min-width: 150px; cursor: pointer; }
+        .search-input { 
+            flex: 1; 
+            min-width: 260px; 
+        }
+        
+        .search-input:focus, .select-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
 
-        /* Table Style */
+        .select-input { 
+            min-width: 160px; 
+            cursor: pointer;
+        }
+
+        /* Table Structure */
         .table-header {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
-            padding: 12px 20px;
-            background-color: var(--bg-card);
-            font-weight: 600;
+            grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
+            padding: 16px 24px;
+            background-color: rgba(21, 31, 50, 0.5);
+            font-weight: 700;
             color: var(--text-muted);
-            border-radius: 6px 6px 0 0;
+            border-radius: var(--radius) var(--radius) 0 0;
             border-bottom: 2px solid var(--border);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stock-list {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 8px;
+            margin-top: 8px;
         }
 
         .stock-row {
             background-color: var(--bg-card);
-            border-radius: 0;
-            transition: background-color 0.2s;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .stock-row:last-child {
-            border-radius: 0 0 6px 6px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .stock-row:hover {
-            background-color: #24324d;
+            background-color: var(--bg-card-hover);
+            transform: translateY(-1px);
+            border-color: #31456a;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         }
 
         .stock-summary {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
-            padding: 16px 20px;
+            grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1fr 1.5fr 1.5fr;
+            padding: 20px 24px;
             align-items: center;
             cursor: pointer;
         }
@@ -113,16 +140,17 @@
         .stock-profile {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .stock-logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             background-color: #fff;
             object-fit: contain;
-            padding: 2px;
+            padding: 4px;
+            border: 1px solid var(--border);
         }
 
         .stock-info {
@@ -130,61 +158,116 @@
             flex-direction: column;
         }
 
-        .stock-name { font-weight: 600; font-size: 1rem; }
-        .stock-tags { display: flex; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
-        .tag { background: #334155; color: #cbd5e1; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; }
+        .stock-name { 
+            font-weight: 700; 
+            font-size: 1.05rem; 
+            color: #ffffff;
+        }
+        
+        .stock-tags { 
+            display: flex; 
+            gap: 6px; 
+            margin-top: 6px; 
+            flex-wrap: wrap; 
+        }
+        
+        .tag { 
+            background: #1e293b; 
+            color: #94a3b8; 
+            font-size: 0.7rem; 
+            font-weight: 600;
+            padding: 3px 8px; 
+            border-radius: 6px; 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
 
-        .stock-value { font-size: 0.95rem; }
-        .perf { font-weight: 600; }
-        .positive { color: var(--positive); }
-        .negative { color: var(--negative); }
+        .stock-value { 
+            font-size: 1rem; 
+            font-weight: 500;
+        }
+        
+        .perf { 
+            font-weight: 700; 
+            font-size: 0.95rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            width: fit-content;
+        }
+        
+        .positive { 
+            color: var(--positive); 
+            background-color: var(--positive-bg);
+        }
+        
+        .negative { 
+            color: var(--negative); 
+            background-color: var(--negative-bg);
+        }
 
         /* Badges & Deviations */
         .kgv-diff-text, .kcv-diff-text {
             font-size: 0.8rem;
-            margin-left: 5px;
-            display: inline-block;
+            margin-left: 6px;
+            font-weight: 700;
         }
+        
         .discount-badge {
-            display: block;
-            font-size: 0.7rem;
-            background: #15803d;
-            color: #fff;
-            padding: 1px 4px;
-            border-radius: 4px;
-            width: fit-content;
-            margin-top: 2px;
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: #065f46;
+            color: #34d399;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
         }
 
-        /* Detail Area */
+        /* Extended Grid Info Dashboard */
         .stock-details {
             display: none;
-            padding: 20px;
-            background-color: #131c2e;
+            padding: 24px;
+            background-color: #0d1522;
             border-top: 1px solid var(--border);
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
         }
 
         .detail-card {
             background: var(--bg-card);
-            padding: 12px 15px;
-            border-radius: 6px;
+            padding: 16px;
+            border-radius: 8px;
             border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .detail-card label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            font-weight: 700;
             letter-spacing: 0.5px;
         }
 
         .detail-card span {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Dev Diagnostics Styling */
+        .dev-box {
+            grid-column: 1 / -1; 
+            background: #1a1813 !important; 
+            border-left: 4px solid #eab308 !important;
+            border-color: #eab308 !important;
+            padding: 14px 18px !important;
         }
 
         @media (max-width: 1024px) {
@@ -199,7 +282,7 @@
 <div class="container">
     <header>
         <h1>Aktien-Analyse Dashboard</h1>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Automatische Auswertung fundamentaler Kennzahlen</p>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Automatische Echtzeit-Auswertung fundamentaler Kennzahlen</p>
     </header>
 
     <div class="controls">
@@ -232,7 +315,6 @@
 <script>
     let alleAktien = [];
 
-    // Universeller Konverter: Macht aus jedem Datentyp (String, Zahl, "None") eine JS-Zahl oder null
     function parseToNumber(val) {
         if (val === undefined || val === null || val === "N/A" || val === "-" || val === "None") return null;
         if (typeof val === 'number') return val;
@@ -243,7 +325,6 @@
 
     async function ladeDaten() {
         try {
-            // Cache-Busting: Erzwingt das Laden der echten Datei ohne Browser-Cache-Tricks
             const response = await fetch(`daten.json?t=${new Date().getTime()}`);
             alleAktien = await response.json();
             
@@ -281,7 +362,6 @@
         }
 
         daten.forEach(aktie => {
-            // Formatierung Kursperformance
             const pTag = parseToNumber(aktie.perfTag) || 0;
             const pMonat = parseToNumber(aktie.perfMonat) || 0;
             const pJahr = parseToNumber(aktie.perfJahr) || 0;
@@ -291,36 +371,32 @@
             const monatClass = pMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = pJahr >= 0 ? 'positive' : 'negative';
 
-            // Dividenden-Fix
             const divRaw = parseToNumber(aktie.dividende);
             let dividendDisplay = "-";
             if (divRaw !== null) {
                 dividendDisplay = divRaw < 0.2 ? `${(divRaw * 100).toFixed(2)} %` : `${divRaw.toFixed(2)} %`;
             }
 
-            // KGV Logik
             const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
             const kgv5JNum = parseToNumber(aktie.kgv5J) !== null ? parseToNumber(aktie.kgv5J) : parseToNumber(aktie.kgv5Jahre);
             
             let kgvDiffHTML = "", kgvDiscount = "";
             if (kgvNum !== null && kgv5JNum !== null && kgv5JNum !== 0) {
                 const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
-                kgvDiffHTML = `<span class="kgv-diff-text ${abw <= 0 ? 'positive' : 'negative'}">(${abw > 0 ? '+' : ''}${abw.toFixed(1)}%)</span>`;
-                if (abw < -10) kgvDiscount = `<span class="discount-badge">Unterbewertet 🏷️</span>`;
+                kgvDiffHTML = `<span class="kgv-diff-text ${abw <= 0 ? 'positive' : 'negative'}">${abw > 0 ? '+' : ''}${abw.toFixed(1)}%</span>`;
+                if (abw < -10) kgvDiscount = `<div><span class="discount-badge">Unterbewertet 🏷️</span></div>`;
             }
 
-            // KCV Logik (Kugelsicherer Fallback gegen alte und neue Keys)
             const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
             const kcv5JNum = parseToNumber(aktie.kcv5J) !== null ? parseToNumber(aktie.kcv5J) : parseToNumber(aktie.kcv5Jahre);
 
             let kcvDiffHTML = "", kcvDiscount = "";
             if (kcvNum !== null && kcv5JNum !== null && kcv5JNum !== 0) {
                 const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
-                kcvDiffHTML = `<span class="kcv-diff-text ${abw <= 0 ? 'positive' : 'negative'}">(${abw > 0 ? '+' : ''}${abw.toFixed(1)}%)</span>`;
-                if (abw < 0 && !kgvDiscount) kcvDiscount = `<span class="discount-badge">Cash Günstig 💸</span>`;
+                kcvDiffHTML = `<span class="kcv-diff-text ${abw <= 0 ? 'positive' : 'negative'}">${abw > 0 ? '+' : ''}${abw.toFixed(1)}%</span>`;
+                if (abw < 0 && !kgvDiscount) kcvDiscount = `<div><span class="discount-badge">Cash Günstig 💸</span></div>`;
             }
 
-            // Tags generieren
             const tagsHTML = (aktie.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
 
             const row = document.createElement('div');
@@ -334,11 +410,11 @@
                             <div class="stock-tags">${tagsHTML}</div>
                         </div>
                     </div>
-                    <div class="stock-value">${aktie.kurs || '-'}</div>
-                    <div class="stock-value perf ${tagClass}">${pTag >= 0 ? '+' : ''}${pTag.toFixed(2)}%</div>
-                    <div class="stock-value perf ${monatClass}">${pMonat >= 0 ? '+' : ''}${pMonat.toFixed(2)}%</div>
-                    <div class="stock-value perf ${jahrClass}">${pJahr >= 0 ? '+' : ''}${pJahr.toFixed(2)}%</div>
-                    <div class="stock-value hide-tablet">${dividendDisplay}</div>
+                    <div class="stock-value" style="font-weight:700;">${aktie.kurs || '-'}</div>
+                    <div><span class="perf ${tagClass}">${pTag >= 0 ? '+' : ''}${pTag.toFixed(2)}%</span></div>
+                    <div><span class="perf ${monatClass}">${pMonat >= 0 ? '+' : ''}${pMonat.toFixed(2)}%</span></div>
+                    <div><span class="perf ${jahrClass}">${pJahr >= 0 ? '+' : ''}${pJahr.toFixed(2)}%</span></div>
+                    <div class="stock-value hide-tablet" style="color: #cbd5e1;">${dividendDisplay}</div>
                     <div class="stock-value hide-tablet">${kgvNum !== null ? kgvNum.toFixed(1) : '-'}${kgvDiffHTML}${kgvDiscount}</div>
                     <div class="stock-value hide-tablet">${kcvNum !== null ? kcvNum.toFixed(1) : '-'}${kcvDiffHTML}${kcvDiscount}</div>
                 </div>
@@ -358,7 +434,7 @@
                     </div>
                     <div class="detail-card">
                         <label>5Y Ø KGV</label>
-                        <span>${kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-'}</span>
+                        <span style="color: var(--text-muted);">${kgv5JNum !== null ? kgv5JNum.toFixed(1) : '-'}</span>
                     </div>
                     <div class="detail-card">
                         <label>Aktuelles KCV</label>
@@ -366,7 +442,7 @@
                     </div>
                     <div class="detail-card">
                         <label>5Y Ø KCV</label>
-                        <span>${kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-'}</span>
+                        <span style="color: var(--text-muted);">${kcv5JNum !== null ? kcv5JNum.toFixed(1) : '-'}</span>
                     </div>
                     <div class="detail-card">
                         <label>Ex-Datum</label>
@@ -374,11 +450,11 @@
                     </div>
                     <div class="detail-card">
                         <label>5J Perf.</label>
-                        <span class="${p5J >= 0 ? 'positive' : 'negative'}">${p5J >= 0 ? '+' : ''}${p5J.toFixed(1)}%</span>
+                        <span class="${p5J >= 0 ? 'positive' : 'negative'}" style="background:none; padding:0;">${p5J >= 0 ? '+' : ''}${p5J.toFixed(1)}%</span>
                     </div>
                     
-                    <div class="detail-card" style="grid-column: span 2; opacity: 0.9; background: #1e293b; border-left: 3px solid #eab308;">
-                        <label>🔍 Live-Werte Check (Inhalt deiner JSON):</label>
+                    <div class="detail-card dev-box">
+                        <label style="color:#eab308;">🔍 Live-Werte Check (Inhalt deiner JSON):</label>
                         <span style="font-size:0.8rem; font-family:monospace; color:#fef08a; display:block; margin-top:5px; font-weight:normal;">
                             dividende: "${aktie.dividende !== undefined ? aktie.dividende : 'nicht im JSON'}" | 
                             kcv: "${aktie.kcv !== undefined ? aktie.kcv : 'nicht im JSON'}" | 
@@ -394,11 +470,7 @@
     function toggleDetails(rowElement) {
         const details = rowElement.querySelector('.stock-details');
         const isVisible = window.getComputedStyle(details).display === 'grid';
-        
-        // Alle anderen schließen
         document.querySelectorAll('.stock-details').forEach(el => el.style.display = 'none');
-        
-        // Gewähltes Element umschalten
         details.style.display = isVisible ? 'none' : 'grid';
     }
 
