@@ -75,7 +75,7 @@
         .kgv-diff-text, .kcv-diff-text { font-size: 0.78rem; font-weight: 600; margin-left: 0.3rem; }
 
         .stock-details { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: rgba(30, 41, 59, 0.3); }
-        .stock-item.open .stock-details { max-height: 800px; border-top: 1px solid var(--border); }
+        .stock-item.open .stock-details { max-height: 900px; border-top: 1px solid var(--border); }
         .details-container { padding: 1.5rem; }
         .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
         .detail-card { background-color: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; border: 1px solid rgba(51, 65, 85, 0.5); }
@@ -193,10 +193,9 @@
             const monatClass = perfMonat >= 0 ? 'positive' : 'negative';
             const jahrClass = perfJahr >= 0 ? 'positive' : 'negative';
 
-            // DIVIDENDEN-FIX: Keine automatische Multiplikation mehr!
+            // DIVIDENDEN-REDUKTION (Kein Shifting mehr)
             let dividendDisplay = "-";
             let roheDiv = aktie.dividendYield !== undefined ? aktie.dividendYield : aktie.yield;
-            
             if (roheDiv !== undefined && roheDiv !== null) {
                 let divString = String(roheDiv).trim();
                 if (divString !== "N/A" && divString !== "-") {
@@ -204,16 +203,55 @@
                         dividendDisplay = divString;
                     } else {
                         let num = parseToNumber(divString);
-                        if (num !== null) {
-                            dividendDisplay = `${num.toFixed(2)} %`;
-                        }
+                        if (num !== null) dividendDisplay = `${num.toFixed(2)} %`;
                     }
                 }
             }
 
-            // KGV-LOOKUP
-            const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
-            const kgv5JNum = parseToNumber(aktie.kgv5Jahre) !== null ? parseToNumber(aktie.kgv5Jahre) : parseToNumber(aktie.kgv5j);
+            // AUTO-SCANNER FÜR KGV AKTUELL
+            let kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
+            if (kgvNum === null) {
+                for (let k in aktie) {
+                    if (k.toLowerCase().includes('kgv') && !k.includes('5') && !k.toLowerCase().includes('avg')) {
+                        kgvNum = parseToNumber(aktie[k]); break;
+                    }
+                }
+            }
+
+            // AUTO-SCANNER FÜR KGV 5 JAHRE
+            let kgv5JNum = parseToNumber(aktie.kgv5Jahre) !== null ? parseToNumber(aktie.kgv5Jahre) : parseToNumber(aktie.kgv5j);
+            if (kgv5JNum === null) {
+                for (let k in aktie) {
+                    let kl = k.toLowerCase();
+                    if (kl.includes('kgv') && (kl.includes('5') || kl.includes('avg') || kl.includes('jahr'))) {
+                        kgv5JNum = parseToNumber(aktie[k]); break;
+                    }
+                }
+            }
+
+            // AUTO-SCANNER FÜR KCV AKTUELL
+            let kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
+            if (kcvNum === null) {
+                for (let k in aktie) {
+                    let kl = k.toLowerCase();
+                    if ((kl.includes('kcv') || kl.includes('pcf') || kl.includes('cashflow')) && !kl.includes('5') && !kl.includes('avg')) {
+                        kcvNum = parseToNumber(aktie[k]); break;
+                    }
+                }
+            }
+
+            // AUTO-SCANNER FÜR KCV 5 JAHRE
+            let kcv5JNum = parseToNumber(aktie.kcv5Jahre) !== null ? parseToNumber(aktie.kcv5Jahre) : parseToNumber(aktie.kcv5j);
+            if (kcv5JNum === null) {
+                for (let k in aktie) {
+                    let kl = k.toLowerCase();
+                    if ((kl.includes('kcv') || kl.includes('pcf') || kl.includes('cashflow')) && (kl.includes('5') || kl.includes('avg') || kl.includes('jahr'))) {
+                        kcv5JNum = parseToNumber(aktie[k]); break;
+                    }
+                }
+            }
+
+            // Berechnungen Abweichungen
             let kgvDiffHTML = "", kgvDiscount = "";
             if (kgvNum !== null && kgv5JNum !== null) {
                 const abw = ((kgvNum - kgv5JNum) / kgv5JNum) * 100;
@@ -221,12 +259,6 @@
                 if (abw < 0) kgvDiscount = `<span class="discount-badge">Günstig 🔥</span>`;
             }
 
-            // KCV-LOOKUP (Sucht flexibel nach 'kcv', 'kcvAktuell', 'pcf' oder 'KCV')
-            const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : 
-                           (parseToNumber(aktie.kcvAktuell) !== null ? parseToNumber(aktie.kcvAktuell) : 
-                           (parseToNumber(aktie.pcf) !== null ? parseToNumber(aktie.pcf) : parseToNumber(aktie.KCV)));
-            
-            const kcv5JNum = parseToNumber(aktie.kcv5Jahre) !== null ? parseToNumber(aktie.kcv5Jahre) : parseToNumber(aktie.kcv5j);
             let kcvDiffHTML = "", kcvDiscount = "";
             if (kcvNum !== null && kcv5JNum !== null) {
                 const abw = ((kcvNum - kcv5JNum) / kcv5JNum) * 100;
@@ -236,9 +268,11 @@
 
             const ausschuettungstage = aktie.monate || "-";
             const haeufigkeit = aktie.frequenz || "-";
-
             const fallbackSrc = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100";
             const tagsHTML = (aktie.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+            
+            // Debug-Liste aller Keys des Objekts erzeugen
+            const alleObjektKeys = Object.keys(aktie).join(', ');
 
             const item = document.createElement('div');
             item.className = 'stock-item';
@@ -311,6 +345,10 @@
                             <div class="detail-card">
                                 <label>5J Perf.</label>
                                 <span class="perf ${perf5J >= 0 ? 'positive' : 'negative'}">${perf5J >= 0 ? '+' : ''}${perf5J.toFixed(1)}%</span>
+                            </div>
+                            <div class="detail-card" style="grid-column: span 2; opacity: 0.6; background: #1e293b;">
+                                <label>🛠️ Gefundene JSON-Keys für dieses Objekt:</label>
+                                <span style="font-size:0.72rem; font-family:monospace; word-break:break-all; color:var(--accent);">${alleObjektKeys}</span>
                             </div>
                         </div>
                     </div>
