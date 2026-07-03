@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktien Terminal Pro - V3.0 (Direkt-Modus)</title>
+    <title>Aktien Terminal Pro - V4.0 (Responsive)</title>
     <style>
         :root {
             --bg-main: #090d16;
@@ -29,7 +29,7 @@
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding: 25px;
+            padding: 20px;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -51,14 +51,14 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.5px;
         }
 
         .version-badge {
-            background: #10b981;
+            background: var(--accent);
             color: var(--bg-main);
             font-size: 0.75rem;
             padding: 4px 10px;
@@ -66,13 +66,13 @@
             font-weight: 900;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
 
         /* Filter-Leiste */
         .controls {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
@@ -81,20 +81,20 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 10px 16px;
+            padding: 12px 16px;
             border-radius: var(--radius);
             outline: none;
             font-size: 0.9rem;
         }
 
         .search-input { flex: 1; min-width: 250px; }
-        .select-input { min-width: 160px; cursor: pointer; }
+        .select-input { flex: 1; min-width: 160px; cursor: pointer; }
         .search-input:focus, .select-input:focus { border-color: var(--accent); }
 
-        /* Tabellen-Layout */
+        /* Desktop Tabellen-Layout */
         .table-grid {
             display: grid;
-            grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1.6fr 1.6fr;
+            grid-template-columns: 2.5fr 5.5fr;
             align-items: center;
             padding: 14px 20px;
         }
@@ -110,19 +110,19 @@
             letter-spacing: 0.5px;
         }
 
-        .sortable {
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.2s;
+        .desktop-headers {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.6fr 1.6fr;
+            width: 100%;
         }
-        .sortable:hover {
-            color: var(--accent);
-        }
+
+        .desktop-headers span { text-align: center; }
+        .desktop-headers .txt-right { text-align: right; }
 
         .stock-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             margin-top: 6px;
         }
 
@@ -141,12 +141,39 @@
 
         .stock-summary {
             cursor: pointer;
+            user-select: none;
         }
 
-        /* Spalten-Ausrichtungen */
-        .cell-left { text-align: left; display: flex; align-items: center; }
-        .cell-center { text-align: center; justify-content: center; display: flex; }
-        .cell-right { text-align: right; justify-content: flex-end; display: flex; font-weight: 600; }
+        /* Container-Strukturen für Zeilen */
+        .main-info-block {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-price-display {
+            display: none; /* Nur auf Mobilgeräten aktiv */
+        }
+
+        .metrics-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.6fr 1.6fr;
+            align-items: center;
+            width: 100%;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-item .m-label {
+            display: none; /* Im Desktop-Modus verstecken */
+        }
+
+        /* Desktop Ausrichtungen */
+        .c-kurs { text-align: right; justify-content: flex-end; font-weight: 600; color: #ffffff; }
+        .c-tag, .c-monat, .c-jahr, .c-div { text-align: center; justify-content: center; }
+        .c-kgv, .c-kcv { text-align: right; justify-content: flex-end; }
 
         /* Logo & Firmenname */
         .stock-profile {
@@ -156,8 +183,8 @@
         }
 
         .stock-logo {
-            width: 32px;
-            height: 32px;
+            width: 35px;
+            height: 35px;
             border-radius: 6px;
             background-color: #ffffff;
             object-fit: contain;
@@ -186,17 +213,18 @@
 
         /* Performance Badges */
         .perf-badge {
-            padding: 4px 8px;
+            padding: 5px 8px;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            min-width: 75px;
+            min-width: 72px;
             text-align: center;
+            display: inline-block;
         }
         .perf-badge.positive { color: var(--positive); background-color: rgba(16, 185, 129, 0.12); }
         .perf-badge.negative { color: var(--negative); background-color: rgba(239, 68, 68, 0.12); }
 
-        /* KGV / KCV Werte */
+        /* KGV / KCV */
         .val-main { font-size: 0.95rem; color: #ffffff; }
         .val-sub { font-size: 0.75rem; font-weight: 700; margin-left: 5px; }
         .val-sub.positive { color: var(--positive); }
@@ -225,7 +253,7 @@
             padding: 20px;
             background-color: #0b111e;
             border-top: 1px solid var(--border);
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 12px;
         }
 
@@ -245,11 +273,72 @@
             font-weight: 700;
         }
 
-        .detail-card span { font-size: 1.1rem; font-weight: 700; color: #ffffff; }
+        .detail-card span { font-size: 1.05rem; font-weight: 700; color: #ffffff; }
 
-        @media (max-width: 1024px) {
-            .table-grid { grid-template-columns: 2fr 1.2fr 1fr 1fr 1fr; }
-            .hide-tablet { display: none !important; }
+        /* 📱 MOBILGERÄTE RENDER-OVERWRITES (Absolute Absicherung) */
+        @media (max-width: 900px) {
+            .table-header {
+                display: none !important;
+            }
+            .responsive-row-container {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding: 16px !important;
+                gap: 14px !important;
+            }
+            .main-info-block {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                width: 100% !important;
+            }
+            .mobile-price-display {
+                display: block !important;
+                font-size: 1.1rem !important;
+                font-weight: 800 !important;
+                color: #ffffff !important;
+                background: rgba(255,255,255,0.05) !important;
+                padding: 5px 12px !important;
+                border-radius: 6px !important;
+                border: 1px solid var(--border) !important;
+            }
+            .metrics-block {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
+                background: rgba(13, 20, 35, 0.6) !important;
+                padding: 12px !important;
+                border-radius: 6px !important;
+                border: 1px solid rgba(255,255,255,0.04) !important;
+                width: 100% !important;
+            }
+            .metric-item {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                justify-content: center !important;
+            }
+            .metric-item .m-label {
+                display: block !important;
+                font-size: 0.65rem !important;
+                color: var(--text-muted) !important;
+                text-transform: uppercase !important;
+                font-weight: 700 !important;
+                margin-bottom: 4px !important;
+                letter-spacing: 0.5px !important;
+            }
+            .c-kurs {
+                display: none !important; /* Auf Mobilgeräten oben rechts platziert */
+            }
+            .c-tag, .c-monat, .c-jahr, .c-div, .c-kgv, .c-kcv {
+                text-align: center !important;
+                justify-content: center !important;
+            }
+            .discount-container {
+                align-items: center !important;
+            }
         }
     </style>
 </head>
@@ -259,122 +348,52 @@
     <header>
         <div class="header-title-row">
             <h1>Aktien Terminal Pro</h1>
-            <span class="version-badge">Version 3.0 (DIREKT-MODUS)</span>
+            <span class="version-badge">V4.0 Live</span>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 6px;">Klicke direkt auf die Spaltenüberschriften <b>KGV</b> oder <b>KCV</b>, um die Liste blitzschnell zu sortieren.</p>
     </header>
 
     <div class="controls">
-        <input type="text" id="searchInput" class="search-input" placeholder="Nach Name, Ticker oder Sektor suchen..." oninput="filterUndSortiere()">
+        <input type="text" id="searchInput" class="search-input" placeholder="Name, Ticker oder Tag suchen..." oninput="filterUndSortiere()">
         <select id="tagFilter" class="select-input" onchange="filterUndSortiere()">
-            <option value="">Alle Branchen/Tags</option>
+            <option value="">Alle Branchen</option>
         </select>
         <select id="watchlistFilter" class="select-input" onchange="filterUndSortiere()">
-            <option value="">Alle Listen (Gesamtansicht)</option>
-            <option value="portfolio">Portfolio</option>
+            <option value="">Alle Listen (Gesamt)</option>
+            <option value="portfolio">Portfolio (Depot)</option>
             <option value="watchlist">Watchlist</option>
+        </select>
+        <!-- Mobilfreundliche Sortierung -->
+        <select id="sortFilter" class="select-input" onchange="waehleSortierungDropdown(this.value)">
+            <option value="">Sortieren nach...</option>
+            <option value="kgv_asc">KGV (Niedrig zuerst)</option>
+            <option value="kgv_desc">KGV (Hoch zuerst)</option>
+            <option value="kcv_asc">KCV (Niedrig zuerst)</option>
+            <option value="kcv_desc">KCV (Hoch zuerst)</option>
         </select>
     </div>
 
+    <!-- Desktop Tabellen-Kopfzeile -->
     <div class="table-grid table-header">
-        <span class="cell-left">Unternehmen / Ticker</span>
-        <span class="cell-right">Kurs</span>
-        <span class="cell-center">Heute</span>
-        <span class="cell-center">1 Mon.</span>
-        <span class="cell-center">1 Jahr</span>
-        <span class="cell-center hide-tablet">Dividende</span>
-        <span class="cell-right hide-tablet sortable" onclick="waehleSortierung('kgv')">KGV <span id="sort-icon-kgv">↕</span></span>
-        <span class="cell-right hide-tablet sortable" onclick="waehleSortierung('kcv')">KCV <span id="sort-icon-kcv">↕</span></span>
+        <span style="text-align: left;">Unternehmen / Ticker</span>
+        <div class="desktop-headers">
+            <span class="txt-right">Kurs</span>
+            <span>Heute</span>
+            <span>1 Mon.</span>
+            <span>1 Jahr</span>
+            <span>Div.</span>
+            <span class="txt-right">KGV</span>
+            <span class="txt-right">KCV</span>
+        </div>
     </div>
 
-    <div id="stockList" class="stock-list"></div>
+    <!-- Container für geladene Aktien -->
+    <div id="stockList" class="stock-list">
+        <p style="padding: 30px; text-align: center; color: var(--text-muted);">Lade dein Depot und deine Watchlist...</p>
+    </div>
 </div>
 
 <script>
-    // DEINE DATEN SIND JETZT DIREKT INTERN VERANKERT – KEIN BLOCKIEREN MEHR MÖGLICH!
-    let alleAktien = [
-        {
-            "name": "Main Street Capital",
-            "ticker": "MAIN",
-            "logoUrl": "https://logo.clearbit.com/mainstcapital.com",
-            "kurs": "49,53 $",
-            "perfTag": 0.45,
-            "perfMonat": 2.15,
-            "perfJahr": 14.80,
-            "perf5J": 38.40,
-            "dividende": 0.0595,
-            "kgv": 8.7,
-            "kgv5J": 10.2,
-            "kcv": 7.9,
-            "kcv5J": 9.1,
-            "monate": "Monatlich",
-            "frequenz": "12x im Jahr",
-            "exDate": "15.02.2025",
-            "watchlist": true,
-            "tags": ["Finanzen", "BDC", "Monatszahler"]
-        },
-        {
-            "name": "Realty Income",
-            "ticker": "O",
-            "logoUrl": "https://logo.clearbit.com/realtyincome.com",
-            "kurs": "54,20 $",
-            "perfTag": -0.20,
-            "perfMonat": -1.40,
-            "perfJahr": 5.10,
-            "perf5J": 12.30,
-            "dividende": 0.0585,
-            "kgv": 41.2,
-            "kgv5J": 45.0,
-            "kcv": 13.4,
-            "kcv5J": 15.2,
-            "monate": "Monatlich",
-            "frequenz": "12x im Jahr",
-            "exDate": "02.02.2025",
-            "watchlist": true,
-            "tags": ["Immobilien", "REIT", "Monatszahler"]
-        },
-        {
-            "name": "Microsoft Corp.",
-            "ticker": "MSFT",
-            "logoUrl": "https://logo.clearbit.com/microsoft.com",
-            "kurs": "415,60 $",
-            "perfTag": 1.25,
-            "perfMonat": 4.80,
-            "perfJahr": 28.30,
-            "perf5J": 115.40,
-            "dividende": 0.0075,
-            "kgv": 34.5,
-            "kgv5J": 32.1,
-            "kcv": 26.8,
-            "kcv5J": 25.0,
-            "monate": "Mär, Jun, Sep, Dez",
-            "frequenz": "Quartalsweise",
-            "exDate": "18.02.2025",
-            "watchlist": false,
-            "tags": ["Technologie", "Software", "KI"]
-        },
-        {
-            "name": "Apple Inc.",
-            "ticker": "AAPL",
-            "logoUrl": "https://logo.clearbit.com/apple.com",
-            "kurs": "182,30 $",
-            "perfTag": -0.85,
-            "perfMonat": 1.10,
-            "perfJahr": 18.20,
-            "perf5J": 94.60,
-            "dividende": 0.0055,
-            "kgv": 29.1,
-            "kgv5J": 27.4,
-            "kcv": 22.4,
-            "kcv5J": 21.8,
-            "monate": "Feb, Mai, Aug, Nov",
-            "frequenz": "Quartalsweise",
-            "exDate": "08.02.2025",
-            "watchlist": false,
-            "tags": ["Technologie", "Hardware", "Konsum"]
-        }
-    ];
-
+    let alleAktien = [];
     let aktuelleSortierung = { spalte: null, richtung: 'asc' };
 
     function parseToNumber(val) {
@@ -385,9 +404,22 @@
         return isNaN(n) ? null : n;
     }
 
-    function initialisiere() {
-        extrahiereTags();
-        filterUndSortiere();
+    // Lädt deine echte daten.json live aus dem Repository
+    async function ladeDaten() {
+        const container = document.getElementById('stockList');
+        try {
+            const response = await fetch('daten.json');
+            if (!response.ok) {
+                throw new Error(`Konnte daten.json nicht finden (Status: ${response.status})`);
+            }
+            alleAktien = await response.json();
+            
+            extrahiereTags();
+            filterUndSortiere();
+        } catch (error) {
+            console.error(error);
+            container.innerHTML = `<p style="padding:30px; text-align:center; color:var(--negative);"><b>Fehler beim Laden von daten.json:</b><br>${error.message}</p>`;
+        }
     }
 
     function extrahiereTags() {
@@ -401,22 +433,18 @@
                     opt.value = t; opt.textContent = t; select.appendChild(opt);
                 });
             }
-        } catch(e) { console.error("Fehler bei den Tags:", e); }
+        } catch(e) { console.error(e); }
     }
 
-    function waehleSortierung(spalte) {
-        if (aktuelleSortierung.spalte === spalte) {
-            aktuelleSortierung.richtung = aktuelleSortierung.richtung === 'asc' ? 'desc' : 'asc';
-        } else {
-            aktuelleSortierung.spalte = spalte;
+    function waehleSortierungDropdown(value) {
+        if (!value) {
+            aktuelleSortierung.spalte = null;
             aktuelleSortierung.richtung = 'asc';
+        } else {
+            const parts = value.split('_');
+            aktuelleSortierung.spalte = parts[0];
+            aktuelleSortierung.richtung = parts[1];
         }
-        
-        document.getElementById('sort-icon-kgv').textContent = '↕';
-        document.getElementById('sort-icon-kcv').textContent = '↕';
-        const aktuellesIcon = aktuelleSortierung.richtung === 'asc' ? '↑' : '↓';
-        document.getElementById(`sort-icon-${spalte}`).textContent = aktuellesIcon;
-
         filterUndSortiere();
     }
 
@@ -430,11 +458,7 @@
             let daten = alleAktien.filter(a => {
                 const nameStr = String(a.name || '').toLowerCase();
                 const tickerStr = String(a.ticker || '').toLowerCase();
-                
-                const matchesSearch = nameStr.includes(sTerm) || 
-                                      tickerStr.includes(sTerm) || 
-                                      (a.tags || []).some(t => String(t || '').toLowerCase().includes(sTerm));
-                
+                const matchesSearch = nameStr.includes(sTerm) || tickerStr.includes(sTerm) || (a.tags || []).some(t => String(t || '').toLowerCase().includes(sTerm));
                 const matchesTag = !selTag || (a.tags || []).map(String).includes(selTag);
                 
                 let matchesWatch = true;
@@ -462,7 +486,7 @@
 
             renderAktien(daten);
         } catch (err) {
-            container.innerHTML = `<div style="padding: 20px; color: var(--negative);"><b>Fehler beim Filtern:</b> ${err.message}</div>`;
+            container.innerHTML = `<div style="padding: 20px; color: var(--negative);">Filter-Fehler: ${err.message}</div>`;
         }
     }
 
@@ -520,21 +544,31 @@
                 const row = document.createElement('div');
                 row.className = 'stock-row';
                 row.innerHTML = `
-                    <div class="table-grid stock-summary" onclick="toggleDetails(this.parentNode)">
-                        <div class="cell-left stock-profile">
-                            <img class="stock-logo" src="${aktie.logoUrl || fallbackLogo}" onerror="this.src='${fallbackLogo}';">
-                            <div class="stock-info">
-                                <span class="stock-name">${aktie.name || 'Unbekannt'} <span style="color:var(--text-muted); font-size:0.75rem;">(${aktie.ticker || '-'})</span></span>
-                                <div class="stock-tags">${tagsHTML}</div>
+                    <div class="responsive-row-container stock-summary" onclick="toggleDetails(this.parentNode)">
+                        
+                        <!-- Linke Spalte / Oben: Profil & Mobiler Preis -->
+                        <div class="main-info-block">
+                            <div class="stock-profile">
+                                <img class="stock-logo" src="${aktie.logoUrl || fallbackLogo}" onerror="this.src='${fallbackLogo}';">
+                                <div class="stock-info">
+                                    <span class="stock-name">${aktie.name || 'Unbekannt'} <span style="color:var(--text-muted); font-size:0.75rem;">(${aktie.ticker || '-'})</span></span>
+                                    <div class="stock-tags">${tagsHTML}</div>
+                                </div>
                             </div>
+                            <div class="mobile-price-display">${aktie.kurs || '-'}</div>
                         </div>
-                        <div class="cell-right val-main">${aktie.kurs || '-'}</div>
-                        <div class="cell-center"><span class="perf-badge ${pTag >= 0 ? 'positive' : 'negative'}">${pTag >= 0 ? '+' : ''}${pTag.toFixed(2)}%</span></div>
-                        <div class="cell-center"><span class="perf-badge ${pMonat >= 0 ? 'positive' : 'negative'}">${pMonat >= 0 ? '+' : ''}${pMonat.toFixed(2)}%</span></div>
-                        <div class="cell-center"><span class="perf-badge ${pJahr >= 0 ? 'positive' : 'negative'}">${pJahr >= 0 ? '+' : ''}${pJahr.toFixed(2)}%</span></div>
-                        <div class="cell-center hide-tablet val-main" style="font-weight:600;">${dividendDisplay}</div>
-                        <div class="cell-right hide-tablet">${kgvHTML}</div>
-                        <div class="cell-right hide-tablet">${kcvHTML}</div>
+                        
+                        <!-- Rechte Spalte / Unten: Kennzahlen (Desktop horizontal / Mobil kompakt im Grid) -->
+                        <div class="metrics-block">
+                            <div class="metric-item c-kurs"><span class="m-label">Kurs</span><span class="val-main">${aktie.kurs || '-'}</span></div>
+                            <div class="metric-item c-tag"><span class="m-label">Heute</span><span class="perf-badge ${pTag >= 0 ? 'positive' : 'negative'}">${pTag >= 0 ? '+' : ''}${pTag.toFixed(2)}%</span></div>
+                            <div class="metric-item c-monat"><span class="m-label">1 Mon.</span><span class="perf-badge ${pMonat >= 0 ? 'positive' : 'negative'}">${pMonat >= 0 ? '+' : ''}${pMonat.toFixed(2)}%</span></div>
+                            <div class="metric-item c-jahr"><span class="m-label">1 Jahr</span><span class="perf-badge ${pJahr >= 0 ? 'positive' : 'negative'}">${pJahr >= 0 ? '+' : ''}${pJahr.toFixed(2)}%</span></div>
+                            <div class="metric-item c-div"><span class="m-label">Div.</span><span class="val-main" style="font-weight:600;">${dividendDisplay}</span></div>
+                            <div class="metric-item c-kgv"><span class="m-label">KGV</span>${kgvHTML}</div>
+                            <div class="metric-item c-kcv"><span class="m-label">KCV</span>${kcvHTML}</div>
+                        </div>
+
                     </div>
                     
                     <div class="stock-details">
@@ -550,7 +584,7 @@
                 `;
                 container.appendChild(row);
             } catch(rowErr) {
-                console.error("Fehler bei Zeile:", rowErr);
+                console.error(rowErr);
             }
         });
     }
@@ -562,8 +596,7 @@
         details.style.display = isVisible ? 'none' : 'grid';
     }
 
-    // Sofortiger Start ohne Dateiverzögerung
-    initialisiere();
+    ladeDaten();
 </script>
 
 </body>
