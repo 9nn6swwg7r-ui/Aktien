@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktien Terminal Pro - V2.1</title>
+    <title>Aktien Terminal Pro - V3.0 (Direkt-Modus)</title>
     <style>
         :root {
             --bg-main: #090d16;
@@ -58,7 +58,7 @@
         }
 
         .version-badge {
-            background: var(--accent);
+            background: #10b981;
             color: var(--bg-main);
             font-size: 0.75rem;
             padding: 4px 10px;
@@ -66,7 +66,7 @@
             font-weight: 900;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
         }
 
         /* Filter-Leiste */
@@ -259,7 +259,7 @@
     <header>
         <div class="header-title-row">
             <h1>Aktien Terminal Pro</h1>
-            <span class="version-badge">Version 2.1 (STABIL)</span>
+            <span class="version-badge">Version 3.0 (DIREKT-MODUS)</span>
         </div>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 6px;">Klicke direkt auf die Spaltenüberschriften <b>KGV</b> oder <b>KCV</b>, um die Liste blitzschnell zu sortieren.</p>
     </header>
@@ -287,13 +287,94 @@
         <span class="cell-right hide-tablet sortable" onclick="waehleSortierung('kcv')">KCV <span id="sort-icon-kcv">↕</span></span>
     </div>
 
-    <div id="stockList" class="stock-list">
-        <p style="padding: 20px; text-align: center; color: var(--text-muted);">Lese 'daten.json' aus dem Ordner...</p>
-    </div>
+    <div id="stockList" class="stock-list"></div>
 </div>
 
 <script>
-    let alleAktien = [];
+    // DEINE DATEN SIND JETZT DIREKT INTERN VERANKERT – KEIN BLOCKIEREN MEHR MÖGLICH!
+    let alleAktien = [
+        {
+            "name": "Main Street Capital",
+            "ticker": "MAIN",
+            "logoUrl": "https://logo.clearbit.com/mainstcapital.com",
+            "kurs": "49,53 $",
+            "perfTag": 0.45,
+            "perfMonat": 2.15,
+            "perfJahr": 14.80,
+            "perf5J": 38.40,
+            "dividende": 0.0595,
+            "kgv": 8.7,
+            "kgv5J": 10.2,
+            "kcv": 7.9,
+            "kcv5J": 9.1,
+            "monate": "Monatlich",
+            "frequenz": "12x im Jahr",
+            "exDate": "15.02.2025",
+            "watchlist": true,
+            "tags": ["Finanzen", "BDC", "Monatszahler"]
+        },
+        {
+            "name": "Realty Income",
+            "ticker": "O",
+            "logoUrl": "https://logo.clearbit.com/realtyincome.com",
+            "kurs": "54,20 $",
+            "perfTag": -0.20,
+            "perfMonat": -1.40,
+            "perfJahr": 5.10,
+            "perf5J": 12.30,
+            "dividende": 0.0585,
+            "kgv": 41.2,
+            "kgv5J": 45.0,
+            "kcv": 13.4,
+            "kcv5J": 15.2,
+            "monate": "Monatlich",
+            "frequenz": "12x im Jahr",
+            "exDate": "02.02.2025",
+            "watchlist": true,
+            "tags": ["Immobilien", "REIT", "Monatszahler"]
+        },
+        {
+            "name": "Microsoft Corp.",
+            "ticker": "MSFT",
+            "logoUrl": "https://logo.clearbit.com/microsoft.com",
+            "kurs": "415,60 $",
+            "perfTag": 1.25,
+            "perfMonat": 4.80,
+            "perfJahr": 28.30,
+            "perf5J": 115.40,
+            "dividende": 0.0075,
+            "kgv": 34.5,
+            "kgv5J": 32.1,
+            "kcv": 26.8,
+            "kcv5J": 25.0,
+            "monate": "Mär, Jun, Sep, Dez",
+            "frequenz": "Quartalsweise",
+            "exDate": "18.02.2025",
+            "watchlist": false,
+            "tags": ["Technologie", "Software", "KI"]
+        },
+        {
+            "name": "Apple Inc.",
+            "ticker": "AAPL",
+            "logoUrl": "https://logo.clearbit.com/apple.com",
+            "kurs": "182,30 $",
+            "perfTag": -0.85,
+            "perfMonat": 1.10,
+            "perfJahr": 18.20,
+            "perf5J": 94.60,
+            "dividende": 0.0055,
+            "kgv": 29.1,
+            "kgv5J": 27.4,
+            "kcv": 22.4,
+            "kcv5J": 21.8,
+            "monate": "Feb, Mai, Aug, Nov",
+            "frequenz": "Quartalsweise",
+            "exDate": "08.02.2025",
+            "watchlist": false,
+            "tags": ["Technologie", "Hardware", "Konsum"]
+        }
+    ];
+
     let aktuelleSortierung = { spalte: null, richtung: 'asc' };
 
     function parseToNumber(val) {
@@ -304,29 +385,9 @@
         return isNaN(n) ? null : n;
     }
 
-    // JETZT GANZ SAUBER UND FEHLERRESISTENT OHNE '?' PARAMETER
-    async function ladeDaten() {
-        const container = document.getElementById('stockList');
-        try {
-            const response = await fetch('daten.json');
-            if (!response.ok) {
-                throw new Error(`Die Datei 'daten.json' konnte im selben Ordner nicht gefunden werden (HTTP-Status: ${response.status}).`);
-            }
-            alleAktien = await response.json();
-            
-            extrahiereTags();
-            filterUndSortiere();
-        } catch (error) {
-            console.error("Fehler im Detail:", error);
-            container.innerHTML = `
-                <div style="padding: 25px; color: #f87171; background: rgba(239,68,68,0.1); border: 1px solid #ef4444; border-radius: 8px; line-height: 1.6;">
-                    <strong style="font-size: 1.1rem;">⚠️ Browser blockiert lokalen Datenzugriff (CORS)</strong><br><br>
-                    <b>Das Problem:</b> Du hast die <code>index.html</code> per Doppelklick direkt geöffnet. Moderne Browser verbieten HTML-Dateien aus Sicherheitsgründen, einfach so andere Dateien (wie deine <code>daten.json</code>) von der Festplatte nachzuladen.<br><br>
-                    <b>Die 2 einfachsten Lösungen:</b><br>
-                    1. Nutze in VS Code die Erweiterung <b>"Live Server"</b> (unten rechts auf "Go Live" klicken).<br>
-                    2. <i>Alternativ:</i> Wenn du keinen Server willst, antworte mir kurz mit "Daten direkt einbauen", dann schreibe ich dir den Code so um, dass wir deine Aktien fest in die HTML-Datei integrieren. Dann klappt der Doppelklick immer und überall!
-                </div>`;
-        }
+    function initialisiere() {
+        extrahiereTags();
+        filterUndSortiere();
     }
 
     function extrahiereTags() {
@@ -501,11 +562,8 @@
         details.style.display = isVisible ? 'none' : 'grid';
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', ladeDaten);
-    } else {
-        ladeDaten();
-    }
+    // Sofortiger Start ohne Dateiverzögerung
+    initialisiere();
 </script>
 
 </body>
