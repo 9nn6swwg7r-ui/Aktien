@@ -73,7 +73,7 @@
         .select-input { min-width: 160px; cursor: pointer; }
         .search-input:focus, .select-input:focus { border-color: var(--accent); }
 
-        /* Das Tabellen-Layout (Streng strukturiert) */
+        /* Das Tabellen-Layout */
         .table-grid {
             display: grid;
             grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1.6fr 1.6fr;
@@ -125,12 +125,12 @@
             cursor: pointer;
         }
 
-        /* Ausrichtung der Tabellenzellen */
+        /* Spalten-Ausrichtungen */
         .cell-left { text-align: left; display: flex; align-items: center; }
         .cell-center { text-align: center; justify-content: center; display: flex; }
         .cell-right { text-align: right; justify-content: flex-end; display: flex; font-weight: 600; }
 
-        /* Profil / Firmen-Logo */
+        /* Logo & Firmenname */
         .stock-profile {
             display: flex;
             align-items: center;
@@ -166,19 +166,19 @@
         .stock-tags { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
         .tag { background: #1f2937; color: #9ca3af; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
 
-        /* Farb-Badges für die Performance */
+        /* Performance Badges */
         .perf-badge {
             padding: 4px 8px;
             border-radius: 6px;
             font-size: 0.85rem;
             font-weight: 700;
-            min-width: 70px;
+            min-width: 75px;
             text-align: center;
         }
         .perf-badge.positive { color: var(--positive); background-color: rgba(16, 185, 129, 0.12); }
         .perf-badge.negative { color: var(--negative); background-color: rgba(239, 68, 68, 0.12); }
 
-        /* Kennzahlen & Abweichungen */
+        /* KGV / KCV Werte */
         .val-main { font-size: 0.95rem; color: #ffffff; }
         .val-sub { font-size: 0.75rem; font-weight: 700; margin-left: 5px; }
         .val-sub.positive { color: var(--positive); }
@@ -201,7 +201,7 @@
             border: 1px solid rgba(52, 211, 153, 0.2);
         }
 
-        /* Detail-Grid-Layout */
+        /* Aufklappbare Details */
         .stock-details {
             display: none;
             padding: 20px;
@@ -247,7 +247,7 @@
 <div class="container">
     <header>
         <h1>Aktien Terminal Pro</h1>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Klicke auf KGV oder KCV im Tabellenkopf, um blitzschnell zu sortieren.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Sortiere per Klick auf die Spaltenüberschriften <b>KGV</b> oder <b>KCV</b>.</p>
     </header>
 
     <div class="controls">
@@ -256,7 +256,7 @@
             <option value="">Alle Branchen/Tags</option>
         </select>
         <select id="watchlistFilter" class="select-input" onchange="filterUndSortiere()">
-            <option value="">Alle Listen (Gesamt)</option>
+            <option value="">Alle Listen (Gesamtansicht)</option>
             <option value="portfolio">Portfolio</option>
             <option value="watchlist">Watchlist</option>
         </select>
@@ -279,7 +279,7 @@
 
 <script>
     let alleAktien = [];
-    let aktuelleSortierung = { spalte: null, richtung: 'asc' }; // 'asc' oder 'desc'
+    let aktuelleSortierung = { spalte: null, richtung: 'asc' };
 
     function parseToNumber(val) {
         if (val === undefined || val === null || val === "N/A" || val === "-" || val === "None") return null;
@@ -291,15 +291,16 @@
 
     async function ladeDaten() {
         try {
+            // Cache-Busting durch dynamischen Zeitstempel (?t=...)
             const response = await fetch(`daten.json?t=${new Date().getTime()}`);
             alleAktien = await response.json();
             
             extrahiereTags();
-            // Beim Start wird bedingungslos alles gerendert
+            // Zeige beim Start sofort ALLE Aktien ungefiltert an
             filterUndSortiere();
         } catch (error) {
             console.error("Fehler beim Laden:", error);
-            document.getElementById('stockList').innerHTML = `<p style="padding: 20px; color: var(--negative);">Fehler beim Laden der 'daten.json'.</p>`;
+            document.getElementById('stockList').innerHTML = `<p style="padding: 20px; color: var(--negative);">Fehler beim Laden der 'daten.json'. Stelle sicher, dass index.html und daten.json im selben Ordner liegen.</p>`;
         }
     }
 
@@ -315,14 +316,12 @@
 
     function waehleSortierung(spalte) {
         if (aktuelleSortierung.spalte === spalte) {
-            // Richtung umdrehen
             aktuelleSortierung.richtung = aktuelleSortierung.richtung === 'asc' ? 'desc' : 'asc';
         } else {
             aktuelleSortierung.spalte = spalte;
-            aktuelleSortierung.richtung = 'asc'; // Standardmäßig günstigste zuerst
+            aktuelleSortierung.richtung = 'asc';
         }
         
-        // Icons updaten
         document.getElementById('sort-icon-kgv').textContent = '↕';
         document.getElementById('sort-icon-kcv').textContent = '↕';
         const aktuellesIcon = aktuelleSortierung.richtung === 'asc' ? '↑' : '↓';
@@ -342,13 +341,13 @@
             const matchesTag = !selTag || (a.tags || []).includes(selTag);
             
             let matchesWatch = true;
-            if (selWatch === 'watchlist') matchesWatch = (a.watchlist === true);
-            if (selWatch === 'portfolio') matchesWatch = (a.watchlist === false || a.watchlist === undefined);
+            if (selWatch === 'watchlist') matchesWatch = (a.watchlist === true || a.watchlist === "true");
+            if (selWatch === 'portfolio') matchesWatch = (a.watchlist === false || a.watchlist === "false" || a.watchlist === undefined);
 
             return matchesSearch && matchesTag && matchesWatch;
         });
 
-        // 2. Sortieren, falls eine Spalte ausgewählt wurde
+        // 2. Sortieren
         if (aktuelleSortierung.spalte) {
             daten.sort((a, b) => {
                 let valA, valB;
@@ -361,7 +360,6 @@
                     valB = parseToNumber(b.kcv) !== null ? parseToNumber(b.kcv) : parseToNumber(b.kcvAktuell);
                 }
 
-                // Null-Werte ans Ende schieben
                 if (valA === null) return 1;
                 if (valB === null) return -1;
 
@@ -377,7 +375,7 @@
         container.innerHTML = '';
 
         if (daten.length === 0) {
-            container.innerHTML = '<p style="padding:20px; text-align:center; color:var(--text-muted);">Keine Datensätze matchen deine Filterkriterien.</p>';
+            container.innerHTML = '<p style="padding:20px; text-align:center; color:var(--text-muted);">Keine Datensätze entsprechen den Filtereinstellungen.</p>';
             return;
         }
 
@@ -393,7 +391,7 @@
                 dividendDisplay = divRaw < 0.2 ? `${(divRaw * 100).toFixed(2)} %` : `${divRaw.toFixed(2)} %`;
             }
 
-            // KGV Logik & Abweichung
+            // KGV Berechnungen
             const kgvNum = parseToNumber(aktie.kgv) !== null ? parseToNumber(aktie.kgv) : parseToNumber(aktie.kgvAktuell);
             const kgv5JNum = parseToNumber(aktie.kgv5J) !== null ? parseToNumber(aktie.kgv5J) : parseToNumber(aktie.kgv5Jahre);
             
@@ -409,7 +407,7 @@
                 kgvHTML = `<div class="discount-container"><div><span class="val-main">${kgvNum.toFixed(1)}</span>${diffHTML}</div>${discountHTML}</div>`;
             }
 
-            // KCV Logik & Abweichung
+            // KCV Berechnungen
             const kcvNum = parseToNumber(aktie.kcv) !== null ? parseToNumber(aktie.kcv) : parseToNumber(aktie.kcvAktuell);
             const kcv5JNum = parseToNumber(aktie.kcv5J) !== null ? parseToNumber(aktie.kcv5J) : parseToNumber(aktie.kcv5Jahre);
 
@@ -458,9 +456,9 @@
                     <div class="detail-card"><label>5J Performance</label><span class="${p5J >= 0 ? 'positive' : 'negative'}" style="color:${p5J >= 0 ? 'var(--positive)' : 'var(--negative)'}">${p5J >= 0 ? '+' : ''}${p5J.toFixed(1)}%</span></div>
                     
                     <div class="detail-card dev-box">
-                        <label style="color:#eab308; font-weight:800;">🔍 Rohdaten-Debug-Leiste:</label>
+                        <label style="color:#eab308; font-weight:800;">🔍 Rohdaten-Auslesung (Inhalt deiner JSON):</label>
                         <span style="font-size:0.75rem; font-family:monospace; color:#fef08a; display:block; margin-top:4px; font-weight:normal;">
-                            JSON-Daten -> dividende: "${aktie.dividende}" | kcv: "${aktie.kcv}" | kcv5J: "${aktie.kcv5J}" | watchlist: "${aktie.watchlist}"
+                            dividende: "${aktie.dividende}" | kcv: "${aktie.kcv}" | kcv5J: "${aktie.kcv5J}" | watchlist-status: "${aktie.watchlist}"
                         </span>
                     </div>
                 </div>
@@ -472,12 +470,4 @@
     function toggleDetails(rowElement) {
         const details = rowElement.querySelector('.stock-details');
         const isVisible = window.getComputedStyle(details).display === 'grid';
-        document.querySelectorAll('.stock-details').forEach(el => el.style.display = 'none');
-        details.style.display = isVisible ? 'none' : 'grid';
-    }
-
-    window.onload = ladeDaten;
-</script>
-
-</body>
-</html>
+        document.querySelectorAll('.stock-details').forEach(el => el.style.display =
