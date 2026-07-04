@@ -11,14 +11,14 @@
         th { background: #2a2a2a; color: #ff9800; }
         .watchlist-true { background-color: #2e2a1a; color: #ffeb3b; }
         .logo { width: 24px; height: 24px; vertical-align: middle; margin-right: 8px; }
-        .tag { font-size: 0.8em; background: #444; padding: 2px 6px; border-radius: 4px; margin-right: 4px; }
+        .tag { font-size: 0.7em; background: #444; padding: 2px 4px; border-radius: 4px; margin-right: 2px; }
     </style>
 </head>
 <body>
     <h1>Aktien Terminal Pro V4.5</h1>
-    <table id="aktienTable">
+    <table>
         <thead>
-            <tr><th>Logo</th><th>Name</th><th>Ticker</th><th>Tags</th></tr>
+            <tr><th>Logo</th><th>Name</th><th>Ticker</th><th>Kurs</th><th>Yield %</th><th>KGV</th><th>Tags</th></tr>
         </thead>
         <tbody id="app"></tbody>
     </table>
@@ -28,12 +28,14 @@
             .then(data => {
                 const tbody = document.getElementById('app');
                 data.forEach(a => {
-                    const rowClass = a.watchlist ? 'watchlist-true' : '';
                     tbody.innerHTML += `
-                        <tr class="${rowClass}">
+                        <tr class="${a.watchlist ? 'watchlist-true' : ''}">
                             <td><img src="${a.logoUrl}" class="logo" onerror="this.style.display='none'"></td>
                             <td>${a.name}</td>
                             <td>${a.symbol}</td>
+                            <td>${a.kurs || '-'}</td>
+                            <td>${a.yield || '0.0'}</td>
+                            <td>${a.kgv || '-'}</td>
                             <td>${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</td>
                         </tr>`;
                 });
