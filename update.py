@@ -1,61 +1,32 @@
 import yfinance as yf
 import json
-import math
-import time
 
-def isNaN(num):
-    return isinstance(num, float) and math.isnan(num)
+# Deine vollständige Liste
+symbole = ["MSFT", "TSM", "SAP.DE", "ORCL", "AVGO", "ASML", "GOOGL", "QCOM", "NOW", "INTU", "JPM", "HSBA.L", "SAN.PA", "BLK", "ALV.DE", "MUV2.DE", "SIE.DE", "SU.PA", "HON", "CAT", "DE", "ABBN.SW", "6861.T", "DG.PA", "PH", "RIO", "LIN", "AI.PA", "MC.PA", "TTE", "NEE", "ORSTED.CO", "VIE.PA", "IBE.MC", "LLY", "ROG.SW", "NOVN.SW", "ABBV", "JNJ", "AMZN", "PG", "NESN.SW", "MDLZ", "KO", "MCD", "WMT", "FPE3.DE", "PLD", "KRN.DE", "MMK.VI", "IBN", "1398.HK", "TPE.WA", "DNP.WA", "LHA.DE", "FIH-U.TO", "EOAN.DE", "CMCSA", "KHC", "VNA.DE", "PKO.WA", "DNB.OL", "6506.T", "6954.T", "YAR.OL", "VZ", "DHL.DE", "EVD.DE", "VER.VI", "CGNX", "EUK3.DE", "BMW3.DE", "PDD", "BEI.DE", "SIX2.DE", "ABBN.SW", "STR.VI", "FRM.DE", "6367.T", "ADSK", "ADBE", "SIKA.SW", "TER", "ROK"]
 
-# Deine komplette Liste bleibt unverändert (hier im Skript vorhanden)
-meine_aktien = [
-    # ... (deine Liste aus der Nachricht oben) ...
-]
+daten = []
 
-def fetch_data():
-    print("Starte Datenabruf...")
-    # FX Raten (einfacher gehalten für Stabilität)
-    fx_rates = {"USD": 1.0, "EUR": 1.0, "CHF": 1.0, "GBP": 1.0, "DKK": 1.0, "JPY": 1.0, "HKD": 1.0, "PLN": 1.0, "CAD": 1.0, "NOK": 1.0}
-    
-    aktien_daten = []
+for sym in symbole:
+    try:
+        t = yf.Ticker(sym)
+        info = t.info
+        hist = t.history(period="1mo")
+        price = info.get("currentPrice") or info.get("regularMarketPrice", 0)
+        
+        daten.append({
+            "name": info.get("longName", sym),
+            "symbol": sym,
+            "tags": info.get("industry", "N/A"), # Platzhalter für Branchen-Tags
+            "price": price,
+            "currency": info.get("currency", "USD"),
+            "changeHeute": info.get("regularMarketChangePercent", 0),
+            "perfMonat": ((hist['Close'].iloc[-1] - hist['Close'].iloc[0]) / hist['Close'].iloc[0] * 100) if not hist.empty else 0,
+            "divYield": (info.get("dividendYield", 0) or 0) * 100,
+            "kgv": info.get("trailingPE", 0) or 0,
+            "kcv": info.get("priceToCashflow", 0) or 0
+        })
+    except:
+        continue
 
-    for aktie in meine_aktien:
-        try:
-            ticker = yf.Ticker(aktie["symbol"])
-            # Historische Daten holen
-            hist = ticker.history(period="5y")
-            if hist.empty: continue
-            
-            raw_kurs = hist['Close'].iloc[-1]
-            
-            # Info-Abruf mit kleinem Delay für Stabilität bei vielen Werten
-            # Wir versuchen es einmal, wenn es fehlschlägt, setzen wir Standardwerte
-            try:
-                info = ticker.info
-                div_yield = info.get("dividendYield", 0) or 0
-                div_yield = float(div_yield) * 100 if div_yield < 1 else float(div_yield)
-                kgv = float(info.get("trailingPE") or info.get("forwardPE") or 0.0)
-            except:
-                div_yield, kgv = 0.0, 0.0
-
-            aktien_daten.append({
-                "name": aktie["name"],
-                "symbol": aktie["symbol"],
-                "logoUrl": aktie["logoUrl"],
-                "tags": aktie["tags"],
-                "watchlist": aktie["watchlist"],
-                "kurs": f"{raw_kurs:.2f}",
-                "yield": round(div_yield, 2),
-                "kgv": round(kgv, 2)
-            })
-            print(f"Erfolgreich geladen: {aktie['symbol']}")
-            time.sleep(0.2) # Schutz gegen Yahoo-Blockade
-            
-        except Exception as e:
-            print(f"Fehler bei {aktie['symbol']}: {e}")
-
-    with open("daten.json", "w", encoding="utf-8") as f:
-        json.dump(aktien_daten, f, ensure_ascii=False, indent=4)
-    print("Fertig. daten.json wurde aktualisiert.")
-
-if __name__ == "__main__":
-    fetch_data()
+with open("daten.json", "w", encoding="utf-8") as f:
+    json.dump(daten, f, indent=4)
