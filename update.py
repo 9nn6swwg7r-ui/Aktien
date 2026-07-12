@@ -1,45 +1,49 @@
 import yfinance as yf
 import json
-import datetime
+import time
 
-# Deine Liste der 51 Werte mit korrekten Ticker-Anhängseln
 ticker_map = {
-    "MSFT": "MSFT", "TSM": "TSM", "SAP": "SAP.DE", "ORCL": "ORCL", "AVGO": "AVGO",
-    "ASML": "ASML", "GOOGL": "GOOGL", "QCOM": "QCOM", "NOW": "NOW", "INTU": "INTU",
-    "JPM": "JPM", "HSBA": "HSBA.L", "Sanofi": "SNY", "BLK": "BLK", "ALV": "ALV.DE",
-    "MUV2": "MUV2.DE", "SIE": "SIE.DE", "SU": "SU.PA", "HON": "HON", "CAT": "CAT",
-    "DE": "DE", "ABBN": "ABBN.SW", "6861": "6861.T", "DG": "DG.PA", "PH": "PH",
-    "RIO": "RIO", "LIN": "LIN", "AI": "AI.PA", "LVMH": "MC.PA", "TTE": "TTE",
-    "NEE": "NEE", "ORSTED": "ORSTED.CO", "VIE": "VIE.PA", "IBE": "IBE.MC",
-    "LLY": "LLY", "ROG": "ROG.SW", "NOVN": "NOVN.SW", "ABBV": "ABBV", "JNJ": "JNJ",
-    "AMZN": "AMZN", "PG": "PG", "NESN": "NESN.SW", "MDLZ": "MDLZ", "KO": "KO",
-    "MCD": "MCD", "WMT": "WMT", "FPE3": "FPE3.DE", "PLD": "PLD", "KRN": "KRN.DE",
-    "MMK": "MMK.VI", "Icici": "IBN"
+    "Microsoft": "MSFT", "TSMC": "TSM", "SAP": "SAP.DE", "Oracle": "ORCL", "Broadcom": "AVGO",
+    "ASML": "ASML", "Alphabet": "GOOGL", "Qualcomm": "QCOM", "ServiceNow": "NOW", "Intuit": "INTU",
+    "JPMorgan": "JPM", "HSBC": "HSBA.L", "Sanofi": "SNY", "BlackRock": "BLK", "Allianz": "ALV.DE",
+    "Munich Re": "MUV2.DE", "Siemens": "SIE.DE", "Schneider Electric": "SU.PA", "Honeywell": "HON", "Caterpillar": "CAT",
+    "John Deere": "DE", "ABB": "ABBN.SW", "Keyence": "6861.T", "Vinci": "DG.PA", "Parker-Hannifin": "PH",
+    "Rio Tinto": "RIO", "Linde": "LIN", "Air Liquide": "AI.PA", "LVMH": "MC.PA", "TotalEnergies": "TTE",
+    "NextEra Energy": "NEE", "Ørsted": "ORSTED.CO", "Veolia": "VIE.PA", "Iberdrola": "IBE.MC",
+    "Eli Lilly": "LLY", "Roche": "ROG.SW", "Novartis": "NOVN.SW", "AbbVie": "ABBV", "Johnson & Johnson": "JNJ",
+    "Amazon": "AMZN", "Procter & Gamble": "PG", "Nestlé": "NESN.SW", "Mondelez": "MDLZ", "Coca-Cola": "KO",
+    "McDonald's": "MCD", "Walmart": "WMT", "Fuchs SE": "FPE3.DE", "Prologis": "PLD", "Krones": "KRN.DE",
+    "Mayr-Melnhof": "MMK.VI", "ICICI Bank": "IBN"
 }
 
 daten = []
+print("Starte Datenabruf...")
 
 for name, sym in ticker_map.items():
+    print(f"Lade {name}...")
     try:
         t = yf.Ticker(sym)
         info = t.info
         hist = t.history(period="5y")
+        if hist.empty: continue
         
-        price = info.get("currentPrice") or info.get("regularMarketPrice", 0)
+        price = info.get("currentPrice") or info.get("regularMarketPrice") or 0
         avg_5y = hist['Close'].mean()
         
         daten.append({
-            "name": info.get("longName", name),
+            "name": name,
             "price": price,
             "perf1M": ((hist['Close'].iloc[-1] - hist['Close'].iloc[-21]) / hist['Close'].iloc[-21] * 100),
             "perf1J": ((hist['Close'].iloc[-1] - hist['Close'].iloc[-252]) / hist['Close'].iloc[-252] * 100),
             "divYield": (info.get("dividendYield", 0) or 0) * 100,
             "kgv": info.get("trailingPE", 0) or 0,
             "kcv": info.get("priceToCashflow", 0) or 0,
-            "abweichung5J": ((price - avg_5y) / avg_5y) * 100,
-            "exDate": info.get("exDividendDate", "N/A")
+            "abweichung5J": ((price - avg_5y) / avg_5y) * 100
         })
-    except: continue
+        time.sleep(0.5) # WICHTIG: Verhindert Sperre
+    except Exception as e:
+        print(f"Fehler bei {name}: {e}")
 
 with open("daten.json", "w", encoding="utf-8") as f:
     json.dump(daten, f, indent=4)
+print("Fertig! daten.json wurde erstellt.")
