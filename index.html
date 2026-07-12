@@ -2,33 +2,36 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Aktien Terminal Pro V4.5</title>
+    <title>Aktien Dashboard V5.0</title>
     <style>
-        body { background: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; padding: 20px; }
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; text-align: center; font-size: 0.85em; }
-        .val { font-weight: bold; font-size: 1.1em; }
+        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; padding: 10px; }
+        table { width: 100%; border-collapse: collapse; background: #161b22; }
+        th, td { padding: 8px; border: 1px solid #30363d; text-align: center; font-size: 0.75em; }
+        th { background: #21262d; color: #58a6ff; }
         .pos { color: #3fb950; } .neg { color: #f85149; }
     </style>
 </head>
 <body>
-    <h1>Aktien Terminal Pro <small>V4.5 LIVE</small></h1>
-    <div id="container"></div>
-
+    <h2>Portfolio Dashboard (51 Werte)</h2>
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Kurs</th><th>1M%</th><th>1J%</th><th>Div%</th><th>KGV</th><th>KCV</th><th>Abw. 5J%</th></tr>
+        </thead>
+        <tbody id="app"></tbody>
+    </table>
     <script>
         fetch('daten.json').then(r => r.json()).then(data => {
-            document.getElementById('container').innerHTML = data.map(a => `
-                <div class="card">
-                    <div><strong>${a.name}</strong> (${a.symbol})</div>
-                    <div style="font-size: 1.4em; font-weight: bold; margin: 10px 0;">${a.price.toFixed(2)} ${a.currency}</div>
-                    <div class="grid">
-                        <div>HEUTE<br><div class="val ${a.changeHeute > 0 ? 'pos':'neg'}">${a.changeHeute.toFixed(2)}%</div></div>
-                        <div>1 MON.<br><div class="val ${a.perfMonat > 0 ? 'pos':'neg'}">${a.perfMonat.toFixed(2)}%</div></div>
-                        <div>DIV.<br><div class="val">${a.divYield.toFixed(1)}%</div></div>
-                        <div>KGV<br><div class="val">${a.kgv.toFixed(1)}</div></div>
-                        <div>KCV<br><div class="val">${a.kcv.toFixed(1)}</div></div>
-                    </div>
-                </div>
+            document.getElementById('app').innerHTML = data.map(a => `
+                <tr>
+                    <td style="text-align:left">${a.name}</td>
+                    <td>${a.price.toFixed(2)}</td>
+                    <td class="${a.perf1M>0?'pos':'neg'}">${a.perf1M.toFixed(1)}%</td>
+                    <td class="${a.perf1J>0?'pos':'neg'}">${a.perf1J.toFixed(1)}%</td>
+                    <td>${a.divYield.toFixed(1)}%</td>
+                    <td>${a.kgv.toFixed(1)}</td>
+                    <td>${a.kcv.toFixed(1)}</td>
+                    <td class="${a.abweichung5J>0?'pos':'neg'}">${a.abweichung5J.toFixed(1)}%</td>
+                </tr>
             `).join('');
         });
     </script>
