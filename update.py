@@ -1,32 +1,45 @@
 import yfinance as yf
 import json
+import datetime
 
-# Deine vollständige Liste
-symbole = ["MSFT", "TSM", "SAP.DE", "ORCL", "AVGO", "ASML", "GOOGL", "QCOM", "NOW", "INTU", "JPM", "HSBA.L", "SAN.PA", "BLK", "ALV.DE", "MUV2.DE", "SIE.DE", "SU.PA", "HON", "CAT", "DE", "ABBN.SW", "6861.T", "DG.PA", "PH", "RIO", "LIN", "AI.PA", "MC.PA", "TTE", "NEE", "ORSTED.CO", "VIE.PA", "IBE.MC", "LLY", "ROG.SW", "NOVN.SW", "ABBV", "JNJ", "AMZN", "PG", "NESN.SW", "MDLZ", "KO", "MCD", "WMT", "FPE3.DE", "PLD", "KRN.DE", "MMK.VI", "IBN", "1398.HK", "TPE.WA", "DNP.WA", "LHA.DE", "FIH-U.TO", "EOAN.DE", "CMCSA", "KHC", "VNA.DE", "PKO.WA", "DNB.OL", "6506.T", "6954.T", "YAR.OL", "VZ", "DHL.DE", "EVD.DE", "VER.VI", "CGNX", "EUK3.DE", "BMW3.DE", "PDD", "BEI.DE", "SIX2.DE", "ABBN.SW", "STR.VI", "FRM.DE", "6367.T", "ADSK", "ADBE", "SIKA.SW", "TER", "ROK"]
+# Deine Liste der 51 Werte mit korrekten Ticker-Anhängseln
+ticker_map = {
+    "MSFT": "MSFT", "TSM": "TSM", "SAP": "SAP.DE", "ORCL": "ORCL", "AVGO": "AVGO",
+    "ASML": "ASML", "GOOGL": "GOOGL", "QCOM": "QCOM", "NOW": "NOW", "INTU": "INTU",
+    "JPM": "JPM", "HSBA": "HSBA.L", "Sanofi": "SNY", "BLK": "BLK", "ALV": "ALV.DE",
+    "MUV2": "MUV2.DE", "SIE": "SIE.DE", "SU": "SU.PA", "HON": "HON", "CAT": "CAT",
+    "DE": "DE", "ABBN": "ABBN.SW", "6861": "6861.T", "DG": "DG.PA", "PH": "PH",
+    "RIO": "RIO", "LIN": "LIN", "AI": "AI.PA", "LVMH": "MC.PA", "TTE": "TTE",
+    "NEE": "NEE", "ORSTED": "ORSTED.CO", "VIE": "VIE.PA", "IBE": "IBE.MC",
+    "LLY": "LLY", "ROG": "ROG.SW", "NOVN": "NOVN.SW", "ABBV": "ABBV", "JNJ": "JNJ",
+    "AMZN": "AMZN", "PG": "PG", "NESN": "NESN.SW", "MDLZ": "MDLZ", "KO": "KO",
+    "MCD": "MCD", "WMT": "WMT", "FPE3": "FPE3.DE", "PLD": "PLD", "KRN": "KRN.DE",
+    "MMK": "MMK.VI", "Icici": "IBN"
+}
 
 daten = []
 
-for sym in symbole:
+for name, sym in ticker_map.items():
     try:
         t = yf.Ticker(sym)
         info = t.info
-        hist = t.history(period="1mo")
+        hist = t.history(period="5y")
+        
         price = info.get("currentPrice") or info.get("regularMarketPrice", 0)
+        avg_5y = hist['Close'].mean()
         
         daten.append({
-            "name": info.get("longName", sym),
-            "symbol": sym,
-            "tags": info.get("industry", "N/A"), # Platzhalter für Branchen-Tags
+            "name": info.get("longName", name),
             "price": price,
-            "currency": info.get("currency", "USD"),
-            "changeHeute": info.get("regularMarketChangePercent", 0),
-            "perfMonat": ((hist['Close'].iloc[-1] - hist['Close'].iloc[0]) / hist['Close'].iloc[0] * 100) if not hist.empty else 0,
+            "perf1M": ((hist['Close'].iloc[-1] - hist['Close'].iloc[-21]) / hist['Close'].iloc[-21] * 100),
+            "perf1J": ((hist['Close'].iloc[-1] - hist['Close'].iloc[-252]) / hist['Close'].iloc[-252] * 100),
             "divYield": (info.get("dividendYield", 0) or 0) * 100,
             "kgv": info.get("trailingPE", 0) or 0,
-            "kcv": info.get("priceToCashflow", 0) or 0
+            "kcv": info.get("priceToCashflow", 0) or 0,
+            "abweichung5J": ((price - avg_5y) / avg_5y) * 100,
+            "exDate": info.get("exDividendDate", "N/A")
         })
-    except:
-        continue
+    except: continue
 
 with open("daten.json", "w", encoding="utf-8") as f:
     json.dump(daten, f, indent=4)
