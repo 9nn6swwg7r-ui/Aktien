@@ -17,7 +17,7 @@
 <body>
 
     <h2>Portfolio Dashboard</h2>
-    <table id="portfolioTable">
+    <table>
         <thead>
             <tr>
                 <th>Name</th>
@@ -37,26 +37,23 @@
 
     <script>
         fetch('daten.json')
-            .then(response => {
-                if (!response.ok) throw new Error("HTTP-Fehler: " + response.status);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 const tbody = document.getElementById('app');
                 tbody.innerHTML = ''; 
                 
                 data.forEach(a => {
-                    // Flexibles Abfangen der Werte, egal wie sie in der JSON heißen
+                    // Wir fangen absolut jede mögliche Schreibweise aus Python ab
                     const name = a.name || a.longName || "Unbekannt";
-                    const price = a.price ?? a.currentPrice ?? a.Kurs ?? 0;
-                    const p1M = a.perf1M ?? a.perf_1m ?? a.m1 ?? 0;
-                    const p1J = a.perf1J ?? a.perf_1j ?? a.j1 ?? 0;
-                    const div = a.divYield ?? a.div ?? a.dividende ?? 0;
-                    const kgv = a.kgv ?? a.KGV ?? 0;
-                    const kcv = a.kcv ?? a.KCV ?? 0;
-                    const abw = a.abweichung5J ?? a.abw5j ?? 0;
+                    const price = a.price ?? a.currentPrice ?? a.Kurs ?? a.kurs ?? 0;
+                    const p1M = a.perf1M ?? a.perf_1m ?? a.m1 ?? a.perf1m ?? 0;
+                    const p1J = a.perf1J ?? a.perf_1j ?? a.j1 ?? a.perf1j ?? 0;
+                    const div = a.divYield ?? a.div ?? a.dividende ?? a.dividendYield ?? 0;
+                    const kgv = a.kgv ?? a.KGV ?? a.trailingPE ?? 0;
+                    const kcv = a.kcv ?? a.KCV ?? a.priceToCashflow ?? 0;
+                    const abw = a.abweichung5J ?? a.abw5j ?? a.abweichung_5j ?? 0;
 
-                    const row = `
+                    tbody.innerHTML += `
                         <tr>
                             <td style="text-align:left">${name}</td>
                             <td>${Number(price).toFixed(2)}</td>
@@ -67,7 +64,6 @@
                             <td>${Number(kcv).toFixed(1)}</td>
                             <td class="${Number(abw) >= 0 ? 'pos' : 'neg'}">${Number(abw).toFixed(1)}%</td>
                         </tr>`;
-                    tbody.innerHTML += row;
                 });
             })
             .catch(err => {
