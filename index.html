@@ -2,73 +2,164 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktien Terminal Pro</title>
     <style>
-        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; padding: 10px; margin: 0; }
-        h2 { font-size: 1.2em; color: #ffffff; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; background: #161b22; font-size: 0.75em; }
-        th, td { padding: 8px; border: 1px solid #30363d; text-align: center; }
-        th { background: #21262d; color: #58a6ff; font-weight: bold; }
-        .pos { color: #3fb950; } 
+        body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 12px; margin: 0; }
+        
+        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        h1 { font-size: 1.5em; color: #ffffff; margin: 0; font-weight: 700; }
+        .badge { background: #1f6feb; color: #ffffff; font-size: 0.75em; font-weight: bold; padding: 6px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(31, 111, 235, 0.4); }
+
+        .search-box, .filter-select { width: 100%; padding: 12px 15px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; color: #c9d1d9; font-size: 0.9em; margin-bottom: 10px; outline: none; box-sizing: border-box; }
+        .filter-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        .filter-select { flex: 1; appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%28http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%29%20width%3D%28292.4%29%20height%3D%28292.4%29%3E%3Cpath%20fill%3D%28%238b949e%29%20d%3D%28M287%2069.4a17.6%2017.6%200%200%20%20-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%29%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 10px; }
+
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 15px; margin-bottom: 15px; position: relative; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .stock-info { display: flex; align-items: center; gap: 10px; }
+        .stock-icon { width: 32px; height: 32px; background: #21262d; border: 1px solid #30363d; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #58a6ff; font-size: 0.9em; }
+        .stock-name { font-size: 1em; font-weight: bold; color: #ffffff; margin: 0; }
+        .stock-ticker { font-size: 0.8em; color: #8b949e; margin-top: 2px; }
+        
+        .price-box { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 8px 12px; text-align: right; }
+        .price-value { font-size: 1.1em; font-weight: bold; color: #ffffff; }
+        .price-curr { font-size: 0.75em; color: #8b949e; }
+
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; border-top: 1px solid #21262d; padding-top: 12px; }
+        .metric-item { background: #0d1117; padding: 8px 4px; border-radius: 8px; border: 1px solid #21262d; }
+        .metric-label { font-size: 0.65em; color: #8b949e; text-transform: uppercase; margin-bottom: 4px; font-weight: bold; }
+        .metric-val { font-size: 0.85em; font-weight: bold; }
+
+        .pos { color: #3fb950; }
         .neg { color: #f85149; }
-        tr:hover { background-color: #1c2128; }
+        .neutral { color: #c9d1d9; }
+        .tag-green { color: #3fb950; font-size: 0.65em; margin-top: 2px; display: block; }
     </style>
 </head>
 <body>
 
-    <h2>Portfolio Dashboard</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Kurs</th>
-                <th>1M%</th>
-                <th>1J%</th>
-                <th>Div%</th>
-                <th>KGV</th>
-                <th>KCV</th>
-                <th>Abw. 5J%</th>
-            </tr>
-        </thead>
-        <tbody id="app">
-            <tr><td colspan="8">Lade Daten...</td></tr>
-        </tbody>
-    </table>
+    <div class="header-container">
+        <h1>Aktien Terminal Pro</h1>
+        <div class="badge">V4.0 LIVE</div>
+    </div>
+
+    <input type="text" id="searchInput" class="search-box" placeholder="Name, Ticker oder Tag suchen..." oninput="filterData()">
+    
+    <div class="filter-row">
+        <select class="filter-select" id="branchFilter" onchange="filterData()">
+            <option>Alle Branchen</option>
+        </select>
+        <select class="filter-select" id="sortSelect" onchange="filterData()">
+            <option value="default">Sortierung...</option>
+            <option value="priceDesc">Kurs (Höchste zuerst)</option>
+            <option value="priceAsc">Kurs (Niedrigste zuerst)</option>
+        </select>
+    </div>
+
+    <div id="cardContainer">
+        <div class="card" style="text-align:center; color:#8b949e;">Lade Terminal-Daten...</div>
+    </div>
 
     <script>
-        fetch('daten.json')
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('app');
-                tbody.innerHTML = ''; 
-                
-                data.forEach(a => {
-                    // Wir fangen absolut jede mögliche Schreibweise aus Python ab
-                    const name = a.name || a.longName || "Unbekannt";
-                    const price = a.price ?? a.currentPrice ?? a.Kurs ?? a.kurs ?? 0;
-                    const p1M = a.perf1M ?? a.perf_1m ?? a.m1 ?? a.perf1m ?? 0;
-                    const p1J = a.perf1J ?? a.perf_1j ?? a.j1 ?? a.perf1j ?? 0;
-                    const div = a.divYield ?? a.div ?? a.dividende ?? a.dividendYield ?? 0;
-                    const kgv = a.kgv ?? a.KGV ?? a.trailingPE ?? 0;
-                    const kcv = a.kcv ?? a.KCV ?? a.priceToCashflow ?? 0;
-                    const abw = a.abweichung5J ?? a.abw5j ?? a.abweichung_5j ?? 0;
+        let allData = [];
 
-                    tbody.innerHTML += `
-                        <tr>
-                            <td style="text-align:left">${name}</td>
-                            <td>${Number(price).toFixed(2)}</td>
-                            <td class="${Number(p1M) >= 0 ? 'pos' : 'neg'}">${Number(p1M).toFixed(1)}%</td>
-                            <td class="${Number(p1J) >= 0 ? 'pos' : 'neg'}">${Number(p1J).toFixed(1)}%</td>
-                            <td>${Number(div).toFixed(1)}%</td>
-                            <td>${Number(kgv).toFixed(1)}</td>
-                            <td>${Number(kcv).toFixed(1)}</td>
-                            <td class="${Number(abw) >= 0 ? 'pos' : 'neg'}">${Number(abw).toFixed(1)}%</td>
-                        </tr>`;
-                });
+        fetch('daten.json')
+            .then(res => res.json())
+            .then(data => {
+                allData = data;
+                renderCards(allData);
             })
             .catch(err => {
-                document.getElementById('app').innerHTML = `<tr><td colspan="8" style="color:#f85149">FEHLER: ${err.message}</td></tr>`;
+                document.getElementById('cardContainer').innerHTML = `<div class="card" style="color:#f85149">Fehler beim Laden der daten.json: ${err.message}</div>`;
             });
+
+        function renderCards(data) {
+            const container = document.getElementById('cardContainer');
+            container.innerHTML = '';
+
+            if (data.length === 0) {
+                container.innerHTML = '<div class="card" style="text-align:center; color:#8b949e;">Keine Aktien gefunden</div>';
+                return;
+            }
+
+            data.forEach(a => {
+                // Flexible Feld-Zuordnung, damit es garantiert greift
+                const name = a.name || a.longName || "Unbekannt";
+                const ticker = a.ticker || a.symbol || "-";
+                const price = Number(a.price ?? a.currentPrice ?? a.Kurs ?? 0);
+                const p1M = Number(a.perf1M ?? a.perf_1m ?? 0);
+                const p1J = Number(a.perf1J ?? a.perf_1j ?? 0);
+                const div = Number(a.divYield ?? a.div ?? 0);
+                const kgv = Number(a.kgv ?? a.KGV ?? 0);
+                const kcv = Number(a.kcv ?? a.KCV ?? 0);
+
+                const getClass = (val) => val > 0 ? 'pos' : (val < 0 ? 'neg' : 'neutral');
+                const getSign = (val) => val > 0 ? '+' + val.toFixed(2) + '%' : val.toFixed(2) + '%';
+
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="stock-info">
+                                <div class="stock-icon">?</div>
+                                <div>
+                                    <div class="stock-name">${name}</div>
+                                    <div class="stock-ticker">(${ticker})</div>
+                                </div>
+                            </div>
+                            <div class="price-box">
+                                <div class="price-value">${price.toFixed(2)}</div>
+                                <div class="price-curr">USD</div>
+                            </div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <div class="metric-label">1 Mon.</div>
+                                <div class="metric-val ${getClass(p1M)}">${getSign(p1M)}</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">1 Jahr</div>
+                                <div class="metric-val ${getClass(p1J)}">${getSign(p1J)}</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">Div.</div>
+                                <div class="metric-val neutral">${div.toFixed(2)} %</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">KGV</div>
+                                <div class="metric-val neutral">${kgv.toFixed(1)}</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-label">KCV</div>
+                                <div class="metric-val neutral">${kcv.toFixed(1)}</div>
+                            </div>
+                            <div class="metric-item" style="background:#111b15; border-color:#1b3626;">
+                                <div class="metric-label">Status</div>
+                                <span class="tag-green">AKTIV 🌿</span>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function filterData() {
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const sortVal = document.getElementById('sortSelect').value;
+
+            let filtered = allData.filter(a => {
+                const name = (a.name || a.longName || "").toLowerCase();
+                const ticker = (a.ticker || a.symbol || "").toLowerCase();
+                return name.includes(searchVal) || ticker.includes(searchVal);
+            });
+
+            if (sortVal === 'priceDesc') {
+                filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
+            } else if (sortVal === 'priceAsc') {
+                filtered.sort((a, b) => (a.price || 0) - (b.price || 0));
+            }
+
+            renderCards(filtered);
+        }
     </script>
 </body>
 </html>
