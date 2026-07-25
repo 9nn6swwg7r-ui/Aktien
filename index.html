@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>Portfolio Dashboard</title>
     <style>
-        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; background: #161b22; }
-        th, td { padding: 12px; border: 1px solid #30363d; text-align: center; font-size: 14px; }
-        th { background: #21262d; color: #58a6ff; }
-        .error { color: #f85149; font-weight: bold; padding: 20px; border: 1px solid #f85149; }
+        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; padding: 10px; margin: 0; }
+        h2 { font-size: 1.2em; color: #ffffff; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; background: #161b22; font-size: 0.75em; }
+        th, td { padding: 8px; border: 1px solid #30363d; text-align: center; }
+        th { background: #21262d; color: #58a6ff; font-weight: bold; }
+        .pos { color: #3fb950; } 
+        .neg { color: #f85149; }
+        tr:hover { background-color: #1c2128; }
     </style>
 </head>
 <body>
@@ -17,7 +20,14 @@
     <table id="portfolioTable">
         <thead>
             <tr>
-                <th>Name</th><th>Kurs</th><th>1M%</th><th>1J%</th><th>Div%</th><th>KGV</th><th>KCV</th><th>Abw. 5J%</th>
+                <th>Name</th>
+                <th>Kurs</th>
+                <th>1M%</th>
+                <th>1J%</th>
+                <th>Div%</th>
+                <th>KGV</th>
+                <th>KCV</th>
+                <th>Abw. 5J%</th>
             </tr>
         </thead>
         <tbody id="app">
@@ -33,27 +43,35 @@
             })
             .then(data => {
                 const tbody = document.getElementById('app');
-                tbody.innerHTML = ''; // Leeren
+                tbody.innerHTML = ''; 
                 
-                data.forEach((a, index) => {
-                    // Falls Daten fehlen, nutzen wir || 0 als Fallback
+                data.forEach(a => {
+                    // Flexibles Abfangen der Werte, egal wie sie in der JSON heißen
+                    const name = a.name || a.longName || "Unbekannt";
+                    const price = a.price ?? a.currentPrice ?? a.Kurs ?? 0;
+                    const p1M = a.perf1M ?? a.perf_1m ?? a.m1 ?? 0;
+                    const p1J = a.perf1J ?? a.perf_1j ?? a.j1 ?? 0;
+                    const div = a.divYield ?? a.div ?? a.dividende ?? 0;
+                    const kgv = a.kgv ?? a.KGV ?? 0;
+                    const kcv = a.kcv ?? a.KCV ?? 0;
+                    const abw = a.abweichung5J ?? a.abw5j ?? 0;
+
                     const row = `
                         <tr>
-                            <td style="text-align:left">${a.name || "Unbekannt"}</td>
-                            <td>${(a.price || 0).toFixed(2)}</td>
-                            <td>${(a.perf1M || 0).toFixed(1)}%</td>
-                            <td>${(a.perf1J || 0).toFixed(1)}%</td>
-                            <td>${(a.divYield || 0).toFixed(1)}%</td>
-                            <td>${(a.kgv || 0).toFixed(1)}</td>
-                            <td>${(a.kcv || 0).toFixed(1)}</td>
-                            <td>${(a.abweichung5J || 0).toFixed(1)}%</td>
+                            <td style="text-align:left">${name}</td>
+                            <td>${Number(price).toFixed(2)}</td>
+                            <td class="${Number(p1M) >= 0 ? 'pos' : 'neg'}">${Number(p1M).toFixed(1)}%</td>
+                            <td class="${Number(p1J) >= 0 ? 'pos' : 'neg'}">${Number(p1J).toFixed(1)}%</td>
+                            <td>${Number(div).toFixed(1)}%</td>
+                            <td>${Number(kgv).toFixed(1)}</td>
+                            <td>${Number(kcv).toFixed(1)}</td>
+                            <td class="${Number(abw) >= 0 ? 'pos' : 'neg'}">${Number(abw).toFixed(1)}%</td>
                         </tr>`;
                     tbody.innerHTML += row;
                 });
             })
             .catch(err => {
-                document.getElementById('app').innerHTML = `<tr><td colspan="8" class="error">FEHLER: ${err.message}</td></tr>`;
-                console.error(err);
+                document.getElementById('app').innerHTML = `<tr><td colspan="8" style="color:#f85149">FEHLER: ${err.message}</td></tr>`;
             });
     </script>
 </body>
