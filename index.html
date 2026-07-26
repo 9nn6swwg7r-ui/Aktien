@@ -27,14 +27,13 @@
         .metric-val { font-size: 0.85em; font-weight: bold; }
         .pos { color: #3fb950; } .neg { color: #f85149; } .neutral { color: #c9d1d9; }
         .tag-green { color: #3fb950; font-size: 0.65em; margin-top: 2px; display: block; }
-        .debug-box { font-size: 0.65em; color: #f0883e; background: #1f140c; padding: 6px; border-radius: 4px; margin-top: 8px; word-break: break-all; }
     </style>
 </head>
 <body>
 
     <div class="header-container">
         <h1>Aktien Terminal Pro</h1>
-        <div class="badge">V4.2 DEBUG</div>
+        <div class="badge">V4.3 LIVE</div>
     </div>
 
     <input type="text" id="searchInput" class="search-box" placeholder="Name, Ticker oder Tag suchen..." oninput="filterData()">
@@ -77,22 +76,19 @@
             }
 
             data.forEach(a => {
-                const name = a.name || a.longName || a.shortName || "Unbekannt";
-                const ticker = a.ticker || a.symbol || a.code || "-";
+                const name = a.name || "Unbekannt";
+                const ticker = a.ticker || "-";
                 
-                // Wir suchen nun durch ALLE denkbaren JavaScript- UND Python-Variablennamen
-                const price = Number(a.price ?? a.currentPrice ?? a.Kurs ?? a.kurs ?? a.regularMarketPrice ?? a.preis ?? 0);
-                const p1M = Number(a.perf1M ?? a.perf_1m ?? a.m1 ?? a.performance1M ?? a.monat1 ?? 0);
-                const p1J = Number(a.perf1J ?? a.perf_1j ?? a.j1 ?? a.performance1J ?? a.jahr1 ?? 0);
-                const div = Number(a.divYield ?? a.div ?? a.dividendYield ?? a.dividende ?? a.div_yield ?? 0);
-                const kgv = Number(a.kgv ?? a.KGV ?? a.peRatio ?? a.trailingPE ?? 0);
-                const kcv = Number(a.kcv ?? a.KCV ?? a.priceToCashflow ?? 0);
+                // Exakte Zuordnung basierend auf deinen echten JSON-Schlüsseln
+                const price = Number(a.kurs ?? 0);
+                const p1M = Number(a.perfMonat ?? 0);
+                const p1J = Number(a.perfJahr ?? 0);
+                const div = Number(a.dividende ?? 0);
+                const kgv = Number(a.kgv ?? 0);
+                const kcv = Number(a.kcv ?? 0);
 
                 const getClass = (val) => val > 0 ? 'pos' : (val < 0 ? 'neg' : 'neutral');
                 const getSign = (val) => (val > 0 ? '+' : '') + val.toFixed(2) + '%';
-
-                // Debug-Text, der dir direkt anzeigt, welche Schlüssel in deiner JSON für diese Aktie existieren
-                const jsonKeys = Object.keys(a).join(', ');
 
                 container.innerHTML += `
                     <div class="card">
@@ -135,7 +131,6 @@
                                 <span class="tag-green">AKTIV 🌿</span>
                             </div>
                         </div>
-                        <div class="debug-box">JSON-Schlüssel: ${jsonKeys}</div>
                     </div>`;
             });
         }
@@ -145,10 +140,16 @@
             const sortVal = document.getElementById('sortSelect').value;
 
             let filtered = allData.filter(a => {
-                const name = (a.name || a.longName || "").toLowerCase();
-                const ticker = (a.ticker || a.symbol || "").toLowerCase();
+                const name = (a.name || "").toLowerCase();
+                const ticker = (a.ticker || "").toLowerCase();
                 return name.includes(searchVal) || ticker.includes(searchVal);
             });
+
+            if (sortVal === 'priceDesc') {
+                filtered.sort((a, b) => (Number(b.kurs) || 0) - (Number(a.kurs) || 0));
+            } else if (sortVal === 'priceAsc') {
+                filtered.sort((a, b) => (Number(a.kurs) || 0) - (Number(b.kurs) || 0));
+            }
 
             renderCards(filtered);
         }
