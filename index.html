@@ -8,7 +8,7 @@
         body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 12px; margin: 0; }
         .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         h1 { font-size: 1.5em; color: #ffffff; margin: 0; font-weight: 700; }
-        .badge { background: #d73a49; color: #ffffff; font-size: 0.75em; font-weight: bold; padding: 6px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(215, 58, 73, 0.4); }
+        .badge { background: #1f6feb; color: #ffffff; font-size: 0.75em; font-weight: bold; padding: 6px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(31, 111, 235, 0.4); }
         .search-box, .filter-select { width: 100%; padding: 12px 15px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; color: #c9d1d9; font-size: 0.9em; margin-bottom: 10px; outline: none; box-sizing: border-box; }
         .filter-row { display: flex; gap: 8px; margin-bottom: 10px; }
         .filter-select { flex: 1; }
@@ -18,14 +18,14 @@
         .stock-icon { width: 32px; height: 32px; background: #21262d; border: 1px solid #30363d; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #58a6ff; font-size: 0.9em; }
         .stock-name { font-size: 1em; font-weight: bold; color: #ffffff; margin: 0; }
         .stock-ticker { font-size: 0.8em; color: #8b949e; margin-top: 2px; }
-        .price-box { background: #0d1117; border: 1px solid #d73a49; border-radius: 8px; padding: 8px 12px; text-align: right; }
-        .price-value { font-size: 0.9em; font-weight: bold; color: #ff7b72; word-break: break-all; }
-        .price-curr { font-size: 0.65em; color: #8b949e; }
+        .price-box { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 8px 12px; text-align: right; }
+        .price-value { font-size: 1.1em; font-weight: bold; color: #ffffff; }
+        .price-curr { font-size: 0.75em; color: #8b949e; }
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; border-top: 1px solid #21262d; padding-top: 12px; }
-        .metric-item { background: #0d1117; padding: 8px 4px; border-radius: 8px; border: 1px solid #30363d; }
+        .metric-item { background: #0d1117; padding: 8px 4px; border-radius: 8px; border: 1px solid #21262d; }
         .metric-label { font-size: 0.65em; color: #8b949e; text-transform: uppercase; margin-bottom: 4px; font-weight: bold; }
-        .metric-val { font-size: 0.75em; font-weight: bold; color: #ff7b72; word-break: break-all; }
-        .neutral { color: #c9d1d9; font-size: 0.85em; }
+        .metric-val { font-size: 0.85em; font-weight: bold; }
+        .pos { color: #3fb950; } .neg { color: #f85149; } .neutral { color: #c9d1d9; }
         .tag-green { color: #3fb950; font-size: 0.65em; margin-top: 2px; display: block; }
     </style>
 </head>
@@ -33,17 +33,41 @@
 
     <div class="header-container">
         <h1>Aktien Terminal Pro</h1>
-        <div class="badge">V4.5 RAW DATA</div>
+        <div class="badge">V4.6 FINAL</div>
     </div>
 
     <input type="text" id="searchInput" class="search-box" placeholder="Name, Ticker oder Tag suchen..." oninput="filterData()">
     
+    <div class="filter-row">
+        <select class="filter-select" id="branchFilter" onchange="filterData()">
+            <option>Alle Branchen</option>
+        </select>
+        <select class="filter-select" id="sortSelect" onchange="filterData()">
+            <option value="default">Sortierung...</option>
+            <option value="priceDesc">Kurs (Höchste zuerst)</option>
+            <option value="priceAsc">Kurs (Niedrigste zuerst)</option>
+        </select>
+    </div>
+
     <div id="cardContainer">
         <div class="card" style="text-align:center; color:#8b949e;">Lade Terminal-Daten...</div>
     </div>
 
     <script>
         let allData = [];
+
+        // Absolut kugelsichere Funktion: Fängt "nan USD", null und leere Strings vom Python-Skript ab
+        function safeNumber(val) {
+            if (val === null || val === undefined || val === "") return 0;
+            let strVal = String(val).toLowerCase();
+            // Wenn Python "nan" (Not a Number) liefert, setze es auf 0
+            if (strVal.includes("nan")) return 0;
+            
+            // Entferne alles außer Zahlen, Minus und Punkt
+            let cleaned = strVal.replace(',', '.').replace(/[^0-9.\-]/g, '');
+            let parsed = parseFloat(cleaned);
+            return isNaN(parsed) ? 0 : parsed;
+        }
 
         fetch('daten.json')
             .then(res => res.json())
@@ -59,19 +83,24 @@
             const container = document.getElementById('cardContainer');
             container.innerHTML = '';
 
+            if (data.length === 0) {
+                container.innerHTML = '<div class="card" style="text-align:center; color:#8b949e;">Keine Aktien gefunden</div>';
+                return;
+            }
+
             data.forEach(a => {
                 const name = a.name || "Unbekannt";
                 const ticker = a.ticker || "-";
                 
-                // Erzwungene 1:1 Text-Ausgabe der rohen JSON-Daten ohne jegliche Berechnung oder Formatierung
-                const rawKurs = JSON.stringify(a.kurs);
-                const rawP1M = JSON.stringify(a.perfMonat);
-                const rawP1J = JSON.stringify(a.perfJahr);
-                const rawDiv = JSON.stringify(a.dividende);
-                
-                // KGV und KCV bleiben normal, da sie bereits funktionieren
-                const kgv = Number(a.kgv ?? 0).toFixed(1);
-                const kcv = Number(a.kcv ?? 0).toFixed(1);
+                const price = safeNumber(a.kurs);
+                const p1M = safeNumber(a.perfMonat);
+                const p1J = safeNumber(a.perfJahr);
+                const div = safeNumber(a.dividende);
+                const kgv = safeNumber(a.kgv);
+                const kcv = safeNumber(a.kcv);
+
+                const getClass = (val) => val > 0 ? 'pos' : (val < 0 ? 'neg' : 'neutral');
+                const getSign = (val) => (val > 0 ? '+' : '') + val.toFixed(2) + '%';
 
                 container.innerHTML += `
                     <div class="card">
@@ -84,30 +113,30 @@
                                 </div>
                             </div>
                             <div class="price-box">
-                                <div class="price-value">${rawKurs}</div>
-                                <div class="price-curr">RAW JSON</div>
+                                <div class="price-value">${price.toFixed(2)}</div>
+                                <div class="price-curr">USD</div>
                             </div>
                         </div>
                         <div class="metrics-grid">
                             <div class="metric-item">
-                                <div class="metric-label">1 Mon. (RAW)</div>
-                                <div class="metric-val">${rawP1M}</div>
+                                <div class="metric-label">1 Mon.</div>
+                                <div class="metric-val ${getClass(p1M)}">${getSign(p1M)}</div>
                             </div>
                             <div class="metric-item">
-                                <div class="metric-label">1 Jahr (RAW)</div>
-                                <div class="metric-val">${rawP1J}</div>
+                                <div class="metric-label">1 Jahr</div>
+                                <div class="metric-val ${getClass(p1J)}">${getSign(p1J)}</div>
                             </div>
                             <div class="metric-item">
-                                <div class="metric-label">Div. (RAW)</div>
-                                <div class="metric-val">${rawDiv}</div>
+                                <div class="metric-label">Div.</div>
+                                <div class="metric-val neutral">${div.toFixed(2)} %</div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-label">KGV</div>
-                                <div class="metric-val neutral">${kgv}</div>
+                                <div class="metric-val neutral">${kgv.toFixed(1)}</div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-label">KCV</div>
-                                <div class="metric-val neutral">${kcv}</div>
+                                <div class="metric-val neutral">${kcv.toFixed(1)}</div>
                             </div>
                             <div class="metric-item" style="background:#111b15; border-color:#1b3626;">
                                 <div class="metric-label">Status</div>
@@ -120,11 +149,20 @@
 
         function filterData() {
             const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const sortVal = document.getElementById('sortSelect').value;
+
             let filtered = allData.filter(a => {
                 const name = (a.name || "").toLowerCase();
                 const ticker = (a.ticker || "").toLowerCase();
                 return name.includes(searchVal) || ticker.includes(searchVal);
             });
+
+            if (sortVal === 'priceDesc') {
+                filtered.sort((a, b) => safeNumber(b.kurs) - safeNumber(a.kurs));
+            } else if (sortVal === 'priceAsc') {
+                filtered.sort((a, b) => safeNumber(a.kurs) - safeNumber(b.kurs));
+            }
+
             renderCards(filtered);
         }
     </script>
