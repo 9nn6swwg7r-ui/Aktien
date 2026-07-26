@@ -33,7 +33,7 @@
 
     <div class="header-container">
         <h1>Aktien Terminal Pro</h1>
-        <div class="badge">V4.3 LIVE</div>
+        <div class="badge">V4.4 LIVE</div>
     </div>
 
     <input type="text" id="searchInput" class="search-box" placeholder="Name, Ticker oder Tag suchen..." oninput="filterData()">
@@ -55,6 +55,16 @@
 
     <script>
         let allData = [];
+
+        // Hilfsfunktion: Wandelt alles (auch Strings mit Kommas, €/$ Zeichen) sicher in eine echte Zahl um
+        function cleanNum(val) {
+            if (val === undefined || val === null || val === "") return 0;
+            if (typeof val === "number") return val;
+            // Ersetze Komma durch Punkt, entferne Währungssymbole und Leerzeichen
+            let cleaned = String(val).replace(',', '.').replace(/[^0-9.\-]/g, '');
+            let parsed = parseFloat(cleaned);
+            return isNaN(parsed) ? 0 : parsed;
+        }
 
         fetch('daten.json')
             .then(res => res.json())
@@ -79,13 +89,12 @@
                 const name = a.name || "Unbekannt";
                 const ticker = a.ticker || "-";
                 
-                // Exakte Zuordnung basierend auf deinen echten JSON-Schlüsseln
-                const price = Number(a.kurs ?? 0);
-                const p1M = Number(a.perfMonat ?? 0);
-                const p1J = Number(a.perfJahr ?? 0);
-                const div = Number(a.dividende ?? 0);
-                const kgv = Number(a.kgv ?? 0);
-                const kcv = Number(a.kcv ?? 0);
+                const price = cleanNum(a.kurs);
+                const p1M = cleanNum(a.perfMonat);
+                const p1J = cleanNum(a.perfJahr);
+                const div = cleanNum(a.dividende);
+                const kgv = cleanNum(a.kgv);
+                const kcv = cleanNum(a.kcv);
 
                 const getClass = (val) => val > 0 ? 'pos' : (val < 0 ? 'neg' : 'neutral');
                 const getSign = (val) => (val > 0 ? '+' : '') + val.toFixed(2) + '%';
@@ -146,9 +155,9 @@
             });
 
             if (sortVal === 'priceDesc') {
-                filtered.sort((a, b) => (Number(b.kurs) || 0) - (Number(a.kurs) || 0));
+                filtered.sort((a, b) => cleanNum(b.kurs) - cleanNum(a.kurs));
             } else if (sortVal === 'priceAsc') {
-                filtered.sort((a, b) => (Number(a.kurs) || 0) - (Number(b.kurs) || 0));
+                filtered.sort((a, b) => cleanNum(a.kurs) - cleanNum(b.kurs));
             }
 
             renderCards(filtered);
