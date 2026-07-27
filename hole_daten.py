@@ -121,29 +121,30 @@ def daten_generieren():
         try:
             t = yf.Ticker(symbol)
             
-            # 1. Kurs & Historie laden
-            hist_prices = t.history(period="5y")
+            # 1. Kurs & Historie laden mit Fallback
+            hist_prices = t.history(period="1y")
             if hist_prices.empty:
-                print(f"   ❌ Keine Kursdaten für {symbol} gefunden. Überspringe.")
-                continue
-                
-            aktueller_kurs = float(hist_prices['Close'].iloc[-1])
-            
-            # 2. Performance berechnen
-            perf_tag, perf_monat, perf_jahr, perf_5j = 0.0, 0.0, 0.0, 0.0
-            heute_close = hist_prices['Close'].iloc[-1]
-            if len(hist_prices) > 1:
-                perf_tag = ((heute_close - hist_prices['Close'].iloc[-2]) / hist_prices['Close'].iloc[-2]) * 100
-            if len(hist_prices) > 21:
-                perf_monat = ((heute_close - hist_prices['Close'].iloc[-21]) / hist_prices['Close'].iloc[-21]) * 100
-            if len(hist_prices) > 252:
-                perf_jahr = ((heute_close - hist_prices['Close'].iloc[-252]) / hist_prices['Close'].iloc[-252]) * 100
-            perf_5j = ((heute_close - hist_prices['Close'].iloc[0]) / hist_prices['Close'].iloc[0]) * 100
+                print(f"   ⚠️ Keine Historie für {symbol}, versuche Fast Info...")
+                aktueller_kurs = t.fast_info.get('lastPrice', 0.0) if hasattr(t, 'fast_info') else 0.0
+            else:
+                aktueller_kurs = float(hist_prices['Close'].iloc[-1])
 
-            # 3. Fundamentaldaten & Cashflow laden
-            financials = t.financials
-            cashflow = t.cashflow
-            
+            if not aktueller_kurs or aktueller_kurs == 0:
+                print(f"   ❌ Konnte keinen Kurs für {symbol} ermitteln. Überspringe.")
+                continue
+
+            # Performance Standardwerte
+            perf_tag, perf_monat, perf_jahr, perf_5j = 0.0, 0.0, 0.0, 0.0
+            if not hist_prices.empty and len(hist_prices) > 1:
+                heute_close = hist_prices['Close'].iloc[-1]
+                perf_tag = ((heute_close - hist_prices['Close'].iloc[-2]) / hist_prices['Close'].iloc[-2]) * 100
+                if len(hist_prices) > 21:
+                    perf_monat = ((heute_close - hist_prices['Close'].iloc[-21]) / hist_prices['Close'].iloc[-21]) * 100
+                if len(hist_prices) > 252:
+                    perf_jahr = ((heute_close - hist_prices['Close'].iloc[-252]) / hist_prices['Close'].iloc[-252]) * 100
+                perf_5j = ((heute_close - hist_prices['Close'].iloc[0]) / hist_prices['Close'].iloc[0]) * 100
+
+            # Fundamentaldaten sicher auslesen
             shares_outstanding = 1
             market_cap = None
             try:
@@ -156,8 +157,8 @@ def daten_generieren():
             if not market_cap or market_cap == 0:
                 market_cap = aktueller_kurs * shares_outstanding
 
-            # 4. Dividendenrendite manuell aus den realen Ausschüttungen berechnen (365 Tage)
-            dividende = None
+            # Dividende berechnen
+            dividende = 0.0
             try:
                 divs = t.dividends
                 if not divs.empty:
@@ -165,15 +166,15 @@ def daten_generieren():
                     now_tz = datetime.now(tz_info) if tz_info else datetime.now()
                     one_year_ago = now_tz - timedelta(days=365)
                     divs_filtered = divs[divs.index > one_year_ago] if tz_info else divs[divs.index.replace(tzinfo=None) > one_year_ago]
-                    
                     if not divs_filtered.empty:
-                        dividende = divs_filtered.sum() / aktueller_kurs
+                        dividende = float(divs_filtered.sum() / aktueller_kurs)
             except:
                 pass
 
-            # 5. Aktuelles KGV berechnen
-            kgv = None
+            # KGV & KCV ermitteln
+            kgv, kcv = None, None
             try:
+                financials = t.financials
                 if financials is not None and not financials.empty:
                     net_income_keys = [idx for idx in financials.index if 'Net Income' in str(idx)]
                     if net_income_keys:
@@ -183,9 +184,8 @@ def daten_generieren():
             except:
                 pass
 
-            # 6. Aktuelles KCV berechnen
-            kcv = None
             try:
+                cashflow = t.cashflow
                 if cashflow is not None and not cashflow.empty:
                     ocf_keys = [idx for idx in cashflow.index if 'Operating Cash Flow' in str(idx) or 'Cash Flow From Operating Activities' in str(idx)]
                     if ocf_keys:
@@ -194,20 +194,22 @@ def daten_generieren():
                             kcv = market_cap / letzter_ocf
             except:
                 pass
-                
-            # 7. Historische 5J-Durchschnitte ermitteln
-            kgv_5j, kcv_5j = berechne_historische_durchschnitte(t, shares_outstanding)
-            
-            # 8. Name und Dividenden-Termine auslesen
+
+            # Historische Durchschnitte (mit Fehler-Sicherung)
+            kgv_5j, kcv_5j = None, None
+            try:
+                kgv_5j, kcv_5j = berechne_historische_durchschnitte(t, shares_outstanding)
+            except:
+                pass
+
+            # Name und Termine
             name = symbol
-            ex_date = "-"
-            payout_date = "-"
+            ex_date, payout_date = "-", "-"
             try:
                 info = t.info
                 if info:
                     if info.get("longName"):
                         name = info.get("longName")
-                    
                     if info.get("exDividendDate"):
                         ex_date = datetime.fromtimestamp(info.get("exDividendDate")).strftime('%d.%m.%Y')
                     if info.get("dividendDate"):
@@ -216,10 +218,9 @@ def daten_generieren():
                 pass
 
             def clean(val):
-                if val is None or pd.isna(val) or val == "None": return 0.0
+                if val is None or pd.isna(val) or str(val).lower() == "nan": return 0.0
                 return float(val)
 
-            # 9. Paket schnüren
             aktie_daten = {
                 "name": str(name),
                 "ticker": str(symbol),
@@ -245,12 +246,15 @@ def daten_generieren():
         except Exception as e:
             print(f"❌ Fehler bei Ticker {symbol}: {e}")
         
-        time.sleep(0.5)
+        time.sleep(0.3)
         
-    with open("daten.json", "w", encoding="utf-8") as f:
-        json.dump(json_output, f, indent=4, ensure_ascii=False)
-        
-    print(f"\n=== FERTIG! 'daten.json' mit {len(json_output)} Aktien generiert. ===")
+    # Sicherheitsnetz: Nur speichern, wenn auch wirklich Daten da sind!
+    if len(json_output) > 0:
+        with open("daten.json", "w", encoding="utf-8") as f:
+            json.dump(json_output, f, indent=4, ensure_ascii=False)
+        print(f"\n=== FERTIG! 'daten.json' mit {len(json_output)} Aktien generiert. ===")
+    else:
+        print("\n❌ ABBRUCH: Keine einzige Aktie konnte geladen werden. 'daten.json' wird nicht überschrieben!")
 
 if __name__ == "__main__":
     daten_generieren()
