@@ -2,18 +2,7 @@
     {
         "name": "Microsoft Corporation",
         "ticker": "MSFT",
-        "kurs": 392.8699951171875,
-        "perfTag": 2.9263774044884583,
-        "perfMonat": 5.335548122195665,
-        "perfJahr": 0.0,
-        "perf5J": -22.73013741944731,
-        "dividende": 0.009061521735550465,
-        "kgv": 28.659057132225882,
-        "kgv5y": 33.856884242912,
-        "kcv": 21.433359570870184,
-        "kcv5y": 26.40244153012256,
-        "exDate": "20.08.2026",
-        "payoutDate": "10.09.2026",
+        "kurs": 393.7149963378906,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -23,18 +12,7 @@
     {
         "name": "Taiwan Semiconductor Manufacturing Company Limited",
         "ticker": "TSM",
-        "kurs": 392.1400146484375,
-        "perfTag": -2.7936810964934478,
-        "perfMonat": -9.300333268747735,
-        "perfJahr": 0.0,
-        "perf5J": 63.327239639157554,
-        "dividende": 0.009098790908137222,
-        "kgv": 1.1980556098074466,
-        "kgv5y": 0.7341187062239379,
-        "kcv": 0.8939981577963124,
-        "kcv5y": 0.4993343794120884,
-        "exDate": "16.09.2026",
-        "payoutDate": "08.10.2026",
+        "kurs": 391.8450012207031,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -45,17 +23,6 @@
         "name": "SAP SE",
         "ticker": "SAP.DE",
         "kurs": 151.27999877929688,
-        "perfTag": 7.902997198455792,
-        "perfMonat": 10.71428531545905,
-        "perfJahr": -38.07705767455392,
-        "perf5J": -36.96064324994435,
-        "dividende": 0.016525647938742134,
-        "kgv": 24.66531648599316,
-        "kgv5y": 47.83853837746843,
-        "kcv": 19.290992939733183,
-        "kcv5y": 30.573519570413385,
-        "exDate": "06.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Tech",
@@ -65,18 +32,7 @@
     {
         "name": "Oracle Corporation",
         "ticker": "ORCL",
-        "kurs": 119.91500091552734,
-        "perfTag": 4.282983862294302,
-        "perfMonat": -18.984594830167886,
-        "perfJahr": 0.0,
-        "perf5J": -51.03881208983029,
-        "dividende": 0.01667848046308131,
-        "kgv": 20.21488164113946,
-        "kgv5y": 35.926196889600114,
-        "kcv": 10.801878931799417,
-        "kcv5y": 19.7028791200065,
-        "exDate": "10.07.2026",
-        "payoutDate": "24.07.2026",
+        "kurs": 119.66999816894531,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -86,18 +42,7 @@
     {
         "name": "Broadcom Inc.",
         "ticker": "AVGO",
-        "kurs": 380.0098876953125,
-        "perfTag": -0.5001376375326564,
-        "perfMonat": 4.1065966612253595,
-        "perfJahr": 0.0,
-        "perf5J": 30.06942620103985,
-        "dividende": 0.006684036606006795,
-        "kgv": 78.17726873404058,
-        "kgv5y": 64.04582809591457,
-        "kcv": 65.65448366719042,
-        "kcv5y": 34.55058909118358,
-        "exDate": "22.06.2026",
-        "payoutDate": "30.06.2026",
+        "kurs": 379.6199951171875,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -108,17 +53,6 @@
         "name": "ASML Holding N.V.",
         "ticker": "ASML.AS",
         "kurs": 1429.800048828125,
-        "perfTag": -8.41190598415241,
-        "perfMonat": -11.19591011719822,
-        "perfJahr": 134.7330467472182,
-        "perf5J": 129.05432571964957,
-        "dividende": 0.006560357868002536,
-        "kgv": 57.150935412708684,
-        "kgv5y": 36.731163401235705,
-        "kcv": 0.0,
-        "kcv5y": 0.0,
-        "exDate": "27.07.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Tech",
@@ -128,18 +62,7 @@
     {
         "name": "Alphabet Inc.",
         "ticker": "GOOGL",
-        "kurs": 326.06988525390625,
-        "perfTag": 1.979700760887409,
-        "perfMonat": -3.3552058161314866,
-        "perfJahr": 0.0,
-        "perf5J": 69.7996054198082,
-        "dividende": 0.0026068031377326256,
-        "kgv": 30.171850245947805,
-        "kgv5y": 23.230869330931068,
-        "kcv": 24.21067825251754,
-        "kcv5y": 17.542152660321037,
-        "exDate": "04.09.2026",
-        "payoutDate": "14.09.2026",
+        "kurs": 326.82501220703125,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -149,18 +72,7 @@
     {
         "name": "QUALCOMM Incorporated",
         "ticker": "QCOM",
-        "kurs": 168.5399932861328,
-        "perfTag": 0.9402839156444945,
-        "perfMonat": -11.009032246005294,
-        "perfJahr": 0.0,
-        "perf5J": 6.8564492402125,
-        "dividende": 0.021300582312859147,
-        "kgv": 32.05940316253095,
-        "kgv5y": 18.230559295858903,
-        "kcv": 12.677787105594062,
-        "kcv5y": 12.411444372481151,
-        "exDate": "03.09.2026",
-        "payoutDate": "24.09.2026",
+        "kurs": 168.35499572753906,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -170,18 +82,7 @@
     {
         "name": "ServiceNow, Inc.",
         "ticker": "NOW",
-        "kurs": 107.22000122070312,
-        "perfTag": 8.544242301787895,
-        "perfMonat": 9.029901579720736,
-        "perfJahr": 0.0,
-        "perf5J": -45.615011645904445,
-        "dividende": 0.0,
-        "kgv": 63.41572362816852,
-        "kgv5y": 139.56543552481511,
-        "kcv": 20.36199208340165,
-        "kcv5y": 37.35757592561808,
-        "exDate": "-",
-        "payoutDate": "-",
+        "kurs": 107.73989868164062,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -191,18 +92,7 @@
     {
         "name": "Intuit Inc.",
         "ticker": "INTU",
-        "kurs": 308.4599914550781,
-        "perfTag": 4.093411207931997,
-        "perfMonat": 15.727768389138488,
-        "perfJahr": 0.0,
-        "perf5J": -60.94734406763119,
-        "dividende": 0.015561175299776396,
-        "kgv": 21.808017752041277,
-        "kgv5y": 56.4803804845653,
-        "kcv": 13.593558995109989,
-        "kcv5y": 31.48819812207774,
-        "exDate": "09.07.2026",
-        "payoutDate": "17.07.2026",
+        "kurs": 308.5299987792969,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -212,18 +102,7 @@
     {
         "name": "JPMorgan Chase & Co.",
         "ticker": "JPM",
-        "kurs": 354.54998779296875,
-        "perfTag": 0.3793766796829268,
-        "perfMonat": 8.234989641282233,
-        "perfJahr": 0.0,
-        "perf5J": 21.13879851070281,
-        "dividende": 0.016922860545981914,
-        "kgv": 16.52055773298397,
-        "kgv5y": 10.954061294897873,
-        "kcv": -6.37739899007504,
-        "kcv5y": 3.9742177820777,
-        "exDate": "06.07.2026",
-        "payoutDate": "31.07.2026",
+        "kurs": 354.8949890136719,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -234,17 +113,6 @@
         "name": "HSBC Holdings plc",
         "ticker": "HSBA.L",
         "kurs": 1551.199951171875,
-        "perfTag": -0.10304595607512827,
-        "perfMonat": 8.94787877332972,
-        "perfJahr": 0.0,
-        "perf5J": 61.69192717989148,
-        "dividende": 0.03585263115692158,
-        "kgv": 1193.6415412538067,
-        "kgv5y": 645.8806713771821,
-        "kcv": 893.6471728428771,
-        "kcv5y": 421.7671627669806,
-        "exDate": "14.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -255,17 +123,6 @@
         "name": "Sanofi",
         "ticker": "SAN.PA",
         "kurs": 77.79000091552734,
-        "perfTag": 2.3148785538448817,
-        "perfMonat": 3.0331137954004554,
-        "perfJahr": 4.184722482925803,
-        "perf5J": -3.930721062473777,
-        "dividende": 0.052963105174326126,
-        "kgv": 18.851113051640112,
-        "kgv5y": 17.081089316968786,
-        "kcv": 8.660990452283768,
-        "kcv5y": 9.548169302458394,
-        "exDate": "05.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -275,18 +132,7 @@
     {
         "name": "BlackRock, Inc.",
         "ticker": "BLK",
-        "kurs": 1056.0350341796875,
-        "perfTag": 0.03457427218555306,
-        "perfMonat": 9.466576497286535,
-        "perfJahr": 0.0,
-        "perf5J": -3.547756411185511,
-        "dividende": 0.02071900958948399,
-        "kgv": 29.4760599532341,
-        "kgv5y": 23.94416104259114,
-        "kcv": 41.68081510575731,
-        "kcv5y": 30.726992528692225,
-        "exDate": "08.09.2026",
-        "payoutDate": "22.09.2026",
+        "kurs": 1056.219970703125,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -297,17 +143,6 @@
         "name": "Allianz SE",
         "ticker": "ALV.DE",
         "kurs": 430.3999938964844,
-        "perfTag": 0.7726499053640699,
-        "perfMonat": 5.283758989360503,
-        "perfJahr": 30.60801196492942,
-        "perf5J": 32.56944144171243,
-        "dividende": 0.03973048383479468,
-        "kgv": 15.150330236011166,
-        "kgv5y": 10.84524441033151,
-        "kcv": 4.9156797341991725,
-        "kcv5y": 3.6282879964869235,
-        "exDate": "08.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -318,17 +153,6 @@
         "name": "Münchener Rückversicherungs-Gesellschaft Aktiengesellschaft in München",
         "ticker": "MUV2.DE",
         "kurs": 520.2000122070312,
-        "perfTag": 2.2003953255464146,
-        "perfMonat": 7.19143319429693,
-        "perfJahr": -5.342053651324035,
-        "perf5J": -4.445927086593975,
-        "dividende": 0.04613610041679197,
-        "kgv": 10.880316479214576,
-        "kgv5y": 9.281481944609885,
-        "kcv": 13.568238120634891,
-        "kcv5y": 14.52750736452193,
-        "exDate": "30.04.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -339,17 +163,6 @@
         "name": "Siemens Aktiengesellschaft",
         "ticker": "SIE.DE",
         "kurs": 272.75,
-        "perfTag": 0.18365472910927455,
-        "perfMonat": 1.3187175453166742,
-        "perfJahr": 22.68159541068505,
-        "perf5J": 23.44275356308697,
-        "dividende": 0.019615032080659945,
-        "kgv": 27.514647940285677,
-        "kgv5y": 17.91441331483344,
-        "kcv": 15.692709744022027,
-        "kcv5y": 10.007643078191204,
-        "exDate": "13.02.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -360,17 +173,6 @@
         "name": "Schneider Electric S.E.",
         "ticker": "SU.PA",
         "kurs": 265.6000061035156,
-        "perfTag": -0.9140017910933069,
-        "perfMonat": -4.494785949536151,
-        "perfJahr": 18.18453160559099,
-        "perf5J": 14.255052986434743,
-        "dividende": 0.015813252648658002,
-        "kgv": 32.89765066853811,
-        "kgv5y": 26.142368807203827,
-        "kcv": 24.419704484181526,
-        "kcv5y": 19.806607645652193,
-        "exDate": "11.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -380,18 +182,7 @@
     {
         "name": "Honeywell International Inc.",
         "ticker": "HON",
-        "kurs": 243.61000061035156,
-        "perfTag": 0.18918639745597732,
-        "perfMonat": 0.03106464321680834,
-        "perfJahr": 0.0,
-        "perf5J": 11.885483860229563,
-        "dividende": 0.019954328590044926,
-        "kgv": 17.448532436055327,
-        "kgv5y": 13.351787530099955,
-        "kcv": 12.048963175646822,
-        "kcv5y": 11.116336599757219,
-        "exDate": "14.08.2026",
-        "payoutDate": "05.06.2026",
+        "kurs": 243.87010192871094,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -401,18 +192,7 @@
     {
         "name": "Caterpillar Inc.",
         "ticker": "CAT",
-        "kurs": 855.4249877929688,
-        "perfTag": -3.7474816207072172,
-        "perfMonat": -14.081434442638239,
-        "perfJahr": 0.0,
-        "perf5J": 99.36368493464019,
-        "dividende": 0.0072010989717439175,
-        "kgv": 44.349605069260946,
-        "kgv5y": 18.970033618373364,
-        "kcv": 33.56349701297506,
-        "kcv5y": 15.459502704208777,
-        "exDate": "20.07.2026",
-        "payoutDate": "19.08.2026",
+        "kurs": 855.8950805664062,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -422,18 +202,7 @@
     {
         "name": "Deere & Company",
         "ticker": "DE",
-        "kurs": 616.6099853515625,
-        "perfTag": -1.8387016503376046,
-        "perfMonat": 0.8101603885864068,
-        "perfJahr": 0.0,
-        "perf5J": 22.28653227565514,
-        "dividende": 0.010509074056440075,
-        "kgv": 33.11042603443177,
-        "kgv5y": 16.06729941398363,
-        "kcv": 22.31480247688544,
-        "kcv5y": 15.41933598641805,
-        "exDate": "30.06.2026",
-        "payoutDate": "10.08.2026",
+        "kurs": 616.0900268554688,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -444,17 +213,6 @@
         "name": "ABB Ltd",
         "ticker": "ABBN.SW",
         "kurs": 79.0,
-        "perfTag": -1.25,
-        "perfMonat": -7.537455825592618,
-        "perfJahr": 0.0,
-        "perf5J": 51.54834977095825,
-        "dividende": 0.01189873417721519,
-        "kgv": 31.440034060745614,
-        "kgv5y": 20.889249578738703,
-        "kcv": 26.214400313951362,
-        "kcv5y": 22.94988417166475,
-        "exDate": "23.03.2026",
-        "payoutDate": "02.04.2025",
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -464,18 +222,7 @@
     {
         "name": "Keyence Corporation",
         "ticker": "6861.T",
-        "kurs": 0.0,
-        "perfTag": 0.0,
-        "perfMonat": 0.0,
-        "perfJahr": 0.0,
-        "perf5J": 0.0,
-        "dividende": 0.0,
-        "kgv": 40.405874719768185,
-        "kgv5y": 36.415488085637236,
-        "kcv": 41.766716209529115,
-        "kcv5y": 37.911508422113286,
-        "exDate": "17.09.2026",
-        "payoutDate": "-",
+        "kurs": NaN,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -486,17 +233,6 @@
         "name": "Vinci SA",
         "ticker": "DG.PA",
         "kurs": 117.9000015258789,
-        "perfTag": -0.38022556319727013,
-        "perfMonat": -7.055575132756579,
-        "perfJahr": 0.7337611069653104,
-        "perf5J": -0.6953783225774777,
-        "dividende": 0.04240882048591413,
-        "kgv": 13.305070791755607,
-        "kgv5y": 11.71096756390066,
-        "kcv": 5.488369686351821,
-        "kcv5y": 5.052372950799406,
-        "exDate": "21.04.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -506,18 +242,7 @@
     {
         "name": "Parker-Hannifin Corporation",
         "ticker": "PH",
-        "kurs": 981.7899780273438,
-        "perfTag": -0.5822549089593201,
-        "perfMonat": 1.3282825562676912,
-        "perfJahr": 0.0,
-        "perf5J": 33.997579727019136,
-        "dividende": 0.007537253552810154,
-        "kgv": 35.05815720358457,
-        "kgv5y": 22.98185440006503,
-        "kcv": 32.783462151974874,
-        "kcv5y": 17.452871886593933,
-        "exDate": "08.05.2026",
-        "payoutDate": "05.06.2026",
+        "kurs": 978.5499877929688,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -528,17 +253,6 @@
         "name": "Rio Tinto Group",
         "ticker": "RIO.L",
         "kurs": 6832.0,
-        "perfTag": -0.5386519143980201,
-        "perfMonat": -3.4482758620689653,
-        "perfJahr": 0.0,
-        "perf5J": 47.346694288330745,
-        "dividende": 0.043962311182669786,
-        "kgv": 1114.8460239293597,
-        "kgv5y": 850.7011616770166,
-        "kcv": 660.0852824667301,
-        "kcv5y": 579.6188881747362,
-        "exDate": "05.03.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Rohstoffe",
@@ -548,18 +262,7 @@
     {
         "name": "Linde plc",
         "ticker": "LIN",
-        "kurs": 507.6300048828125,
-        "perfTag": -0.9077114367399499,
-        "perfMonat": -2.3074535905168454,
-        "perfJahr": 0.0,
-        "perf5J": 10.055016194291,
-        "dividende": 0.01221362003893226,
-        "kgv": 34.02455309261456,
-        "kgv5y": 30.210790770384023,
-        "kcv": 22.676460602208234,
-        "kcv5y": 18.676039126114055,
-        "exDate": "04.06.2026",
-        "payoutDate": "18.06.2026",
+        "kurs": 507.9750061035156,
         "watchlist": false,
         "tags": [
             "Chemie",
@@ -570,17 +273,6 @@
         "name": "L'Air Liquide S.A.",
         "ticker": "AI.PA",
         "kurs": 177.17999267578125,
-        "perfTag": 0.3738887306515197,
-        "perfMonat": 2.5822090224392187,
-        "perfJahr": 15.206845458674662,
-        "perf5J": 15.474158686238034,
-        "dividende": 0.018984287950361653,
-        "kgv": 32.02571032037213,
-        "kgv5y": 26.112381044359985,
-        "kcv": 17.28388045165027,
-        "kcv5y": 13.244066917715198,
-        "exDate": "18.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Chemie",
@@ -591,17 +283,6 @@
         "name": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
         "ticker": "MC.PA",
         "kurs": 466.79998779296875,
-        "perfTag": 1.1046080682472705,
-        "perfMonat": -5.1797685623189045,
-        "perfJahr": 1.3033916342738825,
-        "perf5J": -2.1859028418847197,
-        "dividende": 0.027849186675141156,
-        "kgv": 21.16002143264592,
-        "kgv5y": 24.537670346379763,
-        "kcv": 12.194898709632971,
-        "kcv5y": 17.26987068356597,
-        "exDate": "28.04.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Luxus",
@@ -612,17 +293,6 @@
         "name": "TotalEnergies SE",
         "ticker": "TTE.PA",
         "kurs": 74.37999725341797,
-        "perfTag": -2.002640634918401,
-        "perfMonat": 9.173626776272528,
-        "perfJahr": 51.0224039540089,
-        "perf5J": 49.92720580557345,
-        "dividende": 0.045711214379532135,
-        "kgv": 12.580563103708046,
-        "kgv5y": 6.780808709923141,
-        "kcv": 6.039756129992156,
-        "kcv5y": 3.312677725560779,
-        "exDate": "30.09.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Energie",
@@ -632,18 +302,7 @@
     {
         "name": "NextEra Energy, Inc.",
         "ticker": "NEE",
-        "kurs": 88.57499694824219,
-        "perfTag": -1.3421718060131662,
-        "perfMonat": 0.016936980648078144,
-        "perfJahr": 0.0,
-        "perf5J": 27.754152006473927,
-        "dividende": 0.026869885204633157,
-        "kgv": 27.02743061010791,
-        "kgv5y": 24.82726144393583,
-        "kcv": 14.796354683226877,
-        "kcv5y": 13.447345629932926,
-        "exDate": "05.06.2026",
-        "payoutDate": "15.06.2026",
+        "kurs": 88.66000366210938,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -654,17 +313,6 @@
         "name": "Ørsted A/S",
         "ticker": "ORSTED.CO",
         "kurs": 146.75,
-        "perfTag": -2.0687393908907525,
-        "perfMonat": 0.7552393749480112,
-        "perfJahr": 0.0,
-        "perf5J": -53.92464678178964,
-        "dividende": 0.0,
-        "kgv": 79.45321659836065,
-        "kgv5y": -522.0154194803573,
-        "kcv": 8.165867002232424,
-        "kcv5y": 29.784565614169882,
-        "exDate": "08.03.2023",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -675,17 +323,6 @@
         "name": "Veolia Environnement SA",
         "ticker": "VIE.PA",
         "kurs": 36.04999923706055,
-        "perfTag": -1.4758155596486142,
-        "perfMonat": -0.11083656236691765,
-        "perfJahr": 26.685558096710654,
-        "perf5J": 23.646437031556346,
-        "dividende": 0.041608877440916896,
-        "kgv": 19.77616775693782,
-        "kgv5y": 17.711246492727216,
-        "kcv": 5.123458947314572,
-        "kcv5y": 3.8374737810560027,
-        "exDate": "11.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -696,17 +333,6 @@
         "name": "Iberdrola, S.A.",
         "ticker": "IBE.MC",
         "kurs": 21.229999542236328,
-        "perfTag": 0.09429730611499056,
-        "perfMonat": -0.7564725741466524,
-        "perfJahr": 42.97850158715723,
-        "perf5J": 44.5315956249285,
-        "dividende": 0.03226566249505644,
-        "kgv": 23.926835218706003,
-        "kgv5y": 17.503593917553975,
-        "kcv": 12.176260535449785,
-        "kcv5y": 7.352536825176814,
-        "exDate": "06.07.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -716,18 +342,7 @@
     {
         "name": "Eli Lilly and Company",
         "ticker": "LLY",
-        "kurs": 1198.0,
-        "perfTag": 0.16470913395737322,
-        "perfMonat": -0.8376647318220954,
-        "perfJahr": 0.0,
-        "perf5J": 49.29585456715036,
-        "dividende": 0.005392320534223707,
-        "kgv": 51.75902153042636,
-        "kgv5y": 65.86114475622337,
-        "kcv": 63.540486789270204,
-        "kcv5y": 75.54117347044607,
-        "exDate": "14.08.2026",
-        "payoutDate": "10.09.2026",
+        "kurs": 1197.5400390625,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -738,17 +353,6 @@
         "name": "Novartis AG",
         "ticker": "NOVN.SW",
         "kurs": 128.52000427246094,
-        "perfTag": 1.2765978936979459,
-        "perfMonat": 1.838357670618838,
-        "perfJahr": 0.0,
-        "perf5J": 41.87976022558087,
-        "dividende": 0.028789292538117586,
-        "kgv": 17.468526841928625,
-        "kgv5y": 17.041121595843137,
-        "kcv": 12.760127421517442,
-        "kcv5y": 9.962555077037916,
-        "exDate": "10.03.2026",
-        "payoutDate": "13.03.2025",
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -758,18 +362,7 @@
     {
         "name": "AbbVie Inc.",
         "ticker": "ABBV",
-        "kurs": 258.9400939941406,
-        "perfTag": -0.16189519630513252,
-        "perfMonat": 2.9339631287963948,
-        "perfJahr": 0.0,
-        "perf5J": 41.615281791069386,
-        "dividende": 0.02637675724391508,
-        "kgv": 108.25686207712089,
-        "kgv5y": 59.26677869695903,
-        "kcv": 24.040646302570302,
-        "kcv5y": 14.50705223271204,
-        "exDate": "15.07.2026",
-        "payoutDate": "14.08.2026",
+        "kurs": 258.7699890136719,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -779,18 +372,7 @@
     {
         "name": "Johnson & Johnson",
         "ticker": "JNJ",
-        "kurs": 268.3450012207031,
-        "perfTag": 1.8773756411559095,
-        "perfMonat": 5.373830739730696,
-        "perfJahr": 0.0,
-        "perf5J": 65.47339884300168,
-        "dividende": 0.019527101217325482,
-        "kgv": 24.126408071695856,
-        "kgv5y": 23.222841676142803,
-        "kcv": 26.362993964685515,
-        "kcv5y": 16.98544347221869,
-        "exDate": "25.08.2026",
-        "payoutDate": "08.09.2026",
+        "kurs": 267.8349914550781,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -800,18 +382,7 @@
     {
         "name": "Amazon.com, Inc.",
         "ticker": "AMZN",
-        "kurs": 231.7100067138672,
-        "perfTag": -0.17232945389365364,
-        "perfMonat": -0.42115936106272356,
-        "perfJahr": 0.0,
-        "perf5J": -0.46393169956329017,
-        "dividende": 0.0,
-        "kgv": 32.09128234372813,
-        "kgv5y": -53.53405196201653,
-        "kcv": 17.86580486286225,
-        "kcv5y": 19.476172128651875,
-        "exDate": "-",
-        "payoutDate": "-",
+        "kurs": 232.52000427246094,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -821,18 +392,7 @@
     {
         "name": "The Procter & Gamble Company",
         "ticker": "PG",
-        "kurs": 149.1300048828125,
-        "perfTag": 1.1668144481196008,
-        "perfMonat": 0.8208639512365158,
-        "perfJahr": 0.0,
-        "perf5J": -2.2879302491404916,
-        "dividende": 0.028780257892251034,
-        "kgv": 21.739324963018166,
-        "kgv5y": 22.44782657381438,
-        "kcv": 19.490597573062367,
-        "kcv5y": 19.005562233318884,
-        "exDate": "24.07.2026",
-        "payoutDate": "17.08.2026",
+        "kurs": 149.1199951171875,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -843,17 +403,6 @@
         "name": "Nestlé S.A.",
         "ticker": "NESN.SW",
         "kurs": 80.38999938964844,
-        "perfTag": -0.3470915899991469,
-        "perfMonat": -4.638201092007961,
-        "perfJahr": 0.0,
-        "perf5J": 15.713624297660575,
-        "dividende": 0.03856201049305117,
-        "kgv": 22.891704221193567,
-        "kgv5y": 21.094918968674715,
-        "kcv": 13.001808616074038,
-        "kcv5y": 14.432807557799505,
-        "exDate": "20.04.2026",
-        "payoutDate": "24.04.2025",
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -863,18 +412,7 @@
     {
         "name": "Mondelez International, Inc.",
         "ticker": "MDLZ",
-        "kurs": 60.755001068115234,
-        "perfTag": 0.38830239354602647,
-        "perfMonat": 0.7801614197772258,
-        "perfJahr": 0.0,
-        "perf5J": -9.650088196708328,
-        "dividende": 0.032919100729793545,
-        "kgv": 31.81890775373964,
-        "kgv5y": 22.325506179734706,
-        "kcv": 17.27694791856798,
-        "kcv5y": 16.995443806489632,
-        "exDate": "30.06.2026",
-        "payoutDate": "14.07.2026",
+        "kurs": 60.739898681640625,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -884,18 +422,7 @@
     {
         "name": "The Coca-Cola Company",
         "ticker": "KO",
-        "kurs": 84.0250015258789,
-        "perfTag": 2.158056566418123,
-        "perfMonat": 1.688254046750841,
-        "perfJahr": 0.0,
-        "perf5J": 26.89772055188106,
-        "dividende": 0.024754536890539417,
-        "kgv": 27.58190979915443,
-        "kgv5y": 23.407022194668322,
-        "kcv": 48.800768323098964,
-        "kcv5y": 29.660739963919134,
-        "exDate": "15.09.2026",
-        "payoutDate": "01.10.2026",
+        "kurs": 84.02999877929688,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -905,18 +432,7 @@
     {
         "name": "McDonald's Corporation",
         "ticker": "MCD",
-        "kurs": 270.1099853515625,
-        "perfTag": 2.020688694895233,
-        "perfMonat": 0.1297359034949504,
-        "perfJahr": 0.0,
-        "perf5J": -7.53830683366877,
-        "dividende": 0.02721113767946633,
-        "kgv": 22.412090058004125,
-        "kgv5y": 25.148436066505642,
-        "kcv": 18.189245300605567,
-        "kcv5y": 21.341344560425036,
-        "exDate": "01.09.2026",
-        "payoutDate": "16.09.2026",
+        "kurs": 270.58099365234375,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -926,18 +442,7 @@
     {
         "name": "Walmart Inc.",
         "ticker": "WMT",
-        "kurs": 111.66999816894531,
-        "perfTag": 2.0096802080112894,
-        "perfMonat": -3.4748069734867166,
-        "perfJahr": 0.0,
-        "perf5J": 15.360764598721078,
-        "dividende": 0.008650488186975168,
-        "kgv": 40.59190995602119,
-        "kgv5y": 37.00931366882088,
-        "kcv": 21.38045674647352,
-        "kcv5y": 17.97322529810197,
-        "exDate": "21.08.2026",
-        "payoutDate": "04.01.2027",
+        "kurs": 111.93009948730469,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -948,17 +453,6 @@
         "name": "Fuchs SE",
         "ticker": "FPE3.DE",
         "kurs": 40.279998779296875,
-        "perfTag": -1.8996652895913488,
-        "perfMonat": 5.1148201985434465,
-        "perfJahr": -0.13647209698881838,
-        "perf5J": -0.7564538813516694,
-        "dividende": 0.030536247201481934,
-        "kgv": 17.244051764993106,
-        "kgv5y": 16.265119528317037,
-        "kcv": 12.996748374600715,
-        "kcv5y": 16.265244137909065,
-        "exDate": "07.05.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Specialty",
@@ -968,18 +462,7 @@
     {
         "name": "Prologis, Inc.",
         "ticker": "PLD",
-        "kurs": 146.77999877929688,
-        "perfTag": -0.575767848948019,
-        "perfMonat": 4.865326497965676,
-        "perfJahr": 0.0,
-        "perf5J": 41.46293220418371,
-        "dividende": 0.028341736167031246,
-        "kgv": 41.11750972270016,
-        "kgv5y": 31.52664787913963,
-        "kcv": 27.323624610385618,
-        "kcv5y": 21.77349386205289,
-        "exDate": "16.06.2026",
-        "payoutDate": "30.06.2026",
+        "kurs": 146.74000549316406,
         "watchlist": false,
         "tags": [
             "REIT",
@@ -990,17 +473,6 @@
         "name": "Krones AG",
         "ticker": "KRN.DE",
         "kurs": 113.19999694824219,
-        "perfTag": 0.17698844977184736,
-        "perfMonat": 2.350812396014145,
-        "perfJahr": -16.854580483338246,
-        "perf5J": -15.768500489867538,
-        "dividende": 0.024734982998985668,
-        "kgv": 11.973482878406886,
-        "kgv5y": 14.645469020472026,
-        "kcv": 8.012779035163737,
-        "kcv5y": 11.898979970714084,
-        "exDate": "10.06.2026",
-        "payoutDate": "-",
         "watchlist": false,
         "tags": [
             "Maschinenbau",
@@ -1011,17 +483,6 @@
         "name": "Mayr-Melnhof Karton AG",
         "ticker": "MMK.VI",
         "kurs": 82.69999694824219,
-        "perfTag": 2.2249633972967047,
-        "perfMonat": 8.959150573988792,
-        "perfJahr": 11.203208910000392,
-        "perf5J": 12.084617074051419,
-        "dividende": 0.02418379774852592,
-        "kgv": 21.256690998337923,
-        "kgv5y": 17.950744950847398,
-        "kcv": 6.952817223018903,
-        "kcv5y": 5.745376321466219,
-        "exDate": "06.05.2026",
-        "payoutDate": "23.08.1970",
         "watchlist": false,
         "tags": [
             "Packaging",
@@ -1031,22 +492,569 @@
     {
         "name": "ICICI Bank Limited",
         "ticker": "IBN",
-        "kurs": 29.905000686645508,
-        "perfTag": 1.3385308529312703,
-        "perfMonat": 1.2013585744521134,
-        "perfJahr": 0.0,
-        "perf5J": -10.92820176445732,
-        "dividende": 0.008593880424646401,
-        "kgv": 0.19786565505789003,
-        "kgv5y": 0.20300682854816202,
-        "kcv": 0.15931341830396573,
-        "kcv5y": -0.4322913881861238,
-        "exDate": "03.08.2026",
-        "payoutDate": "08.09.2025",
+        "kurs": 29.885000228881836,
         "watchlist": false,
         "tags": [
             "Finanzen",
             "IN"
+        ]
+    },
+    {
+        "name": "Powell Industries, Inc.",
+        "ticker": "POWL",
+        "kurs": 216.86500549316406,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Rockwell Automation, Inc.",
+        "ticker": "ROK",
+        "kurs": 459.1000061035156,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "S&P Global Inc.",
+        "ticker": "SPGI",
+        "kurs": 442.3500061035156,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "A. O. Smith Corporation",
+        "ticker": "AOS",
+        "kurs": 62.32500076293945,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Verizon Communications Inc.",
+        "ticker": "VZ",
+        "kurs": 47.38999938964844,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Visa Inc.",
+        "ticker": "V",
+        "kurs": 363.5050048828125,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Weyerhaeuser Company",
+        "ticker": "WY",
+        "kurs": 24.024999618530273,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "CrowdStrike Holdings, Inc.",
+        "ticker": "CRWD",
+        "kurs": 181.3300018310547,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Datadog, Inc.",
+        "ticker": "DDOG",
+        "kurs": 255.85000610351562,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "International Business Machines Corporation",
+        "ticker": "IBM",
+        "kurs": 217.05999755859375,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Keysight Technologies, Inc.",
+        "ticker": "KEYS",
+        "kurs": 308.9700012207031,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "The Kraft Heinz Company",
+        "ticker": "KHC",
+        "kurs": 26.275999069213867,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Monolithic Power Systems, Inc.",
+        "ticker": "MPWR",
+        "kurs": 1313.06494140625,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Philip Morris International Inc.",
+        "ticker": "PM",
+        "kurs": 195.89500427246094,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "PDD Holdings Inc.",
+        "ticker": "PDD",
+        "kurs": 84.63999938964844,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Adobe Inc.",
+        "ticker": "ADBE",
+        "kurs": 241.6699981689453,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Altria Group, Inc.",
+        "ticker": "MO",
+        "kurs": 73.1144027709961,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Arista Networks, Inc.",
+        "ticker": "ANET",
+        "kurs": 171.1300048828125,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Autodesk, Inc.",
+        "ticker": "ADSK",
+        "kurs": 227.4949951171875,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Carlisle Companies Incorporated",
+        "ticker": "CSL",
+        "kurs": 341.0249938964844,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Church & Dwight Co., Inc.",
+        "ticker": "CHD",
+        "kurs": 98.91000366210938,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Cloudflare, Inc.",
+        "ticker": "NET",
+        "kurs": 265.93499755859375,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Cognex Corporation",
+        "ticker": "CGNX",
+        "kurs": 60.650001525878906,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "YASKAWA Electric Corporation",
+        "ticker": "6506.T",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Equinor ASA",
+        "ticker": "EQNR",
+        "kurs": 38.880001068115234,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "DNB Bank ASA",
+        "ticker": "DNB.OL",
+        "kurs": 300.20001220703125,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Yara International ASA",
+        "ticker": "YAR.OL",
+        "kurs": 437.79998779296875,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Dino Polska S.A.",
+        "ticker": "DNP.WA",
+        "kurs": 29.969999313354492,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Powszechna Kasa Oszczednosci Bank Polski Spólka Akcyjna",
+        "ticker": "PKO.WA",
+        "kurs": 108.0,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Telefonaktiebolaget LM Ericsson (publ)",
+        "ticker": "ERIC-B.ST",
+        "kurs": 93.36000061035156,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "DBS Group Holdings Ltd",
+        "ticker": "D05.SI",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Pernod Ricard SA",
+        "ticker": "RI.PA",
+        "kurs": 64.80000305175781,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Dassault Systèmes SE",
+        "ticker": "DSY.PA",
+        "kurs": 20.40999984741211,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Shell plc",
+        "ticker": "SHEL",
+        "kurs": 86.69499969482422,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "ITOCHU Corporation",
+        "ticker": "8001.T",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "SoftBank Group Corp.",
+        "ticker": "9984.T",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Daikin Industries,Ltd.",
+        "ticker": "6367.T",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Fanuc Corporation",
+        "ticker": "6954.T",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Mitsubishi Corporation",
+        "ticker": "8058.T",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "RWE Aktiengesellschaft",
+        "ticker": "RWE.DE",
+        "kurs": 57.29999923706055,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Sixt SE",
+        "ticker": "SIX2.DE",
+        "kurs": 69.44999694824219,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Villeroy & Boch AG",
+        "ticker": "VIB3.DE",
+        "kurs": 15.75,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Deutsche Lufthansa AG",
+        "ticker": "LHA.DE",
+        "kurs": 8.928000450134277,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Hannover Rück SE",
+        "ticker": "HNR1.DE",
+        "kurs": 257.20001220703125,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Vonovia SE",
+        "ticker": "VNA.DE",
+        "kurs": 21.200000762939453,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "E.ON SE",
+        "ticker": "EOAN.DE",
+        "kurs": 19.104999542236328,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "KION GROUP AG",
+        "ticker": "KGX.DE",
+        "kurs": 41.779998779296875,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Bayerische Motoren Werke Aktiengesellschaft",
+        "ticker": "BMW3.DE",
+        "kurs": 57.45000076293945,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Beiersdorf Aktiengesellschaft",
+        "ticker": "BEI.DE",
+        "kurs": 79.08000183105469,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "CTS Eventim AG & Co. KGaA",
+        "ticker": "EVD.DE",
+        "kurs": 58.95000076293945,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Deutsche Post AG",
+        "ticker": "DHL.DE",
+        "kurs": 57.060001373291016,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Deutsche Telekom AG",
+        "ticker": "DTE.DE",
+        "kurs": 27.06999969482422,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Fraport AG",
+        "ticker": "FRA.DE",
+        "kurs": 66.9000015258789,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "DEUTZ Aktiengesellschaft",
+        "ticker": "DEZ.DE",
+        "kurs": 10.119999885559082,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Strabag SE",
+        "ticker": "STR.VI",
+        "kurs": 82.0999984741211,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "VERBUND AG",
+        "ticker": "VER.VI",
+        "kurs": 58.20000076293945,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Fairfax India Holdings Corporation",
+        "ticker": "FIH-U.TO",
+        "kurs": 18.229999542236328,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "ABB Ltd",
+        "ticker": "ABBN.SW",
+        "kurs": 79.0,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Swiss Re AG",
+        "ticker": "SREN.SW",
+        "kurs": 136.4499969482422,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Sika AG",
+        "ticker": "SIKA.SW",
+        "kurs": 161.25,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Industrial and Commercial Bank of China Limited",
+        "ticker": "1398.HK",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
+        ]
+    },
+    {
+        "name": "Ping An Insurance (Group) Company of China, Ltd.",
+        "ticker": "2318.HK",
+        "kurs": NaN,
+        "watchlist": true,
+        "tags": [
+            "Watchlist"
         ]
     }
 ]
