@@ -2,7 +2,7 @@
     {
         "name": "Microsoft Corporation",
         "ticker": "MSFT",
-        "kurs": 392.80999755859375,
+        "kurs": 389.1000061035156,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -12,7 +12,7 @@
     {
         "name": "Taiwan Semiconductor Manufacturing Company Limited",
         "ticker": "TSM",
-        "kurs": 396.2250061035156,
+        "kurs": 399.0899963378906,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -32,7 +32,7 @@
     {
         "name": "Oracle Corporation",
         "ticker": "ORCL",
-        "kurs": 120.05999755859375,
+        "kurs": 119.9000015258789,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -42,7 +42,7 @@
     {
         "name": "Broadcom Inc.",
         "ticker": "AVGO",
-        "kurs": 382.67999267578125,
+        "kurs": 383.2200012207031,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -62,7 +62,7 @@
     {
         "name": "Alphabet Inc.",
         "ticker": "GOOGL",
-        "kurs": 327.1300048828125,
+        "kurs": 326.55999755859375,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -72,7 +72,7 @@
     {
         "name": "QUALCOMM Incorporated",
         "ticker": "QCOM",
-        "kurs": 169.88999938964844,
+        "kurs": 170.0399932861328,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -82,7 +82,7 @@
     {
         "name": "ServiceNow, Inc.",
         "ticker": "NOW",
-        "kurs": 107.5199966430664,
+        "kurs": 105.55999755859375,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -92,7 +92,7 @@
     {
         "name": "Intuit Inc.",
         "ticker": "INTU",
-        "kurs": 306.8900146484375,
+        "kurs": 303.9100036621094,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -102,7 +102,7 @@
     {
         "name": "JPMorgan Chase & Co.",
         "ticker": "JPM",
-        "kurs": 355.19000244140625,
+        "kurs": 356.20001220703125,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -132,7 +132,7 @@
     {
         "name": "BlackRock, Inc.",
         "ticker": "BLK",
-        "kurs": 1057.4749755859375,
+        "kurs": 1062.1400146484375,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -182,7 +182,7 @@
     {
         "name": "Honeywell International Inc.",
         "ticker": "HON",
-        "kurs": 244.14100646972656,
+        "kurs": 245.75,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -192,7 +192,7 @@
     {
         "name": "Caterpillar Inc.",
         "ticker": "CAT",
-        "kurs": 861.8300170898438,
+        "kurs": 873.280029296875,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -202,7 +202,7 @@
     {
         "name": "Deere & Company",
         "ticker": "DE",
-        "kurs": 617.7750244140625,
+        "kurs": 625.02001953125,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -242,7 +242,7 @@
     {
         "name": "Parker-Hannifin Corporation",
         "ticker": "PH",
-        "kurs": 982.3200073242188,
+        "kurs": 987.3099975585938,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -262,7 +262,7 @@
     {
         "name": "Linde plc",
         "ticker": "LIN",
-        "kurs": 508.54998779296875,
+        "kurs": 507.0199890136719,
         "watchlist": false,
         "tags": [
             "Chemie",
@@ -302,7 +302,7 @@
     {
         "name": "NextEra Energy, Inc.",
         "ticker": "NEE",
-        "kurs": 88.6500015258789,
+        "kurs": 88.83000183105469,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -342,7 +342,7 @@
     {
         "name": "Eli Lilly and Company",
         "ticker": "LLY",
-        "kurs": 1197.37109375,
+        "kurs": 1197.530029296875,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -362,7 +362,7 @@
     {
         "name": "AbbVie Inc.",
         "ticker": "ABBV",
-        "kurs": 257.9200134277344,
+        "kurs": 256.9200134277344,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -372,7 +372,7 @@
     {
         "name": "Johnson & Johnson",
         "ticker": "JNJ",
-        "kurs": 267.6400146484375,
+        "kurs": 265.95001220703125,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -382,7 +382,7 @@
     {
         "name": "Amazon.com, Inc.",
         "ticker": "AMZN",
-        "kurs": 232.37989807128906,
+        "kurs": 231.38999938964844,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -392,7 +392,7 @@
     {
         "name": "The Procter & Gamble Company",
         "ticker": "PG",
-        "kurs": 148.9499969482422,
+        "kurs": 148.65499877929688,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -412,7 +412,7 @@
     {
         "name": "Mondelez International, Inc.",
         "ticker": "MDLZ",
-        "kurs": 60.709999084472656,
+        "kurs": 60.66999816894531,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -422,7 +422,7 @@
     {
         "name": "The Coca-Cola Company",
         "ticker": "KO",
-        "kurs": 83.9800033569336,
+        "kurs": 84.06999969482422,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -432,7 +432,7 @@
     {
         "name": "McDonald's Corporation",
         "ticker": "MCD",
-        "kurs": 270.5798034667969,
+        "kurs": 270.6700134277344,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -442,7 +442,7 @@
     {
         "name": "Walmart Inc.",
         "ticker": "WMT",
-        "kurs": 111.86000061035156,
+        "kurs": 111.73999786376953,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -462,7 +462,7 @@
     {
         "name": "Prologis, Inc.",
         "ticker": "PLD",
-        "kurs": 146.9600067138672,
+        "kurs": 147.25999450683594,
         "watchlist": false,
         "tags": [
             "REIT",
@@ -492,7 +492,7 @@
     {
         "name": "ICICI Bank Limited",
         "ticker": "IBN",
-        "kurs": 29.875,
+        "kurs": 29.889999389648438,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -502,7 +502,7 @@
     {
         "name": "Powell Industries, Inc.",
         "ticker": "POWL",
-        "kurs": 218.97000122070312,
+        "kurs": 219.22999572753906,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -511,7 +511,7 @@
     {
         "name": "Rockwell Automation, Inc.",
         "ticker": "ROK",
-        "kurs": 460.82501220703125,
+        "kurs": 466.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -520,7 +520,7 @@
     {
         "name": "S&P Global Inc.",
         "ticker": "SPGI",
-        "kurs": 441.8074951171875,
+        "kurs": 439.8299865722656,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -529,7 +529,7 @@
     {
         "name": "A. O. Smith Corporation",
         "ticker": "AOS",
-        "kurs": 62.28499984741211,
+        "kurs": 62.439998626708984,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -538,7 +538,7 @@
     {
         "name": "Verizon Communications Inc.",
         "ticker": "VZ",
-        "kurs": 47.39500045776367,
+        "kurs": 47.31999969482422,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -547,7 +547,7 @@
     {
         "name": "Visa Inc.",
         "ticker": "V",
-        "kurs": 362.69500732421875,
+        "kurs": 362.5299987792969,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -556,7 +556,7 @@
     {
         "name": "Weyerhaeuser Company",
         "ticker": "WY",
-        "kurs": 24.0,
+        "kurs": 23.90999984741211,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -565,7 +565,7 @@
     {
         "name": "CrowdStrike Holdings, Inc.",
         "ticker": "CRWD",
-        "kurs": 181.7899932861328,
+        "kurs": 180.11000061035156,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -574,7 +574,7 @@
     {
         "name": "Datadog, Inc.",
         "ticker": "DDOG",
-        "kurs": 256.3599853515625,
+        "kurs": 251.86000061035156,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -583,7 +583,7 @@
     {
         "name": "International Business Machines Corporation",
         "ticker": "IBM",
-        "kurs": 217.12100219726562,
+        "kurs": 216.27999877929688,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -592,7 +592,7 @@
     {
         "name": "Keysight Technologies, Inc.",
         "ticker": "KEYS",
-        "kurs": 311.0350036621094,
+        "kurs": 313.67999267578125,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -601,7 +601,7 @@
     {
         "name": "The Kraft Heinz Company",
         "ticker": "KHC",
-        "kurs": 26.2549991607666,
+        "kurs": 26.219999313354492,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -610,7 +610,7 @@
     {
         "name": "Monolithic Power Systems, Inc.",
         "ticker": "MPWR",
-        "kurs": 1324.9649658203125,
+        "kurs": 1339.0799560546875,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -619,7 +619,7 @@
     {
         "name": "Philip Morris International Inc.",
         "ticker": "PM",
-        "kurs": 195.9199981689453,
+        "kurs": 195.66000366210938,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -628,7 +628,7 @@
     {
         "name": "PDD Holdings Inc.",
         "ticker": "PDD",
-        "kurs": 84.62000274658203,
+        "kurs": 84.8499984741211,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -637,7 +637,7 @@
     {
         "name": "Adobe Inc.",
         "ticker": "ADBE",
-        "kurs": 240.7899932861328,
+        "kurs": 237.75,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -646,7 +646,7 @@
     {
         "name": "Altria Group, Inc.",
         "ticker": "MO",
-        "kurs": 73.05999755859375,
+        "kurs": 72.88999938964844,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -655,7 +655,7 @@
     {
         "name": "Arista Networks, Inc.",
         "ticker": "ANET",
-        "kurs": 172.1300048828125,
+        "kurs": 170.75999450683594,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -664,7 +664,7 @@
     {
         "name": "Autodesk, Inc.",
         "ticker": "ADSK",
-        "kurs": 227.16000366210938,
+        "kurs": 225.91000366210938,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -673,7 +673,7 @@
     {
         "name": "Carlisle Companies Incorporated",
         "ticker": "CSL",
-        "kurs": 341.1199951171875,
+        "kurs": 340.6600036621094,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -682,7 +682,7 @@
     {
         "name": "Church & Dwight Co., Inc.",
         "ticker": "CHD",
-        "kurs": 98.69000244140625,
+        "kurs": 98.69999694824219,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -691,7 +691,7 @@
     {
         "name": "Cloudflare, Inc.",
         "ticker": "NET",
-        "kurs": 266.8800048828125,
+        "kurs": 265.6000061035156,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -700,7 +700,7 @@
     {
         "name": "Cognex Corporation",
         "ticker": "CGNX",
-        "kurs": 61.13999938964844,
+        "kurs": 61.290000915527344,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -718,7 +718,7 @@
     {
         "name": "Equinor ASA",
         "ticker": "EQNR",
-        "kurs": 38.810001373291016,
+        "kurs": 38.47999954223633,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -799,7 +799,7 @@
     {
         "name": "Shell plc",
         "ticker": "SHEL",
-        "kurs": 86.72000122070312,
+        "kurs": 86.37000274658203,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1006,7 +1006,7 @@
     {
         "name": "Fairfax India Holdings Corporation",
         "ticker": "FIH-U.TO",
-        "kurs": 18.25,
+        "kurs": 18.290000915527344,
         "watchlist": true,
         "tags": [
             "Watchlist"
