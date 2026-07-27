@@ -222,7 +222,7 @@
     {
         "name": "Keyence Corporation",
         "ticker": "6861.T",
-        "kurs": NaN,
+        "kurs": 74170.0,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -362,7 +362,7 @@
     {
         "name": "AbbVie Inc.",
         "ticker": "ABBV",
-        "kurs": 256.9200134277344,
+        "kurs": 256.9100036621094,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -392,7 +392,7 @@
     {
         "name": "The Procter & Gamble Company",
         "ticker": "PG",
-        "kurs": 148.65499877929688,
+        "kurs": 148.6300048828125,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -691,7 +691,7 @@
     {
         "name": "Cloudflare, Inc.",
         "ticker": "NET",
-        "kurs": 265.6000061035156,
+        "kurs": 265.6099853515625,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -709,7 +709,7 @@
     {
         "name": "YASKAWA Electric Corporation",
         "ticker": "6506.T",
-        "kurs": NaN,
+        "kurs": 5257.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -772,7 +772,7 @@
     {
         "name": "DBS Group Holdings Ltd",
         "ticker": "D05.SI",
-        "kurs": NaN,
+        "kurs": 74.37999725341797,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -808,7 +808,7 @@
     {
         "name": "ITOCHU Corporation",
         "ticker": "8001.T",
-        "kurs": NaN,
+        "kurs": 1984.5,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -817,7 +817,7 @@
     {
         "name": "SoftBank Group Corp.",
         "ticker": "9984.T",
-        "kurs": NaN,
+        "kurs": 5331.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -826,7 +826,7 @@
     {
         "name": "Daikin Industries,Ltd.",
         "ticker": "6367.T",
-        "kurs": NaN,
+        "kurs": 24135.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -835,7 +835,7 @@
     {
         "name": "Fanuc Corporation",
         "ticker": "6954.T",
-        "kurs": NaN,
+        "kurs": 6785.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -844,7 +844,7 @@
     {
         "name": "Mitsubishi Corporation",
         "ticker": "8058.T",
-        "kurs": NaN,
+        "kurs": 4847.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -970,7 +970,7 @@
     {
         "name": "Fraport AG",
         "ticker": "FRA.DE",
-        "kurs": 66.9000015258789,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -979,7 +979,7 @@
     {
         "name": "DEUTZ Aktiengesellschaft",
         "ticker": "DEZ.DE",
-        "kurs": 10.119999885559082,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -988,7 +988,7 @@
     {
         "name": "Strabag SE",
         "ticker": "STR.VI",
-        "kurs": 82.0999984741211,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -997,7 +997,7 @@
     {
         "name": "VERBUND AG",
         "ticker": "VER.VI",
-        "kurs": 58.20000076293945,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1015,7 +1015,7 @@
     {
         "name": "ABB Ltd",
         "ticker": "ABBN.SW",
-        "kurs": 79.0,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1024,7 +1024,7 @@
     {
         "name": "Swiss Re AG",
         "ticker": "SREN.SW",
-        "kurs": 136.4499969482422,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1033,7 +1033,7 @@
     {
         "name": "Sika AG",
         "ticker": "SIKA.SW",
-        "kurs": 161.25,
+        "kurs": NaN,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1042,7 +1042,7 @@
     {
         "name": "Industrial and Commercial Bank of China Limited",
         "ticker": "1398.HK",
-        "kurs": NaN,
+        "kurs": 7.289999961853027,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1051,7 +1051,7 @@
     {
         "name": "Ping An Insurance (Group) Company of China, Ltd.",
         "ticker": "2318.HK",
-        "kurs": NaN,
+        "kurs": 56.650001525878906,
         "watchlist": true,
         "tags": [
             "Watchlist"
