@@ -1,17 +1,64 @@
 import json
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import yfinance as yf
 import pandas as pd
 
 # ==============================================================================
-# HIER DEINE AKTIEN EINTRAGEN
+# VOLLSTÄNDIGE DEPOT-AKTIEN-KONFIGURATION
 # ==============================================================================
 AKTIEN_KONFIGURATION = [
-    {"ticker": "MSFT", "tags": ["Tech", "MegaCap", "US"], "watchlist": False},
-    {"ticker": "AAPL", "tags": ["Tech", "Hardware", "US"], "watchlist": False},
-    {"ticker": "O", "tags": ["REIT", "Immobilien", "Monatszahler"], "watchlist": True},
-    {"ticker": "NSRGY", "tags": ["Konsum", "Dividende", "CH"], "watchlist": False}
+    {"ticker": "MSFT", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "TSM", "tags": ["Tech", "Taiwan"], "watchlist": False},
+    {"ticker": "SAP.DE", "tags": ["Tech", "DE"], "watchlist": False},
+    {"ticker": "ORCL", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "AVGO", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "ASML.AS", "tags": ["Tech", "NL"], "watchlist": False},
+    {"ticker": "GOOGL", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "QCOM", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "NOW", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "INTU", "tags": ["Tech", "US"], "watchlist": False},
+    {"ticker": "JPM", "tags": ["Finanzen", "US"], "watchlist": False},
+    {"ticker": "HSBA.L", "tags": ["Finanzen", "UK"], "watchlist": False},
+    {"ticker": "SAN.PA", "tags": ["Gesundheit", "FR"], "watchlist": False},
+    {"ticker": "BLK", "tags": ["Finanzen", "US"], "watchlist": False},
+    {"ticker": "ALV.DE", "tags": ["Finanzen", "DE"], "watchlist": False},
+    {"ticker": "MUV2.DE", "tags": ["Finanzen", "DE"], "watchlist": False},
+    {"ticker": "SIE.DE", "tags": ["Industrie", "DE"], "watchlist": False},
+    {"ticker": "SU.PA", "tags": ["Industrie", "FR"], "watchlist": False},
+    {"ticker": "HON", "tags": ["Industrie", "US"], "watchlist": False},
+    {"ticker": "CAT", "tags": ["Industrie", "US"], "watchlist": False},
+    {"ticker": "DE", "tags": ["Industrie", "US"], "watchlist": False},
+    {"ticker": "ABBN.SW", "tags": ["Industrie", "CH"], "watchlist": False},
+    {"ticker": "6861.T", "tags": ["Tech", "JP"], "watchlist": False},
+    {"ticker": "DG.PA", "tags": ["Industrie", "FR"], "watchlist": False},
+    {"ticker": "PH", "tags": ["Industrie", "US"], "watchlist": False},
+    {"ticker": "RIO.L", "tags": ["Rohstoffe", "UK"], "watchlist": False},
+    {"ticker": "LIN", "tags": ["Chemie", "US"], "watchlist": False},
+    {"ticker": "AI.PA", "tags": ["Chemie", "FR"], "watchlist": False},
+    {"ticker": "MC.PA", "tags": ["Luxus", "FR"], "watchlist": False},
+    {"ticker": "TTE.PA", "tags": ["Energie", "FR"], "watchlist": False},
+    {"ticker": "NEE", "tags": ["Utilities", "US"], "watchlist": False},
+    {"ticker": "ORSTED.CO", "tags": ["Utilities", "DK"], "watchlist": False},
+    {"ticker": "VIE.PA", "tags": ["Utilities", "FR"], "watchlist": False},
+    {"ticker": "IBE.MC", "tags": ["Utilities", "ES"], "watchlist": False},
+    {"ticker": "LLY", "tags": ["Gesundheit", "US"], "watchlist": False},
+    {"ticker": "ROG.SW", "tags": ["Gesundheit", "CH"], "watchlist": False},
+    {"ticker": "NOVN.SW", "tags": ["Gesundheit", "CH"], "watchlist": False},
+    {"ticker": "ABBV", "tags": ["Gesundheit", "US"], "watchlist": False},
+    {"ticker": "JNJ", "tags": ["Gesundheit", "US"], "watchlist": False},
+    {"ticker": "AMZN", "tags": ["Consumer", "US"], "watchlist": False},
+    {"ticker": "PG", "tags": ["Consumer", "US"], "watchlist": False},
+    {"ticker": "NESN.SW", "tags": ["Consumer", "CH"], "watchlist": False},
+    {"ticker": "MDLZ", "tags": ["Consumer", "US"], "watchlist": False},
+    {"ticker": "KO", "tags": ["Consumer", "US"], "watchlist": False},
+    {"ticker": "MCD", "tags": ["Consumer", "US"], "watchlist": False},
+    {"ticker": "WMT", "tags": ["Consumer", "US"], "watchlist": False},
+    {"ticker": "FPE3.DE", "tags": ["Specialty", "DE"], "watchlist": False},
+    {"ticker": "PLD", "tags": ["REIT", "US"], "watchlist": False},
+    {"ticker": "KRN.DE", "tags": ["Maschinenbau", "DE"], "watchlist": False},
+    {"ticker": "MMK.VI", "tags": ["Packaging", "AT"], "watchlist": False},
+    {"ticker": "IBN", "tags": ["Finanzen", "IN"], "watchlist": False}
 ]
 
 def berechne_historische_durchschnitte(ticker, shares_outstanding):
@@ -65,7 +112,7 @@ def berechne_historische_durchschnitte(ticker, shares_outstanding):
 def daten_generieren():
     json_output = []
     
-    print(f"=== STARTE REPARIERTE AKTUALISIERUNG: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')} ===")
+    print(f"=== STARTE AKTUALISIERUNG FÜR {len(AKTIEN_KONFIGURATION)} AKTIEN: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')} ===")
     
     for aktie in AKTIEN_KONFIGURATION:
         symbol = aktie["ticker"]
@@ -74,25 +121,13 @@ def daten_generieren():
         try:
             t = yf.Ticker(symbol)
             
-            # 1. Kurs & Historie laden (Der stabilste Endpunkt bei Yahoo)
+            # 1. Kurs & Historie laden
             hist_prices = t.history(period="5y")
             if hist_prices.empty:
                 print(f"   ❌ Keine Kursdaten für {symbol} gefunden. Überspringe.")
                 continue
                 
             aktueller_kurs = float(hist_prices['Close'].iloc[-1])
-            
-            # Währung bestimmen über Metadaten
-            waehrung = "USD"
-            try:
-                if hasattr(t, 'history_metadata') and t.history_metadata:
-                    waehrung = t.history_metadata.get('currency', 'USD')
-                elif hasattr(t, 'fast_info') and t.fast_info:
-                    waehrung = t.fast_info.get('currency', 'USD')
-            except:
-                pass
-                
-            kurs_formatiert = f"{aktueller_kurs:.2f} {waehrung}"
             
             # 2. Performance berechnen
             perf_tag, perf_monat, perf_jahr, perf_5j = 0.0, 0.0, 0.0, 0.0
@@ -109,7 +144,6 @@ def daten_generieren():
             financials = t.financials
             cashflow = t.cashflow
             
-            # Anteile für die Marktkapitalisierung bestimmen
             shares_outstanding = 1
             market_cap = None
             try:
@@ -137,7 +171,7 @@ def daten_generieren():
             except:
                 pass
 
-            # 5. Aktuelles KGV berechnen (Market Cap / Letzter Jahresgewinn)
+            # 5. Aktuelles KGV berechnen
             kgv = None
             try:
                 if financials is not None and not financials.empty:
@@ -149,7 +183,7 @@ def daten_generieren():
             except:
                 pass
 
-            # 6. Aktuelles KCV berechnen (Market Cap / Operativer Cashflow)
+            # 6. Aktuelles KCV berechnen
             kcv = None
             try:
                 if cashflow is not None and not cashflow.empty:
@@ -164,52 +198,59 @@ def daten_generieren():
             # 7. Historische 5J-Durchschnitte ermitteln
             kgv_5j, kcv_5j = berechne_historische_durchschnitte(t, shares_outstanding)
             
-            # Name bestimmen
+            # 8. Name und Dividenden-Termine auslesen
             name = symbol
+            ex_date = "-"
+            payout_date = "-"
             try:
-                if hasattr(t, 'info') and t.info and t.info.get("longName"):
-                    name = t.info.get("longName")
+                info = t.info
+                if info:
+                    if info.get("longName"):
+                        name = info.get("longName")
+                    
+                    if info.get("exDividendDate"):
+                        ex_date = datetime.fromtimestamp(info.get("exDividendDate")).strftime('%d.%m.%Y')
+                    if info.get("dividendDate"):
+                        payout_date = datetime.fromtimestamp(info.get("dividendDate")).strftime('%d.%m.%Y')
             except:
                 pass
 
             def clean(val):
-                if val is None or pd.isna(val) or val == "None": return None
+                if val is None or pd.isna(val) or val == "None": return 0.0
                 return float(val)
 
-            # Paket schnüren
+            # 9. Paket schnüren
             aktie_daten = {
                 "name": str(name),
                 "ticker": str(symbol),
-                "kurs": str(kurs_formatiert),
-                "perfTag": clean(perf_tag) or 0.0,
-                "perfMonat": clean(perf_monat) or 0.0,
-                "perfJahr": clean(perf_jahr) or 0.0,
-                "perf5J": clean(perf_5j) or 0.0,
+                "kurs": clean(aktueller_kurs),
+                "perfTag": clean(perf_tag),
+                "perfMonat": clean(perf_monat),
+                "perfJahr": clean(perf_jahr),
+                "perf5J": clean(perf_5j),
                 "dividende": clean(dividende),
                 "kgv": clean(kgv),
-                "kgv5J": clean(kgv_5j),
+                "kgv5y": clean(kgv_5j),
                 "kcv": clean(kcv),
-                "kcv5J": clean(kcv_5j),
+                "kcv5y": clean(kcv_5j),
+                "exDate": ex_date,
+                "payoutDate": payout_date,
                 "watchlist": bool(aktie["watchlist"]),
-                "tags": aktie["tags"],
-                "logoUrl": f"https://logo.clearbit.com/{symbol.split('.')[0].lower()}.com",
-                "monate": "-", 
-                "frequenz": "-",
-                "exDate": "-"
+                "tags": aktie["tags"]
             }
             
             json_output.append(aktie_daten)
-            print(f"   -> {name} erfolgreich mit echten Werten erfasst! ({kurs_formatiert})")
+            print(f"   -> {name} erfolgreich erfasst! (Kurs: {aktueller_kurs:.2f})")
             
         except Exception as e:
             print(f"❌ Fehler bei Ticker {symbol}: {e}")
         
-        time.sleep(1)
+        time.sleep(0.5)
         
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
         
-    print(f"\n=== FERTIG! 'daten.json' wurde erfolgreich generiert ({len(json_output)} Aktien). ===")
+    print(f"\n=== FERTIG! 'daten.json' mit {len(json_output)} Aktien generiert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
