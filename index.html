@@ -3,210 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktien Terminal Pro</title>
+    <title>Aktien & Watchlist</title>
     <style>
-        body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 12px; margin: 0; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        h1 { font-size: 1.5em; color: #ffffff; margin: 0; font-weight: 700; }
-        .badge { background: #8957e5; color: #ffffff; font-size: 0.75em; font-weight: bold; padding: 6px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(137, 87, 229, 0.4); }
-        .search-box, .filter-select { width: 100%; padding: 12px 15px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; color: #c9d1d9; font-size: 0.9em; margin-bottom: 10px; outline: none; box-sizing: border-box; }
-        .filter-row { display: flex; gap: 8px; margin-bottom: 10px; }
-        .filter-select { flex: 1; }
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .stock-info { display: flex; align-items: center; gap: 10px; }
-        .stock-icon { width: 32px; height: 32px; background: #21262d; border: 1px solid #30363d; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #58a6ff; font-size: 0.9em; }
-        .stock-name { font-size: 1em; font-weight: bold; color: #ffffff; margin: 0; }
-        .stock-ticker { font-size: 0.8em; color: #8b949e; margin-top: 2px; }
-        .price-box { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 8px 12px; text-align: right; }
-        .price-value { font-size: 1.1em; font-weight: bold; color: #ffffff; }
-        .price-curr { font-size: 0.75em; color: #8b949e; }
-        
-        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; border-top: 1px solid #21262d; padding-top: 12px; }
-        .metric-item { background: #0d1117; padding: 8px 4px; border-radius: 8px; border: 1px solid #21262d; display: flex; flex-direction: column; justify-content: center; }
-        .metric-label { font-size: 0.65em; color: #8b949e; text-transform: uppercase; margin-bottom: 4px; font-weight: bold; }
-        .metric-val { font-size: 0.9em; font-weight: bold; }
-        
-        .pos { color: #3fb950; } .neg { color: #f85149; } .neutral { color: #c9d1d9; }
-        .sub-text { font-size: 0.6em; margin-top: 4px; color: #8b949e; line-height: 1.3; }
-        .tag-green { color: #3fb950; font-size: 0.65em; margin-top: 2px; display: block; font-weight: bold; }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 70px; /* Platz für die untere Navigation */
+        }
+        header {
+            padding: 20px 16px 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            font-weight: 700;
+        }
+        .sort-indicator {
+            color: #00e676;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .list-container {
+            padding: 0 16px;
+        }
+        .aktie-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #1e1e1e;
+        }
+        .aktie-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .aktie-logo {
+            width: 36px;
+            height: 36px;
+            background-color: #2c2c2c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+            overflow: hidden;
+        }
+        .aktie-name {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .aktie-kurs {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: right;
+        }
+        /* Untere Navigationsleiste wie in der App */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #181818;
+            border-top: 1px solid #282828;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+        .nav-button {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .nav-button.active {
+            color: #ffffff;
+        }
+        .nav-button svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <h1>Aktien Terminal Pro</h1>
-        <div class="badge">V4.7 PRO DATA</div>
+    <header>
+        <h1 id="page-title">Watchlist</h1>
+        <div class="sort-indicator">↓ Kurs</div>
+    </header>
+
+    <div class="list-container" id="aktien-liste">
+        <!-- Daten werden dynamisch geladen -->
     </div>
 
-    <input type="text" id="searchInput" class="search-box" placeholder="Name, Ticker oder Tag suchen..." oninput="filterData()">
-    
-    <div class="filter-row">
-        <select class="filter-select" id="branchFilter" onchange="filterData()">
-            <option>Alle Branchen</option>
-        </select>
-        <select class="filter-select" id="sortSelect" onchange="filterData()">
-            <option value="default">Sortierung...</option>
-            <option value="priceDesc">Kurs (Höchste zuerst)</option>
-            <option value="priceAsc">Kurs (Niedrigste zuerst)</option>
-            <option value="divDesc">Dividende (Höchste zuerst)</option>
-            <option value="kgvUndervalued">KGV (Unterbewertet zuerst)</option>
-            <option value="kcvUndervalued">KCV (Unterbewertet zuerst)</option>
-        </select>
-    </div>
-
-    <div id="cardContainer">
-        <div class="card" style="text-align:center; color:#8b949e;">Lade Terminal-Daten...</div>
-    </div>
+    <!-- Untere Navigationsleiste mit Umschalt-Button -->
+    <nav>
+        <button class="nav-button active" id="btn-watchlist" onclick="zeigeAnsicht('watchlist')">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+            Watchlist
+        </button>
+        <button class="nav-button" id="btn-depot" onclick="zeigeAnsicht('depot')">
+            <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3z"/></svg>
+            Depot
+        </button>
+    </nav>
 
     <script>
-        let allData = [];
+        let alleDaten = [];
+        let aktuelleAnsicht = 'watchlist'; // Startansicht
 
-        function safeNumber(val) {
-            if (val === null || val === undefined || val === "") return 0;
-            let strVal = String(val).toLowerCase();
-            if (strVal.includes("nan")) return 0;
-            let cleaned = strVal.replace(',', '.').replace(/[^0-9.\-]/g, '');
-            let parsed = parseFloat(cleaned);
-            return isNaN(parsed) ? 0 : parsed;
+        async function ladeDaten() {
+            try {
+                const response = await fetch('daten.json');
+                alleDaten = await response.json();
+                rendereListe();
+            } catch (error) {
+                console.error("Fehler beim Laden der daten.json:", error);
+            }
         }
 
-        fetch('daten.json')
-            .then(res => res.json())
-            .then(data => {
-                allData = data;
-                renderCards(allData);
-            })
-            .catch(err => {
-                document.getElementById('cardContainer').innerHTML = `<div class="card" style="color:#f85149">Fehler beim Laden: ${err.message}</div>`;
-            });
+        function zeigeAnsicht(ansicht) {
+            aktuelleAnsicht = ansicht;
+            document.getElementById('page-title').innerText = ansicht === 'watchlist' ? 'Watchlist' : 'Depot';
+            
+            // Aktiven Button markieren
+            document.getElementById('btn-watchlist').classList.toggle('active', ansicht === 'watchlist');
+            document.getElementById('btn-depot').classList.toggle('active', ansicht === 'depot');
+            
+            rendereListe();
+        }
 
-        function renderCards(data) {
-            const container = document.getElementById('cardContainer');
+        function rendereListe() {
+            const container = document.getElementById('aktien-liste');
             container.innerHTML = '';
 
-            if (data.length === 0) {
-                container.innerHTML = '<div class="card" style="text-align:center; color:#8b949e;">Keine Aktien gefunden</div>';
+            // Filtern nach Watchlist (true/false)
+            const gefiltert = alleDaten.filter(item => aktuelleAnsicht === 'watchlist' ? item.watchlist === true : item.watchlist === false);
+
+            if (gefiltert.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color: #777; margin-top: 40px;">Keine Einträge vorhanden.</p>';
                 return;
             }
 
-            data.forEach(a => {
-                const name = a.name || "Unbekannt";
-                const ticker = a.ticker || "-";
+            gefiltert.forEach(aktie => {
+                const initialen = aktie.name.substring(0, 2).toUpperCase();
                 
-                const price = safeNumber(a.kurs);
-                const p1M = safeNumber(a.perfMonat);
-                const p1J = safeNumber(a.perfJahr);
-                
-                // Dividende (Yahoo liefert oft Dezimalwerte wie 0.05 für 5%, daher * 100)
-                let rawDiv = safeNumber(a.dividende);
-                const div = rawDiv < 1 ? rawDiv * 100 : rawDiv; 
-                
-                // Neue Felder (Fallback, falls noch nicht in JSON vorhanden)
-                const exDate = a.exDate ? a.exDate : "-";
-                const payoutDate = a.payoutDate ? a.payoutDate : "-";
-                
-                const kgv = safeNumber(a.kgv);
-                const kgv5y = safeNumber(a.kgv5y);
-                const kcv = safeNumber(a.kcv);
-                const kcv5y = safeNumber(a.kcv5y);
+                // Kurs formatieren (z.B. 190.05 mit hochgestellten Cent oder normal getrennt)
+                const kursStr = aktie.kurs.toFixed(2).replace('.', ',');
+                constteile = kursStr.split(',');
+                const ganzerKurs = kursteile[0];
+                const centKurs = kursteile[1];
 
-                // Berechnungen für Abweichungen
-                const calcDev = (current, avg) => {
-                    if (avg === 0 || current === 0) return { diff: 0, class: 'neutral', text: '-' };
-                    const diffPct = ((current - avg) / avg) * 100;
-                    // Aktuell < Schnitt = Unterbewertet (Grün), Aktuell > Schnitt = Überbewertet (Rot)
-                    const colorClass = current < avg ? 'pos' : 'neg'; 
-                    const sign = diffPct > 0 ? '+' : '';
-                    return { diff: diffPct, class: colorClass, text: `${sign}${diffPct.toFixed(1)}%` };
-                };
-
-                const kgvDev = calcDev(kgv, kgv5y);
-                const kcvDev = calcDev(kcv, kcv5y);
-
-                const getClass = (val) => val > 0 ? 'pos' : (val < 0 ? 'neg' : 'neutral');
-                const getSign = (val) => (val > 0 ? '+' : '') + val.toFixed(2) + '%';
-
-                container.innerHTML += `
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="stock-info">
-                                <div class="stock-icon">?</div>
-                                <div>
-                                    <div class="stock-name">${name}</div>
-                                    <div class="stock-ticker">${ticker}</div>
-                                </div>
-                            </div>
-                            <div class="price-box">
-                                <div class="price-value">${price.toFixed(2)}</div>
-                                <div class="price-curr">USD</div>
-                            </div>
+                const html = `
+                    <div class="aktie-item">
+                        <div class="aktie-info">
+                            <div class="aktie-logo">${initialen}</div>
+                            <div class="aktie-name">${aktie.name}</div>
                         </div>
-                        <div class="metrics-grid">
-                            <div class="metric-item">
-                                <div class="metric-label">1 Mon.</div>
-                                <div class="metric-val ${getClass(p1M)}">${getSign(p1M)}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">1 Jahr</div>
-                                <div class="metric-val ${getClass(p1J)}">${getSign(p1J)}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">Div. Rendite</div>
-                                <div class="metric-val neutral">${div.toFixed(2)} %</div>
-                                <div class="sub-text">Ex: ${exDate}<br>Pay: ${payoutDate}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">KGV (vs 5J)</div>
-                                <div class="metric-val neutral">${kgv.toFixed(1)}</div>
-                                <div class="sub-text ${kgvDev.class}">Ø ${kgv5y.toFixed(1)} (${kgvDev.text})</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">KCV (vs 5J)</div>
-                                <div class="metric-val neutral">${kcv.toFixed(1)}</div>
-                                <div class="sub-text ${kcvDev.class}">Ø ${kcv5y.toFixed(1)} (${kcvDev.text})</div>
-                            </div>
-                            <div class="metric-item" style="background:#111b15; border-color:#1b3626;">
-                                <div class="metric-label">Status</div>
-                                <span class="tag-green">AKTIV 🌿</span>
-                            </div>
+                        <div class="aktie-kurs">
+                            ${ganzerKurs}<span style="font-size: 0.75em; vertical-align: super; color: #aaa;">${centKurs}</span>
                         </div>
-                    </div>`;
+                    </div>
+                `;
+                container.innerHTML += html;
             });
         }
 
-        function filterData() {
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
-            const sortVal = document.getElementById('sortSelect').value;
-
-            let filtered = allData.filter(a => {
-                const name = (a.name || "").toLowerCase();
-                const ticker = (a.ticker || "").toLowerCase();
-                return name.includes(searchVal) || ticker.includes(searchVal);
-            });
-
-            // Hilfsfunktion zur Sortierung der Abweichung (am stärksten unterbewertet zuerst)
-            const getDiff = (current, avg) => {
-                let curr = safeNumber(current);
-                let a = safeNumber(avg);
-                if (a === 0 || curr === 0) return 999; // Fehlende Daten ans Ende packen
-                return ((curr - a) / a) * 100;
-            };
-
-            if (sortVal === 'priceDesc') {
-                filtered.sort((a, b) => safeNumber(b.kurs) - safeNumber(a.kurs));
-            } else if (sortVal === 'priceAsc') {
-                filtered.sort((a, b) => safeNumber(a.kurs) - safeNumber(b.kurs));
-            } else if (sortVal === 'divDesc') {
-                filtered.sort((a, b) => safeNumber(b.dividende) - safeNumber(a.dividende));
-            } else if (sortVal === 'kgvUndervalued') {
-                filtered.sort((a, b) => getDiff(a.kgv, a.kgv5y) - getDiff(b.kgv, b.kgv5y));
-            } else if (sortVal === 'kcvUndervalued') {
-                filtered.sort((a, b) => getDiff(a.kcv, a.kcv5y) - getDiff(b.kcv, b.kcv5y));
-            }
-
-            renderCards(filtered);
-        }
+        // Beim Laden ausführen
+        ladeDaten();
     </script>
 </body>
 </html>
