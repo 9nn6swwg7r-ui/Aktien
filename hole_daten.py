@@ -3,11 +3,10 @@ import time
 from datetime import datetime, timedelta
 import yfinance as yf
 import pandas as pd
-import requests
+from curl_cffi import requests
 
-# Session mit User-Agent erstellen, um Yahoo-Blockaden auf GitHub-Servern zu umgehen
-session = requests.Session()
-session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+# Echte Browser-Session per curl_cffi erzeugen, um die GitHub-Blockade von Yahoo zu umgehen
+session = requests.Session(impersonate="chrome")
 
 # ==============================================================================
 # VOLLSTÄNDIGE DEPOT-AKTIEN-KONFIGURATION
@@ -124,13 +123,10 @@ def daten_generieren():
         print(f"\nVerarbeite Ticker: {symbol}...")
         
         try:
-            # Wichtig: session=session wird hier übergeben
             t = yf.Ticker(symbol, session=session)
             
-            # 1. Kurs & Historie laden mit Fallback
             hist_prices = t.history(period="1y")
             if hist_prices.empty:
-                print(f"   ⚠️ Keine Historie für {symbol}, versuche Fast Info...")
                 aktueller_kurs = t.fast_info.get('lastPrice', 0.0) if hasattr(t, 'fast_info') else 0.0
             else:
                 aktueller_kurs = float(hist_prices['Close'].iloc[-1])
@@ -139,7 +135,6 @@ def daten_generieren():
                 print(f"   ❌ Konnte keinen Kurs für {symbol} ermitteln. Überspringe.")
                 continue
 
-            # Performance Standardwerte
             perf_tag, perf_monat, perf_jahr, perf_5j = 0.0, 0.0, 0.0, 0.0
             if not hist_prices.empty and len(hist_prices) > 1:
                 heute_close = hist_prices['Close'].iloc[-1]
@@ -150,7 +145,6 @@ def daten_generieren():
                     perf_jahr = ((heute_close - hist_prices['Close'].iloc[-252]) / hist_prices['Close'].iloc[-252]) * 100
                 perf_5j = ((heute_close - hist_prices['Close'].iloc[0]) / hist_prices['Close'].iloc[0]) * 100
 
-            # Fundamentaldaten sicher auslesen
             shares_outstanding = 1
             market_cap = None
             try:
@@ -163,7 +157,6 @@ def daten_generieren():
             if not market_cap or market_cap == 0:
                 market_cap = aktueller_kurs * shares_outstanding
 
-            # Dividende berechnen
             dividende = 0.0
             try:
                 divs = t.dividends
@@ -177,7 +170,6 @@ def daten_generieren():
             except:
                 pass
 
-            # KGV & KCV ermitteln
             kgv, kcv = None, None
             try:
                 financials = t.financials
@@ -201,14 +193,12 @@ def daten_generieren():
             except:
                 pass
 
-            # Historische Durchschnitte
             kgv_5j, kcv_5j = None, None
             try:
                 kgv_5j, kcv_5j = berechne_historische_durchschnitte(t, shares_outstanding)
             except:
                 pass
 
-            # Name und Termine
             name = symbol
             ex_date, payout_date = "-", "-"
             try:
@@ -252,15 +242,14 @@ def daten_generieren():
         except Exception as e:
             print(f"❌ Fehler bei Ticker {symbol}: {e}")
         
-        time.sleep(0.3)
+        time.sleep(0.5)
         
-    # Sicherheitsnetz: Nur speichern, wenn auch wirklich Daten da sind!
     if len(json_output) > 0:
         with open("daten.json", "w", encoding="utf-8") as f:
             json.dump(json_output, f, indent=4, ensure_ascii=False)
         print(f"\n=== FERTIG! 'daten.json' mit {len(json_output)} Aktien generiert. ===")
     else:
-        print("\n❌ ABBRUCH: Keine einzige Aktie konnte geladen werden. 'daten.json' wird nicht überschrieben!")
+        print("\n❌ ABBRUCH: Keine einzige Aktie konnte geladen werden.")
 
 if __name__ == "__main__":
     daten_generieren()
