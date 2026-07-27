@@ -61,7 +61,7 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "MMK.VI", "tags": ["Packaging", "AT"], "watchlist": False},
     {"ticker": "IBN", "tags": ["Finanzen", "IN"], "watchlist": False},
 
-    # --- WATCHLIST (AUS DEINEN SCREENSHOTS) ---
+    # --- WATCHLIST ---
     {"ticker": "POWL", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "ROK", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "SPGI", "tags": ["Watchlist"], "watchlist": True},
@@ -127,43 +127,6 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "2318.HK", "tags": ["Watchlist"], "watchlist": True}
 ]
 
-# (Die restlichen Funktionen bleiben exakt gleich wie im vorherigen Skript)
-def berechne_historische_durchschnitte(ticker, shares_outstanding):
-    kgv_historie, kcv_historie = [], []
-    try:
-        financials = ticker.financials
-        cashflow = ticker.cashflow
-        if financials is not None and not financials.empty:
-            net_income_keys = [idx for idx in financials.index if 'Net Income' in str(idx)]
-            if net_income_keys:
-                row_key = net_income_keys[0]
-                for datum in financials.columns:
-                    datum_naive = datum.replace(tzinfo=None) if hasattr(datum, 'tzinfo') else datum
-                    try:
-                        h_data = ticker.history(start=datum_naive - timedelta(days=7), end=datum_naive + timedelta(days=7))
-                        net_income = financials.loc[row_key, datum]
-                        if not h_data.empty and pd.notna(net_income) and net_income != 0:
-                            hist_close = h_data['Close'].iloc[-1]
-                            kgv_historie.append((hist_close * shares_outstanding) / net_income)
-                    except:
-                        continue
-        if cashflow is not None and not cashflow.empty:
-            ocf_keys = [idx for idx in cashflow.index if 'Operating Cash Flow' in str(idx) or 'Cash Flow From Operating Activities' in str(idx)]
-            if ocf_keys:
-                row_key = ocf_keys[0]
-                for datum in cashflow.columns:
-                    datum_naive = datum.replace(tzinfo=None) if hasattr(datum, 'tzinfo') else datum
-                    try:
-                        h_data = ticker.history(start=datum_naive - timedelta(days=7), end=datum_naive + timedelta(days=7))
-                        ocf = cashflow.loc[row_key, datum]
-                        if not h_data.empty and pd.notna(ocf) and ocf != 0:
-                            kcv_historie.append((hist_close * shares_outstanding) / ocf)
-                    except:
-                        continue
-    except:
-        pass
-    return (sum(kgv_historie)/len(kgv_historie) if kgv_historie else None), (sum(kcv_historie)/len(kcv_historie) if kcv_historie else None)
-
 def daten_generieren():
     json_output = []
     print(f"=== STARTE AKTUALISIERUNG FÜR {len(AKTIEN_KONFIGURATION)} AKTIEN ===")
@@ -173,20 +136,32 @@ def daten_generieren():
         print(f"Verarbeite: {symbol}...")
         try:
             t = yf.Ticker(symbol, session=session)
-            hist_prices = t.history(period="1y")
-            aktueller_kurs = float(hist_prices['Close'].iloc[-1]) if not hist_prices.empty else (t.fast_info.get('lastPrice', 0.0) if hasattr(t, 'fast_info') else 0.0)
             
+            # Kurs sicher abrufen mit Fallbacks
+            aktueller_kurs = 0.0
+            try:
+                hist_prices = t.history(period="5d")
+                if not hist_prices.empty:
+                    aktueller_kurs = float(hist_prices['Close'].iloc[-1])
+            except:
+                pass
+                
             if not aktueller_kurs or aktueller_kurs == 0:
-                continue
+                try:
+                    if hasattr(t, 'fast_info') and t.fast_info.get('lastPrice'):
+                        aktueller_kurs = float(t.fast_info.get('lastPrice'))
+                except:
+                    pass
 
-            shares_outstanding = t.fast_info.get('shares', 1) if hasattr(t, 'fast_info') else 1
-            market_cap = t.fast_info.get('marketCap') if hasattr(t, 'fast_info') else None
-            if not market_cap: market_cap = aktueller_kurs * shares_outstanding
+            if not aktueller_kurs or aktueller_kurs == 0:
+                print(f"   -> Übersprungen (Kein Kurs gefunden für {symbol})")
+                continue
 
             name = symbol
             try:
                 info = t.info
-                if info and info.get("longName"): name = info.get("longName")
+                if info and info.get("longName"): 
+                    name = info.get("longName")
             except:
                 pass
 
@@ -199,13 +174,15 @@ def daten_generieren():
             }
             json_output.append(aktie_daten)
             print(f"   -> OK: {name} ({aktueller_kurs:.2f})")
+            
         except Exception as e:
             print(f"   -> Fehler bei {symbol}: {e}")
-        time.sleep(0.3)
+            
+        time.sleep(0.2)
         
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
-    print("=== FERTIG! daten.json aktualisiert. ===")
+    print("=== FERTIG! daten.json erfolgreich aktualisiert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
