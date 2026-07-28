@@ -1,8 +1,7 @@
 import json
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 import yfinance as yf
-import pandas as pd
 from curl_cffi import requests
 
 session = requests.Session(impersonate="chrome")
@@ -136,24 +135,38 @@ def daten_generieren():
         print(f"Verarbeite: {symbol}...")
         try:
             t = yf.Ticker(symbol, session=session)
-            hist_prices = t.history(period="5d")
-            if hist_prices.empty:
-                hist_prices = t.history(period="1mo")
-
-            if hist_prices.empty:
+            
+            # 5 Jahre Historie für den Durchschnittskurs
+            hist_5y = t.history(period="5y")
+            if hist_5y.empty:
+                hist_5y = t.history(period="1max")
+            
+            if hist_5y.empty:
                 continue
 
-            aktueller_kurs = float(hist_prices['Close'].iloc[-1])
-            info = t.info or {}
+            aktueller_kurs = float(hist_5y['Close'].iloc[-1])
+            avg_5y_kurs = float(hist_5y['Close'].mean())
             
+            # Abweichung vom 5J-Durchschnitt in Prozent
+            # Negativ = Günstiger als im Schnitt (Grün), Positiv = Teurer (Rot)
+            abweichung_5y = ((aktueller_kurs - avg_5y_kurs) / avg_5y_kurs) * 100
+
+            info = t.info or {}
             name = info.get("longName", symbol)
             kgv = info.get("trailingPE")
-            kcv = info.get("operatingCashflow") # bzw. aus Kennzahlen
-            dividendenrendite = info.get("dividendYield")
-            if dividendenrendite:
-                dividendenrendite = float(dividendenrendite) * 100
+            kcv = info.get("operatingCashflow") # Alternativ priceToCashflow falls verfügbar
+            if not kcv:
+                kcv = info.get("marketCap") / info.get("totalCash") if info.get("totalCash") and info.get("marketCap") else None
+            # Bessere Quelle für KCV über yfinance direkt:
+            kcv = info.get("priceToCashflow", info.get("operatingCashflow"))
 
-            # Ex-Tag und Auszahlungstag falls vorhanden
+            div_yield = info.get("dividendYield")
+            if div_yield:
+                # Korrektur der Skalierung (manchmal liefert yf 0.03 für 3% oder direkt 3.0)
+                dividendenrendite = float(div_yield) * 100 if float(div_yield) < 1 else float(div_yield)
+            else:
+                dividendenrendite = None
+
             ex_dividende = info.get("exDividendDate")
             ex_dividende_str = datetime.fromtimestamp(ex_dividende).strftime('%Y-%m-%d') if ex_dividende else "-"
             
@@ -165,14 +178,16 @@ def daten_generieren():
                 "ticker": str(symbol),
                 "kurs": float(aktueller_kurs),
                 "kgv": float(kgv) if kgv else None,
+                "kcv": float(info.get("priceToCashflow")) if info.get("priceToCashflow") else None,
                 "dividendenrendite": float(dividendenrendite) if dividendenrendite else None,
+                "abweichung5y": float(abweichung_5y),
                 "exDividendDate": ex_dividende_str,
                 "payoutDate": payout_str,
                 "watchlist": bool(aktie["watchlist"]),
                 "tags": aktie["tags"]
             }
             json_output.append(aktie_daten)
-            print(f"   -> OK: {name} ({aktueller_kurs:.2f})")
+            print(f"   -> OK: {name} ({aktueller_kurs:.2f}, 5J-Abw: {abweichung_5y:.1f}%)")
         except Exception as e:
             print(f"   -> Fehler bei {symbol}: {e}")
         time.sleep(0.2)
