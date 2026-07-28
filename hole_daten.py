@@ -120,6 +120,7 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "STR.VI", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "VER.VI", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "FIH-U.TO", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "ABBN.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "SREN.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "SIKA.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "1398.HK", "tags": ["Watchlist"], "watchlist": True},
@@ -136,32 +137,37 @@ def daten_generieren():
         try:
             t = yf.Ticker(symbol, session=session)
             hist_prices = t.history(period="5d")
-            
             if hist_prices.empty:
-                # Fallback auf 1m period, falls 5d leer ist
                 hist_prices = t.history(period="1mo")
 
             if hist_prices.empty:
-                print(f"   -> Warnung: Keine Kursdaten für {symbol} gefunden, überspringe.")
                 continue
 
             aktueller_kurs = float(hist_prices['Close'].iloc[-1])
+            info = t.info or {}
             
-            if not aktueller_kurs or aktueller_kurs == 0:
-                continue
+            name = info.get("longName", symbol)
+            kgv = info.get("trailingPE")
+            kcv = info.get("operatingCashflow") # bzw. aus Kennzahlen
+            dividendenrendite = info.get("dividendYield")
+            if dividendenrendite:
+                dividendenrendite = float(dividendenrendite) * 100
 
-            name = symbol
-            try:
-                info = t.info
-                if info and info.get("longName"): 
-                    name = info.get("longName")
-            except:
-                pass
+            # Ex-Tag und Auszahlungstag falls vorhanden
+            ex_dividende = info.get("exDividendDate")
+            ex_dividende_str = datetime.fromtimestamp(ex_dividende).strftime('%Y-%m-%d') if ex_dividende else "-"
+            
+            payout_date = info.get("payoutDate")
+            payout_str = datetime.fromtimestamp(payout_date).strftime('%Y-%m-%d') if payout_date else "-"
 
             aktie_daten = {
                 "name": str(name),
                 "ticker": str(symbol),
                 "kurs": float(aktueller_kurs),
+                "kgv": float(kgv) if kgv else None,
+                "dividendenrendite": float(dividendenrendite) if dividendenrendite else None,
+                "exDividendDate": ex_dividende_str,
+                "payoutDate": payout_str,
                 "watchlist": bool(aktie["watchlist"]),
                 "tags": aktie["tags"]
             }
@@ -171,10 +177,9 @@ def daten_generieren():
             print(f"   -> Fehler bei {symbol}: {e}")
         time.sleep(0.2)
         
-    # SCHREIBT DIE DATEN IMMER, SELBST WENN EINZELNE AKTIEN FEHLGESCHLAGEN SIND
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
-    print(f"=== FERTIG! daten.json mit {len(json_output)} Einträgen gespeichert. ===")
+    print("=== FERTIG! daten.json aktualisiert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
