@@ -72,10 +72,19 @@
         }
         .aktie-details {
             display: flex;
-            gap: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
             font-size: 12px;
             color: #888;
             padding-left: 48px;
+        }
+        .gruen {
+            color: #00e676;
+            font-weight: 600;
+        }
+        .rot {
+            color: #ff5252;
+            font-weight: 600;
         }
         nav {
             position: fixed;
@@ -182,7 +191,18 @@
                 const centKurs = kursteile[1] || '00';
 
                 const kgvText = aktie.kgv ? `KGV: ${aktie.kgv.toFixed(1)}` : 'KGV: -';
+                const kcvText = aktie.kcv ? `KCV: ${aktie.kcv.toFixed(1)}` : 'KCV: -';
                 const divText = aktie.dividendenrendite ? `Div: ${aktie.dividendenrendite.toFixed(1)}%` : 'Div: -';
+                
+                // 5-Jahres Abweichung: Günstig (unter Schnitt) = Grün, Teuer (über Schnitt) = Rot
+                let abwHtml = '';
+                if (aktie.abweichung5y !== undefined && aktie.abweichung5y !== null) {
+                    const abwVal = aktie.abweichung5y;
+                    const abwSign = abwVal > 0 ? '+' : '';
+                    const abwClass = abwVal <= 0 ? 'gruen' : 'rot'; // Unter Durchschnitt ist günstig (grün)
+                    abwHtml = `<span class="${abwClass}">5J: ${abwSign}${abwVal.toFixed(1)}%</span>`;
+                }
+
                 const exText = aktie.exDividendDate && aktie.exDividendDate !== '-' ? `Ex: ${aktie.exDividendDate}` : '';
                 const payText = aktie.payoutDate && aktie.payoutDate !== '-' ? `Pay: ${aktie.payoutDate}` : '';
 
@@ -199,7 +219,9 @@
                         </div>
                         <div class="aktie-details">
                             <span>${kgvText}</span>
+                            <span>${kcvText}</span>
                             <span>${divText}</span>
+                            ${abwHtml}
                             ${exText ? `<span>${exText}</span>` : ''}
                             ${payText ? `<span>${payText}</span>` : ''}
                         </div>
