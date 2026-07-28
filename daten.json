@@ -100,7 +100,7 @@
         ]
     },
     {
-        "name": "JPMorgan Chase & Co.",
+        "name": "JPM",
         "ticker": "JPM",
         "kurs": 356.20001220703125,
         "watchlist": false,
@@ -130,7 +130,7 @@
         ]
     },
     {
-        "name": "BlackRock, Inc.",
+        "name": "BLK",
         "ticker": "BLK",
         "kurs": 1062.1400146484375,
         "watchlist": false,
@@ -140,7 +140,7 @@
         ]
     },
     {
-        "name": "Allianz SE",
+        "name": "ALV.DE",
         "ticker": "ALV.DE",
         "kurs": NaN,
         "watchlist": false,
@@ -160,7 +160,7 @@
         ]
     },
     {
-        "name": "Siemens Aktiengesellschaft",
+        "name": "SIE.DE",
         "ticker": "SIE.DE",
         "kurs": NaN,
         "watchlist": false,
@@ -180,7 +180,7 @@
         ]
     },
     {
-        "name": "Honeywell International Inc.",
+        "name": "HON",
         "ticker": "HON",
         "kurs": 245.75,
         "watchlist": false,
@@ -190,7 +190,7 @@
         ]
     },
     {
-        "name": "Caterpillar Inc.",
+        "name": "CAT",
         "ticker": "CAT",
         "kurs": 873.280029296875,
         "watchlist": false,
@@ -222,7 +222,7 @@
     {
         "name": "Keyence Corporation",
         "ticker": "6861.T",
-        "kurs": 74170.0,
+        "kurs": 71270.0,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -300,7 +300,7 @@
         ]
     },
     {
-        "name": "NextEra Energy, Inc.",
+        "name": "NEE",
         "ticker": "NEE",
         "kurs": 88.83000183105469,
         "watchlist": false,
@@ -340,7 +340,7 @@
         ]
     },
     {
-        "name": "Eli Lilly and Company",
+        "name": "LLY",
         "ticker": "LLY",
         "kurs": 1197.530029296875,
         "watchlist": false,
@@ -390,7 +390,7 @@
         ]
     },
     {
-        "name": "The Procter & Gamble Company",
+        "name": "PG",
         "ticker": "PG",
         "kurs": 148.6300048828125,
         "watchlist": false,
@@ -402,7 +402,7 @@
     {
         "name": "Nestlé S.A.",
         "ticker": "NESN.SW",
-        "kurs": NaN,
+        "kurs": 80.38999938964844,
         "watchlist": false,
         "tags": [
             "Consumer",
@@ -420,7 +420,7 @@
         ]
     },
     {
-        "name": "The Coca-Cola Company",
+        "name": "KO",
         "ticker": "KO",
         "kurs": 84.06999969482422,
         "watchlist": false,
@@ -430,7 +430,7 @@
         ]
     },
     {
-        "name": "McDonald's Corporation",
+        "name": "MCD",
         "ticker": "MCD",
         "kurs": 270.6700134277344,
         "watchlist": false,
@@ -460,7 +460,7 @@
         ]
     },
     {
-        "name": "Prologis, Inc.",
+        "name": "PLD",
         "ticker": "PLD",
         "kurs": 147.25999450683594,
         "watchlist": false,
@@ -490,7 +490,7 @@
         ]
     },
     {
-        "name": "ICICI Bank Limited",
+        "name": "IBN",
         "ticker": "IBN",
         "kurs": 29.889999389648438,
         "watchlist": false,
@@ -545,7 +545,7 @@
         ]
     },
     {
-        "name": "Visa Inc.",
+        "name": "V",
         "ticker": "V",
         "kurs": 362.5299987792969,
         "watchlist": true,
@@ -617,7 +617,7 @@
         ]
     },
     {
-        "name": "Philip Morris International Inc.",
+        "name": "PM",
         "ticker": "PM",
         "kurs": 195.66000366210938,
         "watchlist": true,
@@ -644,7 +644,7 @@
         ]
     },
     {
-        "name": "Altria Group, Inc.",
+        "name": "MO",
         "ticker": "MO",
         "kurs": 72.88999938964844,
         "watchlist": true,
@@ -680,7 +680,7 @@
         ]
     },
     {
-        "name": "Church & Dwight Co., Inc.",
+        "name": "CHD",
         "ticker": "CHD",
         "kurs": 98.69999694824219,
         "watchlist": true,
@@ -709,7 +709,7 @@
     {
         "name": "YASKAWA Electric Corporation",
         "ticker": "6506.T",
-        "kurs": 5257.0,
+        "kurs": 4894.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -761,7 +761,7 @@
         ]
     },
     {
-        "name": "Telefonaktiebolaget LM Ericsson (publ)",
+        "name": "ERIC-B.ST",
         "ticker": "ERIC-B.ST",
         "kurs": NaN,
         "watchlist": true,
@@ -770,9 +770,9 @@
         ]
     },
     {
-        "name": "DBS Group Holdings Ltd",
+        "name": "D05.SI",
         "ticker": "D05.SI",
-        "kurs": 74.37999725341797,
+        "kurs": 73.58000183105469,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -808,7 +808,7 @@
     {
         "name": "ITOCHU Corporation",
         "ticker": "8001.T",
-        "kurs": 1984.5,
+        "kurs": 1967.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -817,7 +817,7 @@
     {
         "name": "SoftBank Group Corp.",
         "ticker": "9984.T",
-        "kurs": 5331.0,
+        "kurs": 5114.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -826,7 +826,7 @@
     {
         "name": "Daikin Industries,Ltd.",
         "ticker": "6367.T",
-        "kurs": 24135.0,
+        "kurs": 23785.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -835,7 +835,7 @@
     {
         "name": "Fanuc Corporation",
         "ticker": "6954.T",
-        "kurs": 6785.0,
+        "kurs": 6392.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -844,14 +844,14 @@
     {
         "name": "Mitsubishi Corporation",
         "ticker": "8058.T",
-        "kurs": 4847.0,
+        "kurs": 4762.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
         ]
     },
     {
-        "name": "RWE Aktiengesellschaft",
+        "name": "RWE.DE",
         "ticker": "RWE.DE",
         "kurs": NaN,
         "watchlist": true,
@@ -932,7 +932,7 @@
         ]
     },
     {
-        "name": "Beiersdorf Aktiengesellschaft",
+        "name": "BEI.DE",
         "ticker": "BEI.DE",
         "kurs": NaN,
         "watchlist": true,
@@ -995,7 +995,7 @@
         ]
     },
     {
-        "name": "VERBUND AG",
+        "name": "VER.VI",
         "ticker": "VER.VI",
         "kurs": NaN,
         "watchlist": true,
@@ -1042,7 +1042,7 @@
     {
         "name": "Industrial and Commercial Bank of China Limited",
         "ticker": "1398.HK",
-        "kurs": 7.289999961853027,
+        "kurs": 7.309999942779541,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1051,7 +1051,7 @@
     {
         "name": "Ping An Insurance (Group) Company of China, Ltd.",
         "ticker": "2318.HK",
-        "kurs": 56.650001525878906,
+        "kurs": 57.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
