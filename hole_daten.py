@@ -8,7 +8,7 @@ from curl_cffi import requests
 session = requests.Session(impersonate="chrome")
 
 AKTIEN_KONFIGURATION = [
-    # --- DEINE BEREITS VORHANDENEN AKTIEN (Depot) ---
+    # --- DEINE DEPOT-AKTIEN ---
     {"ticker": "MSFT", "tags": ["Tech", "US"], "watchlist": False},
     {"ticker": "TSM", "tags": ["Tech", "Taiwan"], "watchlist": False},
     {"ticker": "SAP.DE", "tags": ["Tech", "DE"], "watchlist": False},
@@ -120,7 +120,6 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "STR.VI", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "VER.VI", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "FIH-U.TO", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ABBN.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "SREN.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "SIKA.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "1398.HK", "tags": ["Watchlist"], "watchlist": True},
@@ -136,25 +135,19 @@ def daten_generieren():
         print(f"Verarbeite: {symbol}...")
         try:
             t = yf.Ticker(symbol, session=session)
+            hist_prices = t.history(period="5d")
             
-            # Kurs sicher abrufen mit Fallbacks
-            aktueller_kurs = 0.0
-            try:
-                hist_prices = t.history(period="5d")
-                if not hist_prices.empty:
-                    aktueller_kurs = float(hist_prices['Close'].iloc[-1])
-            except:
-                pass
-                
-            if not aktueller_kurs or aktueller_kurs == 0:
-                try:
-                    if hasattr(t, 'fast_info') and t.fast_info.get('lastPrice'):
-                        aktueller_kurs = float(t.fast_info.get('lastPrice'))
-                except:
-                    pass
+            if hist_prices.empty:
+                # Fallback auf 1m period, falls 5d leer ist
+                hist_prices = t.history(period="1mo")
 
+            if hist_prices.empty:
+                print(f"   -> Warnung: Keine Kursdaten für {symbol} gefunden, überspringe.")
+                continue
+
+            aktueller_kurs = float(hist_prices['Close'].iloc[-1])
+            
             if not aktueller_kurs or aktueller_kurs == 0:
-                print(f"   -> Übersprungen (Kein Kurs gefunden für {symbol})")
                 continue
 
             name = symbol
@@ -174,15 +167,14 @@ def daten_generieren():
             }
             json_output.append(aktie_daten)
             print(f"   -> OK: {name} ({aktueller_kurs:.2f})")
-            
         except Exception as e:
             print(f"   -> Fehler bei {symbol}: {e}")
-            
         time.sleep(0.2)
         
+    # SCHREIBT DIE DATEN IMMER, SELBST WENN EINZELNE AKTIEN FEHLGESCHLAGEN SIND
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
-    print("=== FERTIG! daten.json erfolgreich aktualisiert. ===")
+    print(f"=== FERTIG! daten.json mit {len(json_output)} Einträgen gespeichert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
