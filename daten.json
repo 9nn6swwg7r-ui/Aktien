@@ -222,7 +222,7 @@
     {
         "name": "Keyence Corporation",
         "ticker": "6861.T",
-        "kurs": 71270.0,
+        "kurs": 71060.0,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -709,7 +709,7 @@
     {
         "name": "YASKAWA Electric Corporation",
         "ticker": "6506.T",
-        "kurs": 4894.0,
+        "kurs": 4835.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -772,7 +772,7 @@
     {
         "name": "D05.SI",
         "ticker": "D05.SI",
-        "kurs": 73.58000183105469,
+        "kurs": 73.91999816894531,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -808,7 +808,7 @@
     {
         "name": "ITOCHU Corporation",
         "ticker": "8001.T",
-        "kurs": 1967.0,
+        "kurs": 1998.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -817,7 +817,7 @@
     {
         "name": "SoftBank Group Corp.",
         "ticker": "9984.T",
-        "kurs": 5114.0,
+        "kurs": 5094.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -826,7 +826,7 @@
     {
         "name": "Daikin Industries,Ltd.",
         "ticker": "6367.T",
-        "kurs": 23785.0,
+        "kurs": 23890.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -835,7 +835,7 @@
     {
         "name": "Fanuc Corporation",
         "ticker": "6954.T",
-        "kurs": 6392.0,
+        "kurs": 6401.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -844,7 +844,7 @@
     {
         "name": "Mitsubishi Corporation",
         "ticker": "8058.T",
-        "kurs": 4762.0,
+        "kurs": 4804.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1051,7 +1051,7 @@
     {
         "name": "Ping An Insurance (Group) Company of China, Ltd.",
         "ticker": "2318.HK",
-        "kurs": 57.0,
+        "kurs": 56.95000076293945,
         "watchlist": true,
         "tags": [
             "Watchlist"
