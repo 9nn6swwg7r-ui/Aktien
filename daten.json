@@ -22,7 +22,7 @@
     {
         "name": "SAP SE",
         "ticker": "SAP.DE",
-        "kurs": NaN,
+        "kurs": 140.1999969482422,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -112,7 +112,7 @@
     {
         "name": "HSBC Holdings plc",
         "ticker": "HSBA.L",
-        "kurs": NaN,
+        "kurs": 1552.800048828125,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -122,7 +122,7 @@
     {
         "name": "Sanofi",
         "ticker": "SAN.PA",
-        "kurs": NaN,
+        "kurs": 76.02999877929688,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -142,7 +142,7 @@
     {
         "name": "ALV.DE",
         "ticker": "ALV.DE",
-        "kurs": NaN,
+        "kurs": 427.1000061035156,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -152,7 +152,7 @@
     {
         "name": "Münchener Rückversicherungs-Gesellschaft Aktiengesellschaft in München",
         "ticker": "MUV2.DE",
-        "kurs": NaN,
+        "kurs": 509.0,
         "watchlist": false,
         "tags": [
             "Finanzen",
@@ -162,7 +162,7 @@
     {
         "name": "SIE.DE",
         "ticker": "SIE.DE",
-        "kurs": NaN,
+        "kurs": 272.25,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -172,7 +172,7 @@
     {
         "name": "Schneider Electric S.E.",
         "ticker": "SU.PA",
-        "kurs": NaN,
+        "kurs": 268.04998779296875,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -212,7 +212,7 @@
     {
         "name": "ABB Ltd",
         "ticker": "ABBN.SW",
-        "kurs": NaN,
+        "kurs": 80.0,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -222,7 +222,7 @@
     {
         "name": "Keyence Corporation",
         "ticker": "6861.T",
-        "kurs": 71060.0,
+        "kurs": 70950.0,
         "watchlist": false,
         "tags": [
             "Tech",
@@ -232,7 +232,7 @@
     {
         "name": "Vinci SA",
         "ticker": "DG.PA",
-        "kurs": NaN,
+        "kurs": 118.3499984741211,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -252,7 +252,7 @@
     {
         "name": "Rio Tinto Group",
         "ticker": "RIO.L",
-        "kurs": NaN,
+        "kurs": 6869.0,
         "watchlist": false,
         "tags": [
             "Rohstoffe",
@@ -272,7 +272,7 @@
     {
         "name": "L'Air Liquide S.A.",
         "ticker": "AI.PA",
-        "kurs": NaN,
+        "kurs": 176.52000427246094,
         "watchlist": false,
         "tags": [
             "Chemie",
@@ -282,7 +282,7 @@
     {
         "name": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
         "ticker": "MC.PA",
-        "kurs": NaN,
+        "kurs": 461.70001220703125,
         "watchlist": false,
         "tags": [
             "Luxus",
@@ -292,7 +292,7 @@
     {
         "name": "TotalEnergies SE",
         "ticker": "TTE.PA",
-        "kurs": NaN,
+        "kurs": 75.9000015258789,
         "watchlist": false,
         "tags": [
             "Energie",
@@ -312,7 +312,7 @@
     {
         "name": "Ørsted A/S",
         "ticker": "ORSTED.CO",
-        "kurs": NaN,
+        "kurs": 146.14999389648438,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -322,7 +322,7 @@
     {
         "name": "Veolia Environnement SA",
         "ticker": "VIE.PA",
-        "kurs": NaN,
+        "kurs": 36.59000015258789,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -332,7 +332,7 @@
     {
         "name": "Iberdrola, S.A.",
         "ticker": "IBE.MC",
-        "kurs": NaN,
+        "kurs": 21.209999084472656,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -352,7 +352,7 @@
     {
         "name": "Novartis AG",
         "ticker": "NOVN.SW",
-        "kurs": NaN,
+        "kurs": 126.9000015258789,
         "watchlist": false,
         "tags": [
             "Gesundheit",
@@ -452,7 +452,7 @@
     {
         "name": "Fuchs SE",
         "ticker": "FPE3.DE",
-        "kurs": NaN,
+        "kurs": 41.060001373291016,
         "watchlist": false,
         "tags": [
             "Specialty",
@@ -472,7 +472,7 @@
     {
         "name": "Krones AG",
         "ticker": "KRN.DE",
-        "kurs": NaN,
+        "kurs": 113.0,
         "watchlist": false,
         "tags": [
             "Maschinenbau",
@@ -482,7 +482,7 @@
     {
         "name": "Mayr-Melnhof Karton AG",
         "ticker": "MMK.VI",
-        "kurs": NaN,
+        "kurs": 80.9000015258789,
         "watchlist": false,
         "tags": [
             "Packaging",
@@ -709,7 +709,7 @@
     {
         "name": "YASKAWA Electric Corporation",
         "ticker": "6506.T",
-        "kurs": 4835.0,
+        "kurs": 4756.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -727,7 +727,7 @@
     {
         "name": "DNB Bank ASA",
         "ticker": "DNB.OL",
-        "kurs": NaN,
+        "kurs": 298.70001220703125,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -736,7 +736,7 @@
     {
         "name": "Yara International ASA",
         "ticker": "YAR.OL",
-        "kurs": NaN,
+        "kurs": 456.1000061035156,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -745,7 +745,7 @@
     {
         "name": "Dino Polska S.A.",
         "ticker": "DNP.WA",
-        "kurs": NaN,
+        "kurs": 28.780000686645508,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -754,7 +754,7 @@
     {
         "name": "Powszechna Kasa Oszczednosci Bank Polski Spólka Akcyjna",
         "ticker": "PKO.WA",
-        "kurs": NaN,
+        "kurs": 106.58000183105469,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -763,7 +763,7 @@
     {
         "name": "ERIC-B.ST",
         "ticker": "ERIC-B.ST",
-        "kurs": NaN,
+        "kurs": 94.30000305175781,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -772,7 +772,7 @@
     {
         "name": "D05.SI",
         "ticker": "D05.SI",
-        "kurs": 73.91999816894531,
+        "kurs": 74.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -781,7 +781,7 @@
     {
         "name": "Pernod Ricard SA",
         "ticker": "RI.PA",
-        "kurs": NaN,
+        "kurs": 62.900001525878906,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -790,7 +790,7 @@
     {
         "name": "Dassault Systèmes SE",
         "ticker": "DSY.PA",
-        "kurs": NaN,
+        "kurs": 19.8799991607666,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -808,7 +808,7 @@
     {
         "name": "ITOCHU Corporation",
         "ticker": "8001.T",
-        "kurs": 1998.0,
+        "kurs": 1998.5,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -817,7 +817,7 @@
     {
         "name": "SoftBank Group Corp.",
         "ticker": "9984.T",
-        "kurs": 5094.0,
+        "kurs": 5095.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -826,7 +826,7 @@
     {
         "name": "Daikin Industries,Ltd.",
         "ticker": "6367.T",
-        "kurs": 23890.0,
+        "kurs": 23745.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -835,7 +835,7 @@
     {
         "name": "Fanuc Corporation",
         "ticker": "6954.T",
-        "kurs": 6401.0,
+        "kurs": 6373.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -844,7 +844,7 @@
     {
         "name": "Mitsubishi Corporation",
         "ticker": "8058.T",
-        "kurs": 4804.0,
+        "kurs": 4776.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -853,7 +853,7 @@
     {
         "name": "RWE.DE",
         "ticker": "RWE.DE",
-        "kurs": NaN,
+        "kurs": 58.79999923706055,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -862,7 +862,7 @@
     {
         "name": "Sixt SE",
         "ticker": "SIX2.DE",
-        "kurs": NaN,
+        "kurs": 69.69999694824219,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -871,7 +871,7 @@
     {
         "name": "Villeroy & Boch AG",
         "ticker": "VIB3.DE",
-        "kurs": NaN,
+        "kurs": 15.699999809265137,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -880,7 +880,7 @@
     {
         "name": "Deutsche Lufthansa AG",
         "ticker": "LHA.DE",
-        "kurs": NaN,
+        "kurs": 8.758000373840332,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -889,7 +889,7 @@
     {
         "name": "Hannover Rück SE",
         "ticker": "HNR1.DE",
-        "kurs": NaN,
+        "kurs": 253.1999969482422,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -898,7 +898,7 @@
     {
         "name": "Vonovia SE",
         "ticker": "VNA.DE",
-        "kurs": NaN,
+        "kurs": 20.729999542236328,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -907,7 +907,7 @@
     {
         "name": "E.ON SE",
         "ticker": "EOAN.DE",
-        "kurs": NaN,
+        "kurs": 19.594999313354492,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -916,7 +916,7 @@
     {
         "name": "KION GROUP AG",
         "ticker": "KGX.DE",
-        "kurs": NaN,
+        "kurs": 40.54999923706055,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -934,7 +934,7 @@
     {
         "name": "BEI.DE",
         "ticker": "BEI.DE",
-        "kurs": NaN,
+        "kurs": 77.54000091552734,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -943,7 +943,7 @@
     {
         "name": "CTS Eventim AG & Co. KGaA",
         "ticker": "EVD.DE",
-        "kurs": NaN,
+        "kurs": 56.25,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -952,7 +952,7 @@
     {
         "name": "Deutsche Post AG",
         "ticker": "DHL.DE",
-        "kurs": NaN,
+        "kurs": 57.040000915527344,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -961,7 +961,7 @@
     {
         "name": "Deutsche Telekom AG",
         "ticker": "DTE.DE",
-        "kurs": NaN,
+        "kurs": 26.389999389648438,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -970,7 +970,7 @@
     {
         "name": "Fraport AG",
         "ticker": "FRA.DE",
-        "kurs": NaN,
+        "kurs": 66.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -979,7 +979,7 @@
     {
         "name": "DEUTZ Aktiengesellschaft",
         "ticker": "DEZ.DE",
-        "kurs": NaN,
+        "kurs": 10.229999542236328,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -988,7 +988,7 @@
     {
         "name": "Strabag SE",
         "ticker": "STR.VI",
-        "kurs": NaN,
+        "kurs": 83.19999694824219,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -997,7 +997,7 @@
     {
         "name": "VER.VI",
         "ticker": "VER.VI",
-        "kurs": NaN,
+        "kurs": 59.20000076293945,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1015,7 +1015,7 @@
     {
         "name": "ABB Ltd",
         "ticker": "ABBN.SW",
-        "kurs": NaN,
+        "kurs": 80.0,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1024,7 +1024,7 @@
     {
         "name": "Swiss Re AG",
         "ticker": "SREN.SW",
-        "kurs": NaN,
+        "kurs": 134.5,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1033,7 +1033,7 @@
     {
         "name": "Sika AG",
         "ticker": "SIKA.SW",
-        "kurs": NaN,
+        "kurs": 155.85000610351562,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1042,7 +1042,7 @@
     {
         "name": "Industrial and Commercial Bank of China Limited",
         "ticker": "1398.HK",
-        "kurs": 7.309999942779541,
+        "kurs": 7.349999904632568,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1051,7 +1051,7 @@
     {
         "name": "Ping An Insurance (Group) Company of China, Ltd.",
         "ticker": "2318.HK",
-        "kurs": 56.95000076293945,
+        "kurs": 57.150001525878906,
         "watchlist": true,
         "tags": [
             "Watchlist"
