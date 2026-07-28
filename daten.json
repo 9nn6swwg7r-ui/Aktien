@@ -232,7 +232,7 @@
     {
         "name": "Vinci SA",
         "ticker": "DG.PA",
-        "kurs": 118.3499984741211,
+        "kurs": 119.30000305175781,
         "watchlist": false,
         "tags": [
             "Industrie",
@@ -252,7 +252,7 @@
     {
         "name": "Rio Tinto Group",
         "ticker": "RIO.L",
-        "kurs": 6869.0,
+        "kurs": 6814.0,
         "watchlist": false,
         "tags": [
             "Rohstoffe",
@@ -282,7 +282,7 @@
     {
         "name": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
         "ticker": "MC.PA",
-        "kurs": 461.70001220703125,
+        "kurs": 472.25,
         "watchlist": false,
         "tags": [
             "Luxus",
@@ -312,7 +312,7 @@
     {
         "name": "Ørsted A/S",
         "ticker": "ORSTED.CO",
-        "kurs": 146.14999389648438,
+        "kurs": 146.35000610351562,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -322,7 +322,7 @@
     {
         "name": "Veolia Environnement SA",
         "ticker": "VIE.PA",
-        "kurs": 36.59000015258789,
+        "kurs": 35.459999084472656,
         "watchlist": false,
         "tags": [
             "Utilities",
@@ -472,7 +472,7 @@
     {
         "name": "Krones AG",
         "ticker": "KRN.DE",
-        "kurs": 113.0,
+        "kurs": 113.5999984741211,
         "watchlist": false,
         "tags": [
             "Maschinenbau",
@@ -727,7 +727,7 @@
     {
         "name": "DNB Bank ASA",
         "ticker": "DNB.OL",
-        "kurs": 298.70001220703125,
+        "kurs": 300.20001220703125,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -736,7 +736,7 @@
     {
         "name": "Yara International ASA",
         "ticker": "YAR.OL",
-        "kurs": 456.1000061035156,
+        "kurs": 441.1000061035156,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -745,7 +745,7 @@
     {
         "name": "Dino Polska S.A.",
         "ticker": "DNP.WA",
-        "kurs": 28.780000686645508,
+        "kurs": 30.450000762939453,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -754,7 +754,7 @@
     {
         "name": "Powszechna Kasa Oszczednosci Bank Polski Spólka Akcyjna",
         "ticker": "PKO.WA",
-        "kurs": 106.58000183105469,
+        "kurs": 108.77999877929688,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -763,7 +763,7 @@
     {
         "name": "ERIC-B.ST",
         "ticker": "ERIC-B.ST",
-        "kurs": 94.30000305175781,
+        "kurs": 94.55999755859375,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -781,7 +781,7 @@
     {
         "name": "Pernod Ricard SA",
         "ticker": "RI.PA",
-        "kurs": 62.900001525878906,
+        "kurs": 65.80000305175781,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -790,7 +790,7 @@
     {
         "name": "Dassault Systèmes SE",
         "ticker": "DSY.PA",
-        "kurs": 19.8799991607666,
+        "kurs": 20.5,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -880,7 +880,7 @@
     {
         "name": "Deutsche Lufthansa AG",
         "ticker": "LHA.DE",
-        "kurs": 8.758000373840332,
+        "kurs": 9.029999732971191,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -889,7 +889,7 @@
     {
         "name": "Hannover Rück SE",
         "ticker": "HNR1.DE",
-        "kurs": 253.1999969482422,
+        "kurs": 255.8000030517578,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -898,7 +898,7 @@
     {
         "name": "Vonovia SE",
         "ticker": "VNA.DE",
-        "kurs": 20.729999542236328,
+        "kurs": 21.34000015258789,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -907,7 +907,7 @@
     {
         "name": "E.ON SE",
         "ticker": "EOAN.DE",
-        "kurs": 19.594999313354492,
+        "kurs": 19.219999313354492,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -916,7 +916,7 @@
     {
         "name": "KION GROUP AG",
         "ticker": "KGX.DE",
-        "kurs": 40.54999923706055,
+        "kurs": 42.119998931884766,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -925,7 +925,7 @@
     {
         "name": "Bayerische Motoren Werke Aktiengesellschaft",
         "ticker": "BMW3.DE",
-        "kurs": 57.45,
+        "kurs": 57.45000076293945,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -943,7 +943,7 @@
     {
         "name": "CTS Eventim AG & Co. KGaA",
         "ticker": "EVD.DE",
-        "kurs": 56.25,
+        "kurs": 59.79999923706055,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -952,7 +952,7 @@
     {
         "name": "Deutsche Post AG",
         "ticker": "DHL.DE",
-        "kurs": 57.040000915527344,
+        "kurs": 57.41999816894531,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -961,7 +961,7 @@
     {
         "name": "Deutsche Telekom AG",
         "ticker": "DTE.DE",
-        "kurs": 26.389999389648438,
+        "kurs": 27.309999465942383,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -970,7 +970,7 @@
     {
         "name": "Fraport AG",
         "ticker": "FRA.DE",
-        "kurs": 66.0,
+        "kurs": 67.55000305175781,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -979,7 +979,7 @@
     {
         "name": "DEUTZ Aktiengesellschaft",
         "ticker": "DEZ.DE",
-        "kurs": 10.229999542236328,
+        "kurs": 10.199999809265137,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -988,7 +988,7 @@
     {
         "name": "Strabag SE",
         "ticker": "STR.VI",
-        "kurs": 83.19999694824219,
+        "kurs": 82.0999984741211,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -997,7 +997,7 @@
     {
         "name": "VER.VI",
         "ticker": "VER.VI",
-        "kurs": 59.20000076293945,
+        "kurs": 58.20000076293945,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1013,18 +1013,9 @@
         ]
     },
     {
-        "name": "ABB Ltd",
-        "ticker": "ABBN.SW",
-        "kurs": 80.0,
-        "watchlist": true,
-        "tags": [
-            "Watchlist"
-        ]
-    },
-    {
         "name": "Swiss Re AG",
         "ticker": "SREN.SW",
-        "kurs": 134.5,
+        "kurs": 134.14999389648438,
         "watchlist": true,
         "tags": [
             "Watchlist"
@@ -1042,7 +1033,7 @@
     {
         "name": "Industrial and Commercial Bank of China Limited",
         "ticker": "1398.HK",
-        "kurs": 7.349999904632568,
+        "kurs": 7.360000133514404,
         "watchlist": true,
         "tags": [
             "Watchlist"
