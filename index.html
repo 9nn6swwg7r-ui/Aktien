@@ -146,15 +146,19 @@
             document.getElementById('btn-watchlist').classList.toggle('active', ansicht === 'watchlist');
             document.getElementById('btn-depot').classList.toggle('active', ansicht === 'depot');
             
-            rendereListe();
-        }
-
-        function rendereListe() {
+                    function rendereListe() {
             const container = document.getElementById('aktien-liste');
             container.innerHTML = '';
 
-            // Filtern nach Watchlist (true/false)
-            const gefiltert = alleDaten.filter(item => aktuelleAnsicht === 'watchlist' ? item.watchlist === true : item.watchlist === false);
+            // Filtern: Watchlist zeigt nur items mit watchlist === true. 
+            // Depot zeigt alles, was NICHT explizit auf true steht (also false oder undefined).
+            const gefiltert = alleDaten.filter(item => {
+                if (aktuelleAnsicht === 'watchlist') {
+                    return item.watchlist === true;
+                } else {
+                    return item.watchlist !== true;
+                }
+            });
 
             if (gefiltert.length === 0) {
                 container.innerHTML = '<p style="text-align:center; color: #777; margin-top: 40px;">Keine Einträge vorhanden.</p>';
@@ -162,11 +166,11 @@
             }
 
             gefiltert.forEach(aktie => {
-                const initialen = aktie.name.substring(0, 2).toUpperCase();
+                const initialen = aktie.name ? aktie.name.substring(0, 2).toUpperCase() : aktie.ticker.substring(0, 2).toUpperCase();
                 
-                // Kurs formatieren (z.B. 190.05 mit hochgestellten Cent oder normal getrennt)
-                const kursStr = aktie.kurs.toFixed(2).replace('.', ',');
-                constteile = kursStr.split(',');
+                const kursVal = aktie.kurs || 0;
+                const kursStr = kursVal.toFixed(2).replace('.', ',');
+                const kursteile = kursStr.split(',');
                 const ganzerKurs = kursteile[0];
                 const centKurs = kursteile[1];
 
@@ -183,9 +187,7 @@
                 `;
                 container.innerHTML += html;
             });
-        }
-
-        // Beim Laden ausführen
+    
         ladeDaten();
     </script>
 </body>
