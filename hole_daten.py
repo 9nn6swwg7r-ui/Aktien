@@ -7,7 +7,7 @@ from curl_cffi import requests
 session = requests.Session(impersonate="chrome")
 
 AKTIEN_KONFIGURATION = [
-    # --- DEINE DEPOT-AKTIEN (UNVERÄNDERT) ---
+    # --- DEINE DEPOT-AKTIEN (KORRIGIERT: ROG.SW zu RO.SW & VNA.DE) ---
     {"ticker": "MSFT", "tags": ["Tech", "US"], "watchlist": False},
     {"ticker": "TSM", "tags": ["Tech", "Taiwan"], "watchlist": False},
     {"ticker": "SAP.DE", "tags": ["Tech", "DE"], "watchlist": False},
@@ -43,7 +43,7 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "VIE.PA", "tags": ["Utilities", "FR"], "watchlist": False},
     {"ticker": "IBE.MC", "tags": ["Utilities", "ES"], "watchlist": False},
     {"ticker": "LLY", "tags": ["Gesundheit", "US"], "watchlist": False},
-    {"ticker": "ROG.SW", "tags": ["Gesundheit", "CH"], "watchlist": False},
+    {"ticker": "RO.SW", "tags": ["Gesundheit", "CH"], "watchlist": False},
     {"ticker": "NOVN.SW", "tags": ["Gesundheit", "CH"], "watchlist": False},
     {"ticker": "ABBV", "tags": ["Gesundheit", "US"], "watchlist": False},
     {"ticker": "JNJ", "tags": ["Gesundheit", "US"], "watchlist": False},
@@ -60,9 +60,9 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "MMK.VI", "tags": ["Packaging", "AT"], "watchlist": False},
     {"ticker": "IBN", "tags": ["Finanzen", "IN"], "watchlist": False},
 
-    # --- DEINE NEUE WATCHLIST ---
+    # --- WATCHLIST ---
     {"ticker": "PKO.WA", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "VINA.DE", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "VNA.DE", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "6367.T", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "UBSG.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "STR.VI", "tags": ["Watchlist"], "watchlist": True},
