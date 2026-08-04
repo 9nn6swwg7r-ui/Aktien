@@ -60,7 +60,7 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "MMK.VI", "tags": ["Packaging", "AT"], "watchlist": False},
     {"ticker": "IBN", "tags": ["Finanzen", "IN"], "watchlist": False},
 
-    # --- WATCHLIST (MIT KORREKTEN TAGS & WATCHLIST=TRUE) ---
+    # --- WATCHLIST ---
     {"ticker": "PKO.WA", "tags": ["Finanzen", "PL"], "watchlist": True},
     {"ticker": "VNA.DE", "tags": ["Real Estate", "DE"], "watchlist": True},
     {"ticker": "6367.T", "tags": ["Industrie", "JP"], "watchlist": True},
@@ -81,6 +81,7 @@ def daten_generieren():
     
     for i, aktie in enumerate(AKTIEN_KONFIGURATION):
         symbol = aktie["ticker"]
+        is_wl = bool(aktie["watchlist"])
         try:
             t = yf.Ticker(symbol, session=session)
             
@@ -135,7 +136,9 @@ def daten_generieren():
                 "abweichung5y": float(abweichung_5y),
                 "exDividendDate": ex_dividende_str,
                 "payoutDate": payout_str,
-                "watchlist": bool(aktie["watchlist"]),
+                "watchlist": is_wl,
+                "isWatchlist": is_wl,
+                "inWatchlist": is_wl,
                 "tags": aktie["tags"]
             }
             json_output.append(aktie_daten)
