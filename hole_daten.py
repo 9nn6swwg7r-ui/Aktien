@@ -7,7 +7,7 @@ from curl_cffi import requests
 session = requests.Session(impersonate="chrome")
 
 AKTIEN_KONFIGURATION = [
-    # --- DEINE DEPOT-AKTIEN ---
+    # --- DEINE DEPOT-AKTIEN (UNVERÄNDERT) ---
     {"ticker": "MSFT", "tags": ["Tech", "US"], "watchlist": False},
     {"ticker": "TSM", "tags": ["Tech", "Taiwan"], "watchlist": False},
     {"ticker": "SAP.DE", "tags": ["Tech", "DE"], "watchlist": False},
@@ -60,70 +60,19 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "MMK.VI", "tags": ["Packaging", "AT"], "watchlist": False},
     {"ticker": "IBN", "tags": ["Finanzen", "IN"], "watchlist": False},
 
-    # --- WATCHLIST ---
-    {"ticker": "POWL", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ROK", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "SPGI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "AOS", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "VZ", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "V", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "WY", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "CRWD", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DDOG", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "IBM", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "KEYS", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "KHC", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "MPWR", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "PM", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "PDD", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ADBE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "MO", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ANET", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ADSK", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "CSL", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "CHD", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "NET", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "CGNX", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "6506.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "EQNR", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DNB.OL", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "YAR.OL", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DNP.WA", "tags": ["Watchlist"], "watchlist": True},
+    # --- DEINE NEUE WATCHLIST ---
     {"ticker": "PKO.WA", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ERIC-B.ST", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "D05.SI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "RI.PA", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DSY.PA", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "SHEL", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "8001.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "9984.T", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "VINA.DE", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "6367.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "6954.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "8058.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "RWE.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "SIX2.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "VIB3.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "LHA.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "HNR1.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "VNA.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "EOAN.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "KGX.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "BMW3.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "BEI.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "EVD.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DHL.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DTE.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "EKF.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "FRA.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "DEZ.DE", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "UBSG.SW", "tags": ["Watchlist"], "watchlist": True},
     {"ticker": "STR.VI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "VER.VI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "FIH-U.TO", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "ABBN.SW", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "SREN.SW", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "SIKA.SW", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "1398.HK", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "2318.HK", "tags": ["Watchlist"], "watchlist": True}
+    {"ticker": "SCRPF", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "D05.SI", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "8001.T", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "O39.SI", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "RI.PA", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "HNR1.DE", "tags": ["Watchlist"], "watchlist": True},
+    {"ticker": "BAS.DE", "tags": ["Watchlist"], "watchlist": True}
 ]
 
 def daten_generieren():
@@ -135,7 +84,6 @@ def daten_generieren():
         try:
             t = yf.Ticker(symbol, session=session)
             
-            # Historie für Kurs & 5J-Abweichung holen
             hist_5y = t.history(period="5y")
             if hist_5y.empty:
                 hist_5y = t.history(period="1y")
@@ -150,7 +98,6 @@ def daten_generieren():
             avg_5y_kurs = float(hist_5y['Close'].mean())
             abweichung_5y = ((aktueller_kurs - avg_5y_kurs) / avg_5y_kurs) * 100
 
-            # Metadaten mit eigener Fehlerbehandlung (falls t.info blockiert)
             name = symbol
             kgv = None
             kcv = None
@@ -176,7 +123,7 @@ def daten_generieren():
                 if pay_date:
                     payout_str = datetime.fromtimestamp(pay_date).strftime('%Y-%m-%d')
             except Exception:
-                pass # Falls t.info blockiert wird, nutzen wir wenigstens die Kurse sicher weiter!
+                pass 
 
             aktie_daten = {
                 "name": str(name),
@@ -197,7 +144,6 @@ def daten_generieren():
         except Exception as e:
             print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] Fehler bei {symbol}: {e}")
             
-        # Wichtig: Eine kleine Pause einlegen, damit Yahoo Finance die IP nicht drosselt
         time.sleep(0.8)
         
     with open("daten.json", "w", encoding="utf-8") as f:
