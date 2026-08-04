@@ -7,7 +7,7 @@ from curl_cffi import requests
 session = requests.Session(impersonate="chrome")
 
 AKTIEN_KONFIGURATION = [
-    # --- DEINE DEPOT-AKTIEN (KORRIGIERT: ROG.SW zu RO.SW & VNA.DE) ---
+    # --- DEINE DEPOT-AKTIEN ---
     {"ticker": "MSFT", "tags": ["Tech", "US"], "watchlist": False},
     {"ticker": "TSM", "tags": ["Tech", "Taiwan"], "watchlist": False},
     {"ticker": "SAP.DE", "tags": ["Tech", "DE"], "watchlist": False},
@@ -60,19 +60,19 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "MMK.VI", "tags": ["Packaging", "AT"], "watchlist": False},
     {"ticker": "IBN", "tags": ["Finanzen", "IN"], "watchlist": False},
 
-    # --- WATCHLIST ---
-    {"ticker": "PKO.WA", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "VNA.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "6367.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "UBSG.SW", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "STR.VI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "SCRPF", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "D05.SI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "8001.T", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "O39.SI", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "RI.PA", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "HNR1.DE", "tags": ["Watchlist"], "watchlist": True},
-    {"ticker": "BAS.DE", "tags": ["Watchlist"], "watchlist": True}
+    # --- WATCHLIST (MIT KORREKTEN TAGS & WATCHLIST=TRUE) ---
+    {"ticker": "PKO.WA", "tags": ["Finanzen", "PL"], "watchlist": True},
+    {"ticker": "VNA.DE", "tags": ["Real Estate", "DE"], "watchlist": True},
+    {"ticker": "6367.T", "tags": ["Industrie", "JP"], "watchlist": True},
+    {"ticker": "UBSG.SW", "tags": ["Finanzen", "CH"], "watchlist": True},
+    {"ticker": "STR.VI", "tags": ["Bau", "AT"], "watchlist": True},
+    {"ticker": "SCRPF", "tags": ["Industrie", "SG"], "watchlist": True},
+    {"ticker": "D05.SI", "tags": ["Finanzen", "SG"], "watchlist": True},
+    {"ticker": "8001.T", "tags": ["Trading", "JP"], "watchlist": True},
+    {"ticker": "O39.SI", "tags": ["Finanzen", "SG"], "watchlist": True},
+    {"ticker": "RI.PA", "tags": ["Consumer", "FR"], "watchlist": True},
+    {"ticker": "HNR1.DE", "tags": ["Finanzen", "DE"], "watchlist": True},
+    {"ticker": "BAS.DE", "tags": ["Chemie", "DE"], "watchlist": True}
 ]
 
 def daten_generieren():
