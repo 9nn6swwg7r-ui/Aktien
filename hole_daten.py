@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 import yfinance as yf
 from curl_cffi import requests
+import math
 
 session = requests.Session(impersonate="chrome")
 
@@ -95,9 +96,14 @@ def daten_generieren():
                 print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] {symbol}: Keine Kursdaten gefunden.")
                 continue
 
-            aktueller_kurs = float(hist_5y['Close'].iloc[-1])
+            raw_kurs = hist_5y['Close'].iloc[-1]
+            if math.isnan(raw_kurs):
+                print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] {symbol}: Kurs ist NaN, überspringe.")
+                continue
+
+            aktueller_kurs = float(raw_kurs)
             avg_5y_kurs = float(hist_5y['Close'].mean())
-            abweichung_5y = ((aktueller_kurs - avg_5y_kurs) / avg_5y_kurs) * 100
+            abweichung_5y = ((aktueller_kurs - avg_5y_kurs) / avg_5y_kurs) * 100 if not math.isnan(avg_5y_kurs) else 0.0
 
             name = symbol
             kgv = None
@@ -130,9 +136,9 @@ def daten_generieren():
                 "name": str(name),
                 "ticker": str(symbol),
                 "kurs": float(aktueller_kurs),
-                "kgv": float(kgv) if kgv else None,
-                "kcv": float(kcv) if kcv else None,
-                "dividendenrendite": float(dividendenrendite) if dividendenrendite else None,
+                "kgv": float(kgv) if kgv and not math.isnan(kgv) else None,
+                "kcv": float(kcv) if kcv and not math.isnan(kcv) else None,
+                "dividendenrendite": float(dividendenrendite) if dividendenrendite and not math.isnan(dividendenrendite) else None,
                 "abweichung5y": float(abweichung_5y),
                 "exDividendDate": ex_dividende_str,
                 "payoutDate": payout_str,
