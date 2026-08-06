@@ -158,15 +158,19 @@
         let kgvSortiert = false;
 
         async function ladeDaten() {
+            const container = document.getElementById('aktien-liste');
+            container.innerHTML = '<p style="color: #888; text-align: center; margin-top: 40px;">Lade Daten...</p>';
+            
             try {
-                const response = await fetch('daten.json');
-                if (response.ok) {
-                    alleDaten = await response.json();
-                }
+                // Das ?t=... zwingt den Browser, die neueste daten.json zu laden und nicht den Cache zu nutzen
+                const response = await fetch('daten.json?t=' + new Date().getTime());
+                if (!response.ok) throw new Error('daten.json nicht gefunden');
+                alleDaten = await response.json();
+                rendereListe();
             } catch (error) {
-                console.log("Fehler beim Laden der daten.json");
+                console.error("Fehler:", error);
+                container.innerHTML = `<p style="color: #ff5252; text-align: center; margin-top: 40px;">Fehler: ${error.message}</p>`;
             }
-            rendereListe();
         }
 
         function zeigeAnsicht(ansicht) {
@@ -195,7 +199,6 @@
                 sortBtn.style.color = "#00e676";
                 sortBtn.style.borderColor = "#333";
                 sortBtn.innerText = "📉 KGV sortieren";
-                // Ursprüngliche Reihenfolge beibehalten (optional neu laden oder lassen)
             }
             rendereListe();
         }
@@ -269,4 +272,3 @@
     </script>
 </body>
 </html>
-
