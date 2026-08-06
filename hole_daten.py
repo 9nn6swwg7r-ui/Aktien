@@ -73,7 +73,11 @@ AKTIEN_KONFIGURATION = [
     {"ticker": "O39.SI", "tags": ["Finanzen", "SG"], "watchlist": True},
     {"ticker": "RI.PA", "tags": ["Consumer", "FR"], "watchlist": True},
     {"ticker": "HNR1.DE", "tags": ["Finanzen", "DE"], "watchlist": True},
-    {"ticker": "BAS.DE", "tags": ["Chemie", "DE"], "watchlist": True}
+    {"ticker": "BAS.DE", "tags": ["Chemie", "DE"], "watchlist": True},
+    {"ticker": "DNB.OL", "tags": ["Finanzen", "NO"], "watchlist": True},
+    {"ticker": "J36.SI", "tags": ["Konglomerat", "SG"], "watchlist": True},
+    {"ticker": "MO", "tags": ["Consumer", "US"], "watchlist": True},
+    {"ticker": "V03.SI", "tags": ["Tech", "SG"], "watchlist": True}
 ]
 
 def daten_generieren():
@@ -98,6 +102,7 @@ def daten_generieren():
 
             raw_kurs = hist_5y['Close'].iloc[-1]
             if math.isnan(raw_kurs):
+                print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] {symbol}: Kurs ist NaN, überspringe.")
                 continue
 
             aktueller_kurs = float(raw_kurs)
@@ -154,13 +159,12 @@ def daten_generieren():
             
         time.sleep(0.8)
 
-    # --- HIER WIRD NACH KGV SORTIERT (Niedrigstes KGV zuerst) ---
-    # Aktien ohne KGV (None) werden ans Ende sortiert
+    # Nach KGV sortieren (Niedrigstes KGV zuerst, None-Werte ans Ende)
     json_output.sort(key=lambda x: (x["kgv"] is None, x["kgv"]))
         
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
-    print(f"=== FERTIG! daten.json nach KGV sortiert und mit {len(json_output)} Einträgen gespeichert. ===")
+    print(f"=== FERTIG! daten.json sortiert und mit {len(json_output)} Einträgen gespeichert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
