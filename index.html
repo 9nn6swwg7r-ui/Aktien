@@ -24,10 +24,21 @@
             margin: 0;
             font-weight: 700;
         }
-        .sort-indicator {
+        .sort-button {
+            background: #1e1e1e;
+            border: 1px solid #333;
             color: #00e676;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .sort-button:active {
+            background: #2a2a2a;
         }
         .list-container {
             padding: 0 16px;
@@ -123,7 +134,7 @@
 
     <header>
         <h1 id="page-title">Watchlist</h1>
-        <div class="sort-indicator">↓ Kurs</div>
+        <button class="sort-button" onclick="sortiereNachKGV()" id="sort-btn">📉 KGV sortieren</button>
     </header>
 
     <div class="list-container" id="aktien-liste">
@@ -144,6 +155,7 @@
     <script>
         let alleDaten = [];
         let aktuelleAnsicht = 'watchlist';
+        let kgvSortiert = false;
 
         async function ladeDaten() {
             try {
@@ -162,6 +174,29 @@
             document.getElementById('page-title').innerText = ansicht === 'watchlist' ? 'Watchlist' : 'Depot';
             document.getElementById('btn-watchlist').classList.toggle('active', ansicht === 'watchlist');
             document.getElementById('btn-depot').classList.toggle('active', ansicht === 'depot');
+            rendereListe();
+        }
+
+        function sortiereNachKGV() {
+            kgvSortiert = !kgvSortiert;
+            const sortBtn = document.getElementById('sort-btn');
+            
+            if (kgvSortiert) {
+                sortBtn.style.color = "#ffffff";
+                sortBtn.style.borderColor = "#00e676";
+                sortBtn.innerText = "📈 KGV (Aufsteigend)";
+                
+                alleDaten.sort((a, b) => {
+                    if (a.kgv === null) return 1;
+                    if (b.kgv === null) return -1;
+                    return a.kgv - b.kgv;
+                });
+            } else {
+                sortBtn.style.color = "#00e676";
+                sortBtn.style.borderColor = "#333";
+                sortBtn.innerText = "📉 KGV sortieren";
+                // Ursprüngliche Reihenfolge beibehalten (optional neu laden oder lassen)
+            }
             rendereListe();
         }
 
@@ -194,12 +229,11 @@
                 const kcvText = aktie.kcv ? `KCV: ${aktie.kcv.toFixed(1)}` : 'KCV: -';
                 const divText = aktie.dividendenrendite ? `Div: ${aktie.dividendenrendite.toFixed(1)}%` : 'Div: -';
                 
-                // 5-Jahres Abweichung: Günstig (unter Schnitt) = Grün, Teuer (über Schnitt) = Rot
                 let abwHtml = '';
                 if (aktie.abweichung5y !== undefined && aktie.abweichung5y !== null) {
                     const abwVal = aktie.abweichung5y;
                     const abwSign = abwVal > 0 ? '+' : '';
-                    const abwClass = abwVal <= 0 ? 'gruen' : 'rot'; // Unter Durchschnitt ist günstig (grün)
+                    const abwClass = abwVal <= 0 ? 'gruen' : 'rot';
                     abwHtml = `<span class="${abwClass}">5J: ${abwSign}${abwVal.toFixed(1)}%</span>`;
                 }
 
@@ -235,3 +269,4 @@
     </script>
 </body>
 </html>
+
