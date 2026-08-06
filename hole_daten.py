@@ -98,7 +98,6 @@ def daten_generieren():
 
             raw_kurs = hist_5y['Close'].iloc[-1]
             if math.isnan(raw_kurs):
-                print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] {symbol}: Kurs ist NaN, überspringe.")
                 continue
 
             aktueller_kurs = float(raw_kurs)
@@ -148,16 +147,20 @@ def daten_generieren():
                 "tags": aktie["tags"]
             }
             json_output.append(aktie_daten)
-            print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] OK: {symbol} ({aktueller_kurs:.2f})")
+            print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] OK: {symbol} (KGV: {kgv})")
             
         except Exception as e:
             print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] Fehler bei {symbol}: {e}")
             
         time.sleep(0.8)
+
+    # --- HIER WIRD NACH KGV SORTIERT (Niedrigstes KGV zuerst) ---
+    # Aktien ohne KGV (None) werden ans Ende sortiert
+    json_output.sort(key=lambda x: (x["kgv"] is None, x["kgv"]))
         
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
-    print(f"=== FERTIG! daten.json mit {len(json_output)} Einträgen gespeichert. ===")
+    print(f"=== FERTIG! daten.json nach KGV sortiert und mit {len(json_output)} Einträgen gespeichert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
