@@ -96,18 +96,16 @@ def daten_generieren():
             if hist_5y.empty:
                 hist_5y = t.history(period="5d")
 
-            if hist_5y.empty:
-                print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] {symbol}: Keine Kursdaten gefunden.")
-                continue
+            aktueller_kurs = 0.0
+            abweichung_5y = 0.0
 
-            raw_kurs = hist_5y['Close'].iloc[-1]
-            if math.isnan(raw_kurs):
-                print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] {symbol}: Kurs ist NaN, überspringe.")
-                continue
-
-            aktueller_kurs = float(raw_kurs)
-            avg_5y_kurs = float(hist_5y['Close'].mean())
-            abweichung_5y = ((aktueller_kurs - avg_5y_kurs) / avg_5y_kurs) * 100 if not math.isnan(avg_5y_kurs) else 0.0
+            if not hist_5y.empty and 'Close' in hist_5y:
+                raw_kurs = hist_5y['Close'].iloc[-1]
+                if not math.isnan(raw_kurs):
+                    aktueller_kurs = float(raw_kurs)
+                    avg_5y_kurs = float(hist_5y['Close'].mean())
+                    if not math.isnan(avg_5y_kurs) and avg_5y_kurs > 0:
+                        abweichung_5y = ((aktueller_kurs - avg_5y_kurs) / avg_5y_kurs) * 100
 
             name = symbol
             kgv = None
@@ -152,7 +150,7 @@ def daten_generieren():
                 "tags": aktie["tags"]
             }
             json_output.append(aktie_daten)
-            print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] OK: {symbol} (KGV: {kgv})")
+            print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] OK: {symbol}")
             
         except Exception as e:
             print(f"[{i+1}/{len(AKTIEN_KONFIGURATION)}] Fehler bei {symbol}: {e}")
@@ -164,7 +162,7 @@ def daten_generieren():
         
     with open("daten.json", "w", encoding="utf-8") as f:
         json.dump(json_output, f, indent=4, ensure_ascii=False)
-    print(f"=== FERTIG! daten.json sortiert und mit {len(json_output)} Einträgen gespeichert. ===")
+    print(f"=== FERTIG! daten.json mit {len(json_output)} Einträgen gespeichert. ===")
 
 if __name__ == "__main__":
     daten_generieren()
