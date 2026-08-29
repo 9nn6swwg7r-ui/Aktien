@@ -312,7 +312,7 @@
         "kgv": 15.490765,
         "kcv": null,
         "dividendenrendite": 4.09,
-        "abweichung5y": 27.978984022077757,
+        "abweichung5y": 27.978984132138756,
         "exDividendDate": "2026-08-20",
         "payoutDate": "-",
         "watchlist": true,
@@ -330,7 +330,7 @@
         "kgv": 16.5287,
         "kcv": null,
         "dividendenrendite": 2.08,
-        "abweichung5y": 74.58534882180231,
+        "abweichung5y": 74.58534904460097,
         "exDividendDate": "2026-09-29",
         "payoutDate": "-",
         "watchlist": true,
@@ -366,7 +366,7 @@
         "kgv": 17.856321,
         "kcv": null,
         "dividendenrendite": 3.03,
-        "abweichung5y": 132.15678230035792,
+        "abweichung5y": 132.15678152386351,
         "exDividendDate": "2026-08-17",
         "payoutDate": "-",
         "watchlist": true,
@@ -384,7 +384,7 @@
         "kgv": 18.230768,
         "kcv": null,
         "dividendenrendite": 4.47,
-        "abweichung5y": 55.809211718514305,
+        "abweichung5y": 55.809209771000745,
         "exDividendDate": "2026-08-21",
         "payoutDate": "-",
         "watchlist": true,
@@ -393,6 +393,24 @@
         "tags": [
             "Industrie",
             "SG"
+        ]
+    },
+    {
+        "name": "NextEra Energy, Inc.",
+        "ticker": "NEE",
+        "kurs": 0.0,
+        "kgv": 18.39101,
+        "kcv": null,
+        "dividendenrendite": 2.99,
+        "abweichung5y": 0.0,
+        "exDividendDate": "2026-08-28",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Utilities",
+            "US"
         ]
     },
     {
@@ -432,31 +450,13 @@
         ]
     },
     {
-        "name": "NextEra Energy, Inc.",
-        "ticker": "NEE",
-        "kurs": 0.0,
-        "kgv": 18.770641,
-        "kcv": null,
-        "dividendenrendite": 2.99,
-        "abweichung5y": 0.0,
-        "exDividendDate": "2026-08-28",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Utilities",
-            "US"
-        ]
-    },
-    {
         "name": "UBS Group AG",
         "ticker": "UBSG.SW",
         "kurs": 44.529998779296875,
         "kgv": 18.868645,
         "kcv": null,
         "dividendenrendite": 1.97,
-        "abweichung5y": 95.19001736398421,
+        "abweichung5y": 95.19001745486149,
         "exDividendDate": "2026-04-21",
         "payoutDate": "-",
         "watchlist": true,
@@ -492,7 +492,7 @@
         "kgv": 19.475704,
         "kcv": null,
         "dividendenrendite": 4.18,
-        "abweichung5y": 120.54030998711272,
+        "abweichung5y": 120.54030947345157,
         "exDividendDate": "2026-08-14",
         "payoutDate": "-",
         "watchlist": true,
@@ -528,7 +528,7 @@
         "kgv": 20.950617,
         "kcv": null,
         "dividendenrendite": 4.71,
-        "abweichung5y": 26.940264314219537,
+        "abweichung5y": 26.940264033258327,
         "exDividendDate": "2026-08-31",
         "payoutDate": "-",
         "watchlist": true,
@@ -537,24 +537,6 @@
         "tags": [
             "Tech",
             "SG"
-        ]
-    },
-    {
-        "name": "Intuit Inc.",
-        "ticker": "INTU",
-        "kurs": 0.0,
-        "kgv": 21.136953,
-        "kcv": null,
-        "dividendenrendite": 1.59,
-        "abweichung5y": 0.0,
-        "exDividendDate": "2026-10-08",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Tech",
-            "US"
         ]
     },
     {
@@ -612,6 +594,24 @@
         ]
     },
     {
+        "name": "Intuit Inc.",
+        "ticker": "INTU",
+        "kurs": 0.0,
+        "kgv": 21.753342,
+        "kcv": null,
+        "dividendenrendite": 1.59,
+        "abweichung5y": 0.0,
+        "exDividendDate": "2026-10-08",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Tech",
+            "US"
+        ]
+    },
+    {
         "name": "BASF SE",
         "ticker": "BAS.DE",
         "kurs": 0.0,
@@ -636,7 +636,7 @@
         "kgv": 22.271608,
         "kcv": null,
         "dividendenrendite": 1.72,
-        "abweichung5y": 0.12352481412183458,
+        "abweichung5y": 0.12352484476922769,
         "exDividendDate": "2026-09-29",
         "payoutDate": "-",
         "watchlist": true,
@@ -708,7 +708,7 @@
         "kgv": 23.89034,
         "kcv": null,
         "dividendenrendite": 2.62,
-        "abweichung5y": 24.866730637807706,
+        "abweichung5y": 24.866730461984535,
         "exDividendDate": "2026-03-12",
         "payoutDate": "-",
         "watchlist": false,
@@ -723,10 +723,10 @@
         "name": "Iberdrola, S.A.",
         "ticker": "IBE.MC",
         "kurs": 20.280000686645508,
-        "kgv": 25.037037,
+        "kgv": 25.35,
         "kcv": null,
         "dividendenrendite": 3.39,
-        "abweichung5y": 68.68807346373931,
+        "abweichung5y": 68.68807341142742,
         "exDividendDate": "2026-07-06",
         "payoutDate": "-",
         "watchlist": false,
@@ -780,7 +780,7 @@
         "kgv": 27.204153,
         "kcv": null,
         "dividendenrendite": 3.95,
-        "abweichung5y": -10.628404578175664,
+        "abweichung5y": -10.628404633671874,
         "exDividendDate": "2026-04-20",
         "payoutDate": "-",
         "watchlist": false,
@@ -1032,7 +1032,7 @@
         "kgv": 36.57534,
         "kcv": null,
         "dividendenrendite": 1.19,
-        "abweichung5y": 90.95441096946674,
+        "abweichung5y": 90.95441066553617,
         "exDividendDate": "2026-03-23",
         "payoutDate": "-",
         "watchlist": false,
@@ -1086,7 +1086,7 @@
         "kgv": 45.248768,
         "kcv": null,
         "dividendenrendite": 66.0,
-        "abweichung5y": 35.011720973150645,
+        "abweichung5y": 35.011720895953644,
         "exDividendDate": "2026-09-17",
         "payoutDate": "-",
         "watchlist": false,
@@ -1137,7 +1137,7 @@
         "name": "AbbVie Inc.",
         "ticker": "ABBV",
         "kurs": 0.0,
-        "kgv": 72.994286,
+        "kgv": 72.169495,
         "kcv": null,
         "dividendenrendite": 2.68,
         "abweichung5y": 0.0,
