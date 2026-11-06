@@ -5,7 +5,7 @@
         "kurs": 0.0,
         "kgv": 3.8724375,
         "kcv": null,
-        "dividendenrendite": 7.67,
+        "dividendenrendite": 7.4,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-22",
         "payoutDate": "-",
@@ -36,30 +36,12 @@
         ]
     },
     {
-        "name": "Honeywell International Inc.",
-        "ticker": "HON",
-        "kurs": 215.77999877929688,
-        "kgv": 10.698067,
-        "kcv": null,
-        "dividendenrendite": 1.23,
-        "abweichung5y": 9.930069121049847,
-        "exDividendDate": "2026-11-13",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Industrie",
-            "US"
-        ]
-    },
-    {
         "name": "Münchener Rückversicherungs-Gesellschaft Aktiengesellschaft in München",
         "ticker": "MUV2.DE",
         "kurs": 0.0,
         "kgv": 11.157815,
         "kcv": null,
-        "dividendenrendite": 4.21,
+        "dividendenrendite": 4.11,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-04-30",
         "payoutDate": "-",
@@ -72,13 +54,31 @@
         ]
     },
     {
+        "name": "Honeywell International Inc.",
+        "ticker": "HON",
+        "kurs": 215.77999877929688,
+        "kgv": 11.327035,
+        "kcv": null,
+        "dividendenrendite": 1.23,
+        "abweichung5y": 9.930068732614092,
+        "exDividendDate": "2026-11-13",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Industrie",
+            "US"
+        ]
+    },
+    {
         "name": "Rio Tinto Group",
         "ticker": "RIO.L",
-        "kurs": 6270.0,
+        "kurs": 0.0,
         "kgv": 11.400001,
         "kcv": null,
         "dividendenrendite": 5.62,
-        "abweichung5y": 14.835542351049149,
+        "abweichung5y": 0.0,
         "exDividendDate": "2026-08-13",
         "payoutDate": "-",
         "watchlist": false,
@@ -92,11 +92,11 @@
     {
         "name": "HSBC Holdings plc",
         "ticker": "HSBA.L",
-        "kurs": 1307.4000244140625,
+        "kurs": 0.0,
         "kgv": 11.468422,
         "kcv": null,
         "dividendenrendite": 2.26,
-        "abweichung5y": 65.45764179761127,
+        "abweichung5y": 0.0,
         "exDividendDate": "2026-08-13",
         "payoutDate": "-",
         "watchlist": false,
@@ -110,11 +110,11 @@
     {
         "name": "DBS Group Holdings Ltd",
         "ticker": "D05.SI",
-        "kurs": 71.19999694824219,
-        "kgv": 11.906354,
+        "kurs": 69.6500015258789,
+        "kgv": 11.589018,
         "kcv": null,
         "dividendenrendite": 4.49,
-        "abweichung5y": 94.34763160907423,
+        "abweichung5y": 89.9210645415368,
         "exDividendDate": "2026-08-14",
         "payoutDate": "-",
         "watchlist": true,
@@ -144,24 +144,6 @@
         ]
     },
     {
-        "name": "QUALCOMM Incorporated",
-        "ticker": "QCOM",
-        "kurs": 156.75,
-        "kgv": 12.34252,
-        "kcv": null,
-        "dividendenrendite": 2.12,
-        "abweichung5y": 8.203600026082679,
-        "exDividendDate": "2026-12-03",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Tech",
-            "US"
-        ]
-    },
-    {
         "name": "Krones AG",
         "ticker": "KRN.DE",
         "kurs": 0.0,
@@ -185,7 +167,7 @@
         "kurs": 0.0,
         "kgv": 12.466258,
         "kcv": null,
-        "dividendenrendite": 2.82,
+        "dividendenrendite": 2.85,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-06-17",
         "payoutDate": "-",
@@ -239,7 +221,7 @@
         "kurs": 0.0,
         "kgv": 13.515659,
         "kcv": null,
-        "dividendenrendite": 4.29,
+        "dividendenrendite": 4.18,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-07",
         "payoutDate": "-",
@@ -252,13 +234,31 @@
         ]
     },
     {
+        "name": "QUALCOMM Incorporated",
+        "ticker": "QCOM",
+        "kurs": 156.75,
+        "kgv": 13.642298,
+        "kcv": null,
+        "dividendenrendite": 2.12,
+        "abweichung5y": 8.203600339640401,
+        "exDividendDate": "2026-12-03",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Tech",
+            "US"
+        ]
+    },
+    {
         "name": "JPMorgan Chase & Co.",
         "ticker": "JPM",
         "kurs": 337.3399963378906,
-        "kgv": 14.150167,
+        "kgv": 14.769702,
         "kcv": null,
         "dividendenrendite": 1.87,
-        "abweichung5y": 66.87790039566458,
+        "abweichung5y": 66.8779004006871,
         "exDividendDate": "2026-10-06",
         "payoutDate": "-",
         "watchlist": false,
@@ -266,24 +266,6 @@
         "inWatchlist": false,
         "tags": [
             "Finanzen",
-            "US"
-        ]
-    },
-    {
-        "name": "Alphabet Inc.",
-        "ticker": "GOOGL",
-        "kurs": 282.57000732421875,
-        "kgv": 14.755614,
-        "kcv": null,
-        "dividendenrendite": 30.0,
-        "abweichung5y": 54.713207384177146,
-        "exDividendDate": "2026-09-04",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Tech",
             "US"
         ]
     },
@@ -306,12 +288,30 @@
         ]
     },
     {
+        "name": "Alphabet Inc.",
+        "ticker": "GOOGL",
+        "kurs": 282.57000732421875,
+        "kgv": 15.0864935,
+        "kcv": null,
+        "dividendenrendite": 30.0,
+        "abweichung5y": 54.71320715741324,
+        "exDividendDate": "2026-09-04",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Tech",
+            "US"
+        ]
+    },
+    {
         "name": "Allianz SE",
         "ticker": "ALV.DE",
         "kurs": 0.0,
         "kgv": 15.249181,
         "kcv": null,
-        "dividendenrendite": 3.88,
+        "dividendenrendite": 3.73,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-08",
         "payoutDate": "-",
@@ -324,12 +324,30 @@
         ]
     },
     {
+        "name": "Jardine Matheson Holdings Limited",
+        "ticker": "J36.SI",
+        "kurs": 60.650001525878906,
+        "kgv": 15.83551,
+        "kcv": null,
+        "dividendenrendite": 3.92,
+        "abweichung5y": 30.659960474755483,
+        "exDividendDate": "2026-08-20",
+        "payoutDate": "-",
+        "watchlist": true,
+        "isWatchlist": true,
+        "inWatchlist": true,
+        "tags": [
+            "Konglomerat",
+            "SG"
+        ]
+    },
+    {
         "name": "Fuchs SE",
         "ticker": "FPE3.DE",
         "kurs": 0.0,
         "kgv": 15.861314,
         "kcv": null,
-        "dividendenrendite": 2.84,
+        "dividendenrendite": 2.86,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-07",
         "payoutDate": "-",
@@ -342,31 +360,13 @@
         ]
     },
     {
-        "name": "NextEra Energy, Inc.",
-        "ticker": "NEE",
-        "kurs": 88.25,
-        "kgv": 15.9009,
-        "kcv": null,
-        "dividendenrendite": 2.82,
-        "abweichung5y": 23.30230192321297,
-        "exDividendDate": "2026-11-27",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Utilities",
-            "US"
-        ]
-    },
-    {
         "name": "Oversea-Chinese Banking Corporation Limited",
         "ticker": "O39.SI",
-        "kurs": 27.93000030517578,
-        "kgv": 15.96,
+        "kurs": 27.790000915527344,
+        "kgv": 15.88,
         "kcv": null,
         "dividendenrendite": 3.38,
-        "abweichung5y": 96.5288017613072,
+        "abweichung5y": 95.339698789124,
         "exDividendDate": "2026-08-17",
         "payoutDate": "-",
         "watchlist": true,
@@ -378,13 +378,31 @@
         ]
     },
     {
+        "name": "NextEra Energy, Inc.",
+        "ticker": "NEE",
+        "kurs": 88.25,
+        "kgv": 15.929603,
+        "kcv": null,
+        "dividendenrendite": 2.82,
+        "abweichung5y": 23.30230265167177,
+        "exDividendDate": "2026-11-27",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Utilities",
+            "US"
+        ]
+    },
+    {
         "name": "Altria Group, Inc.",
         "ticker": "MO",
         "kurs": 77.58000183105469,
-        "kgv": 15.995877,
+        "kgv": 16.095436,
         "kcv": null,
         "dividendenrendite": 5.69,
-        "abweichung5y": 72.50968860611921,
+        "abweichung5y": 72.5096884485855,
         "exDividendDate": "2026-09-15",
         "payoutDate": "-",
         "watchlist": true,
@@ -396,31 +414,31 @@
         ]
     },
     {
-        "name": "Jardine Matheson Holdings Limited",
-        "ticker": "J36.SI",
-        "kurs": 61.939998626708984,
-        "kgv": 16.172323,
+        "name": "ITOCHU Corporation",
+        "ticker": "8001.T",
+        "kurs": 2240.5,
+        "kgv": 16.662947,
         "kcv": null,
-        "dividendenrendite": 3.92,
-        "abweichung5y": 33.46924184894412,
-        "exDividendDate": "2026-08-20",
+        "dividendenrendite": 1.94,
+        "abweichung5y": 77.41189554931464,
+        "exDividendDate": "2027-03-30",
         "payoutDate": "-",
         "watchlist": true,
         "isWatchlist": true,
         "inWatchlist": true,
         "tags": [
-            "Konglomerat",
-            "SG"
+            "Trading",
+            "JP"
         ]
     },
     {
         "name": "UBS Group AG",
         "ticker": "UBSG.SW",
-        "kurs": 0.0,
-        "kgv": 16.551867,
+        "kurs": 39.88999938964844,
+        "kgv": 17.120173,
         "kcv": null,
-        "dividendenrendite": 2.09,
-        "abweichung5y": 0.0,
+        "dividendenrendite": 2.16,
+        "abweichung5y": 66.96109195443513,
         "exDividendDate": "2026-04-21",
         "payoutDate": "-",
         "watchlist": true,
@@ -438,7 +456,7 @@
         "kgv": 17.461538,
         "kcv": null,
         "dividendenrendite": 4.67,
-        "abweichung5y": 42.64858214274953,
+        "abweichung5y": 42.64858321306506,
         "exDividendDate": "2026-08-21",
         "payoutDate": "-",
         "watchlist": true,
@@ -450,67 +468,13 @@
         ]
     },
     {
-        "name": "ITOCHU Corporation",
-        "ticker": "8001.T",
-        "kurs": 2395.5,
-        "kgv": 17.815706,
-        "kcv": null,
-        "dividendenrendite": 1.94,
-        "abweichung5y": 89.89114482928248,
-        "exDividendDate": "2027-03-30",
-        "payoutDate": "-",
-        "watchlist": true,
-        "isWatchlist": true,
-        "inWatchlist": true,
-        "tags": [
-            "Trading",
-            "JP"
-        ]
-    },
-    {
-        "name": "Oracle Corporation",
-        "ticker": "ORCL",
-        "kurs": 115.16000366210938,
-        "kgv": 18.050158,
-        "kcv": null,
-        "dividendenrendite": 1.62,
-        "abweichung5y": -12.294367498457952,
-        "exDividendDate": "2026-10-09",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Tech",
-            "US"
-        ]
-    },
-    {
-        "name": "ICICI Bank Limited",
-        "ticker": "IBN",
-        "kurs": 32.529998779296875,
-        "kgv": 18.482954,
-        "kcv": null,
-        "dividendenrendite": 80.0,
-        "abweichung5y": 28.193248232000684,
-        "exDividendDate": "2026-08-03",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Finanzen",
-            "IN"
-        ]
-    },
-    {
         "name": "Venture Corporation Limited",
         "ticker": "V03.SI",
-        "kurs": 14.729999542236328,
-        "kgv": 18.645569,
+        "kurs": 14.260000228881836,
+        "kgv": 17.604939,
         "kcv": null,
-        "dividendenrendite": 5.33,
-        "abweichung5y": 11.583470933617347,
+        "dividendenrendite": 5.43,
+        "abweichung5y": 8.023615400946005,
         "exDividendDate": "2026-08-31",
         "payoutDate": "-",
         "watchlist": true,
@@ -519,6 +483,24 @@
         "tags": [
             "Tech",
             "SG"
+        ]
+    },
+    {
+        "name": "ICICI Bank Limited",
+        "ticker": "IBN",
+        "kurs": 32.529998779296875,
+        "kgv": 18.482954,
+        "kcv": null,
+        "dividendenrendite": 77.0,
+        "abweichung5y": 28.19324812058489,
+        "exDividendDate": "2026-08-03",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Finanzen",
+            "IN"
         ]
     },
     {
@@ -540,6 +522,24 @@
         ]
     },
     {
+        "name": "Oracle Corporation",
+        "ticker": "ORCL",
+        "kurs": 115.16000366210938,
+        "kgv": 19.387205,
+        "kcv": null,
+        "dividendenrendite": 1.62,
+        "abweichung5y": -12.294367624439685,
+        "exDividendDate": "2026-10-09",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Tech",
+            "US"
+        ]
+    },
+    {
         "name": "Veolia Environnement SA",
         "ticker": "VIE.PA",
         "kurs": 0.0,
@@ -558,10 +558,28 @@
         ]
     },
     {
+        "name": "Mondelez International, Inc.",
+        "ticker": "MDLZ",
+        "kurs": 66.81999969482422,
+        "kgv": 21.280254,
+        "kcv": null,
+        "dividendenrendite": 3.09,
+        "abweichung5y": 10.358346092761321,
+        "exDividendDate": "2026-09-30",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Consumer",
+            "US"
+        ]
+    },
+    {
         "name": "Amazon.com, Inc.",
         "ticker": "AMZN",
         "kurs": 260.2099914550781,
-        "kgv": 21.03557,
+        "kgv": 21.504957,
         "kcv": null,
         "dividendenrendite": null,
         "abweichung5y": 47.37869210272743,
@@ -576,31 +594,13 @@
         ]
     },
     {
-        "name": "Mondelez International, Inc.",
-        "ticker": "MDLZ",
-        "kurs": 66.81999969482422,
-        "kgv": 21.078863,
-        "kcv": null,
-        "dividendenrendite": 3.09,
-        "abweichung5y": 10.358345998503946,
-        "exDividendDate": "2026-09-30",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Consumer",
-            "US"
-        ]
-    },
-    {
         "name": "Intuit Inc.",
         "ticker": "INTU",
         "kurs": 354.8399963378906,
-        "kgv": 21.557716,
+        "kgv": 21.663004,
         "kcv": null,
         "dividendenrendite": 1.55,
-        "abweichung5y": -30.89354901194476,
+        "abweichung5y": -30.893549159335315,
         "exDividendDate": "2026-10-08",
         "payoutDate": "-",
         "watchlist": false,
@@ -612,31 +612,13 @@
         ]
     },
     {
-        "name": "Caterpillar Inc.",
-        "ticker": "CAT",
-        "kurs": 553.6400146484375,
-        "kgv": 21.728415,
-        "kcv": null,
-        "dividendenrendite": 1.1,
-        "abweichung5y": 46.817718849371175,
-        "exDividendDate": "2026-10-26",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Industrie",
-            "US"
-        ]
-    },
-    {
         "name": "McDonald's Corporation",
         "ticker": "MCD",
         "kurs": 278.0400085449219,
-        "kgv": 21.996836,
+        "kgv": 22.172249,
         "kcv": null,
         "dividendenrendite": 2.76,
-        "abweichung5y": 5.088310783982513,
+        "abweichung5y": 5.088310692153974,
         "exDividendDate": "2026-12-01",
         "payoutDate": "-",
         "watchlist": false,
@@ -650,11 +632,11 @@
     {
         "name": "Daikin Industries,Ltd.",
         "ticker": "6367.T",
-        "kurs": 21465.0,
-        "kgv": 22.204407,
+        "kurs": 21650.0,
+        "kgv": 22.395779,
         "kcv": null,
         "dividendenrendite": 1.72,
-        "abweichung5y": 4.38640842762351,
+        "abweichung5y": 5.318753122145788,
         "exDividendDate": "2027-03-30",
         "payoutDate": "-",
         "watchlist": true,
@@ -666,21 +648,21 @@
         ]
     },
     {
-        "name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "ticker": "TSM",
-        "kurs": 353.1000061035156,
-        "kgv": 22.883991,
+        "name": "Caterpillar Inc.",
+        "ticker": "CAT",
+        "kurs": 553.6400146484375,
+        "kgv": 23.203688,
         "kcv": null,
-        "dividendenrendite": 95.0,
-        "abweichung5y": 94.19268660186128,
-        "exDividendDate": "2026-12-10",
+        "dividendenrendite": 1.1,
+        "abweichung5y": 46.81771851300651,
+        "exDividendDate": "2026-10-26",
         "payoutDate": "-",
         "watchlist": false,
         "isWatchlist": false,
         "inWatchlist": false,
         "tags": [
-            "Tech",
-            "Taiwan"
+            "Industrie",
+            "US"
         ]
     },
     {
@@ -707,7 +689,7 @@
         "kurs": 0.0,
         "kgv": 24.928888,
         "kcv": null,
-        "dividendenrendite": 4.22,
+        "dividendenrendite": 4.14,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-04",
         "payoutDate": "-",
@@ -723,10 +705,10 @@
         "name": "The Procter & Gamble Company",
         "ticker": "PG",
         "kurs": 167.10000610351562,
-        "kgv": 25.165665,
+        "kgv": 25.20362,
         "kcv": null,
         "dividendenrendite": 2.6,
-        "abweichung5y": 16.20914327928343,
+        "abweichung5y": 16.20914265482952,
         "exDividendDate": "2026-10-23",
         "payoutDate": "-",
         "watchlist": false,
@@ -735,6 +717,24 @@
         "tags": [
             "Consumer",
             "US"
+        ]
+    },
+    {
+        "name": "Taiwan Semiconductor Manufacturing Company Limited",
+        "ticker": "TSM",
+        "kurs": 353.1000061035156,
+        "kgv": 25.6427,
+        "kcv": null,
+        "dividendenrendite": 95.0,
+        "abweichung5y": 94.19268699172409,
+        "exDividendDate": "2026-12-10",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Tech",
+            "Taiwan"
         ]
     },
     {
@@ -756,30 +756,12 @@
         ]
     },
     {
-        "name": "BlackRock, Inc.",
-        "ticker": "BLK",
-        "kurs": 1170.6700439453125,
-        "kgv": 26.654602,
-        "kcv": null,
-        "dividendenrendite": 1.87,
-        "abweichung5y": 42.0915882038161,
-        "exDividendDate": "2026-09-08",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Finanzen",
-            "US"
-        ]
-    },
-    {
         "name": "Siemens Aktiengesellschaft",
         "ticker": "SIE.DE",
         "kurs": 0.0,
         "kgv": 27.325,
         "kcv": null,
-        "dividendenrendite": 1.98,
+        "dividendenrendite": 1.94,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-02-13",
         "payoutDate": "-",
@@ -810,20 +792,20 @@
         ]
     },
     {
-        "name": "Microsoft Corporation",
-        "ticker": "MSFT",
-        "kurs": 535.9299926757812,
-        "kgv": 27.971294,
+        "name": "BlackRock, Inc.",
+        "ticker": "BLK",
+        "kurs": 1170.6700439453125,
+        "kgv": 27.879734,
         "kcv": null,
-        "dividendenrendite": 71.0,
-        "abweichung5y": 43.990036676850686,
-        "exDividendDate": "2026-11-19",
+        "dividendenrendite": 1.87,
+        "abweichung5y": 42.091588589954135,
+        "exDividendDate": "2026-09-08",
         "payoutDate": "-",
         "watchlist": false,
         "isWatchlist": false,
         "inWatchlist": false,
         "tags": [
-            "Tech",
+            "Finanzen",
             "US"
         ]
     },
@@ -834,7 +816,7 @@
         "kgv": 28.238937,
         "kcv": null,
         "dividendenrendite": 2.21,
-        "abweichung5y": 53.54840091898963,
+        "abweichung5y": 53.54840026717468,
         "exDividendDate": "2026-12-01",
         "payoutDate": "-",
         "watchlist": false,
@@ -849,10 +831,10 @@
         "name": "Prologis, Inc.",
         "ticker": "PLD",
         "kurs": 128.5500030517578,
-        "kgv": 28.31498,
+        "kgv": 28.952703,
         "kcv": null,
         "dividendenrendite": 3.26,
-        "abweichung5y": 11.021869772171003,
+        "abweichung5y": 11.021869387152627,
         "exDividendDate": "2026-09-16",
         "payoutDate": "-",
         "watchlist": false,
@@ -864,13 +846,31 @@
         ]
     },
     {
+        "name": "Microsoft Corporation",
+        "ticker": "MSFT",
+        "kurs": 535.9299926757812,
+        "kgv": 29.000542,
+        "kcv": null,
+        "dividendenrendite": 71.0,
+        "abweichung5y": 43.99003636145616,
+        "exDividendDate": "2026-11-19",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Tech",
+            "US"
+        ]
+    },
+    {
         "name": "Nestlé S.A.",
         "ticker": "NESN.SW",
-        "kurs": 0.0,
+        "kurs": 87.2300033569336,
         "kgv": 30.183392,
         "kcv": null,
-        "dividendenrendite": 3.61,
-        "abweichung5y": 0.0,
+        "dividendenrendite": 3.55,
+        "abweichung5y": 0.01007945584662411,
         "exDividendDate": "2026-04-20",
         "payoutDate": "-",
         "watchlist": false,
@@ -882,30 +882,12 @@
         ]
     },
     {
-        "name": "ABB Ltd",
-        "ticker": "ABBN.SW",
-        "kurs": 0.0,
-        "kgv": 30.681818,
-        "kcv": null,
-        "dividendenrendite": 1.33,
-        "abweichung5y": 0.0,
-        "exDividendDate": "2026-03-23",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Industrie",
-            "CH"
-        ]
-    },
-    {
         "name": "Iberdrola, S.A.",
         "ticker": "IBE.MC",
         "kurs": 0.0,
         "kgv": 30.770271,
         "kcv": null,
-        "dividendenrendite": 3.01,
+        "dividendenrendite": 2.99,
         "abweichung5y": 0.0,
         "exDividendDate": "2027-01-12",
         "payoutDate": "-",
@@ -923,7 +905,7 @@
         "kurs": 0.0,
         "kgv": 31.222866,
         "kcv": null,
-        "dividendenrendite": 1.21,
+        "dividendenrendite": 1.17,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-06",
         "payoutDate": "-",
@@ -939,10 +921,10 @@
         "name": "Parker-Hannifin Corporation",
         "ticker": "PH",
         "kurs": 892.2899780273438,
-        "kgv": 31.330406,
+        "kgv": 31.95881,
         "kcv": null,
         "dividendenrendite": 88.0,
-        "abweichung5y": 63.021103726259554,
+        "abweichung5y": 63.02110393283513,
         "exDividendDate": "2026-11-13",
         "payoutDate": "-",
         "watchlist": false,
@@ -954,31 +936,31 @@
         ]
     },
     {
-        "name": "Novartis AG",
-        "ticker": "NOVN.SW",
-        "kurs": 0.0,
-        "kgv": 32.163067,
+        "name": "ABB Ltd",
+        "ticker": "ABBN.SW",
+        "kurs": 67.5,
+        "kgv": 31.990522,
         "kcv": null,
-        "dividendenrendite": 2.76,
-        "abweichung5y": 0.0,
-        "exDividendDate": "2026-03-10",
+        "dividendenrendite": 1.33,
+        "abweichung5y": 53.844449694222575,
+        "exDividendDate": "2026-03-23",
         "payoutDate": "-",
         "watchlist": false,
         "isWatchlist": false,
         "inWatchlist": false,
         "tags": [
-            "Gesundheit",
+            "Industrie",
             "CH"
         ]
     },
     {
         "name": "Keyence Corporation",
         "ticker": "6861.T",
-        "kurs": 72390.0,
-        "kgv": 33.674625,
+        "kurs": 68950.0,
+        "kgv": 32.074394,
         "kcv": null,
         "dividendenrendite": 17.0,
-        "abweichung5y": 17.478609507441863,
+        "abweichung5y": 11.900665491927976,
         "exDividendDate": "2027-03-18",
         "payoutDate": "-",
         "watchlist": false,
@@ -987,6 +969,24 @@
         "tags": [
             "Tech",
             "JP"
+        ]
+    },
+    {
+        "name": "Novartis AG",
+        "ticker": "NOVN.SW",
+        "kurs": 134.1199951171875,
+        "kgv": 32.163067,
+        "kcv": null,
+        "dividendenrendite": 2.76,
+        "abweichung5y": 54.927136066862595,
+        "exDividendDate": "2026-03-10",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Gesundheit",
+            "CH"
         ]
     },
     {
@@ -1011,10 +1011,10 @@
         "name": "Linde plc",
         "ticker": "LIN",
         "kurs": 521.22998046875,
-        "kgv": 34.61022,
+        "kgv": 34.841576,
         "kcv": null,
         "dividendenrendite": 1.22,
-        "abweichung5y": 31.49877449714974,
+        "abweichung5y": 31.49877452944409,
         "exDividendDate": "2026-12-03",
         "payoutDate": "-",
         "watchlist": false,
@@ -1044,31 +1044,13 @@
         ]
     },
     {
-        "name": "Deere & Company",
-        "ticker": "DE",
-        "kurs": 663.3099975585938,
-        "kgv": 36.87104,
-        "kcv": null,
-        "dividendenrendite": 96.0,
-        "abweichung5y": 54.67348364713964,
-        "exDividendDate": "2026-09-30",
-        "payoutDate": "-",
-        "watchlist": false,
-        "isWatchlist": false,
-        "inWatchlist": false,
-        "tags": [
-            "Industrie",
-            "US"
-        ]
-    },
-    {
         "name": "Broadcom Inc.",
         "ticker": "AVGO",
         "kurs": 291.5299987792969,
         "kgv": 37.23244,
         "kcv": null,
-        "dividendenrendite": 80.0,
-        "abweichung5y": 68.50441964948678,
+        "dividendenrendite": 89.0,
+        "abweichung5y": 68.50441994872928,
         "exDividendDate": "2026-09-21",
         "payoutDate": "-",
         "watchlist": false,
@@ -1080,13 +1062,31 @@
         ]
     },
     {
+        "name": "Deere & Company",
+        "ticker": "DE",
+        "kurs": 663.3099975585938,
+        "kgv": 37.602608,
+        "kcv": null,
+        "dividendenrendite": 96.0,
+        "abweichung5y": 54.67348321704525,
+        "exDividendDate": "2026-09-30",
+        "payoutDate": "-",
+        "watchlist": false,
+        "isWatchlist": false,
+        "inWatchlist": false,
+        "tags": [
+            "Industrie",
+            "US"
+        ]
+    },
+    {
         "name": "Johnson & Johnson",
         "ticker": "JNJ",
         "kurs": 272.32000732421875,
-        "kgv": 41.323215,
+        "kgv": 41.95994,
         "kcv": null,
         "dividendenrendite": 1.94,
-        "abweichung5y": 62.230512356562286,
+        "abweichung5y": 62.230512062561786,
         "exDividendDate": "2026-11-24",
         "payoutDate": "-",
         "watchlist": false,
@@ -1101,10 +1101,10 @@
         "name": "Eli Lilly and Company",
         "ticker": "LLY",
         "kurs": 1364.72998046875,
-        "kgv": 44.295033,
+        "kgv": 46.027992,
         "kcv": null,
         "dividendenrendite": 49.0,
-        "abweichung5y": 104.41815590595607,
+        "abweichung5y": 104.41815690445941,
         "exDividendDate": "2026-11-13",
         "payoutDate": "-",
         "watchlist": false,
@@ -1122,7 +1122,7 @@
         "kgv": 46.275364,
         "kcv": null,
         "dividendenrendite": 77.0,
-        "abweichung5y": 74.04486757646342,
+        "abweichung5y": 74.04486742495197,
         "exDividendDate": "2026-12-11",
         "payoutDate": "-",
         "watchlist": false,
@@ -1140,7 +1140,7 @@
         "kgv": 49.52577,
         "kcv": null,
         "dividendenrendite": 2.35,
-        "abweichung5y": 73.06592006170618,
+        "abweichung5y": 73.0659193283425,
         "exDividendDate": "2027-01-15",
         "payoutDate": "-",
         "watchlist": false,
@@ -1193,7 +1193,7 @@
         "kurs": 0.0,
         "kgv": null,
         "kcv": null,
-        "dividendenrendite": 2.95,
+        "dividendenrendite": 3.03,
         "abweichung5y": 0.0,
         "exDividendDate": "2026-05-06",
         "payoutDate": "-",
